@@ -1,0 +1,196 @@
+a, a:link, a:visited, p#information, h1, h2, h3, h4, #posts {
+  color: #686ec4;
+}
+
+a, a:link, a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  color: #00f;
+  text-decoration: none;
+}
+
+body {
+  font-family: Ubuntu;
+  margin: 0px 0px;
+  padding: 0px;
+  text-align: center;
+}
+
+#page {
+  width: 800px;
+  margin: 0px auto;
+  margin-top: 0px;
+  text-align: justify;
+}
+
+#header {
+  margin-top: 8px;
+  position: relative;
+  height: 40px;
+}
+
+.menu {
+  font-size: 14pt;
+  font-weight: bold;
+  width: 100%;
+}
+
+.menu ul {
+  padding: 6px 0 7px 0;
+  margin: 0;
+  text-align: center;
+}
+
+.menu ul li {
+  text-align: center;
+  /*
+  border: 0;
+  border-radius: 8px;
+  background-color: #686ec4;
+  */
+  display: inline;
+}
+
+.menu ul li a {
+  padding: 6px 3px 4px 3px; /* Top padding is 6px, bottom padding is 4px. */
+  margin-left: 10px;
+  margin-right: 10px;
+  text-decoration: none;
+}
+
+blockquote {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 50px;
+  padding-left: 15px;
+  border-left: 3px solid #ccc;
+} 
+
+img {
+  border: 0px;
+}
+
+#site-title {
+  float: left;
+  margin: 5px;
+  font-size: 200%;
+}
+
+div#page {
+  padding: 0px;
+}
+
+div#content {
+  padding: 0px 12px;
+  margin-bottom: 36px;
+}
+
+div#content p {
+    text-indent: 20px;
+}
+
+div#logos {
+  width: 640px;
+  margin: 0px auto;
+  margin-top: 0px;
+  text-align: justify;
+}
+
+div#linktext {
+  margin-top: 0px;
+  height: 55px;
+}
+
+p#information {
+  text-align: center;
+  font-size: 12pt;
+  font-weight: bold;
+}
+
+.clear {
+  clear: both;
+}
+
+.imageleft {
+  float: left;
+  margin: 15px;
+}
+
+.imageright {
+  float: right;
+  margin: 15px;
+}
+
+.image .caption {
+  font-size: 50%;
+  text-align: center;
+}
+
+.imagecenter {
+  text-align: center;
+}
+
+div.figure {
+  float: right;
+  margin-left: 15px;
+}
+
+div.figure p {
+  text-align: center;
+  /* font-style: italic; */
+  font-size: smaller;
+  text-indent: 0;
+}
+
+div.terminal {
+  text-align: left;
+  text-indent: 0px;
+  border: 1px solid #dcdccd;
+  background-color: #000;
+  color: #dcdccd;
+  font-family: monospace;
+  padding: 1em;
+}
+
+/*
+.refs {
+  text-align: left;
+  font-size: 12pt;
+  font-weight: normal;
+  text-indent: -25px;
+  padding-left: 25px;
+}
+*/
+
+h1, h2, h3, #posts {
+  font-weight: bold;
+  text-align: left;
+}
+
+h1 {
+  text-indent: -18px;
+  font-size: 16pt;
+}
+
+h2, #posts {
+  text-indent: -8px;
+  font-size: 14pt;
+}
+
+h3 {
+  text-indent: -4px;
+  font-size: 12pt;
+}
+
+h4 {
+  text-align: right;
+  font-weight: bold;
+  font-size: 14pt;
+}
+
+#posts {
+  list-style-type: none;
+}
+

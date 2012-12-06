@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+ <title>Philippe Desjardins-Proulx :: Updates</title>
+ <link href="http://phdp.github.com/atom.xml" rel="self"/>
+ <link href="http://phdp.github.com"/>
+ <updated>2012-12-06T03:46:23-05:00</updated>
+ <id>http://phdp.github.comL</id>
+ <author>
+   <name>Philippe Desjardins-Proulx :: Updates</name>
+ </author>
+
+ 
+ 
+</feed>
