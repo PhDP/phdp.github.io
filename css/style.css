@@ -1,5 +1,7 @@
 a, a:link, a:visited, p#information, h1, h2, h3, h4, #posts {
-  color: #686ec4;
+  /* color: #686ec4; /* Nice greyish blue. */
+  color: #036; /* Midnight blue. */
+  /* color: #01796F; /* Pine green. */
 }
 
 a, a:link, a:visited {
@@ -98,6 +100,13 @@ div#logos {
   text-align: justify;
 }
 
+div#smlogos {
+  width: 320px;
+  margin: 0px auto;
+  margin-top: 0px;
+  text-align: center;
+}
+
 div#linktext {
   margin-top: 0px;
   height: 55px;
@@ -164,7 +173,7 @@ div.terminal {
 }
 */
 
-h1, h2, h3, #posts {
+h1, h2, h3, li #posts {
   font-weight: bold;
   text-align: left;
 }
@@ -174,9 +183,12 @@ h1 {
   font-size: 16pt;
 }
 
-h2, #posts {
-  text-indent: -8px;
+h2, li #posts {
   font-size: 14pt;
+}
+
+h2 {
+  text-indent: -8px;
 }
 
 h3 {
