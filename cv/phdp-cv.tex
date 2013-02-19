@@ -187,7 +187,7 @@
 \newcommand{\makeheading}[2][]%
         {\hspace*{-\marginparsep minus \marginparwidth}%
          \begin{minipage}[t]{\textwidth+\marginparwidth+\marginparsep}%
-             {\large \bfseries #2 \hfill #1}\\[-0.15\baselineskip]%
+             {{\LARGE {\bfseries #2}} \hfill {\small\emph{#1}}}\\[-0.15\baselineskip]%
                  \rule{\columnwidth}{1pt}%
          \end{minipage}}
 
@@ -310,19 +310,22 @@
 %%%%%%%%%%%%%%%%%%%%%%%%% Begin CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-\makeheading{Philippe Desjardins-Proulx}
+\makeheading[\today]{Philippe Desjardins-Proulx}
+
+\section{Current Position}
+
+Ph.D. candidate,\\
+\href{http://www.bio.uqam.ca/}{Department of biology, Université du Québec à Montréal, Canada,}\\
+\href{http://qcbs.ca/}{Quebec Center for Biodiversity Science, McGill University, Canada.}
 
 \section{Contact}
 
-Graduate (Ph.D.) student\\
-\href{http://www.bio.uqam.ca/}{Department of Biology, Université du Québec à Montréal}\\
-\href{http://qcbs.ca/}{Quebec Center for Biodiversity Science, McGill University, Canada.}\\
-\textit{Phone:} +1-418-732-9877 \\
-\textit{E-mail:} \email{philippe.d.proulx@gmail.com}\\
-\textit{E-mail (alt.):} \email{p.desjardinsproulx@ymail.com}\\
-\textit{WWW:} \href{http://phdp.github.com/}{http://phdp.github.com/}\\
-\textit{GitHub:} \href{https://github.com/PhDP}{https://github.com/PhDP/}\\
-\textit{BitBucket: } \href{https://bitbucket.org/PhDP}{https://bitbucket.org/PhDP/}
+\textit{email:} \email{philippe.d.proulx@gmail.com}\\
+\textit{email (alt.):} \email{p.desjardinsproulx@ymail.com}\\
+\textit{phone:} +1-418-732-9877 \\
+\textit{www:} \href{http://phdp.github.com/}{http://phdp.github.com/}\\
+\textit{github:} \href{https://github.com/phdp/}{https://github.com/phdp/}\\
+\textit{bitbucket:} \href{https://bitbucket.org/phdp/}{https://bitbucket.org/phdp/}
 
 %%
 %% In modern CV's, it seems like ``Objective'' is frowned upon. Instead,
@@ -350,19 +353,15 @@ Canada
 
 \section{Languages}
 
-English \& French, basic knowledge of Japanese.
+\textsc{English}: Fluent (\emph{writing \& speaking})\\
+\textsc{French}: Fluent (\emph{writing \& speaking})\\
+\textsc{Japanese}: Limited working proficiency (\emph{writing only})
 
 \section{Professional\\ Interests}
 
-\textbf{Artificial Intelligence; Machine Learning (artificial neural 
-networks, probabilistic graphical models); Statistics/Inference; 
-Evolutionary Genomics; Molecular Ecology}.
-
-\section{Other \\Interests}
-
-\textbf{Effective Technical Writing in English}; Software Engineering; 
-Scientific Computing; Artificial Intelligence in Board Games and for Medical 
-Diagnosis; Computational Finance.
+Artificial Intelligence; Machine Learning (artificial neural networks, 
+probabilistic graphical models); Statistics/Inference; Evolutionary 
+Genomics; Molecular Ecology. Effective Technical Writing in English
 
 \section{Major Awards}
 
@@ -376,16 +375,14 @@ Diagnosis; Computational Finance.
 
 \href{http://www.bio.uqam.ca/}{\textbf{Department of Biology, Université du Québec à Montréal, Montréal, Canada.}}
 \begin{outerlist}
-\item[] Ph.D., September 2012 -- August 2015 \emph{[expected]}
-        \begin{innerlist}
-        %\item Thesis Topic: \emph{Design and Analysis of Optimal Task-Processing Agents}
-        \item Thesis Proposal: \emph{Artificial Intelligence and the Puzzle of Genomic Diversity}
-        %\item Candidacy: \emph{Research Problems in Distributed Control for Energy Systems}
-        \item Adviser:
-              \href{http://chaire-eec.uqar.ca/dom.php}
-                   {Dr. Dominique Gravel}
-        \item Area of Study: Artificial Intelligence (machine learning: neural networks, probabilistic graphical models), evolutionary genomics, molecular ecology.
-        \end{innerlist}
+\item[] Ph.D., September 2012 --
+  \begin{innerlist}
+  %\item Thesis Topic: \emph{Design and Analysis of Optimal Task-Processing Agents}
+  \item Thesis Proposal: \emph{Machine Learning and the Puzzle of Genomic Diversity}
+  %\item Candidacy: \emph{Research Problems in Distributed Control for Energy Systems}
+  \item Adviser: \href{http://chaire-eec.uqar.ca/dom.php}{Dr. Dominique Gravel}
+  \item Area of Study: Machine learning, probabilistic graphical models, molecular ecology/evolution.
+  \end{innerlist}
 \end{outerlist}
 
 \hspace{.5cm}
@@ -394,7 +391,7 @@ Diagnosis; Computational Finance.
 \begin{outerlist}
 \item[] Graduate Certificate in Bioinformatics, 2012,
         \begin{innerlist}
-          \item Area of Study: Machine learning (Artificial Intelligence) and biostatistics.
+          \item Area of Study: Machine learning and biostatistics.
         \end{innerlist}
 \end{outerlist}
 
@@ -419,20 +416,22 @@ Biology (in review)}
 
   \item R Vergilino, TA Elliott, \textbf{P Desjardins-Proulx}, TJ Crease and F
 Dufresne.  Evolution of a transposon in \emph{Daphnia} hybrid genomes.
-\emph{Mobile DNA} 4-7, 2013.\\ DOI: doi:10.1186/1759-8753-4-7
+\emph{Mobile DNA} 4-7, 2013.\\
+\href{http://dx.doi.org/10.1186/1759-8753-4-7}{DOI: 10.1186/1759-8753-4-7}
 
   \item D Ai, \textbf{P Desjardins-Proulx}, C Chu, and G Wang. The influence of
 immigration and dispersal limitation on the repeatability of niche and neutral
-communities. \emph{PLOS ONE} 7(9): e46164, 2012.\\ DOI:
-10.1371/journal.pone.0046164
+communities. \emph{PLOS ONE} 7(9): e46164, 2012.\\ 
+\href{http://dx.doi.org/10.1371/journal.pone.0046164}{DOI: 10.1371/journal.pone.0046164}
 
   \item \textbf{P Desjardins-Proulx} and D Gravel. A complex speciation-richness
 relationship in a simple neutral model. \emph{Ecology and Evolution} 2(8):
-1781--1790, 2012.\\ DOI: 10.1002/ece3.292
+1781--1790, 2012.\\
+\href{http://dx.doi.org/10.1002/ece3.292}{DOI: 10.1002/ece3.292}
 
   \item \textbf{P Desjardins-Proulx} and D Gravel. How likely is speciation in
-neutral ecology? \emph{The American Naturalist} 179(1):137-144, 2012.\\ DOI:
-10.1086/663196\\
+neutral ecology? \emph{The American Naturalist} 179(1):137-144, 2012.\\
+\href{http://dx.doi.org/10.1086/663196}{DOI: 10.1086/663196}\\
 
 \end{bibenum}
 
@@ -440,17 +439,23 @@ neutral ecology? \emph{The American Naturalist} 179(1):137-144, 2012.\\ DOI:
 
 \begin{bibenum}
     \item \textbf{P Desjardins-Proulx}. The case for arXiv and a broader
-conception of peer-reviews. Invited blog, International Network of
+conception of peer-reviews. Invited blog, International Network of 
 Next-Generation Ecologists, 2012.\\
     \href{http://www.innge.net/?q=node/330}{http://www.innge.net/?q=node/330}.
 
-    \item \textbf{P Desjardins-Proulx}. A foot in the neutral trap.\\
+    \item \textbf{P Desjardins-Proulx}, JL Rosindell, T Poisot, and D 
+    Gravel. A simple model to study phylogeographies and speciation patterns 
+    in space, 2012.\\
+    \href{http://arxiv.org/abs/1203.1790}{arXiv: 1203.1790}.
+
+    \item \textbf{P Desjardins-Proulx}. A foot in the neutral trap.\\ 
     Invited comment for \emph{Trends in Ecology \& Evolution}, 2012.
 
     \item \textbf{P Desjardins-Proulx}. L'origine de la Biodiversit\'e. Le
-Mouton Noir, Mai-Juin. Cahier Sp\'ecial sur la Biodiversit\'e p.2, 2010.
-\textit{Selected and republished by GaiaPresse, a group sponsored by the
+Mouton Noir, Mai-Juin. Cahier Sp\'ecial sur la Biodiversit\'e p.2, 2010. 
+\textit{Selected and republished by GaiaPresse, a group sponsored by the 
 Universit\'e Laval}.
+
 \end{bibenum}
 
 \section{Teaching \\Experience}
@@ -465,7 +470,8 @@ Universit\'e Laval}.
 
 \section{Referee \\Service}
 
-\emph{Journal of Theoretical Biology, Theoretical Ecology, Acta Biotheoretica, Journal of Plant Ecology}.
+\emph{Journal of Theoretical Biology, Theoretical Ecology, Acta  
+Biotheoretica, Journal of Plant Ecology}.
 
 \section{Computer \\Skills}
 
@@ -480,8 +486,8 @@ Universit\'e Laval}.
   \begin{innerlist}
     \item[--] \textbf{Operating systems:}   Linux (Debian, Ubuntu, Arch).
     \item[--] \textbf{Revision control:}    git, mercurial.
-    \item[--] \textbf{Compilers:}           gcc, clang, intel, ghc.
-    \item[--] \textbf{Database:}            MongoDB.
+    \item[--] \textbf{Compilers:}           clang, gcc, intel, ghc.
+    \item[--] \textbf{Database:}            MongoDB, MySQL.
     \item[--] \textbf{Web:}                 Node.js (Express), basic php/css3/html5.
   \end{innerlist}
   \item \textbf{Web sites:}
