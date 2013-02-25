@@ -1,8 +1,16 @@
 a, a:link, a:visited, p#information, h1, h2, h3, h4, #posts {
   /* color: #686ec4; /* Nice greyish blue. */
-  color: #2b76a0;
+  /* color: #2b76a0; */
   /* color: #036; /* Midnight blue. */
-  /* color: #01796F; /* Pine green. */
+  color: #01796F; /* Pine green. */
+}
+
+body {
+  font-family: 'Droid sans', sans-serif;
+}
+
+.menu, h1, h2, h3, h4 {
+  font-family: 'Ubuntu';
 }
 
 a, a:link, a:visited {
@@ -15,7 +23,6 @@ a:hover {
 }
 
 body {
-  font-family: Ubuntu;
   margin: 0px 0px;
   padding: 0px;
   text-align: center;
