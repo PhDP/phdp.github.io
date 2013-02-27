@@ -1,8 +1,19 @@
-a, a:link, a:visited, p#information, h1, h2, h3, h4, #posts, ::selection, ::-moz-selection {
+a, a:link, a:visited, p#information, h1, h2, h3, h4, #posts {
   /* color: #686ec4; /* Nice greyish blue. */
   /* color: #2b76a0; */
+  color: #2c5aa0; /* Xubuntu's blue. */
   /* color: #036; /* Midnight blue. */
-  color: #01796F; /* Pine green. */
+  /* color: #01796f; /* Pine green. */
+}
+
+::selection {
+  color: #fff;
+  background-color: #2c5aa0;
+}
+
+::-moz-selection {
+  color: #fff;
+  background-color: #2c5aa0;
 }
 
 body {
