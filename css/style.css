@@ -1,4 +1,4 @@
-a, a:link, a:visited, p#information, h1, h2, h3, h4, #posts {
+a, a:link, a:visited, p#information, h1, h2, h3, h4, #posts, ::selection, ::-moz-selection {
   /* color: #686ec4; /* Nice greyish blue. */
   /* color: #2b76a0; */
   /* color: #036; /* Midnight blue. */
