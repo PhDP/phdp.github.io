@@ -19,7 +19,7 @@ a, a:link, a:visited, h1 {
   text-decoration: none;
 }
 
-a:hover, h2, h3 {
+a:hover, h2, h3, p#information {
   color: #980000;
   text-decoration: none;
 }
@@ -112,7 +112,7 @@ div#content {
 }
 
 div#content p {
-    text-indent: 20px;
+  text-indent: 20px;
 }
 
 div#logos {
@@ -185,16 +185,6 @@ div.terminal {
   padding: 1em;
 }
 
-/*
-.refs {
-  text-align: left;
-  font-size: 12pt;
-  font-weight: normal;
-  text-indent: -25px;
-  padding-left: 25px;
-}
-*/
-
 h1, h2, h3, li #posts {
   font-weight: bold;
   text-align: left;
@@ -222,3 +212,4 @@ h3 {
 #posts {
   list-style-type: none;
 }
+
