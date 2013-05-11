@@ -14,12 +14,12 @@ body {
   color: #333333; /* #502000; */
 }
 
-a, a:link, a:visited, h1 {
+a, a:link, a:visited, h1, h2, h3 {
   color: #006600;
   text-decoration: none;
 }
 
-a:hover, h2, h3, p#information {
+a:hover {
   color: #00f;
   text-decoration: none;
 }
