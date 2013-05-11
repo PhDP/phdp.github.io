@@ -4,8 +4,8 @@ body {
   font-family: 'Droid sans', sans-serif;
 }
 
-.menu, h1, h2, h3 {
-  font-family: 'Ubuntu';
+div#header, h1, h2, h3 {
+  font-family: 'Domine', serif;
 }
 
 /* Colors */
@@ -15,59 +15,54 @@ body {
 }
 
 a, a:link, a:visited, h1 {
-  color: #ff6900;
+  color: #006600;
   text-decoration: none;
 }
 
 a:hover, h2, h3, p#information {
-  color: #980000;
+  color: #00f;
   text-decoration: none;
 }
 
 ::selection {
   color: #fff;
-  background-color: #980000;
+  background-color: #006600;
 }
 
 ::-moz-selection {
   color: #fff;
-  background-color: #980000;
+  background-color: #006600;
 }
 
 /* Style */
 
 body {
-  margin: 0px 0px;
-  padding: 0px;
-  text-align: center;
-}
-
-#page {
   width: 800px;
   margin: 0px auto;
   margin-top: 0px;
-  text-align: justify;
+  padding: 0px;
 }
 
 #header {
   margin-top: 8px;
   position: relative;
-  height: 40px;
+  height: 80px;
 }
 
-.menu {
+nav{
+  margin: 5px;
   font-size: 14pt;
   font-weight: bold;
   width: 100%;
 }
 
-.menu ul {
+nav ul {
   padding: 6px 0 7px 0;
   margin: 0;
   text-align: center;
 }
 
-.menu ul li {
+nav ul li {
   text-align: center;
   /*
   border: 0;
@@ -77,7 +72,7 @@ body {
   display: inline;
 }
 
-.menu ul li a {
+nav ul li a {
   padding: 6px 3px 4px 3px; /* Top padding is 6px, bottom padding is 4px. */
   margin-left: 10px;
   margin-right: 10px;
@@ -102,42 +97,10 @@ img {
   font-size: 200%;
 }
 
-div#page {
-  padding: 0px;
-}
-
 div#content {
+  font-size: 18px;
   padding: 0px 12px;
   margin-bottom: 36px;
-}
-
-div#content p {
-  text-indent: 20px;
-}
-
-div#logos {
-  width: 640px;
-  margin: 0px auto;
-  margin-top: 0px;
-  text-align: justify;
-}
-
-div#smlogos {
-  width: 700px;
-  margin: 0px auto;
-  margin-top: 0px;
-  text-align: center;
-}
-
-div#linktext {
-  margin-top: 0px;
-  height: 55px;
-}
-
-p#information {
-  text-align: center;
-  font-size: 12pt;
-  font-weight: bold;
 }
 
 .clear {
@@ -183,6 +146,12 @@ div.terminal {
   color: #dcdccd;
   font-family: monospace;
   padding: 1em;
+}
+
+div#header h1 {
+  font-size: 26px;
+  text-indent: 0px;
+  text-align: center;  
 }
 
 h1, h2, h3, li #posts {

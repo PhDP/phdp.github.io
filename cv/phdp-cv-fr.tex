@@ -143,7 +143,7 @@
           {0.5\textwidth+0.5\marginparsep+0.5\marginparwidth-2in}
 \lfoot{\hspace{\footpageshift}%
        \parbox{4in}{\, \hfill %
-                    \arabic{page} of \protect\pageref*{LastPage} % +LP
+                    \arabic{page} de \protect\pageref*{LastPage} % +LP
 %                    \arabic{page}                               % -LP
                     \hfill \,}}
 
@@ -187,7 +187,7 @@
 \newcommand{\makeheading}[2][]%
         {\hspace*{-\marginparsep minus \marginparwidth}%
          \begin{minipage}[t]{\textwidth+\marginparwidth+\marginparsep}%
-             {{\LARGE {\bfseries #2}} \hfill {\small\emph{#1}}}\\[-0.15\baselineskip]%
+             {\large \bfseries #2 \hfill #1}\\[-0.15\baselineskip]%
                  \rule{\columnwidth}{1pt}%
          \end{minipage}}
 
@@ -310,21 +310,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%% Begin CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-\makeheading[\today]{Philippe Desjardins-Proulx}
-
-\section{Current Position}
-
-Ph.D. candidate,\\
-\href{http://www.bio.uqam.ca/}{Department of biology, Université du Québec à Montréal, Canada,}\\
-\href{http://qcbs.ca/}{Quebec Center for Biodiversity Science, McGill University, Canada.}
+\makeheading{Philippe Desjardins-Proulx}
 
 \section{Contact}
 
-\textit{email:} \email{philippe.d.proulx@gmail.com}\\
-\textit{email (alt.):} \email{p.desjardinsproulx@ymail.com}\\
-\textit{www:} \href{http://phdp.github.io}{http://phdp.github.io}\\
-\textit{phone:} +1.418.732.9877
-%\textit{github:} \href{https://github.com/phdp}{https://github.com/phdp}
+Étudiant au doctorat\\
+\href{http://chaire-eec.uqar.ca/}{Laboratoire d'écologie théorique, Université du Québec à Rimouski, Québec, Canada.}\\
+\href{http://qcbs.ca/}{Centre de la science de la biodiversité du Québec, Université McGill, Québec, Canada.}\\
+\textit{Téléphone:} +1-418-732-9877 \\
+\textit{Courriel:} \email{philippe.d.proulx@gmail.com}\\
+\textit{Courriel (alt.):} \email{p.desjardinsproulx@ymail.com}\\
+\textit{WWW:} \href{http://phdp.github.com/}{http://phdp.github.com/}\\
+\textit{GitHub:} \href{https://github.com/PhDP}{https://github.com/PhDP/}\\
+\textit{BitBucket: } \href{https://bitbucket.org/PhDP}{https://bitbucket.org/PhDP/}
 
 %%
 %% In modern CV's, it seems like ``Objective'' is frowned upon. Instead,
@@ -346,45 +344,36 @@ Ph.D. candidate,\\
 % \item More information and auxiliary documents can be found at\\\url{http://www.tedpavlic.com/facjobsearch/}
 % \end{innerlist}
 
-%\section{Citizenship}
-%
-%Canada
+\section{Recherche}
 
-\section{Languages}
+Je travaille sur le développement de techniques en Intelligence Artificielle
+pour l'analyse de systèmes écologiques complexes.
 
-\noindent\textbf{French:} Native.\\
-\textbf{English:} Full professional proficiency.\\
-\textbf{Japanese:} Limited working proficiency (\emph{writing}); Elementary proficiency (\emph{speaking}).
+\section{Prix}
 
-\section{Primary\\Expertises}
+\href{http://www.nserc-crsng.gc.ca/}{\textbf{De:} Conseil de Recherches en
+Sciences Naturelles et en Génie du Canada}
+\begin{innerlist}
+  \item
+\href{http://www.nserc-crsng.gc.ca/students-etudiants/pg-cs/bellandpostgrad-belletsuperieures_eng.asp}{\textbf{Prix:}
+Bourse Alexander Graham Bell}, 09/2012--08/2015
+  \item \textbf{Valeur:} 105 000\$
+\end{innerlist}
 
-\noindent\textbf{Machine learning:} My thesis focuses on inference with 
-probabilistic graphical models and the problem of transfer learning 
-(inductive transfer). I studied machine learning with a strong emphasis on 
-inference and the theory of statistical learning.
+\section{Éducation}
 
-\vspace{1em}
-
-\textbf{Development and deployment of machine learning software for 
-data-intensive tasks:} I know how to develop distributed algorithms and 
-deploy them on the cloud using technologies such as Amazon EC2, ZeroMQ, 
-MongoDB.
-
-\vspace{1em}
-
-\textbf{Ecology \& evolution:} I published several scientific papers on spatial
-ecology, the origin of species (speciation), and ecological statistics.
-
-\section{Education}
-
-\href{http://www.bio.uqam.ca/}{\textbf{Department of Biology, Université du Québec à Montréal, Montréal, Canada.}}
+\href{http://www.bio.uqam.ca/}{\textbf{UQAR}}
 \begin{outerlist}
-\item[] Ph.D., September 2012 --
-  \begin{innerlist}
-  \item Thesis Proposal: \emph{Inductive transfer in species distribution models}
-  \item Adviser: \href{http://chaire-eec.uqar.ca/dom.php}{Dr. Dominique Gravel}
-  \item Area of Study: Machine learning; Statistical learning; Learning transfer; Probabilistic graphical models; Ecology.
-  \end{innerlist}
+\item[] Ph.D., 2012--
+        \begin{innerlist}
+        %\item Thesis Topic: \emph{Design and Analysis of Optimal Task-Processing Agents}
+        \item Proposition de recherche: \emph{Artificial Intelligence and the Puzzle of Biodiversity}
+        %\item Candidacy: \emph{Research Problems in Distributed Control for Energy Systems}
+        \item Superviseur:
+              \href{http://chaire-eec.uqar.ca/dom.php}
+                   {Dr. Dominique Gravel}
+        \item Domaine: Artificial Intelligence (machine learning: neural networks, probabilistic graphical models), evolutionary genomics, molecular ecology.
+        \end{innerlist}
 \end{outerlist}
 
 \hspace{.5cm}
@@ -392,9 +381,9 @@ ecology, the origin of species (speciation), and ecological statistics.
 \href{http://engineering.uic.edu/}{\textbf{College of Engineering, University of Illinois at Chicago, Chicago, USA.}}
 \begin{outerlist}
 \item[] Graduate Certificate in Bioinformatics, 2012,
-  \begin{innerlist}
-    \item Area of Study: Machine learning and biostatistics.
-  \end{innerlist}
+        \begin{innerlist}
+          \item Domaine: Machine learning (Artificial Intelligence) and biostatistics.
+        \end{innerlist}
 \end{outerlist}
 
 \hspace{.5cm}
@@ -402,160 +391,52 @@ ecology, the origin of species (speciation), and ecological statistics.
 \href{http://www.uquebec.ca/}{\textbf{Université du Québec, Québec, Canada.}}
 \begin{outerlist}
 \item[] B.S., 2009,
-  \begin{innerlist}
-    \item Major in Biology,
-    \item Minor in Mathematics \& Computer Science.
-  \end{innerlist}
+        \begin{innerlist}
+          \item Majeure en biologie,
+          \item Mineure en mathématiques et informatique.
+        \end{innerlist}
 \end{outerlist}
 
-\section{Major Awards}
-
-\href{http://www.nserc-crsng.gc.ca/students-etudiants/pg-cs/bellandpostgrad-belletsuperieures_eng.asp}{\textbf{Award:} Alexander Graham Bell Graduate Scholarship} (2012)
-\begin{innerlist}
-  \item \href{http://www.nserc-crsng.gc.ca/}{\textbf{From:} Natural Sciences and Engineering Research Council of Canada}
-  \item \textbf{Value:} 105 000\$ (equivalent to 105 000 USD or 8 150 000 JPY, 2012 est.)
-\end{innerlist}
-
-\section{Refereed Journal Publications}
+\section{Publications}
 
 \begin{bibenum}
 
   \item \textbf{P Desjardins-Proulx}, EP White, JJ Adamson, K Ram, T Poisot, and
-D Gravel. The case for open preprints in biology.\\ \emph{PLOS Biology} (Accepted)
+D Gravel. Developing a preprint culture in biology.\\ \emph{PLOS
+Biology (in review)}
 
   \item R Vergilino, TA Elliott, \textbf{P Desjardins-Proulx}, TJ Crease and F
 Dufresne.  Evolution of a transposon in \emph{Daphnia} hybrid genomes.
-\emph{Mobile DNA} 4-7, 2013.\\
-\href{http://dx.doi.org/10.1186/1759-8753-4-7}{DOI: 10.1186/1759-8753-4-7}
+\emph{Mobile DNA} 4-7, 2013.\\ DOI: doi:10.1186/1759-8753-4-7
 
   \item D Ai, \textbf{P Desjardins-Proulx}, C Chu, and G Wang. The influence of
 immigration and dispersal limitation on the repeatability of niche and neutral
-communities. \emph{PLOS ONE} 7(9): e46164, 2012.\\ 
-\href{http://dx.doi.org/10.1371/journal.pone.0046164}{DOI: 10.1371/journal.pone.0046164}
+communities. \emph{PLOS ONE} 7(9): e46164, 2012.\\ DOI:
+10.1371/journal.pone.0046164
 
   \item \textbf{P Desjardins-Proulx} and D Gravel. A complex speciation-richness
 relationship in a simple neutral model. \emph{Ecology and Evolution} 2(8):
-1781--1790, 2012.\\
-\href{http://dx.doi.org/10.1002/ece3.292}{DOI: 10.1002/ece3.292}
+1781--1790, 2012.\\ DOI: 10.1002/ece3.292
 
   \item \textbf{P Desjardins-Proulx} and D Gravel. How likely is speciation in
-neutral ecology? \emph{The American Naturalist} 179(1):137-144, 2012.\\
-\href{http://dx.doi.org/10.1086/663196}{DOI: 10.1086/663196}\\
+neutral ecology? \emph{The American Naturalist} 179(1):137-144, 2012.\\ DOI:
+10.1086/663196\\
 
 \end{bibenum}
 
-\section{Other Contributions}
+\section{Contributions}
 
 \begin{bibenum}
-  \item \textbf{P Desjardins-Proulx}. The case for arXiv and a broader
-conception of peer-reviews. Invited blog, International Network of 
+    \item \textbf{P Desjardins-Proulx}. The case for arXiv and a broader
+conception of peer-reviews. International Network of
 Next-Generation Ecologists, 2012.\\
-\href{http://www.innge.net/?q=node/330}{http://www.innge.net/?q=node/330}.
+    \href{http://www.innge.net/?q=node/330}{http://www.innge.net/?q=node/330}.
 
-  \item \textbf{P Desjardins-Proulx}, JL Rosindell, T Poisot, and D 
-Gravel. A simple model to study phylogeographies and speciation patterns 
-in space, 2012.\\
-\href{http://arxiv.org/abs/1203.1790}{arXiv: 1203.1790}.
+    \item \textbf{P Desjardins-Proulx}. A foot in the neutral trap.\\
+    Commentaire invité pour \emph{Trends in Ecology \& Evolution}, 2012.
 
-  \item \textbf{P Desjardins-Proulx}. A foot in the neutral trap.\\ 
-Invited comment for \emph{Trends in Ecology \& Evolution}, 2012.
-
-  \item \textbf{P Desjardins-Proulx}. L'origine de la Biodiversit\'e. Le
-Mouton Noir, Mai-Juin. Cahier Sp\'ecial sur la Biodiversit\'e p.2, 2010. 
-\textit{Selected and republished by GaiaPresse, a group sponsored by the 
-Universit\'e Laval}.
-
+    \item \textbf{P Desjardins-Proulx}. L'origine de la Biodiversit\'e. Le
+Mouton Noir, Mai-Juin. Cahier Sp\'ecial sur la Biodiversit\'e p.2, 2010.
 \end{bibenum}
-
-\section{Teaching\\Experience}
-
-\href{http://www.uquebec.ca/}{\textbf{Université du Québec, Québec, Canada.}}
-\begin{innerlist}
-  \item 2013. I organized a series of meetings on information theory and inference. 
-  \item 2012. CUDA training (intensive one-day course).
-  \item 2012. Scientific computing with C (grad. students/post-docs).
-  \item 2011. Scientific computing with C (grad. students/post-docs).
-\end{innerlist}
-
-\section{Referee\\Service}
-
-\emph{Acta Biotheoretica, Journal of Theoretical Biology, Theoretical 
-Ecology, Journal of Plant Ecology}.
-
-\section{Computer\\Skills}
-
-\begin{innerlist}
-  \item \textbf{Tools \& Frameworks}
-  \begin{innerlist}
-    \item[--] \textbf{Operating systems:}   Linux.
-    \item[--] \textbf{Revision control:}    Git, Mercurial.
-    \item[--] \textbf{Compilers:}           LLVM/Clang, GCC, OpenJdk, Intel.
-    \item[--] \textbf{Databases:}           MongoDB, MySQL.
-    \item[--] \textbf{Web:}                 Node.js (Express), basic php/css3/html5.
-  \end{innerlist}
-  \item \textbf{Programming languages:}
-  \begin{innerlist}
-    \item[--] \textbf{Advanced:}            C$+$$+$11, C, JavaScript, CoffeeScript.
-    \item[--] \textbf{Intermediate:}        Go, Java, R, Python, Octave/MatLab, Clojure.
-  \end{innerlist}
-  \item \textbf{Web sites:}
-  \begin{innerlist}
-    \item[--] Benten-dou: \href{http://www.benten-dou.com}{http://www.benten-dou.com}.
-    \item[--] Personal page: \href{http://phdp.github.io}{http://phdp.github.io}.
-    \item[--] TEE's website: \href{http://chaire-eec.uqar.ca}{http://chaire-eec.uqar.ca}.
-  \end{innerlist}
-\end{innerlist}
-
-\section{Professional\\Memberships}
-
-\begin{innerlist}
-  \item Institute of Electrical and Electronics Engineers \hfill 2012--...
-  \item Quebec Center for Biodiversity Science \hfill 2012--...
-  \item Society for the Study of Evolution \hfill 2008--...
-\end{innerlist}
-
-\section{Graduate\\Courses}
-
-\begin{innerlist}
-  \item 2012. Datamining (machine learning) [A (4.0/4.0), 4 credits] \hfill \href{http://www.uic.edu/}{UIC}
-  \item 2011. Biostatistics [A (4.0/4.0), 4 credits] \hfill \href{http://www.uic.edu/}{UIC}
-  \item 2010. Intro. to bioinformatics [A (4.0/4.0), 4 credits] \hfill \href{http://www.uic.edu/}{UIC}
-  \item 2010. Reading course on Ancestral Recombination Graphs [A, 3 credits] \hfill \href{http://www.uqar.ca/}{UQAR}
-\end{innerlist}
-
-\section{Online\\Courses}
-
-Courses in progress are in italic:
-
-\begin{innerlist}
-  \item \textbf{Coursera}:
-    \emph{Web Intelligence and Big Data} (2013),
-    \emph{Probabilistic graphical models} (2013).
-  \item \textbf{Code School}:
-    Try Git (2012),
-    Try Ruby (2012),
-    CSS Cross-Country (2012).
-\end{innerlist}
-
-\section{Referees}
-
-\textbf{Dr.~Dominique Gravel}
-\begin{innerlist}
-  \item Professor (Universit\'e du Qu\'ebec \`a Rimouski)
-  \item Canada Research Chair.
-  \item e-mail:~\href{MAILTO:dominique_gravel@uqar.qc.ca}{dominique\_gravel@uqar.qc.ca}
-  \item phone: 1.418.723.1986 \#1752
-  \item[$\star$] \emph{I worked as a research profesionnal in Dr. Gravel's lab from September 2009 to August 2012, we also collaborated on many scientific projects.}
-\end{innerlist}
-
-\halfblankline
-
-\textbf{Dr.~James Rosindell}
-\begin{innerlist}
-  \item Post-doctoral researcher, Imperial College London, UK.
-  \item e-mail:~\href{MAILTO:j.rosindell@imperial.ac.uk}{j.rosindell@imperial.ac.uk}
-  \item phone: +44 (0)2075 942263
-  \item[$\star$] \emph{I have collaborated with Dr. Rosindell on several occasions.}
-\end{innerlist}
 
 \end{document}

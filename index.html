@@ -3,61 +3,35 @@
 
 <head>
   <title>Philippe Desjardins-Proulx</title>
-  <link rel="stylesheet" media="screen" href="http://phdp.github.com/css/style.css" type="text/css" />
-  <link rel="stylesheet" media="screen" href="http://phdp.github.com/css/pygments.css" type="text/css" />
-  <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'/>
+  <link rel="stylesheet" media="screen" href="css/style.css" type="text/css" />
   <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
-  <script type="text/javascript" src="http://phdp.github.com/js/utils.js"></script>
-  <!-- <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+  <link href='http://fonts.googleapis.com/css?family=Domine' rel='stylesheet' type='text/css'>
   <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 </head>
 
 <body>
 
 <a href="https://github.com/PhDP/">
-  <img style="position: absolute; top: 0; left: 0; border: 0;" src="http://phdp.github.com/images/forkme.png" alt="Fork me on GitHub">
+  <img style="position: absolute; top: 0; left: 0; border: 0;" src="images/forkme.png" alt="Fork me on GitHub">
 </a>
 
 <div id="header">
-  <div class="menu">
-    <ul>
-      <li><a href="http://phdp.github.com/index.html">About</a></li>
-      <li><a href="http://phdp.github.com/publications.html">Publications</a></li>
-      <!-- <li><a href="http://phdp.github.com/notes.html">Notes</a></li> -->
-      <li><a href="http://phdp.github.com/software.html">Software</a></li>
-      <li><a href="http://phdp.github.com/links.html">Links</a></li>
-      <li><a href="/index-jp.html">日本語</a></li>
-    </ul>
-  </div>
+  <h1>Philippe Desjardins-Proulx</h1>
+  <nav>
+    <ul>{
+	  <li><a href="index.html">about</a></li>
+      <li><a href="writings.html">writings</a></li>
+      <li><a href="mailto:philippe.d.proulx@gmail.com">email</a></li>
+    }</ul>
+  </nav>
 </div>
 
 
-
-<div id="page">
-    <div id="content">
-        <h1>Philippe Desjardins-Proulx</h1>
-
-  <div class="figure">
-    <p><img src="images/me_2011sm.png" alt="me (2011)"/></p>
-  </div>
-
-  <p>I'm a computational scientist working on machine learning (a branch of
+<div id="content">
+    <p>I'm a computational scientist working on machine learning (a branch of
 Artificial Intelligence) and its application to ecology &amp; evolution. I'm
-working on inductive transfer, which in layman's terms could be described as the
-capacity to transfer knowledge from one task to another. Humans are expert at
-this, we almost effortlessly exploit the knowledge acquired from our past
-experiences when we encounter new challenges.  We are good at knowing what kind
-of knowledge can be transferred, for example some concepts in economy are
-similar to concepts in population ecology: competition, limits to growth, while
-other important aspects of economy, such as labor laws, have little to do with
-ecology.</p>
-
-  <p>Modern machine learning algorithms tend to learn a model from data without
-exploiting prior knowledge. This method has advantages but makes it hard to
-build strong models when little data is available or when the context has
-suddenly changed. Also, I think the problem of inductive transfer will force us
-to adopt more sophisticated representations of data, and thus move us closer to
-true intelligence.</p>
+mostly working on inductive transfer, which in layman's terms could be
+described as the capacity to transfer knowledge from one task to another.</p>
 
   <p>I'm doing a Ph.D. at the <a href="http://chaire-eec.uqar.ca/">
 Theoretical Ecosystem Ecology laboratory </a> and the <a href=
@@ -66,31 +40,11 @@ supported by an Alexander Graham Bell Graduate Scholarship from the <a href=
 "http://www.nserc-crsng.gc.ca">NSERC</a>. You can get my <a href=
 "cv/phdp-cv.pdf">short CV here</a>.</p>
 
-<h2>Contact</h2>
 
-  <p>
-    <a href="mailto:philippe.d.proulx@gmail.com"><img src="images/icon-email.png" alt="email"></a>
-    <a href="mailto:p.desjardinsproulx@ymail.com"><img src="images/icon-email2.png" alt="email2"></a>
-    <a href="https://plus.google.com/u/0/114180360725455778445/"><img src="images/icon-gplus.png" alt="google plus"></a>
-    <a href="http://www.linkedin.com/profile/view?id=238920945"><img src="images/icon-lin.png" alt="linked in"></a>
-    <a href="https://twitter.com/phdpqc/"><img src="images/icon-twitter.png" alt="twitter"</a>
-    <a href="https://github.com/PhDP/"><img src="images/icon-github.png" alt="github"></a>
-    <a href="https://bitbucket.org/PhDP/"><img src="images/icon-bitbucket.png" alt="bitbucket"></a>
-  <p>
-
-  <!-- <p>I have an Erdős number of 5 (or less) :P</p> -->
-
-    </div>
 </div>
 
-
-<div id="footer">
-    <!-- <b>Hic Sunt Leones Boreales</b> -->
-    <!-- <p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0 Strict" height="31" width="88"/></a></p> -->
-</div>
 
 <script type="text/javascript">
-
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-3803275-13']);
   _gaq.push(['_trackPageview']);
@@ -103,8 +57,10 @@ ga.async = true;
     var s = document.getElementsByTagName('script')[0];
 s.parentNode.insertBefore(ga, s);
   })();
-
 </script>
+
+<script type="text/javascript" src="http://phdp.github.com/js/utils.js"></script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 </body>
 </html>
