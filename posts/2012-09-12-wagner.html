@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Philippe Desjardins-Proulx</title>
+  <link rel="stylesheet" media="screen" href="../css/style.css" type="text/css" />
+  <link href="http://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Domine" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+
+<a href="https://github.com/PhDP/">
+  <img style="position: absolute; top: 0; left: 0; border: 0;" src="../images/forkme.png" alt="Fork me on GitHub">
+</a>
+
+<div id="header">
+  <h1><a href="mailto:philippe.d.proulx@gmail.com">Philippe Desjardins-Proulx</a></h1>
+  <nav>
+    <ul>{
+      <li><a href="../index.html">about</a></li>
+      <li><a href="../writings.html">writings</a></li>
+      <li><a href="../contact.html">contact</a></li>
+    }</ul>
+  </nav>
+</div>
+
+<div id="content">
+  <h1>Wagner: a simple model to study speciation patterns</h1>
+  <p id="dt">2012.09.12</p>
+    <p>This paper describes a very simple model to generate phylogeographies 
+  under allopatric/parapatric speciation. The C++11 code is on github: <a href="https://github.com/PhDP/wagner">github.com/PhDP/wagner</a>.</p>
+
+  <p>I have a love/hate relationship with this model. I love it as an 
+  algorithm: it's an elegant way to get a speciation-like behavior in space. 
+  I hate it because I increasingly doubt this kind of very simplific 
+  'bottom-up' model can bring much ecological insights.</p>
+  
+  <p>I named this model <i>Wagner</i> in honor of Moritz Wagner, one of the 
+  first scientist to argue for the importance of geographic isolation
+  in speciation.</p>
+
+<h2>Reference</h2>
+
+  <p><b>P Desjardins-Proulx</b>, JL Rosindell, T Poisot, and D Gravel. A
+simple model to study phylogeographies and speciation patterns in space. <a href="http://arxiv.org/abs/1203.1790">arXiv: 1203.1790</a>, 2012. <a href="../files/desjardins-proulx_wagner.bib">[BIB]</a></p>
+
+</div>
+
+<div id="comments">
+  <h2>Comments</h2>
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'phdp';
+    var discus_identifier = '/posts/2012-09-12-wagner.html';
+    var disqus_url = 'http://phdp.github.io//posts/2012-09-12-wagner.html';
+    var discus_title = "Wagner: a simple model to study speciation patterns";
+    (function() {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = 'http://phdp.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript><p>Enable JavaScript to see the comments.</p></noscript>
+</div>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-3803275-13']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>
