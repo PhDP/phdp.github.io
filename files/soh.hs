@@ -15,3 +15,12 @@ main = do
     str1 <- readFile "test.txt"
     hPutStr stdout str1
 
+--------------------------------
+
+import System.IO
+import Control.Concurrent
+ 
+main :: IO ()
+main = do
+    forkIO $ hPutStr stdout "Hello"
+    hPutStr stdout " world\n"
