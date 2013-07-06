@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Philippe Desjardins-Proulx</title>
+  <link rel="stylesheet" media="screen" href="../css/style.css" type="text/css" />
+  <link href="http://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Domine" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+
+<a href="https://github.com/PhDP/">
+  <img style="position: absolute; top: 0; left: 0; border: 0;" src="../images/forkme.png" alt="Fork me on GitHub">
+</a>
+
+<div id="header">
+  <h1><a href="mailto:philippe.d.proulx@gmail.com">Philippe Desjardins-Proulx</a></h1>
+  <nav>
+    <ul>{
+      <li><a href="../index.html">about</a></li>
+      <li><a href="../writings.html">writings</a></li>
+      <li><a href="../contact.html">contact</a></li>
+    }</ul>
+  </nav>
+</div>
+
+<div id="content">
+  <h1>Machine Learning and Deep Transfer Learning</h1>
+  <p id="dt">2013.07.05</p>
+  <p>This short text explains the basic idea behind deep
+transfer learning, an ambitious attempt to build machine learning algorithms
+capable of exploiting prior knowledge. If you're looking for a technical
+treatment, I highly suggest Mihalkova's <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.119.241&amp;rep=rep1&amp;typ
+e=pdf">Mapping and Revising Markov Logic Networks for Transfer Learning</a>,
+one of the best algorithm for deep transfer. Also, I do not dwell on
+the distinctions between deep and shallow transfer, and the various subtypes
+of machine learning algorithms (supervised vs nonsupervised, online vs
+batch): I want to provide a strategic overview of what deep transfer learning
+is about and why it's important.</p>
+
+<h2>The standard approach to machine learning</h2>
+
+<p>Machine learning is straightforward: data is fed to an algorithm that
+builds a model and, hopefully, generate good predictions:</p>
+
+<div class="imagecenter">
+  <img src="../images/ml-900.png" alt="Machine learning">
+</div>
+
+<p>The data can be pretty much anything from ecological data to movie
+preferences. Machine learning algorithms can build effective models because
+they are tailored for the input data. It is hard, if not impossible, to
+build by hand the right mathematical model to solve complex problems such as
+handwriting recognition, spam detection, language processing and many,
+many, other problems where no simple equation can be found. In these cases,
+we have to step back and, instead of focusing on building the model ourself,
+we design algorithms to do it in our place. That's the essence of machine
+learning.</p>
+
+<p>Building models this way is good, but it has a few problems. What can we
+do when we have little data? If the situation has changed since we collected
+our data, is our model still good? When we face a similar situation, can we
+reuse our previous model or do we need to build a new one?</p>
+
+<h2>Deep transfer learning algorithms</h2>
+
+<p>Machine learning algorithms use a <i>Tabula rasa</i> approach: the
+algorithms start with nothing and build the model only with the supplied
+data. It's simple, but it's also inefficient. Deep transfer learning is
+about transferring knowledge between different tasks. Instead of starting
+from scratch, deep transfer algorithms can exploit accumulated knowledge to
+learn faster (we also have good reasons to think deep transfer is a key
+component to build reliable models, but that's a more complicated topic). It
+looks like this:</p>
+
+<div class="imagecenter">
+  <img src="../images/ml-transfer-900.png" alt="Deep transfer learning">
+</div>
+
+<p>The algorithm, instead of simply reading the input data, will exploit
+data from a large data-set of prior knowledge. This, in itself, is tricky.
+The algorithm must make a judgment call: what is relevant to the present
+subject, what can be used, and what should be discarded? Certainly, our
+model for US presidential elections will be awful if we try, say, <a href="http://en.wikipedia.org/wiki/Redskins_Rule">to bring data from football
+games</a>. So there are risks to deep transfer learning, but the benefits
+are huge.</p>
+
+<p>To make an analogy with human learning, imagine you need to learn to run.
+Of course, running is very similar to walking so you won't start from zero.
+You're able to see that running and walking are similar tasks and thus you
+can transfer your knowledge of running into walking. It allows you to learn
+much faster, and also yield interesting information on how the two tasks are
+related to each other. If you need to learn Mandarin though, running and
+walking won't serve you. It's a more general approach: a very conservative
+deep transfer learning algorithm could choose to always reject prior
+information and would build the model just as before.</p>
+
+<p>Machine learning starts from 0. Big data is nice, but it would be
+much nicer if we could build models with more than a tiny fraction of it.
+Deep transfer is about determining what is relevant in previous data-sets
+and use this information to design better models, and faster! My thesis
+focuses on doing just that, using the complex heterogeneous data-sets
+found in ecology.</p>
+
+</div>
+
+<div id="comments">
+  <h2>Comments</h2>
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'phdp';
+    var discus_identifier = '/posts/2013-07-05-dtl.html';
+    var disqus_url = 'http://phdp.github.io//posts/2013-07-05-dtl.html';
+    var discus_title = "Machine Learning and Deep Transfer Learning";
+    (function() {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = 'http://phdp.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript><p>Enable JavaScript to see the comments.</p></noscript>
+</div>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-3803275-13']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>
