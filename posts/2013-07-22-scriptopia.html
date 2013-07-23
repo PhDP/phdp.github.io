@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Philippe Desjardins-Proulx</title>
+  <link rel="stylesheet" media="screen" href="../css/style.css" type="text/css" />
+  <link href="http://fonts.googleapis.com/css?family=Domine" rel="stylesheet" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+
+<a href="https://github.com/PhDP/">
+  <img style="position: absolute; top: 0; left: 0; border: 0;" src="../images/forkme.png" alt="Fork me on GitHub">
+</a>
+
+<div id="header">
+  <h1><a href="mailto:philippe.d.proulx@gmail.com">Philippe Desjardins-Proulx</a></h1>
+  <nav>
+    <ul>{
+      <li><a href="../index.html">about</a></li>
+      <li><a href="../writings.html">writings</a></li>
+      <li><a href="../contact.html">contact</a></li>
+    }</ul>
+  </nav>
+</div>
+
+<div id="content">
+  <h1>Scriptoria.info - Tracking Science Manuscripts under Revision Control Systems</h1>
+  <a href="https://twitter.com/share" class="twitter-share-button" data-via="phdpqc">Tweet</a>
+  <p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2013.07.22</p>
+  <p>There is widespread dissatisfaction with the way scientific publishing is
+done, but fortunately many (cheaper) alternatives are emerging. Among these
+alternatives is git (and revision control systems). Karthik Ram recently
+wrote a piece on the use of git in science: <a href="http://www.scfbm.org/content/8/1/7/">http://www.scfbm.org/content/8/1/7/</a>
+: highly suggestion reading.</p>
+
+<p>The put it bluntly: revision control systems are more modern and
+efficient than our peer-review system (my words, not his). With git and
+github (a hosting service for git), <a href="https://github.com/PhDP/article_preprint/commits/master">changes are
+tracked, with the full history of the document preserved in the repository
+</a>. Collaborators can easily fork the repository of the manuscript, make
+changes, and then push back the changes to a main repository.</p>
+
+<p>Git was built to allow potentially thousands of developers to work on the
+same code, create branches to test new ideas, and push back their changes
+(if they want to merge everything into a single version). Better: websites
+like <a href="https://github.com/">GitHub</a>, <a href="https://bitbucket.org/">BitBucket </a>, <a href="https://code.google.com/">
+Google Code</a>, Microsoft's <a href="http://www.codeplex.com/">CodePlex</a>
+, or <a href="http://gitorious.org/"> Gitorious</a> (itself an open source
+project), allow the users to create open git repositories free of charge,
+with wiki systems and bug tracking included.</p>
+
+<p>Bug tracking is particularly great for science. Bug tracking systems are
+essentially the software equivalent of asking a revision in a peer-review.
+Found a problem with some paper? <a href="https://github.com/weecology/data-sharing-paper/issues/71"> Open a freaking
+issue!</a> Open manuscripts and open reviews, all free, and all this thanks
+to git, an open-source piece of software originally written for the Linux
+kernel.</p>
+
+<p>Git, and other similar systems, are potentially very disruptive and not
+only for science, see <a href="http://www.ted.com/talks/clay_shirky_how_the_internet_will_one_day_transform_
+government.html">Clay Shirky's great talk on the subject</a>. These systems
+were built by software engineers with a great deal of experience on close
+collaborations. Several scientists are already using git to write
+manuscripts... the problem is, there is no way to search these manuscripts,
+no way to know where they are.</p>
+
+<p>Git et al. are decentralized and it's fine. Actually, I would rather not
+have all scientific manuscripts at the same place. However, we need a tool
+to track the manuscripts being developed on github, bitbucket, google code.
+We need this tool both to browse these open manuscripts but also to create
+incentives for scientists to push their manuscripts online as soon as
+possible.</p>
+
+<p>This is Scriptoria.info, a project to track manuscripts being written on
+github, bitbucket, gitorious, and other hosting services git revision
+control systems. The goal of Scriptoria is not to host repositories but
+simply track them in the various hosting services, allow them to be search,
+and offer a simple API. I see the project as a thin layer over an already
+well-established system. Scriptoria is not ready (as of 2013.07.22), it's
+just started! The code will be developed on <a href="https://github.com/PhDP/Scriptoria">github</a> and everyone is free to
+contribute. <a href="https://twitter.com/recology_">Scott Chamberlain</a>
+already suggested <a href="https://github.com/PhDP/Scriptoria/issues/7">
+(via an issue!)</a>
+ a way to track the manuscripts...</p>
+
+</div>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-3803275-13']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>
