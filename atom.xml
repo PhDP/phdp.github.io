@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>Philippe Desjardins-Proulx</title>
+    <link href="http://phdp.github.io//atom.xml" rel="self" />
+    <link href="http://phdp.github.io/" />
+    <id>http://phdp.github.io//atom.xml</id>
+    <author>
+        <name>Philippe Desjardins-Proulx</name>
+        <email>phdp@outlook.com</email>
+    </author>
+    <updated>2013-07-22T00:00:00Z</updated>
+    <entry>
+    <title>Scriptoria.info - Tracking Science Manuscripts under Revision Control Systems</title>
+    <link href="http://phdp.github.io//posts/2013-07-22-scriptopia.html" />
+    <id>http://phdp.github.io//posts/2013-07-22-scriptopia.html</id>
+    <published>2013-07-22T00:00:00Z</published>
+    <updated>2013-07-22T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>Scriptoria.info - Tracking Science Manuscripts under Revision Control Systems</h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="Scriptoria.info - Tracking Science Manuscripts under Revision Control Systems" data-via="phdpqc">Tweet</a>
+<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2013.07.22</p>
+<p>There is widespread dissatisfaction with the way scientific publishing is
+done, but fortunately many (cheaper) alternatives are emerging. Among these
+alternatives is git (and revision control systems). Karthik Ram recently
+wrote a piece on the use of git in science: <a href=
+"http://www.scfbm.org/content/8/1/7/">http://www.scfbm.org/content/8/1/7/</a>:
+highly suggested reading.</p>
+
+<p>The put it bluntly: revision control systems are more modern and
+efficient than our peer-review system (my words, not his). With git and
+github (a hosting service for git), <a href=
+"https://github.com/PhDP/article_preprint/commits/master">changes are
+tracked, with the full history of the document preserved in the repository
+</a>. Collaborators can easily fork the repository of the manuscript, make
+changes, and then push back the changes to a main repository.</p>
+
+<p>Git was built to allow potentially thousands of developers to work on the
+same code, create branches to test new ideas, and push back their changes
+(if they want to merge everything into a single version). Better: websites
+like <a href= "https://github.com/">GitHub</a>, <a href=
+"https://bitbucket.org/">BitBucket </a>, <a href="https://code.google.com/">
+Google Code</a>, Microsoft's <a href ="http://www.codeplex.com/">CodePlex</a>
+, or <a href="http://gitorious.org/" > Gitorious</a> (itself an open source
+project), allow the users to create open git repositories free of charge,
+with wiki systems and bug tracking included.</p>
+
+<p>Bug tracking is particularly great for science. Bug tracking systems are
+essentially the software equivalent of asking a revision in a peer-review.
+Found a problem with some paper? <a href=
+"https://github.com/weecology/data-sharing-paper/issues/71"> Open a freaking
+issue!</a> Open manuscripts and open reviews, all free, and all this thanks
+to git, an open-source piece of software originally written for the Linux
+kernel.</p>
+
+<p>Git, and other similar systems, are potentially very disruptive and not
+only for science, see <a href=
+"http://www.ted.com/talks/clay_shirky_how_the_internet_will_one_day_transform_
+government.html">Clay Shirky's great talk on the subject</a>. These systems
+were built by software engineers with a great deal of experience on close
+collaborations. Several scientists are already using git to write
+manuscripts... the problem is, there is no way to search these manuscripts,
+no way to know where they are.</p>
+
+<p>Git et al. are decentralized and it's fine. Actually, I would rather not
+have all scientific manuscripts at the same place. However, we need a tool
+to track the manuscripts being developed on github, bitbucket, google code.
+We need this tool both to browse these open manuscripts but also to create
+incentives for scientists to push their manuscripts online as soon as
+possible.</p>
+
+<p>This is Scriptoria.info, a project to track manuscripts being written on
+github, bitbucket, gitorious, and other hosting services git revision
+control systems. The goal of Scriptoria is not to host repositories but
+simply track them in the various hosting services, allow them to be search,
+and offer a simple API. I see the project as a thin layer over an already
+well-established system. Scriptoria is not ready (as of 2013.07.22), it's
+just started! The code will be developed on <a href=
+"https://github.com/PhDP/Scriptoria">github</a> and everyone is free to
+contribute. <a href="https://twitter.com/recology_">Scott Chamberlain</a>
+already suggested <a href= "https://github.com/PhDP/Scriptoria/issues/7">
+(via an issue!)</a>
+ a way to track the manuscripts...</p>
+
+
+]]></summary>
+</entry>
+<entry>
+    <title>Machine Learning and Deep Transfer Learning</title>
+    <link href="http://phdp.github.io//posts/2013-07-05-dtl.html" />
+    <id>http://phdp.github.io//posts/2013-07-05-dtl.html</id>
+    <published>2013-07-05T00:00:00Z</published>
+    <updated>2013-07-05T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>Machine Learning and Deep Transfer Learning</h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="Machine Learning and Deep Transfer Learning" data-via="phdpqc">Tweet</a>
+<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2013.07.05</p>
+<p>This short text explains the basic idea behind deep
+transfer learning, an ambitious attempt to build machine learning algorithms
+capable of exploiting prior knowledge. If you're looking for a technical
+treatment, I highly suggest Mihalkova's <a href=
+"http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.119.241&rep=rep1&typ
+e=pdf">Mapping and Revising Markov Logic Networks for Transfer Learning</a>,
+one of the best algorithm for deep transfer. Also, I do not dwell on
+the distinctions between deep and shallow transfer, and the various subtypes
+of machine learning algorithms (supervised vs nonsupervised, online vs
+batch): I want to provide a strategic overview of what deep transfer learning
+is about and why it's important.</p>
+
+<h2>The standard approach to machine learning</h2>
+
+<p>Machine learning is straightforward: data is fed to an algorithm that
+builds a model and, hopefully, generate good predictions:</p>
+
+<div class="imagecenter">
+  <img src="../images/ml-900.png" alt="Machine learning">
+</div>
+
+<p>The data can be pretty much anything from ecological data to movie
+preferences. Machine learning algorithms can build effective models because
+they are tailored for the input data. It is hard, if not impossible, to
+build by hand the right mathematical model to solve complex problems such as
+handwriting recognition, spam detection, language processing and many, many,
+other problems where no simple equation can be found. In these cases, we
+have to step back and, instead of focusing on building the model ourselves,
+we design algorithms to do it in our place. That's the essence of machine
+learning. This approach has been incredibly powerful to solve a wide array
+of difficult problems in pretty much all fields of inquiry: it's the <a href=
+"http://www.csee.wvu.edu/~gidoretto/courses/2011-fall-cp/reading/TheUnreasonable%20EffectivenessofData_IEEE_IS2009.pdf">
+unreasonable effectiveness of data.</a></p>
+
+<p>Building models this way is good, but it has a few problems. What can we
+do when we have little data? If the situation has changed since we collected
+our data, is our model still good? When we face a similar situation, can we
+reuse our previous model or do we need to build a new one?</p>
+
+<h2>Deep transfer learning algorithms</h2>
+
+<p>Machine learning algorithms use a <i>Tabula rasa</i> approach: the
+algorithms start with nothing and build the model only with the supplied
+data. It's simple, but it's also inefficient. Deep transfer learning is
+about transferring knowledge between different tasks. Instead of starting
+from scratch, deep transfer algorithms can exploit accumulated knowledge to
+learn faster (we also have good reasons to think deep transfer is a key
+component to build reliable models, but that's a more complicated topic). It
+looks like this:</p>
+
+<div class="imagecenter">
+  <img src="../images/ml-transfer-900.png" alt="Deep transfer learning">
+</div>
+
+<p>The algorithm, instead of simply reading the input data, will exploit
+data from a large data-set of prior knowledge. This, in itself, is tricky.
+The algorithm must make a judgment call: what is relevant to the present
+subject, what can be used, and what should be discarded? Certainly, our
+model for US presidential elections will be awful if we try, say, <a href=
+"http://en.wikipedia.org/wiki/Redskins_Rule">to bring data from football
+games</a>. So there are risks to deep transfer learning, but the benefits
+are huge.</p>
+
+<p>To make an analogy with human learning, imagine you need to learn to run.
+Of course, running is very similar to walking so you won't start from zero.
+You're able to see that running and walking are similar tasks and thus you
+can transfer your knowledge of walking into running. It allows you to learn
+much faster, and also yield interesting information on how the two tasks are
+related to each other. If you need to learn Mandarin though, running and
+walking won't serve you. It's a more general approach: a very conservative
+deep transfer learning algorithm could choose to always reject prior
+information and would build the model just as before.</p>
+
+<p>Machine learning starts from 0. Big data is nice, but it would be
+much nicer if we could build models with more than a tiny fraction of it.
+Deep transfer is about determining what is relevant in previous data-sets
+and use this information to design better models, and faster! My thesis
+focuses on doing just that, using the complex heterogeneous data-sets
+found in ecology.</p>
+
+
+]]></summary>
+</entry>
+<entry>
+    <title>The case for open preprints in biology</title>
+    <link href="http://phdp.github.io//posts/2013-05-14-case-preprint.html" />
+    <id>http://phdp.github.io//posts/2013-05-14-case-preprint.html</id>
+    <published>2013-05-14T00:00:00Z</published>
+    <updated>2013-05-14T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>The case for open preprints in biology</h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="The case for open preprints in biology" data-via="phdpqc">Tweet</a>
+<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2013.05.14</p>
+  <p>Initiated by a <a href="http://jabberwocky.weecology.org/2012/07/18/esa-journals-do-not-allow-papers-with-preprints/">simple tweet</a>, 
+  this collaboration on preprints in biology was ultimately accepted in PLOS Biology. The whole writing
+  process was done on GitHub (<a href="https://github.com/PhDP/article_preprint">here's the repo</a>).</p>
+
+  <h2>Reference</h2>
+
+  <p><b>P Desjardins-Proulx</b>, EP White, JJ Adamson, K Ram, T Poisot, and D
+Gravel. The case for open preprints in biology. <i>PLOS Biology</i> 11(5): e1001563, 2013.
+<a href="http://www.plosbiology.org/article/info%3Adoi%2F10.1371%2Fjournal.pbio.1001563">[URL]</a>
+</p>
+
+
+]]></summary>
+</entry>
+<entry>
+    <title>L'intuition des Intelligences Artificielles</title>
+    <link href="http://phdp.github.io//posts/2013-04-29-intuition-ai.html" />
+    <id>http://phdp.github.io//posts/2013-04-29-intuition-ai.html</id>
+    <published>2013-04-29T00:00:00Z</published>
+    <updated>2013-04-29T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>L'intuition des Intelligences Artificielles</h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="L'intuition des Intelligences Artificielles" data-via="phdpqc">Tweet</a>
+<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2013.04.29</p>
+<p>En 1997, DeepBlue bat le champion d'échecs Garry Kasparov lors d'un match 
+de 6 parties. Depuis, les ordinateurs règnent en maîtres incontestés des 
+échecs. Pourtant, leur victoire est en quelque sorte décevante. C'est une 
+victoire de la force brute. DeepBlue, un dinosaure comparé aux programmes 
+modernes, pouvait évaluer 200 millions de positions par seconde alors que 
+les joueurs d'échecs ne considèrent que quelques coups par tour. Il est 
+clair que les ordinateurs nous surpassent, et ce depuis longtemps, pour 
+résoudre des problèmes mathématiques qui demandent une série bien définie 
+d'étapes. Par exemple, le calcul de n'importe quelle racine carrée est très 
+simple. Il suffit de suivre rigoureusement un certain nombre d'opérations et 
+voilà ! Simple pour un ordinateur mais pas pour nous. Les auteurs de 
+science-fiction nous offrent souvent la caricature d'ordinateurs incapables 
+de penser globalement, incapables d'intuition. Bref, des DeepBlue qui 
+écrasent l'être humain avec leur force de calcul. C'est une erreur. Toutes 
+les I.A. (Intelligence Artificielle) ne sont pas des DeepBlue et nous 
+développons actuellement des programmes qui ont une intelligence très 
+similaire à la nôtre. C'est une quête pour construire des I.A. capables de 
+raisonner sur des questions complexes. C'est une quête pour programmer 
+l'intuition.</p>
+
+<p>À première vue, l'intelligence humaine semble complètement différente des 
+ordinateurs. Ces derniers conservent la plupart des données dans les disques 
+durs qu'on peut voir comme de gigantesques tables. Pour accéder à un élément 
+(une mémoire), il suffit de connaître sa position qui est représentée par un 
+nombre. Mauvais nombre, mauvaise mémoire. À l'inverse, la mémoire humaine 
+est résiliente et associative. Si je vous demande le nom du très 
+charismatique premier ministre du Québec qui a dirigé la province entre 2003 
+et 2012, la plupart des gens seront capables de trouver la bonne réponse, 
+même si « très charismatique » colle difficilement au personnage. Autre 
+différence : la capacité de calculs (ou évaluation) de notre cerveau est 
+largement supérieure à DeepBlue. L'acte de reconnaître un objet (ceci est un 
+chat, ça c'est un arbre) est très difficile. Même le plus puissant 
+ordinateur serait incapable de se déplacer en forêt tout en évaluant la 
+position et la nature des objets, ce que nous faisons pourtant sans grands 
+efforts. Notre cerveau est donc très doué pour certains types d'analyses, 
+surtout celles qui demandent de regrouper plusieurs évidences. Les 
+spécialistes de l'I.A. tentent depuis longtemps de créer des I.A. qui 
+ressemblent à l'intelligence humaine. Et ils ont réussi. Les réseaux de 
+neurones artificiels font partie de ces techniques. Tout comme le cerveau 
+humain, ces réseaux ont une mémoire résiliente et associative. Ils sont 
+capables de prendre en compte un grand nombre d'évidences et les relations 
+complexes qui lient ces évidences.</p>
+
+<p>L'I.A. prend énormément d'expansion mais elle n'a pas la forme que les 
+gens imaginent. Google utilise déjà ces techniques pour son moteur de 
+recherche, pour traduire des textes, adapter les publicités. Amazon, 
+Microsoft, IBM, Fujitsu; pratiquement toutes les compagnies de haute 
+technologie investissent de grandes sommes en I.A. et les succès se 
+multiplient. Goeffrey Hinton est un des grands spécialistes des réseaux de 
+neurones artificiels. Il s'en sert pour apprendre à des programmes à 
+raisonner sur des tâches complexes. Par exemple, ces réseaux de neurones 
+peuvent reconnaître les chiffres (1, 2, 3, 4, …) mieux qu'un être humain. Si 
+vous croyez que c'est facile, demandez à un professeur de mathématiques. Les 
+formes des chiffres varient énormément et certains, moi par exemple, ont 
+développé une incroyable capacité à écrire des 4 qui ressemblent à des 9, ou 
+des 7 qui ressemblent à des 1. Personne n'a jamais réussi à écrire à la main 
+un programme capable de reconnaître les chiffres. Les réseaux de neurones 
+d'Hinton sont capables d'apprendre à les reconnaître et ils le font comme 
+les humains: on gave le réseau de chiffres en leur donnant la bonne réponse 
+(ça, c'est un quatre, ça, c'est un un, etc) et il apprend un modèle (très 
+complexe!) qui lui permet ensuite de déduire le chiffre à partir d'une 
+forme. Hinton n'écrit pas un programme pour reconnaître les chiffres, il 
+écrit un programme capable d'apprendre à reconnaître les chiffres. Mieux 
+encore: en 2012, Hinton et son équipe participent à un concours du géant 
+pharmaceutique Merk. L'objectif est de découvrir des molécules au potentiel 
+pharmaceutique. Les équipes de scientifiques qui participent à ce concours 
+sont des experts dans le domaine, certains y travaillent depuis des 
+décennies. L'équipe de Hinton arrive, en retard, au concours et n'a aucune 
+expérience dans le domaine. Pourtant, il gagne! Un réseau de neurones 
+artificiels, à qui on a donné une large base de données, a réussi à 
+apprendre comment flairer une bonne molécule mieux que les experts. Le choc 
+fut assez grand pour mériter à l'équipe d'Hinton un article dans le 
+prestigieux New York Times.</p>
+
+<p>Il faudra encore attendre plusieurs années avant de voir des I.A. 
+maîtriser toutes les subtilités du langage humain, une tâche où notre 
+cerveau est exceptionnellement bien adapté. Pour bien des tâches complexes 
+cependant, ils commencent déjà à développer une redoutable intuition.  
+L'intuition est un concept difficile à définir. Très brièvement, on peut 
+dire que c'est un raisonnement fondé sur un grand nombre d'évidences. Prises 
+individuellement, ces évidences peuvent être faibles, mais en groupe elles 
+forment un modèle solide. C'est exactement ce que les réseaux de neurones 
+font: ils analysent de grandes bases de données et apprennent à lire les 
+relations subtiles, tout comme les humains maîtrisent les subtilités de leur 
+métier après des années d'expérience. Ceci inclut plusieurs tâches: 
+comprendre les systèmes économiques, financiers, moléculaires, et... 
+écologiques. C'est ce qui m'a amené à l'I.A. Je m'intéresse aux forces qui 
+maintiennent la biodiversité. Ces forces sont multiples et complexes, 
+tellement complexes que je doute qu'on puisse enfermer Mère Nature dans une 
+simple équation. Les outils mathématiques traditionnels ont longtemps eu de 
+la difficulté à analyser les sujets complexes. Les I.A., cependant, ont tout 
+ce qu'il faut pour percer ces mystères, même s'il reste beaucoup de chemin à 
+faire. Le problème, c'est qu'on comprend encore mal l'intelligence. Un peu 
+comme les pionniers de l'aviation tentaient maladroitement d'imiter les 
+ailes des oiseaux, nous bâtissons des I.A. en imitant le cerveau humain. Une 
+meilleure science de l'information nous permettra de dépasser les limites du 
+cerveau humain, mais les succès actuels de l'I.A. sont tout de même 
+impressionnants. Il a fallu quelques milliards d'années pour que la vie sur 
+terre mène à une intelligence comme la nôtre. Les I.A. n'ont pas 100 ans et 
+ils révolutionnent déjà le monde de la technologie.</p>
+
+
+]]></summary>
+</entry>
+<entry>
+    <title>Evolution of a transposon in Daphnia hybrid genomes</title>
+    <link href="http://phdp.github.io//posts/2013-02-06-transposon.html" />
+    <id>http://phdp.github.io//posts/2013-02-06-transposon.html</id>
+    <published>2013-02-06T00:00:00Z</published>
+    <updated>2013-02-06T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>Evolution of a transposon in Daphnia hybrid genomes</h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="Evolution of a transposon in Daphnia hybrid genomes" data-via="phdpqc">Tweet</a>
+<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2013.02.06</p>
+  <h2>Reference</h2>
+
+  <p>R Vergilino, TA Elliott, <b>P Desjardins-Proulx</b>, TJ Crease and F
+Dufresne. Evolution of a transposon in <i>Daphnia</i> hybrid genomes.
+<i>Mobile DNA</i> 4:7, 2013.
+<a href="http://dx.doi.org/10.1186/1759-8753-4-7">DOI: 10.1186/1759-8753-4-7.</a></p>
+
+
+]]></summary>
+</entry>
+<entry>
+    <title>The repeatability of niche and neutral communities</title>
+    <link href="http://phdp.github.io//posts/2012-09-24-repeatability.html" />
+    <id>http://phdp.github.io//posts/2012-09-24-repeatability.html</id>
+    <published>2012-09-24T00:00:00Z</published>
+    <updated>2012-09-24T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>The repeatability of niche and neutral communities</h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="The repeatability of niche and neutral communities" data-via="phdpqc">Tweet</a>
+<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2012.09.24</p>
+  <h2>Reference</h2>
+
+  <p>D Ai, <b>P Desjardins-Proulx</b>, C Chu, and G Wang. The influence of
+immigration and dispersal limitation on the repeatability of niche and neutral
+communities. <i>PLOS ONE</i> 7(9): e46164.  <a
+href="http://dx.doi.org/10.1371/journal.pone.0046164">DOI:
+10.1371/journal.pone.0046164</a>. <a href="files/ai_2012.pdf">[PDF]</a></p>
+
+
+]]></summary>
+</entry>
+<entry>
+    <title>Wagner: a simple model to study speciation patterns</title>
+    <link href="http://phdp.github.io//posts/2012-09-12-wagner.html" />
+    <id>http://phdp.github.io//posts/2012-09-12-wagner.html</id>
+    <published>2012-09-12T00:00:00Z</published>
+    <updated>2012-09-12T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>Wagner: a simple model to study speciation patterns</h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="Wagner: a simple model to study speciation patterns" data-via="phdpqc">Tweet</a>
+<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2012.09.12</p>
+  <p>This paper describes a very simple model to generate phylogeographies 
+  under allopatric/parapatric speciation. The C++11 code is on github: <a href=
+  "https://github.com/PhDP/wagner">github.com/PhDP/wagner</a>.</p>
+
+  <p>I have a love/hate relationship with this model. I love it as an 
+  algorithm: it's an elegant way to get a speciation-like behavior in space. 
+  I hate it because I increasingly doubt this kind of very simplific 
+  'bottom-up' model can bring much ecological insights.</p>
+  
+  <p>I named this model <i>Wagner</i> in honor of Moritz Wagner, one of the 
+  first scientist to argue for the importance of geographic isolation
+  in speciation.</p>
+
+<h2>Reference</h2>
+
+  <p><b>P Desjardins-Proulx</b>, JL Rosindell, T Poisot, and D Gravel. A
+simple model to study phylogeographies and speciation patterns in space. <a
+href="http://arxiv.org/abs/1203.1790">arXiv: 1203.1790</a>, 2012. <a
+href="../files/desjardins-proulx_wagner.bib">[BIB]</a></p>
+
+
+]]></summary>
+</entry>
+<entry>
+    <title>The case for arXiv and a broader conception of peer-reviews</title>
+    <link href="http://phdp.github.io//posts/2012-08-22-case-arxiv.html" />
+    <id>http://phdp.github.io//posts/2012-08-22-case-arxiv.html</id>
+    <published>2012-08-22T00:00:00Z</published>
+    <updated>2012-08-22T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>The case for arXiv and a broader conception of peer-reviews</h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="The case for arXiv and a broader conception of peer-reviews" data-via="phdpqc">Tweet</a>
+<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2012.08.22</p>
+  <h2>Reference</h2>
+
+  <p><b>P Desjardins-Proulx</b>. <a
+href="http://innge.net/?q=node/330">The case for arXiv and a broader conception
+of peer-reviews</a>. Invited blog for the <i>International Network of
+Next-Generation Ecologists</i>, 2012.</p>
+
+
+]]></summary>
+</entry>
+<entry>
+    <title>A complex speciation-richness relationship in a simple neutral model</title>
+    <link href="http://phdp.github.io//posts/2012-06-27-complex.html" />
+    <id>http://phdp.github.io//posts/2012-06-27-complex.html</id>
+    <published>2012-06-27T00:00:00Z</published>
+    <updated>2012-06-27T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>A complex speciation-richness relationship in a simple neutral model</h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="A complex speciation-richness relationship in a simple neutral model" data-via="phdpqc">Tweet</a>
+<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2012.06.27</p>
+  <p><b>P Desjardins-Proulx</b> and D Gravel. A complex speciation-richness
+relationship in a simple neutral model. <i>Ecology and Evolution</i>
+2(8):1781-1790. <a href="http://dx.doi.org/10.1002/ece3.292">DOI:
+10.1002/ece3.292</a>.  <a
+href="http://onlinelibrary.wiley.com/doi/10.1002/ece3.292/pdf">[PDF]</a> <a
+href="http://onlinelibrary.wiley.com/doi/10.1002/ece3.292/full">[HTML]</a> <a
+href="files/desjardins-proulx_2012b.bib">[BIB]</a> <a
+href="http://arxiv.org/abs/1203.3884">[arXiv]</a> <a
+href="https://github.com/PhDP/origin">[C source code]</a></p>
+
+
+]]></summary>
+</entry>
+<entry>
+    <title>A foot in the neutral trap</title>
+    <link href="http://phdp.github.io//posts/2012-03-27-foot.html" />
+    <id>http://phdp.github.io//posts/2012-03-27-foot.html</id>
+    <published>2012-03-27T00:00:00Z</published>
+    <updated>2012-03-27T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>A foot in the neutral trap</h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="A foot in the neutral trap" data-via="phdpqc">Tweet</a>
+<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2012.03.27</p>
+  <h2>Reference</h2>
+
+  <p><b>P Desjardins-Proulx</b>. <a
+href="http://news.cell.com/discussions/trends-in-ecology-and-evolution/ecological-neutral-theory-useful-model-or-statement-of-ignorance">A
+foot in the neutral trap</a>. <i>Trends in Ecology &amp; Evolution (invited
+comment)</i>, 2012.</p>
+
+
+]]></summary>
+</entry>
+
+</feed>
