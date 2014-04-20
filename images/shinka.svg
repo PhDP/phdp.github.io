@@ -54,7 +54,7 @@
      transform="translate(0,-914.78219)">
     <text
        xml:space="preserve"
-       style="font-size:100px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#00a500;fill-opacity:1;stroke:none;font-family:TakaoMincho;-inkscape-font-specification:TakaoMincho"
+       style="font-size:100px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:TakaoMincho;-inkscape-font-specification:TakaoMincho"
        x="-3.8867188"
        y="1001.8123"
        id="text2985"
@@ -63,10 +63,10 @@
          id="tspan2987"
          x="-3.8867188"
          y="1001.8123"
-         style="font-size:100px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#00a500;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN;fill-opacity:1">進化</tspan></text>
+         style="font-size:100px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN;fill-opacity:1">進化</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:48px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#6c5353;fill-opacity:1;stroke:none;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       style="font-size:48px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#5fd35f;fill-opacity:1;stroke:none;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
        x="28.712"
        y="1046.7861"
        id="text2989"
@@ -75,6 +75,6 @@
          id="tspan2991"
          x="28.712"
          y="1046.7861"
-         style="font-size:48px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#6c5353;font-family:Ubuntu;-inkscape-font-specification:Ubuntu">shinka</tspan></text>
+         style="font-size:48px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#5fd35f;font-family:Ubuntu;-inkscape-font-specification:Ubuntu">shinka</tspan></text>
   </g>
 </svg>
