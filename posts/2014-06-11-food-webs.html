@@ -113,15 +113,18 @@ uncertainty.</p>
 
 <p>The equation is readable, can be used with modern inference tools, and is
 very flexible, but there's better. What if the presence of cinereus in some
-region \(r\) could be predicted just by checking a few conditions (like
-temperature), we could have something like this:</p>
+region \(r\) could be predicted just by checking a few conditions, we could
+have something like this:</p>
 
-\[northAmerica(r) \land (presence(A, r) \lor presence(B, r)) \Rightarrow presence(cinereus).\]
+\[northAmerica(r) \land (presence(A, r) \lor presence(B, r)) \Rightarrow presence(cinereus, r).\]
 
-<p>This is an overtly simplistic model of presence/absence, but the point is
-that it can be combined with the other equations. Various evidence can be
-used together instead of having a wall between ecological facts, and such
-database of probabilistic logical formula supports sophisticated queries.</p>
+<p>If the region \(r\) is in north America and if either species A and B are
+present, then cinereus will be present. Again, this question would be
+assigned a probability. Of course this is an overtly simplistic model of
+presence/absence, but the point is that it can be combined with the other
+equations. Various evidence can be used together instead of having a wall
+between ecological facts, and such database of probabilistic logical formula
+supports sophisticated queries.</p>
 
 <p>There are many discussions about having integrative frameworks and
 theories in ecology. This is especially true for interaction networks, which
