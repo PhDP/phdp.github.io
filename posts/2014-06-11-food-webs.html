@@ -2,11 +2,12 @@
 <html>
 
 <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <title>Philippe Desjardins-Proulx</title>
   <link rel="stylesheet" media="screen" href="../css/style.css" type="text/css" />
-  <link href="http://fonts.googleapis.com/css?family=Domine" rel="stylesheet" type="text/css">
-  <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet" type="text/css">
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <link href="http://fonts.googleapis.com/css?family=Domine" rel="stylesheet" type="text/css" />
+  <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet" type="text/css" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 
@@ -100,7 +101,7 @@ specialize on different preys. This fact cannot be easily express with
 standard knowledge representations for food webs, but we can with a simple
 equation:</p>
 
-\[presence(cinereus, r) \land presence(hoffmani, r) \Rightarrow eat(cinereus, A).\]
+\[presence(\mbox{cinereus}, r) \land presence(\mbox{hoffmani}, r) \Rightarrow eat(\mbox{cinereus}, A, r).\]
 
 <p>It reads: the presence of cinereus and the presence of hoffmani in some
 region \(r\) implies that cinereus eats prey A. These logical equations can
@@ -116,10 +117,10 @@ very flexible, but there's better. What if the presence of cinereus in some
 region \(r\) could be predicted just by checking a few conditions, we could
 have something like this:</p>
 
-\[northAmerica(r) \land (presence(A, r) \lor presence(B, r)) \Rightarrow presence(cinereus, r).\]
+\[northAmerica(r) \land (presence(A, r) \lor presence(B, r)) \Rightarrow presence(\mbox{cinereus}, r).\]
 
 <p>If the region \(r\) is in north America and if either species A or B are
-present, then cinereus will be present. Again, this question would be
+present, then cinereus will be present. Again, this equation would be
 assigned a probability. Of course this is an overtly simplistic model of
 presence/absence, but the point is that it can be combined with the other
 equations. Various evidence can be used together instead of having a wall
