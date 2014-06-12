@@ -49,15 +49,15 @@ knowledge representation is to look at the possible queries. What questions
 can be answered? What questions cannot be answered? How expressive can the
 queries be? How expressive are the answers?</p>
 
-<p>Despite its widespread use, these interactions networks can answer a
-single question: is there a binary interaction between X and Y? The <i>binary
+<p>Despite their widespread use, these interactions networks can only answer
+one question: is there a binary interaction between X and Y? The <i>binary
 </i> part is important, because these networks cannot deal with indirect
 relationships such as: X eats Y except when W is there.</p>
 
 <p>It doesn't scale well either: two species might only interact in a given
-region, in which case we can have distinct networks, but we would need
-distinct networks for every region with distinct interactions and a lot
-of information will be repeated.</p>
+region, a problem solved with distinct networks, but we would need distinct
+networks for every region with distinct interactions and a lot of information
+will be repeated.</p>
 
 <h2>Going stochastic</h2>
 
@@ -67,12 +67,11 @@ now handle uncertainty and to some extent spatio-temporal variations. That
 said, we still cannot handle indirect relationships, and it doesn't scale
 that well.</p>
 
-<p>For example, if species A and B compete on the west coast with
-probability 0.9 but only with probability 0.1 on the east coast, we would
-lose quite a bit of information by having a network say they compete with
-probability 0.5. Dividing the network in two would improve our model's
-accuracy, but we are again getting in the messy network-of-networks business.
-</p>
+<p>For example, if species A and B compete on the west coast with probability
+0.9 but only with probability 0.1 on the east coast, we would lose important
+information by having a network say they compete with probability 0.5. Dividing
+the network in two would improve our model's accuracy, but we are again getting
+in the messy network-of-networks business.  </p>
 
 <p>My supervisors, Timothée Poisot and Dominique Gravel, recently proposed a
 metaweb concept that includes, among many other ideas, probabilistic links, but
@@ -80,12 +79,11 @@ in their case it's more than just adding probabilities to links [3].</p>
 
 <h2>A unified path to unification</h2>
 
-<p>To criticize an approach to ecology for missing some features is too
-easy. All representations have limitations, and all approaches to science
-rely on simplifications of reality. Moreover, some simple approaches to
-science have yielded spectacular results. However, in this case I think
-we can have a much richer representation by looking at what is going on
-in the field of knowledge representation (KR), which has been defined as [0]:</p>
+<p>To criticize an approach to ecology for missing some features is too easy.
+All representations have limitations, and any approach to science relies on
+some simplification of reality. However, in this case we can have our cake and
+eat it too by looking at what is going on in the field of knowledge
+representation (KR), which has been defined as [0]:</p>
 
 <p><blockquote>[...] the scientific domain concerned with the study of
 computational models able to explicitly represent knowledge by symbols and
@@ -94,43 +92,42 @@ pieces of knowledge. Systems built upon such computational models are called
 knowledge-based systems. Their main components are a knowledge base and a
 reasoning engine.</blockquote></p>
 
-<p>Take a classical example of two lizards: <i>P. cinereus</i> and <i>P.
+<p>To illustrate, let's look at two lizards: <i>P. cinereus</i> and <i>P.
 hoffmani</i> [1]. The two species essentially hunt the same preys but, when
 they are found in the same region, character displacement pushes them to
 specialize on different preys. This fact cannot be easily express with
-standard knowledge representations for food webs, but we can with a simple
-equation:</p>
+standard knowledge representations for food webs, but we can with a bit
+of logic:</p>
 
 \[presence(\mbox{cinereus}, r) \land presence(\mbox{hoffmani}, r) \Rightarrow eat(\mbox{cinereus}, A, r).\]
 
-<p>It reads: the presence of cinereus and the presence of hoffmani in some
-region \(r\) implies that cinereus eats prey A. These logical equations can
-be seen as templates: presence(cinereus) will be either true or false at any
-given place, but the entire equation can be assigned a probability so it can
-be revised with new evidence [4]. This is an important point, because it
-means we can use the standard food webs as evidence to build these logical
-equations, but we still get a probabilistic model capable of handling
-uncertainty.</p>
+<p>The formula reads: the presence of cinereus in region \(r\) and the presence
+of hoffmani in \(r\) implies that cinereus eats prey A in \(r\). Formulas like
+this be seen as templates: presence(cinereus) will be either true or false at
+any given place, but a probability is assigned to the entire formula so it can
+be revised with new evidence [4]. This is an important point, it means we can
+use the standard food webs as evidence to build these logical formulas, but we
+still get a probabilistic model capable of handling uncertainty.</p>
 
-<p>The equation is readable, can be used with modern inference tools, and is
-very flexible, but there's better. What if the presence of cinereus in some
-region \(r\) could be predicted just by checking a few conditions, we could
-have something like this:</p>
+<p>The formula is readable, can be used with modern inference tools, and is
+very flexible, but there's better. What if the presence of cinereus in \(r\)
+could be predicted with a few conditions, we could have something like
+this:</p>
 
 \[northAmerica(r) \land (presence(A, r) \lor presence(B, r)) \Rightarrow presence(\mbox{cinereus}, r).\]
 
 <p>If the region \(r\) is in north America and if either species A or B are
-present, then cinereus will be present. Again, this equation would be
-assigned a probability. Of course this is an overtly simplistic model of
-presence/absence, but the point is that it can be combined with the other
-equations. Various evidence can be used together instead of having a wall
-between ecological facts, and such database of probabilistic logical formula
-supports sophisticated queries.</p>
+present, then cinereus will be present. Again, this equation would be assigned
+a probability. Of course this is an overtly simplistic model of
+presence/absence, but the point is that this knowledge representation allows
+different formula to be combined. Various evidence can be used together instead
+of having a wall between ecological facts, and such database of probabilistic
+logical formula supports sophisticated queries.</p>
 
 <p>There are many discussions about having integrative frameworks and
 theories in ecology. This is especially true for interaction networks, which
 are often present in one form or another in ecology. Ironically, these
-discussions of integration are often ignoring the current development in
+discussions of integration are often ignoring modern research in
 other fields. Knowledge representation offers powerful tools with mature
 software that are worth checking, especially if we want to understand
 how different ideas and evidence can be combined.</p>
