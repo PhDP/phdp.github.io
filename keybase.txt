@@ -1,0 +1,78 @@
+==================================================================
+https://keybase.io/phdp
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://phdp.github.io
+  * I am phdp (https://keybase.io/phdp) on keybase.
+  * I have a public key with fingerprint 081D 2E96 EC38 85A1 4E50  5C8C 9FA9 BB43 2964 5021
+
+To claim this, I am signing this object:
+
+{
+    "body": {
+        "client": {
+            "name": "keybase.io node.js client",
+            "version": "0.7.2"
+        },
+        "key": {
+            "fingerprint": "081d2e96ec3885a14e505c8c9fa9bb4329645021",
+            "host": "keybase.io",
+            "key_id": "9FA9BB4329645021",
+            "uid": "53a62092610d57bc4fb2030bf9ff0b00",
+            "username": "phdp"
+        },
+        "merkle_root": {
+            "ctime": 1412414637,
+            "hash": "8056a624f390819baf20f7a7c60d76d60c897bb2574a49be5ff7c277b745cee018f329db5b0f5c57f6efc74b6bcd69b202a09131394683e818da4fdb97db68ba",
+            "seqno": 71387
+        },
+        "service": {
+            "hostname": "phdp.github.io",
+            "protocol": "https:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1412414685,
+    "expire_in": 157680000,
+    "prev": "87577a4b3a1110346d2afb6b397dd1e3dc27d0b6ebfaa60fa7e597126cab87f5",
+    "seqno": 4,
+    "tag": "signature"
+}
+
+with the aforementioned key, yielding the PGP signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1
+
+owFdUmtoFUcYvUmjaSqCFFSignGtLUi4mdmdx04qxUR8VeqjqQ8K9jqzM3PvNrm7
+191NahpCK9gfQgUpxgaUKD6Ij6Zo0AhGWoyRqC0oCEopKpFi7B8toa2/qp1NLdXO
+r5n5zpzvnPPN7qmvZMrLns589t3QjpPny374VWQ+qLtwp8MSoWy36jssr8VXQZLu
+Al5UVr3VrNoFj1XWD2uCUKrsx3HNc0yt1aai2A8DgwJZmrWtztoUnj7WfpBXUSny
+Uy4LuFDaihHlOa6LOUQKA+y5HtOcCYEcmxGEgQ0NZSGMk5e6WhOcOV+aW7asgTU2
+voRvnShghxMbMJtAIDEVHtLCBg4QmmkNBAApMFbRc0ulgiylWosqam5RuSgMJwx7
+iZ+WIYI2gog41KjhccE8cAEmpgHSDjNWmODaBppy6hEgKZEEeC6jQtiYIo6YUFhr
+6tmUCoqwpxSArjaapcACaOxhqonSHkWCCE8SZqTaHDDoQIch4jrKha7kSEvBqBTE
+FdzIj9XWILTqKXRc2pkeozbfU6nsNLEXjGXzflJoFf8kV4rCJPTCFlMrJEkprk9t
+J+2lFPyJErlYnZzgyQk/kGZkL84UGuj/InFxraW2lfxI5fwUgSlxgVlpI9WWBkUx
+pRwJh0MIgYOItLk2Nh3jRELlSJOKBIIooTknQHOqMKPQJh4XLtX4P6PI6OR5Qxn7
++YAnrZGyOneWzanIlJVnJk8qTz9t5rWqaf/+5LMjlc8KdbMGjy/KqQ0fftWz/VVx
+vWvhwzcHNv6+Z/qtbfmO8e1zPh1bc3N+68CZ3oZr5V8/mDv74reLTxXnFrSLttSo
+reNvXBoeOhYvKb51ef/aP0cab19adePt6pa+kZ0H+xcd2AD0H49PT+FJVb+89khe
+XVv8pWvZ2V76APRsHhret360ruabY5+f+xFuPKoPvje2efX4TxUDlZuWb+ke/Xn1
+6eun+ophwxcLdmdOrJzc/Nekeb3HZ9y/uLe/eu9n3WMVI4cv9w1VTFk6dQWJnoz2
+BIfWJWeaBivD+1fs6YOo93t71+PhJ1FxxaPqL995uvD17o/en9fUDe/lm5aOvlvs
++k2vqpovj9ydufhv
+=OwZS
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/phdp
+
+==================================================================
+
+
