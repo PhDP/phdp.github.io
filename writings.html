@@ -5,7 +5,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <title>Philippe Desjardins-Proulx</title>
   <link rel="stylesheet" media="screen" href="./css/style.css" type="text/css" />
-  <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+  <link href="http://fonts.googleapis.com/css?family=Questrial" rel="stylesheet" type="text/css">
   <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic" rel="stylesheet" type="text/css" />
   <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -20,25 +20,26 @@
 <div id="header">
   <h1><a href="mailto:philippe.d.proulx@gmail.com">Philippe Desjardins-Proulx</a></h1>
   <nav>
-    <ul>{
+    <ul>
+      <li>( sections</li>
       <li><a href="./index.html">about</a></li>
-      <li><a href="./writings.html">writings</a></li>
-      <li><a href="./contact.html">contact</a></li>
-    }</ul>
+      <li>( writings</li>
+      <li><a href="./writings.html">english</a></li>
+      <li><a href="./french.html">français</a></li>
+      <li><a href="./japanese.html">日本語</a>)</li>
+      <li><a href="./contact.html">contact</a>)</li>
+    </ul>
   </nav>
 </div>
 
 <div id="content">
-  <p id="atom"><a href="atom.xml">Subscribe <img src="images/feed.svg" /></a></p>
-
-<h2>Posts</h2>
+  <h2>Writings</h2>
 
 <div id="posts">
   <p>2014.06.11 :: <a href="./posts/2014-06-11-food-webs.html">Knowledge representation and species interactions</a></p>
 <p>2013.07.22 :: <a href="./posts/2013-07-22-scriptopia.html">Scriptoria.info - Tracking Science Manuscripts under Revision Control Systems</a></p>
 <p>2013.07.05 :: <a href="./posts/2013-07-05-dtl.html">Machine Learning and Deep Transfer Learning</a></p>
 <p>2013.05.14 :: <a href="./posts/2013-05-14-case-preprint.html">The case for open preprints in biology</a></p>
-<p>2013.04.29 :: <a href="./posts/2013-04-29-intuition-ai.html">L'intuition des Intelligences Artificielles</a></p>
 <p>2013.02.06 :: <a href="./posts/2013-02-06-transposon.html">Evolution of a transposon in Daphnia hybrid genomes</a></p>
 <p>2012.09.24 :: <a href="./posts/2012-09-24-repeatability.html">The repeatability of niche and neutral communities</a></p>
 <p>2012.09.12 :: <a href="./posts/2012-09-12-wagner.html">Wagner: a simple model to study speciation patterns</a></p>
@@ -46,14 +47,14 @@
 <p>2012.06.27 :: <a href="./posts/2012-06-27-complex.html">A complex speciation-richness relationship in a simple neutral model</a></p>
 <p>2012.03.27 :: <a href="./posts/2012-03-27-foot.html">A foot in the neutral trap</a></p>
 <p>2012.01.01 :: <a href="./posts/2012-01-01-how-likely.html">How likely is speciation in neutral ecology?</a></p>
-<p>2010.05.01 :: <a href="./posts/2010-05-01-origine.html">L'origine de la biodiversité</a></p>
 
 </div>
 
 
 
   <div id="hidden">
-    let world = "世界" in print $ "Hello " ++ world ++ "!"
+    <!-- let world = "世界" in print &#36; "Hello " ++ world ++ "!" -->
+    (def msg (let [world "世界"] (str "Hello " world "!")))
   </div>
 </div>
 

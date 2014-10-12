@@ -5,7 +5,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <title>Philippe Desjardins-Proulx</title>
   <link rel="stylesheet" media="screen" href="./css/style.css" type="text/css" />
-  <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+  <link href="http://fonts.googleapis.com/css?family=Questrial" rel="stylesheet" type="text/css">
   <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic" rel="stylesheet" type="text/css" />
   <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -20,11 +20,15 @@
 <div id="header">
   <h1><a href="mailto:philippe.d.proulx@gmail.com">Philippe Desjardins-Proulx</a></h1>
   <nav>
-    <ul>{
+    <ul>
+      <li>( sections</li>
       <li><a href="./index.html">about</a></li>
-      <li><a href="./writings.html">writings</a></li>
-      <li><a href="./contact.html">contact</a></li>
-    }</ul>
+      <li>( writings</li>
+      <li><a href="./writings.html">english</a></li>
+      <li><a href="./french.html">français</a></li>
+      <li><a href="./japanese.html">日本語</a>)</li>
+      <li><a href="./contact.html">contact</a>)</li>
+    </ul>
   </nav>
 </div>
 
@@ -55,6 +59,7 @@ society. You can get my <a href="files/phdp-cv.pdf">short CV here</a>.</p>
 following projects:
   <a href="http://llvm.org/">LLVM/Clang</a>,
   <a href="http://www.haskell.org/ghc/">Glasgow Haskell Compiler</a>,
+  <a href="http://clojure.org/">Clojure</a>,
   <a href="http://git-scm.com/">Git</a>,
   <a href="http://www.vim.org/">Vim</a>,
   <a href="http://www.linux.com/">Linux</a>,
@@ -64,12 +69,12 @@ following projects:
   <a href="http://cassandra.apache.org/">Cassandra</a>,
   <a href="http://www.postgresql.org/">PostgreSQL</a>,
   <a href="http://www.mongodb.org/">MongoDB</a>.
-</p>
 
 
 
   <div id="hidden">
-    let world = "世界" in print $ "Hello " ++ world ++ "!"
+    <!-- let world = "世界" in print &#36; "Hello " ++ world ++ "!" -->
+    (def msg (let [world "世界"] (str "Hello " world "!")))
   </div>
 </div>
 
