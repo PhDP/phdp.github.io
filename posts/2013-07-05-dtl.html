@@ -39,7 +39,7 @@
 <p>This short text explains the basic idea behind deep
 transfer learning, an ambitious attempt to build machine learning algorithms
 capable of exploiting prior knowledge. If you're looking for a technical
-treatment, I highly suggest Mihalkova's <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.119.241&amp;rep=rep1&amp;typ
+treatment, I highly suggest Mihalkova's <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.119.241&rep=rep1&typ
 e=pdf">Mapping and Revising Markov Logic Networks for Transfer Learning</a>,
 one of the best algorithm for deep transfer. Also, I do not dwell on
 the distinctions between deep and shallow transfer, and the various subtypes
@@ -117,8 +117,8 @@ found in ecology.</p>
 
 
   <div id="hidden">
-    let world = &quot;世界&quot; in print $ &quot;Hello &quot; ++ world ++ &quot;!&quot;
-    <!-- (def msg (let [world "世界"] (str "Hello " world "!"))) -->
+    "世界" |&gt; printf "Hello %s!"
+    <!-- let world = "世界" in print &#36; "Hello " ++ world ++ "!" -->
   </div>
 </div>
 
