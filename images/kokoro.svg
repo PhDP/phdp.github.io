@@ -9,36 +9,31 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   version="1.1"
-   width="233.27"
-   height="215.2"
+   width="138.60001"
+   height="128.2"
    id="svg2"
-   inkscape:version="0.48.4 r9939"
-   sodipodi:docname="logo.svg">
-  <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="1920"
-     inkscape:window-height="1014"
-     id="namedview9"
-     showgrid="false"
-     inkscape:zoom="0.96102398"
-     inkscape:cx="-119.70153"
-     inkscape:cy="70.425004"
-     inkscape:window-x="0"
-     inkscape:window-y="27"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="layer1"
-     showguides="true"
-     inkscape:guide-bbox="true" />
+   version="1.1"
+   inkscape:version="0.48.4 r9939">
   <defs
      id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="7.9195959"
+     inkscape:cx="137.23436"
+     inkscape:cy="74.080377"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="3200"
+     inkscape:window-height="1760"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -47,25 +42,25 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
-     transform="translate(0,-837.16222)"
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
      id="layer1"
-     style="fill:#ff2a2a">
+     transform="translate(0,-924.16218)">
     <text
        xml:space="preserve"
-       style="font-size:250px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#d50016;fill-opacity:1;stroke:none;font-family:Sans"
-       x="-7.6953125"
-       y="1040.8925"
-       id="text2986"
+       style="font-size:144px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ff8080;fill-opacity:1;stroke:none;font-family:TakaoMincho;-inkscape-font-specification:TakaoMincho"
+       x="-2.3125"
+       y="1043.6356"
+       id="text2989"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan2988"
-         x="-7.6953125"
-         y="1040.8925"
-         style="font-size:250px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#d50016;fill-opacity:1;font-family:TakaoExMincho;-inkscape-font-specification:TakaoExMincho">心</tspan></text>
+         id="tspan2991"
+         x="-2.3125"
+         y="1043.6356">心</tspan></text>
   </g>
 </svg>

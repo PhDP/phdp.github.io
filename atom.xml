@@ -6,10 +6,453 @@
     <id>http://phdp.github.io//atom.xml</id>
     <author>
         <name>Philippe Desjardins-Proulx</name>
-        <email>phdp@outlook.com</email>
+        <email>philippe.d.proulx@gmail.com</email>
     </author>
-    <updated>2014-06-11T00:00:00Z</updated>
+    <updated>2015-04-05T00:00:00Z</updated>
     <entry>
+    <title>Automated reasoning in F#, Scala, Haskell, C++, and Julia</title>
+    <link href="http://phdp.github.io//posts/2015-04-05-automated-reasoning.html" />
+    <id>http://phdp.github.io//posts/2015-04-05-automated-reasoning.html</id>
+    <published>2015-04-05T00:00:00Z</published>
+    <updated>2015-04-05T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>Automated reasoning in F#, Scala, Haskell, C++, and Julia</h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="Automated reasoning in F#, Scala, Haskell, C++, and Julia" data-via="phdpqc">Tweet</a>
+<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2015.04.05</p>
+<p>We need to simplify the following expression:</p>
+
+\[e = ((1 + 0 \times x) \times 3) + 12.\]
+
+<p>Luckily for us, we won't have to remember any elementary school arithmetic,
+because Harris' excellent <a
+  href='http://www.cambridge.org/ca/academic/subjects/computer-science/programming-languages-and-applied-logic/handbook-practical-logic-and-automated-reasoning'>
+  <i>Handbook of Practical Logic and Automated Reasoning</i></a> begins with a
+simple algorithm to do exactly that. It's not complicated, but it's a pretty
+good barometer of how painful a programming language will be for the kind of
+hybrid (probabilistic logic, or statistical relational) approaches I work with.
+Here, I compare the implementations of Harris' simple algorithm in F#, Scala,
+Haskell, C++, and Julia.</p>
+
+<p>No programming languages were hurt while writing this post. It's not a
+competition, and I avoided talking about languages I dislike. Sum types are
+discussed in length because they are awesome and useful for this problem
+(and many, many others).</p>
+
+<h2>The ML family</h2>
+
+<p>Harris' book uses OCaml, a popular language for solvers. F#, Haskell, and
+Scala all share roots with OCaml, with F# being the closest thing to an OCaml
+dialect. I'll start with F#:</p>
+
+<pre><code class="fsharp">/// A sum type for the expression.
+/// An expression is either a var (which is a string), a constant
+/// (which is an integer), an addition (made of two expressions)
+/// or a multiplication (also made of two expressions).
+type Expr =
+    | Var of string
+    | Const of int
+    | Add of Expr * Expr
+    | Mul of Expr * Expr
+
+/// Simplify a single component of the expression. This function
+/// takes an expression and use pattern matching to select the
+/// right approach based on type and value. For example, if we
+/// add a constant 0 to some x (which can be expression), then
+/// we return x.
+let simplify1 e =
+    match e with
+    | Add (Const 0, x)
+    | Add (x, Const 0)
+    | Mul (x, Const 1)
+    | Mul (Const 1, x)        -> x
+    | Mul (x, Const 0)
+    | Mul (Const 0, x)        -> Const 0
+    | Add (Const a, Const b)  -> Const (a + b)
+    | Mul (Const a, Const b)  -> Const (a * b)
+    | _                       -> e
+
+/// Recursive function to simplify an entire expression.
+let rec simplify e =
+    match e with
+    | Add (x, y) -> Add (simplify x, simplify y)
+    | Mul (x, y) -> Mul (simplify x, simplify y)
+    | _          -> e
+    |> simplify1
+
+/// Return the value string if the expression can be reduced to a constant.
+let exprStr e =
+    match e with
+    | Const x -> string x
+    | _       -> "The expression could not be simplified to a constant."
+
+/// The |> operator sends the result on its left to its right, for example
+/// "5.0 |> log |> sqrt" computes log(5.0) and then the square root of the
+/// result. This is nice because it allows a more natural left-to-right
+/// flow for functional programming.
+[&lt;EntryPoint>]
+let main argv =
+    Add (Mul (Add (Const 1, Mul (Const 0, Var "x")), Const 3), Const 12)
+    |> simplify
+    |> exprStr
+    |> printf "%s"
+    0 /// F#'s main returns 0 for success à la C
+</code></pre>
+
+<p>It's almost the same as the OCaml version in Harris' book. The key trick is
+to define an expression (Expr) as a variable (string) <b>or</b> a constant
+(integer) <b>or</b> an addition <b>or</b> a multiplication (both made of two
+expressions). The <b>or</b> is important, object-oriented programming languages
+focuses on hierarchies of objects, while sum types define a type as a series of
+alternatives. Sum types are important for another reason: they provide
+an easy way to express things like "this function <i>might</i> return
+an integer", for example in Haskell if we want a data structure that maps
+keys to values:</p>
+
+<pre><code class="haskell">data Expr =
+import Data.Map (Map)
+import qualified Data.Map as Map
+
+capitals = Map.fromList [("Finland", "Helsinski"), ("France", "Paris"),
+  ("Japan", "Tokyo"), ("South Korea", "Seoul"), ("Arrakis", "Arrakeen")]
+
+lookupCapitals country = case Map.lookup country capitals of
+  Just capital -> "The capital of " ++ country ++ " is " ++ capital ++ "."
+  Nothing      -> "Is " ++ country ++ " even a country?"
+</code></pre>
+
+<p>The point is that a key-value store will only return a value if the key is
+present. In this example, the map takes a country (string) and return its
+capital (string). However, when we try to take a value from the map with the
+lookup function, Haskell returns a <b>Maybe</b> type with either <b>Just
+String</b>, if the string provided is found in the map, or <b>Nothing</b> if
+the key was absent. We then use pattern matching to deal with these
+possibilities in the lookupCapitals function. One of the most common mistake in
+programming is to return a null and not deal with it properly. The solution
+with sum types is to return a wrapped value and handling possibilities
+explicitly with pattern matching. It solves with types what many languages
+would solve with exceptions and try-catch apparatuses.</p>
+
+<pre><code class="haskell">ghci> lookupCapitals "Arrakis"
+"The capital of Arrakis is Arrakeen."
+ghci> lookupCapitals "Canada"
+"Is Canada even a country?"</code></pre>
+
+<p>Speaking of Haskell, the code for the algorithm is:</p>
+
+<pre><code class="haskell">data Expr =
+    Var String
+  | Const Int
+  | Add Expr Expr
+  | Mult Expr Expr
+
+simplify1 :: Expr -> Expr
+simplify1 e = case e of
+  Add (Const 0) x           -> x
+  Add x (Const 0)           -> x
+  Add (Const a) (Const b)   -> Const $ a + b
+  Mult x (Const 0)          -> Const 0
+  Mult (Const 0) x          -> Const 0
+  Mult x (Const 1)          -> x
+  Mult (Const 1) x          -> x
+  Mult (Const a) (Const b)  -> Const $ a * b
+  _                         -> e
+
+simplify :: Expr -> Expr
+simplify e = case e of
+  Add x y   -> simplify1 $ Add (simplify x) (simplify y)
+  Mult x y  -> simplify1 $ Mult (simplify x) (simplify y)
+  _         -> simplify1 e
+
+e = Add (Mult (Add (Const 1) (Mult (Const 0) (Var "x"))) (Const 3)) (Const 12)
+s = simplify e
+
+main = putStrLn $ case s of
+  Const x -> show x
+  _ -> "Could not simplify the expression to a constant."
+</code></pre>
+
+<p>It's quite similar to F#. I decided to add types explicitly to
+<i>simplify1</i> and <i>simplify</i>, but Haskell is smart enough to deduce the
+type without this. Arguably the only thing worth explaining is the $ operator.
+The operator forces Haskell to evaluate the expression to the right of the
+operator in priority, and if it reminds you of parentheses, you are absolutely
+right. <i>x</i> and <i>y</i> have the same value here:</p>
+
+<pre><code class="haskell">x = log (sqrt (exp 5.0))
+y = log $ sqrt $ exp 5.0
+</code></pre>
+
+<p>The operator is there to reduce visual clutter. In my opinion, F# is easier
+to read because the |> operator enforces left-to-right reading, which is more
+natural than reading code inside-out:</p>
+
+<pre><code class="fsharp">
+z = exp 5.0 |> sqrt |> log
+</code></pre>
+
+<p>And now for something a bit different: Scala. It's also a static
+functional programming language with sum types, but its greater
+integration with the object-oriented paradigm is evident:</p>
+
+<pre><code class="scala">object Simplify {
+  sealed abstract class Expr { override def toString = show(this) }
+  case class Variable(name: String) extends Expr
+  case class Const(value: Int) extends Expr
+  case class Add(left: Expr, right: Expr) extends Expr
+  case class Mult(left: Expr, right: Expr) extends Expr
+
+  def evalOne(e: Expr): Expr = e match {
+    case Add(Const(0), r)         => r
+    case Add(l, Const(0))         => l
+    case Add(Const(a), Const(b))  => Const(a + b)
+    case Mult(Const(0), r)        => Const(0)
+    case Mult(l, Const(0))        => Const(0)
+    case Mult(Const(1), r)        => r
+    case Mult(l, Const(1))        => l
+    case Mult(Const(a), Const(b)) => Const(a * b)
+    case _                        => e
+  }
+
+  def eval(e: Expr): Expr = e match {
+    case Add(l, r)  => evalOne(Add(eval(l), eval(r)))
+    case Mult(l, r) => evalOne(Mult(eval(l), eval(r)))
+    case _          => e
+  }
+
+  def show(e: Expr) = e match {
+    case Const(x) => print(x)
+    case _        =>
+      print("The expression could not be simplified to a constant.")
+  }
+
+  def main(args: Array[String]) {
+    var e = Add(Mult(Add(Const(1), Mult(Const(0), Variable("x"))),
+              Const(3)), Const(12))
+    var s = eval(e)
+    print(s)
+  }
+}
+</code></pre>
+
+<p>Everything is an object in Scala. Thus, we have to define the functions to
+simplify as methods inside a singleton object. I named the functions
+<i>evalOne</i> and <i>eval</i> since it has a bit odd to have a function named
+<i>simplify</i> inside a Simplify object.</p>
+
+<h2>C++</h2>
+
+<p>Few understand every corner of C++'s monstrous standard. It's huge.
+Surely, with so many features, it must be easy to solve this problem in C++.
+Well no, it's not. This is a well-known
+issue with C++, see <a href="https://parasol.tamu.edu/~yuriys/pm/"><i>Open
+and Efficient Type Switch for C++</i></a> for an efficient solution
+using a pattern matching library (the effort is directed by the creator
+of the C++ language). That said, here I'll use the boost library (A)
+because solutions based only on the standard library are contrived and
+(B) because boost is almost standard.</p>
+
+<pre><code class="cpp">#include &lt;iostream>
+#include &lt;string>
+#include &lt;boost/variant>
+
+struct Add;
+struct Mult;
+
+using Expr = boost::variant<
+  int,
+  std::string,
+  boost::recursive_wrapper&lt;Add>,
+  boost::recursive_wrapper&lt;Mult>>;
+
+struct Add {
+  Expr left, right;
+  Add(const Expr &left_, const Expr &right_) : left(left_), right(right_) {
+  }
+};
+
+struct Mult {
+  Expr left, right;
+  Mult(const Expr &left_, const Expr &right_) : left(left_), right(right_) {
+  }
+};
+
+struct add_visit : public boost::static_visitor&lt;Expr> {
+  Expr operator()(int l, int r) const {
+    return Expr(l + r);
+  }
+  template&lt;class X> Expr operator()(int l, const X &x) const {
+    return l == 0? Expr(x) : Add(Expr(l), Expr(x));
+  }
+  template&lt;class X> Expr operator()(const X &x, int r) const {
+    return r == 0? Expr(x) : Add(Expr(r), Expr(x));
+  }
+  template&lt;class X, class Y>
+  Expr operator()(const X &x, const Y &y) const {
+    return Add(Expr(x), Expr(y));
+  }
+};
+
+struct mul_visit : public boost::static_visitor&lt;Expr> {
+  Expr operator()(int l, int r) const {
+    return Expr(l * r);
+  }
+  template&lt;class X> Expr operator()(int l, const X &x) const {
+    return l == 0? Expr(0) : (l == 1? Expr(x) : Mult(Expr(l), Expr(x)));
+  }
+  template&lt;class X> Expr operator()(const X &x, int r) const {
+    return r == 0? Expr(0) : (r == 1? Expr(x) : Mult(Expr(r), Expr(x)));
+  }
+  template&lt;class X, class Y>
+  Expr operator()(const X &x, const Y &y) const {
+    return Mult(Expr(x), Expr(y));
+  }
+};
+
+struct simplify1 : public boost::static_visitor&lt;Expr> {
+  Expr operator()(const Add &a) const {
+    return boost::apply_visitor(add_visit(), a.left, a.right);
+  }
+  Expr operator()(const Mult &m) const {
+    return boost::apply_visitor(mul_visit(), m.left, m.right);
+  }
+  template&lt;class X> Expr operator()(const X &x) const {
+    return Expr(x);
+  }
+};
+
+struct simplify : public boost::static_visitor&lt;Expr> {
+  Expr operator()(const Add &a) const {
+    auto left = boost::apply_visitor(simplify(), a.left);
+    auto right = boost::apply_visitor(simplify(), a.right);
+    auto add_lr = boost::apply_visitor(add_visit(), left, right);
+    return boost::apply_visitor(simplify1(), add_lr);
+  }
+  Expr operator()(const Mult &m) const {
+    auto left = boost::apply_visitor(simplify(), m.left);
+    auto right = boost::apply_visitor(simplify(), m.right);
+    auto mul_lr = boost::apply_visitor(mul_visit(), left, right);
+    return boost::apply_visitor(simplify1(), mul_lr);
+  }
+  template&lt;class X> Expr operator()(const X &x) const {
+    return x;
+  }
+};
+
+struct print_expr : public boost::static_visitor&lt;std::string> {
+  std::string operator()(int x) const { return std::to_string(x); };
+  std::string operator()(const Expr &e) const {
+    return "The expression could not be simplified to a constant.";
+  };
+};
+
+int main() {
+  auto e = Expr(Add(
+      Expr(Mult(Expr(Add(Expr(1), Expr(Mult(Expr(0), Expr("x"))))),
+      Expr(3))), Expr(12)));
+  auto s = boost::apply_visitor(simplify(), e);
+  std::cout << boost::apply_visitor(print_expr(), s) << std::endl;
+  return 0;
+}
+</code></pre>
+
+<p>So, this is boost::variant in action, and boost is anything but clever code.
+My biggest qualm with this type of clever header-heavy code is that you get to
+see a big chunk of the developers' lifework unroll before your eyes every time
+you make a small mistake. Even LLVM/Clang will (probably) not save you.  It's
+almost prohibitively verbose and a bit trickier to understand. If you want to
+know how this code works, you need to read a bit on the visitor pattern.</p>
+
+<p>C++ template metaprogramming is both awesome and terrifying. Mostly
+terrifying.  I would not be surprised if someone were to find a simple way to
+use C++11/C++14 features to build a small and nice matching library. <a
+href='https://github.com/jbandela/simple_match'>This attempt</a> is halfway
+there (with boost::variant, it might already allows matching on type but I have
+yet to play with the idea). C++ is awesome for scientific computing, with tons
+of awesome librairies, so I'd love to see a nicer solution to his problem.</p>
+
+<h2>Julia</h2>
+
+<p>Julia is an attempt to build a fast and flexible replacement for
+R/Python/Matlab.  An issue with most dynamic languages is that there is no
+elegant way to switch on type. Actually, you cannot really do it with most
+static languages either, see previous section... However, Julia supports
+multiple-dispatch based on type annotation. To be clear, it's quite different
+from the F#/Scala/Haskell code.  In these languages, it is possible to define
+sum types and do pattern matching on their constructor. With Julia, we define a
+function with type annotation and let the interpreter dispatch based on runtime
+type information. Multiple dispatch is supported in Julia for performance: it
+allows the interpreter to compile optimized functions and use the best one,
+adding predictability while keeping the language dynamic (for some reason...).
+At first sight, it does work pretty well:</p>
+
+<pre><code class="julia">abstract Expr
+
+type Const <: Expr; val::Int end
+type Var <: Expr; name::String end
+type Add <: Expr; left::Expr; right::Expr end
+type Mult <: Expr; left::Expr; right::Expr end
+
+add(x::Const, y::Const) = Const(x.val + y.val)
+add(x::Const, y::Expr) = x.val == 0? y : Add(x, y)
+add(x::Expr, y::Const) = add(y, x)
+add(x::Expr, y::Expr) = Add(x, y)
+
+mult(x::Const, y::Const) = Const(x.val * y.val)
+mult(x::Const, y::Expr) = x.val == 1? y : (x.val == 0? Const(0) : Mult(x, y))
+mult(x::Expr, y::Const) = mult(y, x)
+mult(x::Expr, y::Expr) = Mult(x, y)
+
+simplify1(a::Add) = add(a.left, a.right)
+simplify1(m::Mult) = mult(m.left, m.right)
+simplify1(e::Expr) = e
+
+simplify(a::Add) = simplify1(Add(simplify(a.left), simplify(a.right)))
+simplify(m::Mult) = simplify1(Mult(simplify(m.left), simplify(m.right)))
+simplify(e::Expr) = e
+
+printExpr(c::Const) = print(c.val)
+printExpr(e::Expr) =
+  print("The expression could not be simplified to a constant.")
+
+e = Add(Mult(Add(Const(1), Mult(Const(0), Var("x"))), Const(3)), Const(12))
+s = simplify(e)
+printExpr(s)
+</code></pre>
+
+<p>Unlike pattern matching, we can only dispatch on type, so we need an if
+expression (the ? operator in Julia, just like C), or I could've used the match
+macro, but it's overkill here. It's not too inelegant, and at first I thought
+it was a good enough way to simulate sum types and pattern matching. It matters
+to the Julia ecosystem because these features are very useful to build solvers,
+logic and theorem proving systems, etc etc. Pretty useful for a technical 
+computing platform. Unfortunately, while Julia does well with this simple example,
+I think an oddity with the language would soon bite us: you can't type the
+return value, and yes, it's big deal.</p>
+
+<p>First, it's a issue for the sake of correctness: you can return a float
+thinking you're returning an integer. Also, since annotation is not allowed for
+the return value, it's also impossible to add annotation for a higher-order
+function (a function taking functions as input). As a concrete example,
+first-order logic has <i>predicates</i> mapping objects to a boolean, and <i>functions</i> mapping objects to objects. We'd like to do:</p>
+
+<pre><code class="julia">solve(pre::(Object -> Bool), ...)
+
+solve(fun::(Object -> Object), ...)
+</code></pre>
+
+<p>But instead, we'd have to test the type of the return value inside the
+function. That said, Julia is young and <a
+href='https://github.com/JuliaLang/julia/issues/1090'>it might get return type
+declarations at some point.</a></p>
+
+<h2>Conclusion</h2>
+
+<p>Sum types are awesome.</p>
+
+
+
+]]></summary>
+</entry>
+<entry>
     <title>Knowledge representation and species interactions</title>
     <link href="http://phdp.github.io//posts/2014-06-11-food-webs.html" />
     <id>http://phdp.github.io//posts/2014-06-11-food-webs.html</id>
@@ -35,15 +478,15 @@ knowledge representation is to look at the possible queries. What questions
 can be answered? What questions cannot be answered? How expressive can the
 queries be? How expressive are the answers?</p>
 
-<p>Despite its widespread use, these interactions networks can answer a
-single question: is there a binary interaction between X and Y? The <i>binary
+<p>Despite their widespread use, these interactions networks can only answer
+one question: is there a binary interaction between X and Y? The <i>binary
 </i> part is important, because these networks cannot deal with indirect
 relationships such as: X eats Y except when W is there.</p>
 
 <p>It doesn't scale well either: two species might only interact in a given
-region, in which case we can have distinct networks, but we would need
-distinct networks for every region with distinct interactions and a lot
-of information will be repeated.</p>
+region, a problem solved with distinct networks, but we would need distinct
+networks for every region with distinct interactions and a lot of information
+will be repeated.</p>
 
 <h2>Going stochastic</h2>
 
@@ -53,12 +496,11 @@ now handle uncertainty and to some extent spatio-temporal variations. That
 said, we still cannot handle indirect relationships, and it doesn't scale
 that well.</p>
 
-<p>For example, if species A and B compete on the west coast with
-probability 0.9 but only with probability 0.1 on the east coast, we would
-lose quite a bit of information by having a network say they compete with
-probability 0.5. Dividing the network in two would improve our model's
-accuracy, but we are again getting in the messy network-of-networks business.
-</p>
+<p>For example, if species A and B compete on the west coast with probability
+0.9 but only with probability 0.1 on the east coast, we would lose important
+information by having a network say they compete with probability 0.5. Dividing
+the network in two would improve our model's accuracy, but we are again getting
+in the messy network-of-networks business.  </p>
 
 <p>My supervisors, Timothée Poisot and Dominique Gravel, recently proposed a
 metaweb concept that includes, among many other ideas, probabilistic links, but
@@ -66,12 +508,11 @@ in their case it's more than just adding probabilities to links [3].</p>
 
 <h2>A unified path to unification</h2>
 
-<p>To criticize an approach to ecology for missing some features is too
-easy. All representations have limitations, and all approaches to science
-rely on simplifications of reality. Moreover, some simple approaches to
-science have yielded spectacular results. However, in this case I think
-we can have a much richer representation by looking at what is going on
-in the field of knowledge representation (KR), which has been defined as [0]:</p>
+<p>To criticize an approach to ecology for missing some features is too easy.
+All representations have limitations, and any approach to science relies on
+some simplification of reality. However, in this case we can have our cake and
+eat it too by looking at what is going on in the field of knowledge
+representation (KR), which has been defined as [0]:</p>
 
 <p><blockquote>[...] the scientific domain concerned with the study of
 computational models able to explicitly represent knowledge by symbols and
@@ -80,43 +521,42 @@ pieces of knowledge. Systems built upon such computational models are called
 knowledge-based systems. Their main components are a knowledge base and a
 reasoning engine.</blockquote></p>
 
-<p>Take a classical example of two lizards: <i>P. cinereus</i> and <i>P.
+<p>To illustrate, let's look at two lizards: <i>P. cinereus</i> and <i>P.
 hoffmani</i> [1]. The two species essentially hunt the same preys but, when
 they are found in the same region, character displacement pushes them to
 specialize on different preys. This fact cannot be easily express with
-standard knowledge representations for food webs, but we can with a simple
-equation:</p>
+standard knowledge representations for food webs, but we can with a bit
+of logic:</p>
 
 \[presence(\mbox{cinereus}, r) \land presence(\mbox{hoffmani}, r) \Rightarrow eat(\mbox{cinereus}, A, r).\]
 
-<p>It reads: the presence of cinereus and the presence of hoffmani in some
-region \(r\) implies that cinereus eats prey A. These logical equations can
-be seen as templates: presence(cinereus) will be either true or false at any
-given place, but the entire equation can be assigned a probability so it can
-be revised with new evidence [4]. This is an important point, because it
-means we can use the standard food webs as evidence to build these logical
-equations, but we still get a probabilistic model capable of handling
-uncertainty.</p>
+<p>The formula reads: the presence of cinereus in region \(r\) and the presence
+of hoffmani in \(r\) implies that cinereus eats prey A in \(r\). Formulas like
+this be seen as templates: presence(cinereus) will be either true or false at
+any given place, but a probability is assigned to the entire formula so it can
+be revised with new evidence [4]. This is an important point, it means we can
+use the standard food webs as evidence to build these logical formulas, but we
+still get a probabilistic model capable of handling uncertainty.</p>
 
-<p>The equation is readable, can be used with modern inference tools, and is
-very flexible, but there's better. What if the presence of cinereus in some
-region \(r\) could be predicted just by checking a few conditions, we could
-have something like this:</p>
+<p>The formula is readable, can be used with modern inference tools, and is
+very flexible, but there's better. What if the presence of cinereus in \(r\)
+could be predicted with a few conditions, we could have something like
+this:</p>
 
 \[northAmerica(r) \land (presence(A, r) \lor presence(B, r)) \Rightarrow presence(\mbox{cinereus}, r).\]
 
 <p>If the region \(r\) is in north America and if either species A or B are
 present, then cinereus will be present. Again, this equation would be
-assigned a probability. Of course this is an overtly simplistic model of
-presence/absence, but the point is that it can be combined with the other
-equations. Various evidence can be used together instead of having a wall
+assigned a probability. This is a simplistic model of presence/absence, but
+the point is that this knowledge representation allows different formula to
+be combined. Various evidence can be used together instead of having a wall
 between ecological facts, and such database of probabilistic logical formula
 supports sophisticated queries.</p>
 
 <p>There are many discussions about having integrative frameworks and
 theories in ecology. This is especially true for interaction networks, which
 are often present in one form or another in ecology. Ironically, these
-discussions of integration are often ignoring the current development in
+discussions of integration are often ignoring modern research in
 other fields. Knowledge representation offers powerful tools with mature
 software that are worth checking, especially if we want to understand
 how different ideas and evidence can be combined.</p>
@@ -145,12 +585,17 @@ how different ideas and evidence can be combined.</p>
     <summary type="html"><![CDATA[<h1>Scriptoria.info - Tracking Science Manuscripts under Revision Control Systems</h1>
 <a href="https://twitter.com/share" class="twitter-share-button" data-text="Scriptoria.info - Tracking Science Manuscripts under Revision Control Systems" data-via="phdpqc">Tweet</a>
 <p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2013.07.22</p>
+<p><i><b>Update 2014-09-06</b>: I wanted Scriptoria to be a group effort,
+something built by several scientists, especially since I never intended to
+stay in academia after the Ph.D. I failed to create enough momentum around the
+project, so I'm moving on...</i></p>
+
 <p>There is widespread dissatisfaction with the way scientific publishing is
 done, but fortunately many (cheaper) alternatives are emerging. Among these
 alternatives is git (and revision control systems). Karthik Ram recently
 wrote a piece on the use of git in science: <a href=
-"http://www.scfbm.org/content/8/1/7/">http://www.scfbm.org/content/8/1/7/</a>:
-highly suggested reading.</p>
+"http://www.scfbm.org/content/8/1/7/">http://www.scfbm.org/content/8/1/7/</a>.
+Highly suggested reading.</p>
 
 <p>The put it bluntly: revision control systems are more modern and
 efficient than our peer-review system (my words, not his). With git and
@@ -164,9 +609,9 @@ changes, and then push back the changes to a main repository.</p>
 same code, create branches to test new ideas, and push back their changes
 (if they want to merge everything into a single version). Better: websites
 like <a href= "https://github.com/">GitHub</a>, <a href=
-"https://bitbucket.org/">BitBucket </a>, <a href="https://code.google.com/">
-Google Code</a>, Microsoft's <a href ="http://www.codeplex.com/">CodePlex</a>
-, or <a href="http://gitorious.org/" > Gitorious</a> (itself an open source
+"https://bitbucket.org/">BitBucket</a>, <a href="https://code.google.com/">
+Google Code</a>, Microsoft's <a href ="http://www.codeplex.com/">CodePlex</a>,
+or <a href="http://gitorious.org/" >Gitorious</a> (itself an open source
 project), allow the users to create open git repositories free of charge,
 with wiki systems and bug tracking included.</p>
 
@@ -321,119 +766,6 @@ found in ecology.</p>
 Gravel. The case for open preprints in biology. <i>PLOS Biology</i> 11(5): e1001563, 2013.
 <a href="http://www.plosbiology.org/article/info%3Adoi%2F10.1371%2Fjournal.pbio.1001563">[URL]</a>
 </p>
-
-
-]]></summary>
-</entry>
-<entry>
-    <title>L'intuition des Intelligences Artificielles</title>
-    <link href="http://phdp.github.io//posts/2013-04-29-intuition-ai.html" />
-    <id>http://phdp.github.io//posts/2013-04-29-intuition-ai.html</id>
-    <published>2013-04-29T00:00:00Z</published>
-    <updated>2013-04-29T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<h1>L'intuition des Intelligences Artificielles</h1>
-<a href="https://twitter.com/share" class="twitter-share-button" data-text="L'intuition des Intelligences Artificielles" data-via="phdpqc">Tweet</a>
-<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2013.04.29</p>
-<p>En 1997, DeepBlue bat le champion d'échecs Garry Kasparov lors d'un match 
-de 6 parties. Depuis, les ordinateurs règnent en maîtres incontestés des 
-échecs. Pourtant, leur victoire est en quelque sorte décevante. C'est une 
-victoire de la force brute. DeepBlue, un dinosaure comparé aux programmes 
-modernes, pouvait évaluer 200 millions de positions par seconde alors que 
-les joueurs d'échecs ne considèrent que quelques coups par tour. Il est 
-clair que les ordinateurs nous surpassent, et ce depuis longtemps, pour 
-résoudre des problèmes mathématiques qui demandent une série bien définie 
-d'étapes. Par exemple, le calcul de n'importe quelle racine carrée est très 
-simple. Il suffit de suivre rigoureusement un certain nombre d'opérations et 
-voilà ! Simple pour un ordinateur mais pas pour nous. Les auteurs de 
-science-fiction nous offrent souvent la caricature d'ordinateurs incapables 
-de penser globalement, incapables d'intuition. Bref, des DeepBlue qui 
-écrasent l'être humain avec leur force de calcul. C'est une erreur. Toutes 
-les I.A. (Intelligence Artificielle) ne sont pas des DeepBlue et nous 
-développons actuellement des programmes qui ont une intelligence très 
-similaire à la nôtre. C'est une quête pour construire des I.A. capables de 
-raisonner sur des questions complexes. C'est une quête pour programmer 
-l'intuition.</p>
-
-<p>À première vue, l'intelligence humaine semble complètement différente des 
-ordinateurs. Ces derniers conservent la plupart des données dans les disques 
-durs qu'on peut voir comme de gigantesques tables. Pour accéder à un élément 
-(une mémoire), il suffit de connaître sa position qui est représentée par un 
-nombre. Mauvais nombre, mauvaise mémoire. À l'inverse, la mémoire humaine 
-est résiliente et associative. Si je vous demande le nom du très 
-charismatique premier ministre du Québec qui a dirigé la province entre 2003 
-et 2012, la plupart des gens seront capables de trouver la bonne réponse, 
-même si « très charismatique » colle difficilement au personnage. Autre 
-différence : la capacité de calculs (ou évaluation) de notre cerveau est 
-largement supérieure à DeepBlue. L'acte de reconnaître un objet (ceci est un 
-chat, ça c'est un arbre) est très difficile. Même le plus puissant 
-ordinateur serait incapable de se déplacer en forêt tout en évaluant la 
-position et la nature des objets, ce que nous faisons pourtant sans grands 
-efforts. Notre cerveau est donc très doué pour certains types d'analyses, 
-surtout celles qui demandent de regrouper plusieurs évidences. Les 
-spécialistes de l'I.A. tentent depuis longtemps de créer des I.A. qui 
-ressemblent à l'intelligence humaine. Et ils ont réussi. Les réseaux de 
-neurones artificiels font partie de ces techniques. Tout comme le cerveau 
-humain, ces réseaux ont une mémoire résiliente et associative. Ils sont 
-capables de prendre en compte un grand nombre d'évidences et les relations 
-complexes qui lient ces évidences.</p>
-
-<p>L'I.A. prend énormément d'expansion mais elle n'a pas la forme que les 
-gens imaginent. Google utilise déjà ces techniques pour son moteur de 
-recherche, pour traduire des textes, adapter les publicités. Amazon, 
-Microsoft, IBM, Fujitsu; pratiquement toutes les compagnies de haute 
-technologie investissent de grandes sommes en I.A. et les succès se 
-multiplient. Goeffrey Hinton est un des grands spécialistes des réseaux de 
-neurones artificiels. Il s'en sert pour apprendre à des programmes à 
-raisonner sur des tâches complexes. Par exemple, ces réseaux de neurones 
-peuvent reconnaître les chiffres (1, 2, 3, 4, …) mieux qu'un être humain. Si 
-vous croyez que c'est facile, demandez à un professeur de mathématiques. Les 
-formes des chiffres varient énormément et certains, moi par exemple, ont 
-développé une incroyable capacité à écrire des 4 qui ressemblent à des 9, ou 
-des 7 qui ressemblent à des 1. Personne n'a jamais réussi à écrire à la main 
-un programme capable de reconnaître les chiffres. Les réseaux de neurones 
-d'Hinton sont capables d'apprendre à les reconnaître et ils le font comme 
-les humains: on gave le réseau de chiffres en leur donnant la bonne réponse 
-(ça, c'est un quatre, ça, c'est un un, etc) et il apprend un modèle (très 
-complexe!) qui lui permet ensuite de déduire le chiffre à partir d'une 
-forme. Hinton n'écrit pas un programme pour reconnaître les chiffres, il 
-écrit un programme capable d'apprendre à reconnaître les chiffres. Mieux 
-encore: en 2012, Hinton et son équipe participent à un concours du géant 
-pharmaceutique Merk. L'objectif est de découvrir des molécules au potentiel 
-pharmaceutique. Les équipes de scientifiques qui participent à ce concours 
-sont des experts dans le domaine, certains y travaillent depuis des 
-décennies. L'équipe de Hinton arrive, en retard, au concours et n'a aucune 
-expérience dans le domaine. Pourtant, il gagne! Un réseau de neurones 
-artificiels, à qui on a donné une large base de données, a réussi à 
-apprendre comment flairer une bonne molécule mieux que les experts. Le choc 
-fut assez grand pour mériter à l'équipe d'Hinton un article dans le 
-prestigieux New York Times.</p>
-
-<p>Il faudra encore attendre plusieurs années avant de voir des I.A. 
-maîtriser toutes les subtilités du langage humain, une tâche où notre 
-cerveau est exceptionnellement bien adapté. Pour bien des tâches complexes 
-cependant, ils commencent déjà à développer une redoutable intuition.  
-L'intuition est un concept difficile à définir. Très brièvement, on peut 
-dire que c'est un raisonnement fondé sur un grand nombre d'évidences. Prises 
-individuellement, ces évidences peuvent être faibles, mais en groupe elles 
-forment un modèle solide. C'est exactement ce que les réseaux de neurones 
-font: ils analysent de grandes bases de données et apprennent à lire les 
-relations subtiles, tout comme les humains maîtrisent les subtilités de leur 
-métier après des années d'expérience. Ceci inclut plusieurs tâches: 
-comprendre les systèmes économiques, financiers, moléculaires, et... 
-écologiques. C'est ce qui m'a amené à l'I.A. Je m'intéresse aux forces qui 
-maintiennent la biodiversité. Ces forces sont multiples et complexes, 
-tellement complexes que je doute qu'on puisse enfermer Mère Nature dans une 
-simple équation. Les outils mathématiques traditionnels ont longtemps eu de 
-la difficulté à analyser les sujets complexes. Les I.A., cependant, ont tout 
-ce qu'il faut pour percer ces mystères, même s'il reste beaucoup de chemin à 
-faire. Le problème, c'est qu'on comprend encore mal l'intelligence. Un peu 
-comme les pionniers de l'aviation tentaient maladroitement d'imiter les 
-ailes des oiseaux, nous bâtissons des I.A. en imitant le cerveau humain. Une 
-meilleure science de l'information nous permettra de dépasser les limites du 
-cerveau humain, mais les succès actuels de l'I.A. sont tout de même 
-impressionnants. Il a fallu quelques milliards d'années pour que la vie sur 
-terre mène à une intelligence comme la nôtre. Les I.A. n'ont pas 100 ans et 
-ils révolutionnent déjà le monde de la technologie.</p>
 
 
 ]]></summary>
