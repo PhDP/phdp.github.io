@@ -142,7 +142,7 @@ present. In this example, the map takes a country (string) and return its
 capital (string). However, when we try to take a value from the map with the
 lookup function, Haskell returns a <b>Maybe</b> type with either <b>Just
 String</b>, if the string provided is found in the map, or <b>Nothing</b> if
-the key was absent. We then use pattern matching to deal with these
+the key is absent. We then use pattern matching to deal with these
 possibilities in the lookupCapitals function. One of the most common mistake in
 programming is to return a null and not deal with it properly. The solution
 with sum types is to return a wrapped value and handling possibilities
@@ -203,9 +203,7 @@ y = log $ sqrt $ exp 5.0
 to read because the |&gt; operator enforces left-to-right reading, which is more
 natural than reading code inside-out:</p>
 
-<pre><code class="fsharp">
-z = exp 5.0 |&gt; sqrt |&gt; log
-</code></pre>
+<pre><code class="fsharp">z = exp 5.0 |&gt; sqrt |&gt; log</code></pre>
 
 <p>And now for something a bit different: Scala. It's also a static
 functional programming language with sum types, but its greater
@@ -372,34 +370,34 @@ int main() {
 }
 </code></pre>
 
-<p>So, this is boost::variant in action, and boost is anything but clever code.
-My biggest qualm with this type of clever header-heavy code is that you get to
-see a big chunk of the developers' lifework unroll before your eyes every time
-you make a small mistake. Even LLVM/Clang will (probably) not save you.  It's
-almost prohibitively verbose and a bit trickier to understand. If you want to
-know how this code works, you need to read a bit on the visitor pattern.</p>
+<p>This is boost::variant in action. My biggest qualm with this type of clever
+header-heavy code is that you get to see a big chunk of the developers'
+lifework unroll before your eyes every time you make a small mistake. Even
+LLVM/Clang will (probably) not save you.  It's almost prohibitively verbose and
+a bit trickier to understand. If you want to know how this code works, you need
+to read a bit on the visitor pattern.</p>
 
 <p>C++ template metaprogramming is both awesome and terrifying. Mostly
-terrifying.  I would not be surprised if someone were to find a simple way to
-use C++11/C++14 features to build a small and nice matching library. <a href="https://github.com/jbandela/simple_match">This attempt</a> is halfway
-there (with boost::variant, it might already allows matching on type but I have
-yet to play with the idea). C++ is awesome for scientific computing, with tons
-of awesome librairies, so I'd love to see a nicer solution to his problem.</p>
+terrifying. Someone might find a simple way to use C++11/C++14 features to
+build a small and nice matching library. <a href="https://github.com/jbandela/simple_match">This attempt</a> is halfway
+there (with boost::variant, it might already allow matching on type but I have
+yet to try). C++ is awesome for scientific computing, with tons of awesome
+libraries, so I'd love to see a nice way to handle sum types.</p>
 
 <h2>Julia</h2>
 
 <p>Julia is an attempt to build a fast and flexible replacement for
 R/Python/Matlab.  An issue with most dynamic languages is that there is no
-elegant way to switch on type. Actually, you cannot really do it with most
+elegant way to switch on type. To be fair, you cannot really do it with most
 static languages either, see previous section... However, Julia supports
 multiple-dispatch based on type annotation. To be clear, it's quite different
-from the F#/Scala/Haskell code.  In these languages, it is possible to define
-sum types and do pattern matching on their constructor. With Julia, we define a
+from the F#/Scala/Haskell approach.  In these languages, it is possible to define
+sum types and do pattern matching on their constructors. With Julia, we define a
 function with type annotation and let the interpreter dispatch based on runtime
 type information. Multiple dispatch is supported in Julia for performance: it
 allows the interpreter to compile optimized functions and use the best one,
 adding predictability while keeping the language dynamic (for some reason...).
-At first sight, it does work pretty well:</p>
+Here's the algorithm in Julia:</p>
 
 <pre><code class="julia">abstract Expr
 
@@ -445,11 +443,12 @@ computing platform. Unfortunately, while Julia does well with this simple exampl
 I think an oddity with the language would soon bite us: you can't type the
 return value, and yes, it's big deal.</p>
 
-<p>First, it's a issue for the sake of correctness: you can return a float
-thinking you're returning an integer. Also, since annotation is not allowed for
-the return value, it's also impossible to add annotation for a higher-order
-function (a function taking functions as input). As a concrete example,
-first-order logic has <i>predicates</i> mapping objects to a boolean, and <i>functions</i> mapping objects to objects. We'd like to do:</p>
+<p>First, it's a question of correctness: you can return a float thinking
+you're returning an integer. That's awful. Also, since annotation is not
+allowed for the return value, it's also impossible to add annotation for a
+higher-order function (a function taking functions as input). As a concrete
+example, first-order logic has <i>predicates</i> mapping objects to a boolean,
+and <i>functions</i> mapping objects to objects. We'd like to do:</p>
 
 <pre><code class="julia">solve(pre::(Object -&gt; Bool), ...)
 
@@ -462,7 +461,7 @@ declarations at some point.</a></p>
 
 <h2>Conclusion</h2>
 
-<p>Sum types are awesome.</p>
+<p>Sum types and pattern matching are awesome.</p>
 
 
 
