@@ -264,15 +264,16 @@ simplify as methods inside a singleton object. I named the functions
 
 <h2>C++</h2>
 
-<p>Few understand every corner of C++'s monstrous standard. It's huge.
-Surely, with so many features, it must be easy to solve this problem in C++.
-Well no, it's not. This is a well-known
-issue with C++, see <a href="https://parasol.tamu.edu/~yuriys/pm/"><i>Open
-and Efficient Type Switch for C++</i></a> for an efficient solution
-using a pattern matching library (the effort is directed by the creator
+<p>Few understand every corner of C++'s monstrous standard. It's huge.  Surely,
+with so many features, there must be something a quick way to solve this
+problem in C++.  Well... no. It's a well-known lacuna with C++,
+see <a href="https://parasol.tamu.edu/~yuriys/pm/"><i>Open and
+Efficient Type Switch for C++</i></a> for a library built to implement
+pattern matching (the effort is directed by the creator
 of the C++ language). That said, here I'll use the boost library (A)
 because solutions based only on the standard library are contrived and
-(B) because boost is almost standard.</p>
+(B) because boost is almost standard, and I don't want to rely on third-party
+libraries.</p>
 
 <pre><code class="cpp">#include &lt;iostream&gt;
 #include &lt;string&gt;
@@ -380,9 +381,9 @@ int main() {
 
 <p>This is boost::variant in action. My biggest qualm with this type of clever
 header-heavy code is that you get to see a big chunk of the developers'
-lifework unroll before your eyes every time a small mistake is made. Even
-LLVM/Clang will (probably) not save you. If you want to know how this code
-works, you need to read a bit on the visitor pattern.</p>
+lifework unroll before your eyes every time a small mistake is made. If you
+want to know how this code works, you need to read a bit on the visitor
+pattern.</p>
 
 <p>C++ template metaprogramming is both awesome and terrifying. Mostly
 terrifying. Someone might find a simple way to use C++11/C++14 features to
@@ -446,10 +447,10 @@ expression (the ? operator in Julia, just like C), or I could've used the match
 macro, but it's overkill here. It's not too inelegant, and at first I thought
 it was a good enough way to simulate sum types and pattern matching. It matters
 to the Julia ecosystem because these features are very useful to build solvers,
-logic and theorem proving systems, etc etc. Pretty useful for a technical 
+logic and theorem proving systems, etc etc. Pretty nice for a technical 
 computing platform. Unfortunately, while Julia does well with this simple example,
-I think an oddity with the language would soon bite us: you can't type the
-return value, and yes, it's big deal.</p>
+I think an oddity with the language would soon bite us: return type declarations
+are not allowed, and yes, it <i>is</i> a big deal.</p>
 
 <p>First, it's a question of correctness: you can return a float thinking
 you're returning an integer. That's awful. Also, since annotation is not
