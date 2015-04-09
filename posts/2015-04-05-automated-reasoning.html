@@ -39,7 +39,7 @@
 <p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2015.04.05</p>
 <p>We need to simplify the following expression:</p>
 
-\[e = ((1 + 0 \times x) \times 3) + 12.\]
+\[e = (1 + 0 \times x) \times 3 + 12.\]
 
 <p>Luckily for us, we won't have to remember any elementary school arithmetic,
 because Harris' excellent <a href="http://www.cambridge.org/ca/academic/subjects/computer-science/programming-languages-and-applied-logic/handbook-practical-logic-and-automated-reasoning">
@@ -203,7 +203,15 @@ y = log $ sqrt $ exp 5.0
 to read because the |&gt; operator enforces left-to-right reading, which is more
 natural than reading code inside-out:</p>
 
-<pre><code class="fsharp">z = exp 5.0 |&gt; sqrt |&gt; log</code></pre>
+<pre><code class="fsharp">let z = exp 5.0 |&gt; sqrt |&gt; log</code></pre>
+
+<p>Although it's trivial to simulate this operator in Haskell:</p>
+
+<pre><code class="haskell">(|&gt;) :: t0 -&gt; (t0 -&gt; t1) -&gt; t1
+(|&gt;) a b = b $ a
+
+-- Now valid Haskell:
+z = exp 5.0 |&gt; sqrt |&gt; log</code></pre>
 
 <p>And now for something a bit different: Scala. It's also a static
 functional programming language with sum types, but its greater
@@ -372,17 +380,17 @@ int main() {
 
 <p>This is boost::variant in action. My biggest qualm with this type of clever
 header-heavy code is that you get to see a big chunk of the developers'
-lifework unroll before your eyes every time you make a small mistake. Even
-LLVM/Clang will (probably) not save you.  It's almost prohibitively verbose and
-a bit trickier to understand. If you want to know how this code works, you need
-to read a bit on the visitor pattern.</p>
+lifework unroll before your eyes every time a small mistake is made. Even
+LLVM/Clang will (probably) not save you. If you want to know how this code
+works, you need to read a bit on the visitor pattern.</p>
 
 <p>C++ template metaprogramming is both awesome and terrifying. Mostly
 terrifying. Someone might find a simple way to use C++11/C++14 features to
-build a small and nice matching library. <a href="https://github.com/jbandela/simple_match">This attempt</a> is halfway
+build a small and nice matching library. <a href="https://github.com/jbandela/simple_match">This library</a> is halfway
 there (with boost::variant, it might already allow matching on type but I have
-yet to try). C++ is awesome for scientific computing, with tons of awesome
-libraries, so I'd love to see a nice way to handle sum types.</p>
+yet to try). C++ is great for scientific computing, with tons of awesome
+libraries, so I'd love to see a nice way to simulate pattern matching and sum
+types.</p>
 
 <h2>Julia</h2>
 
