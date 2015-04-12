@@ -125,8 +125,7 @@ an easy way to express things like &quot;this function <i>might</i> return
 an integer&quot;, for example in Haskell if we want a data structure that maps
 keys to values:</p>
 
-<pre><code class="haskell">data Expr =
-import Data.Map (Map)
+<pre><code class="haskell">import Data.Map (Map)
 import qualified Data.Map as Map
 
 capitals = Map.fromList [(&quot;Finland&quot;, &quot;Helsinki&quot;), (&quot;France&quot;, &quot;Paris&quot;),
@@ -208,7 +207,7 @@ natural than reading code inside-out:</p>
 <p>Although it's trivial to simulate this operator in Haskell:</p>
 
 <pre><code class="haskell">(|&gt;) :: t0 -&gt; (t0 -&gt; t1) -&gt; t1
-(|&gt;) a b = b $ a
+(|&gt;) x f = f x
 
 -- Now valid Haskell:
 z = exp 5.0 |&gt; sqrt |&gt; log</code></pre>
