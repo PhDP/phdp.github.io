@@ -137,7 +137,7 @@ lookupCapitals country = case Map.lookup country capitals of
 </code></pre>
 
 <p>The point is that a key-value store will only return a value if the key is
-present. In this example, the map takes a country (string) and return its
+present. In this example, the map takes a country (string) and returns its
 capital (string). However, when we try to take a value from the map with the
 lookup function, Haskell returns a <b>Maybe</b> type with either <b>Just
 String</b>, if the string provided is found in the map, or <b>Nothing</b> if
