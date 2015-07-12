@@ -139,26 +139,95 @@ our first formula yields a set of ground formulas:</p>
 
 <p>Markov logic networks provide the structure to answer question of the type</p>
 
-\[P(Cancer(George) | Smoking(Jerry), Friend(Jerry, George)),\]
+\[P(Cancer(George) \mid Smoking(Jerry), Friend(Jerry, George)),\]
 
-<p>where our variable (in the probabilistic sense) are the ground predicates.
+<p>where our variables (in the probabilistic sense) are the ground predicates.
 Of course, we could generate a completely different set of ground formulas and
 ground predicates if we apply, say, the constants \(\{William, Anastasia,
 Kara, Saul, Karl, Tory, Felix, Laura\}\), or any number of objects we're
-interested in. Also, we don't need to have full data on all predicates, I'll
-show examples where we have no information at all.</p>
+interested in.</p>
 
-<p>The next section is a demonstration, where I show a bit how Markov logic
-networks behave. It's followed by a section that explains the mathematics and
-show a full (albeit simple) example of exact inference. These sections can be
-read in any order.</p>
+<p>To finally see the network, we'll create one node for each ground predicate,
+and link all nodes that are in the same formula. In our example with the
+constants \(\{Elaine, Jerry, George\}\), we get the following Markov
+network:</p>
+
+<div class="imagecenter">
+  <img src="../images/ground_seinfeld.png" alt="ground network"/>
+</div>
+
+<p>That said, to make it easier to follow, we'll generate a simpler network by
+applying only two constants to the same two formulas: \(\{Kara, Lee\}\). We
+get:</p>
+
+<div class="imagecenter">
+  <img src="../images/mln_kara_lee.png" alt="Kara Lee network"/>
+</div>
+
+<p>To understand how to query the network, it's easier to focus on the factor
+graph. In the factor graph, there is a factor for all ground formulas, and all
+the ground predicates found in the ground formula ared linked to the factor:</p>
+
+<div class="imagecenter">
+  <img src="../images/mln_kara_lee_factors.png" alt="Kara Lee network"/>
+</div>
+
+<p>By applying \(\{Kara, Lee\}\) to our two formulas we got the ground formulas
+</p>
+
+\[Smoking(Kara) \Rightarrow Cancer(Kara), 1.5;\]
+\[Smoking(Lee) \Rightarrow Cancer(Lee), 1.5;\]
+\[Friend(Kara, Kara) \land Smoking(Kara) \Rightarrow Smoking(Kara), 1.1;\]
+\[Friend(Kara, Lee) \land Smoking(Kara) \Rightarrow Smoking(Lee), 1.1;\]
+\[Friend(Lee, Kara) \land Smoking(Lee) \Rightarrow Smoking(Kara), 1.1;\]
+\[Friend(Lee, Lee) \land Smoking(Lee) \Rightarrow Smoking(Lee), 1.1;\]
+
+<p>And you can see all the six ground formulas have a corresponding factor (the
+squares) in the graph. From there, if we want to compute \(P(X = x)\), we use
+the equation</p>
+
+\[P(X = x) = \frac{1}{Z}\exp\left(\sum_i w_ig_i(x) \right),\]
+
+<p>where \(w_i\) is the weight of the ith factor, \(g_i\) is 1 if the formula
+is false given the values of the predicates or 0 if it's false, and \(Z\) is a
+normalizing constant (that is: it's the sum of the values of all possible
+assignments).</p>
+
+<p>Let's try to compute the probability of Kara and Lee being mutual friend,
+neither of them being friend with themselves, Kara smokes and has cancer, but
+Lee neither smokes nor has cancer. We'll get the following network:</p>
+
+<div class="imagecenter">
+  <img src="../images/mln_kara_lee_factors_ass_p1.png" alt="Kara Lee network"/>
+</div>
+
+<p>The value of the predicates can then be used to determine the factors that
+are true (worth 1, in green) and those that are false (worth 0, in red). If you
+are confused about the values, it's probably because you misinterpret the logic
+symbol implies \(\Rightarrow\), <a href='2015-07-13-fol.html'>check here for
+clarifications</a>.</p>
+
+<div class="imagecenter">
+  <img src="../images/mln_kara_lee_factors_ass_p2.png" alt="Kara Lee network"/>
+</div>
+
+\[\frac{1}{Z}\exp\left(1 \times 1.1 + 1 \times 1.1 + 1 \times 1.1 + 0 \times 1.1 + 1 \times 1.5 + 1 \times 1.5\right),\]
+\[\frac{1}{Z}\exp\left(3 \times 1.1 + 2 \times 1.5\right),\]
+\[\frac{544.57}{Z}.\]
+
+<p>Computing the normalizing constant gives \(Z = 229210.5024\), so our
+probability is:</p>
+
+\[\frac{544.57}{229210.5024} = 0.0023759.\]
+
+<p>If we were to flip Cancer(Kara) to false, we'd get a lower probability (because smoking causes cancer):</p>
+
+\[\frac{1}{Z}\exp\left(3 \times 1.1 + 1 \times 1.5\right) = \frac{121.51}{229210.5024} = 0.00053012.\]
 
 <h2>Code Example</h2>
 
-<p>At this point, you know enough to use Markov logic networks. After all, it's
-just a set of weighted formulas. In this section we'll perform an exact
-inference on a few MLNs. If you want to follow the examples, you can copy the
-library with:</p>
+<p>In this section we'll perform an exact inference on a few MLNs. If you want
+to follow the examples, you can copy the library with:</p>
 
 <div class='terminal'><pre>
 $ git clone https://github.com/PhDP/Manticore.git
@@ -166,11 +235,11 @@ $ cd Manticore
 $ cabal install
 </pre></div>
 
-<p>It's tested on both Linux and Windows, and it should work fine on OSX with
-the <a href='https://www.haskell.org/platform/'>Haskell platform installed</a>.
-Right now, it performs only exact inference, which is useful for tests...  but
-it does not scale (the Markov networks generated by Markov logic are
-humongous). It'll be enough for exploring a few models though.</p>
+<p>The code is tested on both Linux and Windows, and it should work fine on OSX
+with the <a href='https://www.haskell.org/platform/'>Haskell platform
+installed</a>. Right now, it performs only exact inference, which is useful for
+tests...  but it does not scale (the Markov networks generated by Markov logic
+are humongous). It'll be enough for exploring a few models though.</p>
 
 <p>First, we launch an interactive console from the root of the code:</p>
 
@@ -321,89 +390,6 @@ Just 0.7018023327893508
 
 <p>Again, with the same information, the same query, just by adding a simple formula
 we were able to get a much better model.</p>
-
-<h2>A full example</h2>
-
-<p>Now, let's take a closer at the maths... after all, we still don't have our
-network! To finally get our network, we'll create one node for each ground
-predicate, and link all nodes that are in the same formula. In our example with
-the constants \(\{Elaine, Jerry, George\}\), we get the following Markov
-network:</p>
-
-<div class="imagecenter">
-  <img src="../images/ground_seinfeld.png" alt="ground network"/>
-</div>
-
-<p>That said, to make it easier to follow, we'll generate a simpler network by
-applying only two constants to the same two formulas: \(\{Kara, Lee\}\). We
-get:</p>
-
-<div class="imagecenter">
-  <img src="../images/mln_kara_lee.png" alt="Kara Lee network"/>
-</div>
-
-<p>That said, I think it's easier to just show the factor graph, where
-there is a factor for all ground formulas, and all the predicates found
-in the ground formula link to the factor:</p>
-
-<div class="imagecenter">
-  <img src="../images/mln_kara_lee_factors.png" alt="Kara Lee network"/>
-</div>
-
-<p>By applying \(\{Kara, Lee\}\) to our two formulas we got the ground formulas
-</p>
-
-\[Smoking(Kara) \Rightarrow Cancer(Kara), 1.5;\]
-\[Smoking(Lee) \Rightarrow Cancer(Lee), 1.5;\]
-\[Friend(Kara, Kara) \land Smoking(Kara) \Rightarrow Smoking(Kara), 1.1;\]
-\[Friend(Kara, Lee) \land Smoking(Kara) \Rightarrow Smoking(Lee), 1.1;\]
-\[Friend(Lee, Kara) \land Smoking(Lee) \Rightarrow Smoking(Kara), 1.1;\]
-\[Friend(Lee, Lee) \land Smoking(Lee) \Rightarrow Smoking(Lee), 1.1;\]
-
-<p>And you can see all the six ground formulas have their factors in the graph.
-From there, if we want to compute \(P(X = x)\), we use the equation</p>
-
-\[P(X = x) = \frac{1}{Z}\exp\left(\sum_i w_ig_i(x) \right),\]
-
-<p>where \(w_i\) is the weight of the ith factor, \(g_i\) is 1 if the formula
-is false given the values of the predicates or 0 if it's false, and \(Z\) is a
-normalizing constant (that is: it's the sum of the values of all possible
-assignments).</p>
-
-<p>Let's try to compute the probability of Kara and Lee being mutual friend,
-neither of them being friend with themselves, Kara smokes and has cancer, but
-Lee neither smokes nor has cancer. We'll get the following network:</p>
-
-<div class="imagecenter">
-  <img src="../images/mln_kara_lee_factors_ass_p1.png" alt="Kara Lee network"/>
-</div>
-
-<p>The value of the predicates can then be used to determine the factors that
-are true (worth 1, in green) and those that are false (worth 0, in red). If you
-are confused about the values, it's probably because you misinterpret the logic
-symbol implies \(\Rightarrow\), <a href='2015-07-13-fol.html'>check here for
-clarifications</a>.</p>
-
-<div class="imagecenter">
-  <img src="../images/mln_kara_lee_factors_ass_p2.png" alt="Kara Lee network"/>
-</div>
-
-\[\frac{1}{Z}\exp\left(1 \times 1.1 + 1 \times 1.1 + 1 \times 1.1 + 0 \times 1.1 + 1 \times 1.5 + 1 \times 1.5\right),\]
-\[\frac{1}{Z}\exp\left(3 \times 1.1 + 2 \times 1.5\right),\]
-\[\frac{544.57}{Z}.\]
-
-<p>Computing the normalizing constant gives \(Z = 229210.5024\), so our
-probability is:</p>
-
-\[\frac{544.57}{229210.5024} = 0.0023759.\]
-
-<p>If we were to flip Cancer(Kara) to false, we'd get a lower probability (because smoking causes cancer):</p>
-
-\[\frac{1}{Z}\exp\left(3 \times 1.1 + 1 \times 1.5\right) = \frac{121.51}{229210.5024} = 0.00053012.\]
-
-<p>There are much more interesting algorithms to compute probabilities, like adaptations of
-Gibbs sampling and belief propagation to Markov logic, but that would be it for now.</p>
-
 
 
 ]]></summary>
