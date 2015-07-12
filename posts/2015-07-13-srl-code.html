@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Philippe Desjardins-Proulx</title>
+  <link rel="stylesheet" media="screen" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" media="screen" href="../css/mono-blue.css" />
+  <!-- <link href='http://fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'> -->
+  <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic" rel="stylesheet" type="text/css" />
+  <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<a href="https://github.com/PhDP/">
+  <img style="position: absolute; top: 0; left: 0; border: 0;" src="../images/forkme.png" alt="Fork me on GitHub">
+</a>
+
+<div id="header">
+  <h1><a href="mailto:philippe.d.proulx@gmail.com">Philippe Desjardins-Proulx</a></h1>
+  <nav>
+    <ul>
+      <li>( sections</li>
+      <li><a href="../index.html">about</a></li>
+      <li>( writings</li>
+      <li><a href="../writings.html">english</a></li>
+      <li><a href="../writings-fr.html">français</a></li>
+      <li><a href="../writings-jp.html">日本語</a>)</li>
+      <li><a href="../contact.html">contact</a>)</li>
+    </ul>
+  </nav>
+</div>
+
+<div id="content">
+  <h1>A gentle introduction to statistical relational learning: maths, code, and examples</h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="A gentle introduction to statistical relational learning: maths, code, and examples" data-via="phdpqc">Tweet</a>
+<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2015.07.13</p>
+<p>Statistical relational learning is a branch of machine learning (A.I.)
+mixing ideas from probability theory and logic. I'll write another post later
+to explain the motivation and a bit of history of this fascinating branch of
+study but here I want to focus on a concrete example, with detailed
+maths and real code.</p>
+
+<p>The approach to statistical relational learning explained here is called
+Markov logic network (MLN), <a href="https://homes.cs.washington.edu/~pedrod/kbmn.pdf">discovered in 2006 by
+Richardson and Domingo.</a> Their paper has a nice simple example of MLN
+applied to the relationship between smoking and cancer. However, it's a bit
+hard to follow unless you understand logic and probabilistic graphical models
+well, so I'll go into much more details here. I'll also show an interactive
+session with <a href="https://github.com/PhDP/Manticore">Manticore</a>, a small
+implementation I wrote for interacting with models.</p>
+
+<p>A Markov logic network is simply a set of formulas written in first-order
+logic, each associated with a weight. We'll use this for our examples:</p>
+
+<table style="width: 80%">
+  <tr>
+    <th>Statement</th>
+    <th>Weight</th>
+  </tr>
+  <tr>
+    <td>Smoking causes cancers</td>
+    <td align="center">1.1</td>
+  </tr>
+  <tr>
+    <td>If two people are friends and one smokes, then so does the other</td>
+    <td align="center">1.5</td>
+  </tr>
+</table>
+
+<p>Using a more formal representation for logic, we'll get:</p>
+
+\[\forall x: Smoking(x) \Rightarrow Cancer(x), 1.5;\]
+\[\forall x, y: Friend(x, y) \land Smoking(x) \Rightarrow Smoking(y), 1.1;\]
+
+<p>If you don't know much about first-order logic, <a href="2015-07-13-fol.html">I wrote a short introduction here, it'll be more
+than enough to understand Markov logic</a>.</p>
+
+<p>The grand idea of statistical relational learning is that, in pure logic, a
+world is false if it violates a single formula, but in statistical relational
+learning, a world is less likely if it violates formulas, especially if it
+violates formula with a high weight. Formally, the weight is the log odds
+between a world where the formula is true and a world where it is false.
+Statistical relational learning has important advantages on probabilistic
+approaches too: a first-order logic formula is simple to understand and
+interpret, it can be manipulated by humans and computers in ways a naked
+probabilistic model can't.</p>
+
+<p>But enough with the background, I'll write a longer post later on the history
+of statistical relational learning, and why it's awesome, here I'll focus on 
+examples, code, and equations.</p>
+
+<h2>Inference in Markov logic</h2>
+
+<p>Where's our network? It's called a Markov logic <i>network</i>, but all we
+got is a set of weighted first-order logic formulas. A Markov logic network is
+a template for Markov networks. Take the formula:</p>
+
+\[\forall x: Smoking(x) \Rightarrow Cancer(x), 1.5;\]
+
+<p><i>x</i> is a variable, and to get a concrete model for inference from this
+template, we need to apply constant (real objects) to the MLN. So in
+essence:</p>
+
+\[\mbox{MLN + Constants} \rightarrow \mbox{Markov Network}\]
+
+<p>Let's say we are interested in the relationship between
+smoking/cancer/friendship for Jerry, Elaine, George, we can apply these
+constants to the formula to get a set of ground formulas.  The term <i>ground</i>
+means the variables are replaced by constants, that is, concrete objects. For
+example in mathematics you probably encountered first-order logic formulas
+like:</p>
+
+\[\forall x: Add(x, 0) = 0\]
+
+<p>For this formula, we can have grounding by replacing x with integers</p>
+
+\[Add(47, 0) = 0\]
+\[Add(1729, 0) = 0\]
+
+<p>Similarly, applying the set of constants \(\{Elaine, Jerry, George\}\) to our first formula yields a set of ground formulas:</p>
+
+\[Smoking(Elaine) \Rightarrow Cancer(Elaine), 1.5;\]
+\[Smoking(Jerry) \Rightarrow Cancer(Jerry), 1.5;\]
+\[Smoking(George) \Rightarrow Cancer(George), 1.5;\]
+
+<p>We could do the same thing with the other formula, but now it has two
+variables:</p>
+
+\[Friend(Elaine, Elaine) \land Smoking(Elaine) \Rightarrow Smoking(Elaine), 1.1;\]
+\[Friend(Elaine, Jerry) \land Smoking(Elaine) \Rightarrow Smoking(Jerry), 1.1;\]
+\[Friend(Elaine, George) \land Smoking(Elaine) \Rightarrow Smoking(George), 1.1;\]
+\[Friend(Jerry, Elaine) \land Smoking(Jerry) \Rightarrow Smoking(Elaine), 1.1;\]
+\[Friend(Jerry, Jerry) \land Smoking(Jerry) \Rightarrow Smoking(Jerry), 1.1;\]
+\[Friend(Jerry, George) \land Smoking(Jerry) \Rightarrow Smoking(George), 1.1;\]
+\[Friend(George, Elaine) \land Smoking(George) \Rightarrow Smoking(Elaine), 1.1;\]
+\[Friend(George, Jerry) \land Smoking(George) \Rightarrow Smoking(Jerry), 1.1;\]
+\[Friend(George, George) \land Smoking(George) \Rightarrow Smoking(George), 1.1;\]
+
+<p>From the groundings of the two formulas, we get a set of predicates:</p>
+
+\[\{Smoking(Elaine), Smoking(Jerry), Smoking(George), Cancer(Elaine),\]
+
+\[Cancer(Jerry), Cancer(George), Friend(Elaine, Elaine), Friend(Elaine, Jerry),\]
+
+\[Friend(Elaine, George), Friend(Jerry, Elaine), Friend(Jerry, Jerry),\]
+
+\[Friend(Jerry, George), Friend(George, Elaine),\]
+
+\[Friend(George, Jerry), Friend(Jerry, George)\}\]
+
+<p>We now have the basic blocs for inference. Of course, we could generate a
+completely different set of ground formulas and ground predicates if we
+applied, say, the constants \(\{William, Anastasia, Kara, Saul, Karl, Tory,
+Felix, Laura\}\), or any number of objects we're interested in. Also, we
+don't need to have full data on all predicates, I'll show examples where we
+have no information at all.</p>
+
+<p>The next section is a demonstration, where I show a bit how Markov logic
+networks behave. It's followed by a section that explains the mathematics and
+show a full (albeit simple) example. These sections can be read in any order.</p>
+
+<h2>Code Example</h2>
+
+<p>At this point, you know enough to use Markov logic networks. In this section
+we'll perform an exact inference on a few MLNs, and I'll explain the maths in
+the next section.</p>
+
+<p>If you want to follow the examples, you can copy the library with:</p>
+
+<div class="terminal"><pre>
+$ git clone https://github.com/PhDP/Manticore.git
+$ cd Manticore
+$ cabal install
+</pre></div>
+
+<p>It's tested on both Linux and Windows, and it should work fine on OSX.
+Right now, it performs only exact inference, which is useful for tests...  but
+it does not scale (the Markov networks generated by Markov logic are
+humongous). It'll be enough for exploring a few models.</p>
+
+<p>First, launch an interactive console from the root of the code:</p>
+
+<div class="terminal"><pre>
+$ cabal repl
+</pre></div>
+
+<p>Then, we'll load the Markov logic network module and name it ML:</p>
+
+<pre><code class="haskell">ghci&gt; import qualified Manticore.MarkovLogic as ML</code></pre>
+
+<p>The most straightforward way to build a Markov logic network is with
+<i>fromStrings</i>. This function takes an array of strings, each of which must
+be a valid first-order logic formula followed (or preceded) by a number (the
+weight of the formula). In our smoking example we have:</p>
+
+<pre><code class="haskell">ghci&gt; let mln = ML.fromStrings [&quot;∀x Smoking(x) ⇒ Cancer(x) 1.5&quot;, &quot;∀x∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y) 1.1&quot;]</code></pre>
+
+<p>The strings were copy-pasted from Richardson and Domingos' paper, but the
+parsers is flexible and will accept a keyboard-friendly form too:</p>
+
+<pre><code class="haskell">ghci&gt; ML.fromStrings [&quot;1.5 forall x Smoking(x) implies Cancer(x)&quot;, &quot;1.1 forall x, y Friend(x, y) and Smoking(x) implies Smoking(y)&quot;]</code></pre>
+
+<p>We can use <i>fmtMLN</i> function to print the Markov logic
+network:</p>
+
+<pre><code class="haskell">ghci&gt; putStrLn (ML.fmtMLN mln)
+1.5                     ∀x Smoking(x) ⇒ Cancer(x)
+1.1                     ∀x ∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y)</code></pre>
+
+<p>A Markov logic network is a template for Markov networks. To get a Markov
+network, we need to apply a set of constant to the Markov logic networks
+Following our example in the last section we'll use:</p>
+
+<pre><code class="haskell">ghci&gt; let cs = [&quot;Elaine&quot;, &quot;George&quot;, &quot;Jerry&quot;]</code></pre>
+
+<p>Then, we can query the network, say, what is the probability that Jerry has
+cancer?</p>
+
+<pre><code class="haskell">ghci&gt; ML.ask mln cs &quot;P(Cancer(Jerry))&quot;
+Just 0.6040175344121184</code></pre>
+
+<p>The function <i>ask</i> takes a Markov logic network, a list
+of terms (represented as a list of strings), and a string query. It will return
+Just P, with P being a probability in the [0.0, 1.0] range, or Nothing if the
+parser fails to read the query. To make the process a bit easier we'll create
+a function ask that have already the mln and terms supplied:</p>
+
+<pre><code class="haskell">ghci&gt; let ask = ML.ask mln cs</code></pre>
+
+<p>Then we can ask queries with this function:</p>
+
+<pre><code class="haskell">ghci&gt; ask &quot;P(Cancer(Jerry), Cancer(Elaine))&quot;
+Just 0.3696834237837972
+ghci&gt; ask &quot;P(Cancer(Jerry) | Smoking(Jerry))&quot;
+Just 0.8175744761936782
+</code></pre>
+
+<p>While the formula look distinct, the fact that they share predicates link
+them. So, even if there is no direct relationship between friendship and
+cancer, we have:</p>
+
+<pre><code class="haskell">ghci&gt; ask &quot;P(Cancer(Jerry) | Smoking(Elaine))&quot;
+Just 0.6506081590969498
+ghci&gt; ask &quot;P(Cancer(Jerry) | Smoking(Elaine), Friend(Elaine, Jerry))&quot;
+Just 0.7043948532279771
+</code></pre>
+
+<p>...just as expected, because friends tend to smoke, so Elaine being Jerry's
+friend increases the chance that Jerry is smoking, and if we know he doesn't
+we'll get:</p>
+
+<pre><code class="haskell">ghci&gt; ask &quot;P(Cancer(Jerry) | Smoking(Elaine), Friend(Elaine, Jerry), !Smoking(Jerry))&quot;
+Just 0.4999999999999964
+ghci&gt; ask &quot;P(Cancer(Jerry) | !Smoking(Jerry))&quot;
+Just 0.5000000000000238
+</code></pre>
+
+<p>The cool thing with all of this is that we already have a rich structure for
+inference from just two simple logical formulas, weights, and a list of objects
+to ground the formulas.</p>
+
+<p>We can add a logic formula to the network with the <i>tell</i> function. It
+takes a string (just like <i>fromStrings</i> takes a list of strings), an
+existing Markov logic network, and will return a new Markov logic network with
+the formula added. Let's say we want to add a rule that <i>friends of friends are
+friends</i>, we could add this rule with a weight of 1.0 with:</p>
+
+<pre><code class="haskell">ghci&gt; let mln' = ML.tell &quot;1.0 A.x,y,z Friend(x, y) and Friend(y, z) =&gt; Friend(x, z)&quot; mln
+ghci&gt; putStrLn (fmtMLN mln')
+1.5                     ∀x Smoking(x) ⇒ Cancer(x)
+2.0                     ∀x ∀y ∀z Friend(x, y) ∧ Friend(y, z) ⇒ Friend(x, z)
+1.1                     ∀x ∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y)</code></pre>
+
+<p>We'll build an ask function for this network using the same constants
+(Jerry, Elaine, George):</p>
+
+<pre><code class="haskell">ghci&gt; let ask' = ML.ask cs mln'</code></pre>
+
+<p>Let's compare how our first MLN behaved compare to our new one:</p>
+
+<pre><code class="haskell">ghci&gt; ask' &quot;P(Smoking(George) | Smoking(Jerry), Friend(Jerry, Elaine), Friend(Elaine, George))&quot;
+Just 0.651941997726506
+ghci&gt; ask &quot;P(Smoking(George) | Smoking(Jerry), Friend(Jerry, Elaine), Friend(Elaine, George))&quot;
+Just 0.5877406718485353
+</code></pre>
+
+<p>Same query, same information, but with a different model (the MLN) will
+yield different answers. Now, something is bugging me with the original model:</p>
+
+<pre><code class="haskell">ghci&gt; ask &quot;P(Cancer(Jerry) | Smoking(George))&quot;
+Just 0.6506081590969498
+ghci&gt; ask &quot;P(Cancer(Jerry) | Smoking(George), Friend(George, Jerry))&quot;
+Just 0.7043948532279771
+ghci&gt; ask &quot;P(Cancer(Jerry) | Smoking(George), Friend(Jerry, George))&quot;
+Just 0.6506081590968945
+</code></pre>
+
+<p>The problem is that friendship is completely assymmetricial in this model.
+If we know George is friend with Jerry, there's a very good chance that Jerry
+is friend with George (and thus influeced by his smoking habit). The nice thing
+with Markov logic is that all formulas are connected, so we can fix this issue
+by adding a formula, our new Markov logic network is:</p>
+
+\[\forall x: Smoking(x) \Rightarrow Cancer(x), 1.5;\]
+\[\forall x, y: Friend(x, y) \land Smoking(x) \Rightarrow Smoking(y), 1.1;\]
+\[\forall x, y: Friend(x, y) \iff Friend(y, x), 2.0;\]
+
+<p>The last formula has the \(\iff\) operator, which is true either when both
+sides are true, or when both sides are false. Thus, this formula says: if \(x\)
+is friend with \(y\), then \(y\) is friend with \(x\), and if \(x\) is not friend
+with \(y\), then \(y\) is not friend with \(x\). Since it's probabilistic, it doesn't
+need to be true all the time, but I give it a fairly high weight. And now we have:</p>
+
+<pre><code class="haskell">ghci&gt; let mln'' = ML.tell &quot;ForAll x, y: Friend(x, y) iff Friend(y, z) 2.0&quot; mln
+ghci&gt; putStrLn (ML.fmtMLN mln'')
+1.5                     ∀x Smoking(x) ⇒ Cancer(x)
+1.1                     ∀x ∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y)
+2.0                     ∀x ∀y Friend(x, y) ⇔ Friend(y, z)
+ghci&gt; let ask'' = ML.ask mln'' cs
+ghci&gt; ask'' &quot;P(Cancer(Jerry) | Smoking(George))&quot;
+Just 0.6506081590969105
+ghci&gt; ask'' &quot;P(Cancer(Jerry) | Smoking(George), Friend(George, Jerry))&quot;
+Just 0.7043948532279295
+ghci&gt; ask'' &quot;P(Cancer(Jerry) | Smoking(George), Friend(Jerry, George))&quot;
+Just 0.7018023327893508
+</code></pre>
+
+<p>Again, with the same information, the same query, just by adding a simple formula
+we were able to get a much better model.</p>
+
+<h2>A full example</h2>
+
+<p>Now, let's take a closer at the maths... after all, we still don't have our
+network! To finally get our network, we'll create one node for each ground
+predicate, and link all nodes that are in the same formula. In our example with
+the constants \(\{Elaine, Jerry, George\}\), we get the following Markov
+network:</p>
+
+<div class="imagecenter">
+  <img src="../images/ground_seinfeld.png" alt="ground network" />
+</div>
+
+<p>That said, to make it easier to follow, we'll generate a simpler network by
+applying only two constants to the same two formulas: \(\{Kara, Lee\}\). We
+get:</p>
+
+<div class="imagecenter">
+  <img src="../images/mln_kara_lee.png" alt="Kara Lee network" />
+</div>
+
+<p>That said, I think it's easier to just show the factor graph, where
+there is a factor for all ground formulas, and all the predicates found
+in the ground formula link to the factor:</p>
+
+<div class="imagecenter">
+  <img src="../images/mln_kara_lee_factors.png" alt="Kara Lee network" />
+</div>
+
+<p>By applying \(\{Kara, Lee\}\) to our two formulas we got the ground formulas
+</p>
+
+\[Smoking(Kara) \Rightarrow Cancer(Kara), 1.5;\]
+\[Smoking(Lee) \Rightarrow Cancer(Lee), 1.5;\]
+\[Friend(Kara, Kara) \land Smoking(Kara) \Rightarrow Smoking(Kara), 1.1;\]
+\[Friend(Kara, Lee) \land Smoking(Kara) \Rightarrow Smoking(Lee), 1.1;\]
+\[Friend(Lee, Kara) \land Smoking(Lee) \Rightarrow Smoking(Kara), 1.1;\]
+\[Friend(Lee, Lee) \land Smoking(Lee) \Rightarrow Smoking(Lee), 1.1;\]
+
+<p>And you can see all the six ground formulas have their factors in the graph.
+From there, if we want to compute \(P(X = x)\), we use the equation</p>
+
+\[P(X = x) = \frac{1}{Z}\exp\left(\sum_i w_ig_i(x) \right),\]
+
+<p>where \(w_i\) is the weight of the ith factor, \(g_i\) is 1 if the formula
+is false given the values of the predicates or 0 if it's false, and \(Z\) is a
+normalizing constant (that is: it's the sum of the values of all possible
+assignments).</p>
+
+<p>Let's try to compute the probability of Kara and Lee being mutual friend,
+neither of them being friend with themselves, Kara smokes and has cancer, but
+Lee neither smokes nor has cancer. We'll get the following network:</p>
+
+<div class="imagecenter">
+  <img src="../images/mln_kara_lee_factors_ass_p1.png" alt="Kara Lee network" />
+</div>
+
+<p>The value of the predicates can then be used to determine the factors that
+are true (worth 1, in green) and those that are false (worth 0, in red). If you
+are confused about the values, it's probably because you misinterpret the logic
+symbol implies \(\Rightarrow\), <a href="2015-07-13-fol.html">check here for
+clarifications</a>.</p>
+
+<div class="imagecenter">
+  <img src="../images/mln_kara_lee_factors_ass_p2.png" alt="Kara Lee network" />
+</div>
+
+\[\frac{1}{Z}\exp\left(1 \times 1.1 + 1 \times 1.1 + 1 \times 1.1 + 0 \times 1.1 + 1 \times 1.5 + 1 \times 1.5\right),\]
+\[\frac{1}{Z}\exp\left(3 \times 1.1 + 2 \times 1.5\right),\]
+\[\frac{544.57}{Z}.\]
+
+<p>Computing the normalizing constant gives \(Z = 229210.5024\), so our
+probability is:</p>
+
+\[\frac{544.57}{229210.5024} = 0.0023759.\]
+
+<p>If we were to flip Cancer(Kara) to false, we'd get a lower probability (because smoking causes cancer):</p>
+
+\[\frac{1}{Z}\exp\left(3 \times 1.1 + 1 \times 1.5\right) = \frac{121.51}{229210.5024} = 0.00053012.\]
+
+<p>There are much more interesting algorithms to compute probabilities, like adaptations of
+Gibbs sampling and belief propagation to Markov logic, but that would be it for now.</p>
+
+
+
+
+
+  <div id="hidden">
+    <!-- "世界" |&gt; printf "Hello %s!" -->
+    let world = &quot;世界&quot; in print $ &quot;Hello &quot; ++ world ++ &quot;!&quot;
+  </div>
+</div>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="../js/highlight.pack.js"></script>
+<script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-3803275-13']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</body>
+</html>

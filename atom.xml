@@ -8,8 +8,525 @@
         <name>Philippe Desjardins-Proulx</name>
         <email>philippe.d.proulx@gmail.com</email>
     </author>
-    <updated>2015-04-05T00:00:00Z</updated>
+    <updated>2015-07-13T00:00:00Z</updated>
     <entry>
+    <title>A gentle introduction to statistical relational learning: maths, code, and examples</title>
+    <link href="http://phdp.github.io//posts/2015-07-13-srl-code.html" />
+    <id>http://phdp.github.io//posts/2015-07-13-srl-code.html</id>
+    <published>2015-07-13T00:00:00Z</published>
+    <updated>2015-07-13T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>A gentle introduction to statistical relational learning: maths, code, and examples</h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="A gentle introduction to statistical relational learning: maths, code, and examples" data-via="phdpqc">Tweet</a>
+<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2015.07.13</p>
+<p>Statistical relational learning is a branch of machine learning (A.I.)
+mixing ideas from probability theory and logic. I'll write another post later
+to explain the motivation and a bit of history of this fascinating branch of
+study but here I want to focus on a concrete example, with detailed
+maths and real code.</p>
+
+<p>The approach to statistical relational learning explained here is called
+Markov logic network (MLN), <a
+href='https://homes.cs.washington.edu/~pedrod/kbmn.pdf'>discovered in 2006 by
+Richardson and Domingo.</a> Their paper has a nice simple example of MLN
+applied to the relationship between smoking and cancer. However, it's a bit
+hard to follow unless you understand logic and probabilistic graphical models
+well, so I'll go into much more details here. I'll also show an interactive
+session with <a href='https://github.com/PhDP/Manticore'>Manticore</a>, a small
+implementation I wrote for interacting with models.</p>
+
+<p>A Markov logic network is simply a set of formulas written in first-order
+logic, each associated with a weight. We'll use this for our examples:</p>
+
+<table style='width: 80%'>
+  <tr>
+    <th>Statement</th>
+    <th>Weight</th>
+  </tr>
+  <tr>
+    <td>Smoking causes cancers</td>
+    <td align='center'>1.1</td>
+  </tr>
+  <tr>
+    <td>If two people are friends and one smokes, then so does the other</td>
+    <td align='center'>1.5</td>
+  </tr>
+</table>
+
+<p>Using a more formal representation for logic, we'll get:</p>
+
+\[\forall x: Smoking(x) \Rightarrow Cancer(x), 1.5;\]
+\[\forall x, y: Friend(x, y) \land Smoking(x) \Rightarrow Smoking(y), 1.1;\]
+
+<p>If you don't know much about first-order logic, <a
+href='2015-07-13-fol.html'>I wrote a short introduction here, it'll be more
+than enough to understand Markov logic</a>.</p>
+
+<p>The grand idea of statistical relational learning is that, in pure logic, a
+world is false if it violates a single formula, but in statistical relational
+learning, a world is less likely if it violates formulas, especially if it
+violates formula with a high weight. Formally, the weight is the log odds
+between a world where the formula is true and a world where it is false.
+Statistical relational learning has important advantages on probabilistic
+approaches too: a first-order logic formula is simple to understand and
+interpret, it can be manipulated by humans and computers in ways a naked
+probabilistic model can't.</p>
+
+<p>But enough with the background, I'll write a longer post later on the history
+of statistical relational learning, and why it's awesome, here I'll focus on 
+examples, code, and equations.</p>
+
+<h2>Inference in Markov logic</h2>
+
+<p>Where's our network? It's called a Markov logic <i>network</i>, but all we
+got is a set of weighted first-order logic formulas. A Markov logic network is
+a template for Markov networks. Take the formula:</p>
+
+\[\forall x: Smoking(x) \Rightarrow Cancer(x), 1.5;\]
+
+<p><i>x</i> is a variable, and to get a concrete model for inference from this
+template, we need to apply constant (real objects) to the MLN. So in
+essence:</p>
+
+\[\mbox{MLN + Constants} \rightarrow \mbox{Markov Network}\]
+
+<p>Let's say we are interested in the relationship between
+smoking/cancer/friendship for Jerry, Elaine, George, we can apply these
+constants to the formula to get a set of ground formulas.  The term <i>ground</i>
+means the variables are replaced by constants, that is, concrete objects. For
+example in mathematics you probably encountered first-order logic formulas
+like:</p>
+
+\[\forall x: Add(x, 0) = 0\]
+
+<p>For this formula, we can have grounding by replacing x with integers</p>
+
+\[Add(47, 0) = 0\]
+\[Add(1729, 0) = 0\]
+
+<p>Similarly, applying the set of constants \(\{Elaine, Jerry, George\}\) to our first formula yields a set of ground formulas:</p>
+
+\[Smoking(Elaine) \Rightarrow Cancer(Elaine), 1.5;\]
+\[Smoking(Jerry) \Rightarrow Cancer(Jerry), 1.5;\]
+\[Smoking(George) \Rightarrow Cancer(George), 1.5;\]
+
+<p>We could do the same thing with the other formula, but now it has two
+variables:</p>
+
+\[Friend(Elaine, Elaine) \land Smoking(Elaine) \Rightarrow Smoking(Elaine), 1.1;\]
+\[Friend(Elaine, Jerry) \land Smoking(Elaine) \Rightarrow Smoking(Jerry), 1.1;\]
+\[Friend(Elaine, George) \land Smoking(Elaine) \Rightarrow Smoking(George), 1.1;\]
+\[Friend(Jerry, Elaine) \land Smoking(Jerry) \Rightarrow Smoking(Elaine), 1.1;\]
+\[Friend(Jerry, Jerry) \land Smoking(Jerry) \Rightarrow Smoking(Jerry), 1.1;\]
+\[Friend(Jerry, George) \land Smoking(Jerry) \Rightarrow Smoking(George), 1.1;\]
+\[Friend(George, Elaine) \land Smoking(George) \Rightarrow Smoking(Elaine), 1.1;\]
+\[Friend(George, Jerry) \land Smoking(George) \Rightarrow Smoking(Jerry), 1.1;\]
+\[Friend(George, George) \land Smoking(George) \Rightarrow Smoking(George), 1.1;\]
+
+<p>From the groundings of the two formulas, we get a set of predicates:</p>
+
+\[\{Smoking(Elaine), Smoking(Jerry), Smoking(George), Cancer(Elaine),\]
+
+\[Cancer(Jerry), Cancer(George), Friend(Elaine, Elaine), Friend(Elaine, Jerry),\]
+
+\[Friend(Elaine, George), Friend(Jerry, Elaine), Friend(Jerry, Jerry),\]
+
+\[Friend(Jerry, George), Friend(George, Elaine),\]
+
+\[Friend(George, Jerry), Friend(Jerry, George)\}\]
+
+<p>We now have the basic blocs for inference. Of course, we could generate a
+completely different set of ground formulas and ground predicates if we
+applied, say, the constants \(\{William, Anastasia, Kara, Saul, Karl, Tory,
+Felix, Laura\}\), or any number of objects we're interested in. Also, we
+don't need to have full data on all predicates, I'll show examples where we
+have no information at all.</p>
+
+<p>The next section is a demonstration, where I show a bit how Markov logic
+networks behave. It's followed by a section that explains the mathematics and
+show a full (albeit simple) example. These sections can be read in any order.</p>
+
+<h2>Code Example</h2>
+
+<p>At this point, you know enough to use Markov logic networks. In this section
+we'll perform an exact inference on a few MLNs, and I'll explain the maths in
+the next section.</p>
+
+<p>If you want to follow the examples, you can copy the library with:</p>
+
+<div class='terminal'><pre>
+$ git clone https://github.com/PhDP/Manticore.git
+$ cd Manticore
+$ cabal install
+</pre></div>
+
+<p>It's tested on both Linux and Windows, and it should work fine on OSX.
+Right now, it performs only exact inference, which is useful for tests...  but
+it does not scale (the Markov networks generated by Markov logic are
+humongous). It'll be enough for exploring a few models.</p>
+
+<p>First, launch an interactive console from the root of the code:</p>
+
+<div class='terminal'><pre>
+$ cabal repl
+</pre></div>
+
+<p>Then, we'll load the Markov logic network module and name it ML:</p>
+
+<pre><code class="haskell">ghci> import qualified Manticore.MarkovLogic as ML</code></pre>
+
+<p>The most straightforward way to build a Markov logic network is with
+<i>fromStrings</i>. This function takes an array of strings, each of which must
+be a valid first-order logic formula followed (or preceded) by a number (the
+weight of the formula). In our smoking example we have:</p>
+
+<pre><code class="haskell">ghci> let mln = ML.fromStrings ["∀x Smoking(x) ⇒ Cancer(x) 1.5", "∀x∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y) 1.1"]</code></pre>
+
+<p>The strings were copy-pasted from Richardson and Domingos' paper, but the
+parsers is flexible and will accept a keyboard-friendly form too:</p>
+
+<pre><code class="haskell">ghci> ML.fromStrings ["1.5 forall x Smoking(x) implies Cancer(x)", "1.1 forall x, y Friend(x, y) and Smoking(x) implies Smoking(y)"]</code></pre>
+
+<p>We can use <i>fmtMLN</i> function to print the Markov logic
+network:</p>
+
+<pre><code class="haskell">ghci> putStrLn (ML.fmtMLN mln)
+1.5                     ∀x Smoking(x) ⇒ Cancer(x)
+1.1                     ∀x ∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y)</code></pre>
+
+<p>A Markov logic network is a template for Markov networks. To get a Markov
+network, we need to apply a set of constant to the Markov logic networks
+Following our example in the last section we'll use:</p>
+
+<pre><code class="haskell">ghci> let cs = ["Elaine", "George", "Jerry"]</code></pre>
+
+<p>Then, we can query the network, say, what is the probability that Jerry has
+cancer?</p>
+
+<pre><code class="haskell">ghci> ML.ask mln cs "P(Cancer(Jerry))"
+Just 0.6040175344121184</code></pre>
+
+<p>The function <i>ask</i> takes a Markov logic network, a list
+of terms (represented as a list of strings), and a string query. It will return
+Just P, with P being a probability in the [0.0, 1.0] range, or Nothing if the
+parser fails to read the query. To make the process a bit easier we'll create
+a function ask that have already the mln and terms supplied:</p>
+
+<pre><code class="haskell">ghci> let ask = ML.ask mln cs</code></pre>
+
+<p>Then we can ask queries with this function:</p>
+
+<pre><code class="haskell">ghci> ask "P(Cancer(Jerry), Cancer(Elaine))"
+Just 0.3696834237837972
+ghci> ask "P(Cancer(Jerry) | Smoking(Jerry))"
+Just 0.8175744761936782
+</code></pre>
+
+<p>While the formula look distinct, the fact that they share predicates link
+them. So, even if there is no direct relationship between friendship and
+cancer, we have:</p>
+
+<pre><code class="haskell">ghci> ask "P(Cancer(Jerry) | Smoking(Elaine))"
+Just 0.6506081590969498
+ghci> ask "P(Cancer(Jerry) | Smoking(Elaine), Friend(Elaine, Jerry))"
+Just 0.7043948532279771
+</code></pre>
+
+<p>...just as expected, because friends tend to smoke, so Elaine being Jerry's
+friend increases the chance that Jerry is smoking, and if we know he doesn't
+we'll get:</p>
+
+<pre><code class="haskell">ghci> ask "P(Cancer(Jerry) | Smoking(Elaine), Friend(Elaine, Jerry), !Smoking(Jerry))"
+Just 0.4999999999999964
+ghci> ask "P(Cancer(Jerry) | !Smoking(Jerry))"
+Just 0.5000000000000238
+</code></pre>
+
+<p>The cool thing with all of this is that we already have a rich structure for
+inference from just two simple logical formulas, weights, and a list of objects
+to ground the formulas.</p>
+
+<p>We can add a logic formula to the network with the <i>tell</i> function. It
+takes a string (just like <i>fromStrings</i> takes a list of strings), an
+existing Markov logic network, and will return a new Markov logic network with
+the formula added. Let's say we want to add a rule that <i>friends of friends are
+friends</i>, we could add this rule with a weight of 1.0 with:</p>
+
+<pre><code class="haskell">ghci> let mln' = ML.tell "1.0 A.x,y,z Friend(x, y) and Friend(y, z) => Friend(x, z)" mln
+ghci> putStrLn (fmtMLN mln')
+1.5                     ∀x Smoking(x) ⇒ Cancer(x)
+2.0                     ∀x ∀y ∀z Friend(x, y) ∧ Friend(y, z) ⇒ Friend(x, z)
+1.1                     ∀x ∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y)</code></pre>
+
+<p>We'll build an ask function for this network using the same constants
+(Jerry, Elaine, George):</p>
+
+<pre><code class="haskell">ghci> let ask' = ML.ask cs mln'</code></pre>
+
+<p>Let's compare how our first MLN behaved compare to our new one:</p>
+
+<pre><code class="haskell">ghci> ask' "P(Smoking(George) | Smoking(Jerry), Friend(Jerry, Elaine), Friend(Elaine, George))"
+Just 0.651941997726506
+ghci> ask "P(Smoking(George) | Smoking(Jerry), Friend(Jerry, Elaine), Friend(Elaine, George))"
+Just 0.5877406718485353
+</code></pre>
+
+<p>Same query, same information, but with a different model (the MLN) will
+yield different answers. Now, something is bugging me with the original model:</p>
+
+<pre><code class="haskell">ghci> ask "P(Cancer(Jerry) | Smoking(George))"
+Just 0.6506081590969498
+ghci> ask "P(Cancer(Jerry) | Smoking(George), Friend(George, Jerry))"
+Just 0.7043948532279771
+ghci> ask "P(Cancer(Jerry) | Smoking(George), Friend(Jerry, George))"
+Just 0.6506081590968945
+</code></pre>
+
+<p>The problem is that friendship is completely assymmetricial in this model.
+If we know George is friend with Jerry, there's a very good chance that Jerry
+is friend with George (and thus influeced by his smoking habit). The nice thing
+with Markov logic is that all formulas are connected, so we can fix this issue
+by adding a formula, our new Markov logic network is:</p>
+
+\[\forall x: Smoking(x) \Rightarrow Cancer(x), 1.5;\]
+\[\forall x, y: Friend(x, y) \land Smoking(x) \Rightarrow Smoking(y), 1.1;\]
+\[\forall x, y: Friend(x, y) \iff Friend(y, x), 2.0;\]
+
+<p>The last formula has the \(\iff\) operator, which is true either when both
+sides are true, or when both sides are false. Thus, this formula says: if \(x\)
+is friend with \(y\), then \(y\) is friend with \(x\), and if \(x\) is not friend
+with \(y\), then \(y\) is not friend with \(x\). Since it's probabilistic, it doesn't
+need to be true all the time, but I give it a fairly high weight. And now we have:</p>
+
+<pre><code class="haskell">ghci> let mln'' = ML.tell "ForAll x, y: Friend(x, y) iff Friend(y, z) 2.0" mln
+ghci> putStrLn (ML.fmtMLN mln'')
+1.5                     ∀x Smoking(x) ⇒ Cancer(x)
+1.1                     ∀x ∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y)
+2.0                     ∀x ∀y Friend(x, y) ⇔ Friend(y, z)
+ghci> let ask'' = ML.ask mln'' cs
+ghci> ask'' "P(Cancer(Jerry) | Smoking(George))"
+Just 0.6506081590969105
+ghci> ask'' "P(Cancer(Jerry) | Smoking(George), Friend(George, Jerry))"
+Just 0.7043948532279295
+ghci> ask'' "P(Cancer(Jerry) | Smoking(George), Friend(Jerry, George))"
+Just 0.7018023327893508
+</code></pre>
+
+<p>Again, with the same information, the same query, just by adding a simple formula
+we were able to get a much better model.</p>
+
+<h2>A full example</h2>
+
+<p>Now, let's take a closer at the maths... after all, we still don't have our
+network! To finally get our network, we'll create one node for each ground
+predicate, and link all nodes that are in the same formula. In our example with
+the constants \(\{Elaine, Jerry, George\}\), we get the following Markov
+network:</p>
+
+<div class="imagecenter">
+  <img src="../images/ground_seinfeld.png" alt="ground network"/>
+</div>
+
+<p>That said, to make it easier to follow, we'll generate a simpler network by
+applying only two constants to the same two formulas: \(\{Kara, Lee\}\). We
+get:</p>
+
+<div class="imagecenter">
+  <img src="../images/mln_kara_lee.png" alt="Kara Lee network"/>
+</div>
+
+<p>That said, I think it's easier to just show the factor graph, where
+there is a factor for all ground formulas, and all the predicates found
+in the ground formula link to the factor:</p>
+
+<div class="imagecenter">
+  <img src="../images/mln_kara_lee_factors.png" alt="Kara Lee network"/>
+</div>
+
+<p>By applying \(\{Kara, Lee\}\) to our two formulas we got the ground formulas
+</p>
+
+\[Smoking(Kara) \Rightarrow Cancer(Kara), 1.5;\]
+\[Smoking(Lee) \Rightarrow Cancer(Lee), 1.5;\]
+\[Friend(Kara, Kara) \land Smoking(Kara) \Rightarrow Smoking(Kara), 1.1;\]
+\[Friend(Kara, Lee) \land Smoking(Kara) \Rightarrow Smoking(Lee), 1.1;\]
+\[Friend(Lee, Kara) \land Smoking(Lee) \Rightarrow Smoking(Kara), 1.1;\]
+\[Friend(Lee, Lee) \land Smoking(Lee) \Rightarrow Smoking(Lee), 1.1;\]
+
+<p>And you can see all the six ground formulas have their factors in the graph.
+From there, if we want to compute \(P(X = x)\), we use the equation</p>
+
+\[P(X = x) = \frac{1}{Z}\exp\left(\sum_i w_ig_i(x) \right),\]
+
+<p>where \(w_i\) is the weight of the ith factor, \(g_i\) is 1 if the formula
+is false given the values of the predicates or 0 if it's false, and \(Z\) is a
+normalizing constant (that is: it's the sum of the values of all possible
+assignments).</p>
+
+<p>Let's try to compute the probability of Kara and Lee being mutual friend,
+neither of them being friend with themselves, Kara smokes and has cancer, but
+Lee neither smokes nor has cancer. We'll get the following network:</p>
+
+<div class="imagecenter">
+  <img src="../images/mln_kara_lee_factors_ass_p1.png" alt="Kara Lee network"/>
+</div>
+
+<p>The value of the predicates can then be used to determine the factors that
+are true (worth 1, in green) and those that are false (worth 0, in red). If you
+are confused about the values, it's probably because you misinterpret the logic
+symbol implies \(\Rightarrow\), <a href='2015-07-13-fol.html'>check here for
+clarifications</a>.</p>
+
+<div class="imagecenter">
+  <img src="../images/mln_kara_lee_factors_ass_p2.png" alt="Kara Lee network"/>
+</div>
+
+\[\frac{1}{Z}\exp\left(1 \times 1.1 + 1 \times 1.1 + 1 \times 1.1 + 0 \times 1.1 + 1 \times 1.5 + 1 \times 1.5\right),\]
+\[\frac{1}{Z}\exp\left(3 \times 1.1 + 2 \times 1.5\right),\]
+\[\frac{544.57}{Z}.\]
+
+<p>Computing the normalizing constant gives \(Z = 229210.5024\), so our
+probability is:</p>
+
+\[\frac{544.57}{229210.5024} = 0.0023759.\]
+
+<p>If we were to flip Cancer(Kara) to false, we'd get a lower probability (because smoking causes cancer):</p>
+
+\[\frac{1}{Z}\exp\left(3 \times 1.1 + 1 \times 1.5\right) = \frac{121.51}{229210.5024} = 0.00053012.\]
+
+<p>There are much more interesting algorithms to compute probabilities, like adaptations of
+Gibbs sampling and belief propagation to Markov logic, but that would be it for now.</p>
+
+
+
+]]></summary>
+</entry>
+<entry>
+    <title>A crash course in first-order logic</title>
+    <link href="http://phdp.github.io//posts/2015-07-13-fol.html" />
+    <id>http://phdp.github.io//posts/2015-07-13-fol.html</id>
+    <published>2015-07-13T00:00:00Z</published>
+    <updated>2015-07-13T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>A crash course in first-order logic</h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="A crash course in first-order logic" data-via="phdpqc">Tweet</a>
+<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2015.07.13</p>
+<p>This is a short but complete description of first-order logic, a rich system
+to reason about objects and their relationships. I care mostly about
+first-order logic for its role in statistical relational learning (a branch of
+machine learning), <a href='2015-07-13-srl-code.html'>which I'll cover in
+another post</a>. Here, I just describe logic. If you want a more detailed
+explanation, see <a href='http://aima.cs.berkeley.edu/'>Russell and Norvig
+excellent A.I.  book.</a></p>
+
+<h2>Terms</h2>
+
+<p>Terms represent objects and relationships between objects, they are the
+reason why logic is so flexible. There are three types of terms:</p>
+
+<ol type='I'>
+  <li><b>Constants</b> represent objects, e.g.: <i>Tokyo</i>, the number <i>47</i>, <i>Cylon</i>, <i>Lion</i>.</li>
+  <li><b>Variables</b> range over objects, e.g. the variable <i>c</i> could represent a city, <i>x</i> an integer, <i>s</i> a species. By convention, variables start with a lowercase character.</li>
+  <li><b>Functions</b> are mappings between a list of objects to another object, e.g. <i>CapitalOf</i> could take a country and return a city, while <i>Multiply</i> takes two numbers and returns a number. The number of arguments taken a function is called its arity.</li>
+</ol>
+
+<p>Examples:</p>
+
+\[Add(x, 5)\]
+
+<p>Add is a function taking two numbers and returning a number, x is a
+variable, and 5 is a constant. Since a function is a term, it can be used
+within functions:</p>
+
+\[Add(Multiply(x, y), 5)\]
+
+<h2>Atomic sentences</h2>
+
+<p>Logic formulas ultimately resolve to a truth value: True or False, yet the
+terms we've seen return objects. To get a truth value, we need predicates. A
+predicate is like a function but it maps objects to a truth value, not another
+object. For example, if we want to say that adding 0 to a x yields x, we can
+write:</p>
+
+<ol style='list-style-type: upper-roman'>
+  <li><b>True</b> or <i>top</i>: \(\top\), and it's negation <b>False</b> or <i>bottom</i>: \(\bot\).</li>
+  <li><b>Predicates</b>, which are mappings between 0 or more <b>terms</b> to a truth value. They have the same form as functions but can be distinguished by the context: predicates are atomic sentences, not functions.</li>
+  <li><b>Identity</b>, represented by the mysterious = symbol, tests if two terms are the same. Identity can be (and often is) seen as a predicate with two arguments.</li>
+</ol>
+
+\[Equals(Add(x, 0), x)\]
+\[Add(x, 0) = x\]
+
+<p><i>Equals</i> is a predicate, in this case it takes two numbers and returns
+true or false. We could have a predicate that takes three cities and return
+true if they are on the same continent:</p>
+
+\[SameContinent(Toronto, c, CapitalOf(LargestCountryOf(Europe)))\]
+
+<p>where SameContinent is a predicate, Toronto a constant, c a variable ranging
+over cities, and both CapitalOf and LargestCountryOf are functions taking a
+single argument.</p>
+
+<h2>Connectives</h2>
+
+<p>Atomic sentences are connected by connectives to form complex sentences. The
+standard connectives are:</p>
+
+<ol style='list-style-type: upper-roman'>
+  <li>The binary connective <b>and</b>: \(x \land y\), which is true only if both \(x\) and \(y\) are true. Like all other connective shown here, if \(x\) and \(y\) are sentences, then \(x \land y\) is also a valid sentence.</li>
+  <li>The binary connective <b>or</b>: \(x \lor y\), which is true only if \(x\) is true, if \(y\) is true, or if both are true.</li>
+  <li>The binary connective <b>implies</b>: \(x \Rightarrow y\), returns true in all cases, except if \(x\) is true and \(y\) is false.</li>
+  <li>The binary connective <b>iff</b>: \(x \leftrightarrow y\), returns true if \(x\) and \(y\) have the same value, that is if they are both true, or both false.</li>
+  <li>The binary connective <b>xor</b> (exclusive or): \(x \oplus y\), returns true if \(x\) and \(y\) have different values.</li>
+  <li>The unary connective <b>not</b>: \(\lnot x\), which is true only if \(x\) is false.</li>
+</ol>
+
+<p>Be careful with implication, there is nothing wrong with it, except that it
+doesn't fit how we use the term <i>implies</i>. For example:
+\(Equals(AgeOf(Earth), 42) \implies StillAlive(Elvis)\) is true. If you're
+confused, read again the description of <b>implies</b>.</p>
+
+<p>Before we see examples, we'll look at the last element we need to complete
+the language of first-order logic<./p>
+
+<h2>Qualifiers</h2>
+
+<p>There are two qualifiers in first-order logic: the universal qualifiers "for
+all" denoted \(\forall\) , and the existential qualifiers "exists" denoted
+\(\exists\)). They, well, qualify variables, e.g.:</p>
+
+\[\forall x: Multiply(x, 0) = 0,\]
+
+<p>means: for all x, multiplying x by 0 yields 0. Normally, all variables
+should be qualified to determine their scope, e.g.:</p> 
+
+\[\forall x \exists y: GreaterThan(y, x)\]
+
+<p>which means, for all number x, there is a number y that is greater than x.
+If we had just</p>
+
+\[\forall x, y: GreaterThan(y, x)\]
+
+<p>that would be obviously wrong (say, for x = 3 and y = 1).</p>
+
+\[\forall y \exists c: IsWhite(y) \lor BritherThan(x, y).\]
+
+<p>Either x is white, or there is a color y brighter than it.</p>
+
+\[\exists c: CapitalOf(c) = Tokyo.\]
+
+\[\exists s: NumberOfPredators(s) = 0.\]
+
+<p>Again, remember the = is basically just syntactic sugar for a predicate, we could write:</p>
+
+\[\exists s: Equals(NumberOfPredators(s), 0).\]
+
+\[PredatorOf(x, y) \land \lnot Parasite(x) \Rightarrow BiggerThan(x, y),\]
+\[Friend(x, y) \iff Friend(y, x).\]
+
+
+
+]]></summary>
+</entry>
+<entry>
     <title>Automated reasoning in F#, Scala, Haskell, C++, and Julia</title>
     <link href="http://phdp.github.io//posts/2015-04-05-automated-reasoning.html" />
     <id>http://phdp.github.io//posts/2015-04-05-automated-reasoning.html</id>
@@ -584,13 +1101,13 @@ how different ideas and evidence can be combined.</p>
 ]]></summary>
 </entry>
 <entry>
-    <title>Scriptoria.info - Tracking Science Manuscripts under Revision Control Systems</title>
+    <title>Scriptoria.info - Tracking science manuscripts under revision control systems</title>
     <link href="http://phdp.github.io//posts/2013-07-22-scriptopia.html" />
     <id>http://phdp.github.io//posts/2013-07-22-scriptopia.html</id>
     <published>2013-07-22T00:00:00Z</published>
     <updated>2013-07-22T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<h1>Scriptoria.info - Tracking Science Manuscripts under Revision Control Systems</h1>
-<a href="https://twitter.com/share" class="twitter-share-button" data-text="Scriptoria.info - Tracking Science Manuscripts under Revision Control Systems" data-via="phdpqc">Tweet</a>
+    <summary type="html"><![CDATA[<h1>Scriptoria.info - Tracking science manuscripts under revision control systems</h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="Scriptoria.info - Tracking science manuscripts under revision control systems" data-via="phdpqc">Tweet</a>
 <p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2013.07.22</p>
 <p><i><b>Update 2014-09-06</b>: I wanted Scriptoria to be a group effort,
 something built by several scientists, especially since I never intended to
@@ -663,13 +1180,13 @@ already suggested <a href= "https://github.com/PhDP/Scriptoria/issues/7">
 ]]></summary>
 </entry>
 <entry>
-    <title>Machine Learning and Deep Transfer Learning</title>
+    <title>Machine learning and deep transfer learning</title>
     <link href="http://phdp.github.io//posts/2013-07-05-dtl.html" />
     <id>http://phdp.github.io//posts/2013-07-05-dtl.html</id>
     <published>2013-07-05T00:00:00Z</published>
     <updated>2013-07-05T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<h1>Machine Learning and Deep Transfer Learning</h1>
-<a href="https://twitter.com/share" class="twitter-share-button" data-text="Machine Learning and Deep Transfer Learning" data-via="phdpqc">Tweet</a>
+    <summary type="html"><![CDATA[<h1>Machine learning and deep transfer learning</h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="Machine learning and deep transfer learning" data-via="phdpqc">Tweet</a>
 <p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2013.07.05</p>
 <p>This short text explains the basic idea behind deep
 transfer learning, an ambitious attempt to build machine learning algorithms
@@ -844,47 +1361,6 @@ href="http://dx.doi.org/10.1371/journal.pone.0046164">DOI:
 simple model to study phylogeographies and speciation patterns in space. <a
 href="http://arxiv.org/abs/1203.1790">arXiv: 1203.1790</a>, 2012. <a
 href="../files/desjardins-proulx_wagner.bib">[BIB]</a></p>
-
-
-]]></summary>
-</entry>
-<entry>
-    <title>The case for arXiv and a broader conception of peer-reviews</title>
-    <link href="http://phdp.github.io//posts/2012-08-22-case-arxiv.html" />
-    <id>http://phdp.github.io//posts/2012-08-22-case-arxiv.html</id>
-    <published>2012-08-22T00:00:00Z</published>
-    <updated>2012-08-22T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<h1>The case for arXiv and a broader conception of peer-reviews</h1>
-<a href="https://twitter.com/share" class="twitter-share-button" data-text="The case for arXiv and a broader conception of peer-reviews" data-via="phdpqc">Tweet</a>
-<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2012.08.22</p>
-  <h2>Reference</h2>
-
-  <p><b>P Desjardins-Proulx</b>. <a
-href="http://innge.net/?q=node/330">The case for arXiv and a broader conception
-of peer-reviews</a>. Invited blog for the <i>International Network of
-Next-Generation Ecologists</i>, 2012.</p>
-
-
-]]></summary>
-</entry>
-<entry>
-    <title>A complex speciation-richness relationship in a simple neutral model</title>
-    <link href="http://phdp.github.io//posts/2012-06-27-complex.html" />
-    <id>http://phdp.github.io//posts/2012-06-27-complex.html</id>
-    <published>2012-06-27T00:00:00Z</published>
-    <updated>2012-06-27T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<h1>A complex speciation-richness relationship in a simple neutral model</h1>
-<a href="https://twitter.com/share" class="twitter-share-button" data-text="A complex speciation-richness relationship in a simple neutral model" data-via="phdpqc">Tweet</a>
-<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2012.06.27</p>
-  <p><b>P Desjardins-Proulx</b> and D Gravel. A complex speciation-richness
-relationship in a simple neutral model. <i>Ecology and Evolution</i>
-2(8):1781-1790. <a href="http://dx.doi.org/10.1002/ece3.292">DOI:
-10.1002/ece3.292</a>.  <a
-href="http://onlinelibrary.wiley.com/doi/10.1002/ece3.292/pdf">[PDF]</a> <a
-href="http://onlinelibrary.wiley.com/doi/10.1002/ece3.292/full">[HTML]</a> <a
-href="files/desjardins-proulx_2012b.bib">[BIB]</a> <a
-href="http://arxiv.org/abs/1203.3884">[arXiv]</a> <a
-href="https://github.com/PhDP/origin">[C source code]</a></p>
 
 
 ]]></summary>
