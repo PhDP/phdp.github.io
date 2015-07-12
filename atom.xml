@@ -19,20 +19,21 @@
 <a href="https://twitter.com/share" class="twitter-share-button" data-text="A gentle introduction to statistical relational learning: maths, code, and examples" data-via="phdpqc">Tweet</a>
 <p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2015.07.13</p>
 <p>Statistical relational learning is a branch of machine learning (A.I.)
-mixing ideas from probability theory and logic. I'll write another post later
+devoted to unify probability theory and logic. I'll write another post later
 to explain the motivation and a bit of history of this fascinating branch of
-study but here I want to focus on a concrete example, with detailed
+study, but here I want to focus on a concrete example, with detailed
 maths and real code.</p>
 
 <p>The approach to statistical relational learning explained here is called
 Markov logic network (MLN), <a
 href='https://homes.cs.washington.edu/~pedrod/kbmn.pdf'>discovered in 2006 by
-Richardson and Domingo.</a> Their paper has a nice simple example of MLN
+Richardson and Domingos.</a> Their paper has a nice simple example of MLN
 applied to the relationship between smoking and cancer. However, it's a bit
-hard to follow unless you understand logic and probabilistic graphical models
-well, so I'll go into much more details here. I'll also show an interactive
-session with <a href='https://github.com/PhDP/Manticore'>Manticore</a>, a small
-implementation I wrote for interacting with models.</p>
+hard to follow unless you're used to read papers on both logic and
+probabilistic graphical models.  In this post, I will mostly follow their
+smoking/cancer example, but I will try to be much more explicit. I'll also do a
+demonstration with <a href='https://github.com/PhDP/Manticore'>Manticore</a>, a
+small implementation I wrote for interacting with statistical relational models.</p>
 
 <p>A Markov logic network is simply a set of formulas written in first-order
 logic, each associated with a weight. We'll use this for our examples:</p>
@@ -52,65 +53,67 @@ logic, each associated with a weight. We'll use this for our examples:</p>
   </tr>
 </table>
 
-<p>Using a more formal representation for logic, we'll get:</p>
+<p>Using a more formal representation for logic, we get:</p>
 
 \[\forall x: Smoking(x) \Rightarrow Cancer(x), 1.5;\]
 \[\forall x, y: Friend(x, y) \land Smoking(x) \Rightarrow Smoking(y), 1.1;\]
 
-<p>If you don't know much about first-order logic, <a
-href='2015-07-13-fol.html'>I wrote a short introduction here, it'll be more
-than enough to understand Markov logic</a>.</p>
+<p>And that's our Markov logic network. If you don't know much about
+first-order logic, <a href='2015-07-13-fol.html'>I wrote a short introduction
+here that is more than enough to understand Markov logic networks</a>.</p>
 
 <p>The grand idea of statistical relational learning is that, in pure logic, a
-world is false if it violates a single formula, but in statistical relational
-learning, a world is less likely if it violates formulas, especially if it
-violates formula with a high weight. Formally, the weight is the log odds
-between a world where the formula is true and a world where it is false.
-Statistical relational learning has important advantages on probabilistic
-approaches too: a first-order logic formula is simple to understand and
-interpret, it can be manipulated by humans and computers in ways a naked
-probabilistic model can't.</p>
+world is false if it violates a single formula, but with Markov logic networks,
+a world is <i>less likely</i> if it violates formulas, especially if it violates
+formula with a high weight. Formally, the weight is the log odds between a
+world where the formula is true and a world where it is false. Statistical
+relational learning has important advantages on probabilistic approaches: a
+first-order logic formula is simple to understand and interpret, plus it can be
+manipulated by humans and computers in ways a naked probabilistic model
+can't. I think the greatest advantage of Markov logic networks, and
+statistical relational approaches in general, is to go beyond data models to
+form a general knowledge base. Just like old expert systems, but without
+the inflexibility of logic.</p>
 
-<p>But enough with the background, I'll write a longer post later on the history
-of statistical relational learning, and why it's awesome, here I'll focus on 
-examples, code, and equations.</p>
+<p>But enough with the background, let's look at an example.</p>
 
-<h2>Inference in Markov logic</h2>
+<h2>Grounding</h2>
 
 <p>Where's our network? It's called a Markov logic <i>network</i>, but all we
-got is a set of weighted first-order logic formulas. A Markov logic network is
-a template for Markov networks. Take the formula:</p>
+got is a set of weighted first-order logic formulas. A Markov logic network can
+be seen as a template for Markov networks. Take the formula:</p>
 
 \[\forall x: Smoking(x) \Rightarrow Cancer(x), 1.5;\]
 
 <p><i>x</i> is a variable, and to get a concrete model for inference from this
-template, we need to apply constant (real objects) to the MLN. So in
+template, we need to apply constants (real objects) to the MLN. So in
 essence:</p>
 
-\[\mbox{MLN + Constants} \rightarrow \mbox{Markov Network}\]
+\[\mbox{MLN (weighted formulas) + Constants} \rightarrow \mbox{Markov Network}\]
 
 <p>Let's say we are interested in the relationship between
-smoking/cancer/friendship for Jerry, Elaine, George, we can apply these
-constants to the formula to get a set of ground formulas.  The term <i>ground</i>
-means the variables are replaced by constants, that is, concrete objects. For
-example in mathematics you probably encountered first-order logic formulas
-like:</p>
+smoking/cancer/friendship for three constants: Jerry, Elaine, George. We can
+apply these constants to the formula to get a set of ground formulas.  The term
+<i>ground</i> means the variables are replaced by constants, that is, concrete
+objects. For example in mathematics you probably encountered first-order logic
+formulas like:</p>
 
 \[\forall x: Add(x, 0) = 0\]
 
-<p>For this formula, we can have grounding by replacing x with integers</p>
+<p>We can ground this first-order logic formula by replacing <i>x</i> with an
+actual integer:</p>
 
 \[Add(47, 0) = 0\]
 \[Add(1729, 0) = 0\]
 
-<p>Similarly, applying the set of constants \(\{Elaine, Jerry, George\}\) to our first formula yields a set of ground formulas:</p>
+<p>Similarly, applying the set of constants \(\{Elaine, Jerry, George\}\) to
+our first formula yields a set of ground formulas:</p>
 
 \[Smoking(Elaine) \Rightarrow Cancer(Elaine), 1.5;\]
 \[Smoking(Jerry) \Rightarrow Cancer(Jerry), 1.5;\]
 \[Smoking(George) \Rightarrow Cancer(George), 1.5;\]
 
-<p>We could do the same thing with the other formula, but now it has two
-variables:</p>
+<p>We could do the same thing with the other formula, which has two variables:</p>
 
 \[Friend(Elaine, Elaine) \land Smoking(Elaine) \Rightarrow Smoking(Elaine), 1.1;\]
 \[Friend(Elaine, Jerry) \land Smoking(Elaine) \Rightarrow Smoking(Jerry), 1.1;\]
@@ -134,24 +137,28 @@ variables:</p>
 
 \[Friend(George, Jerry), Friend(Jerry, George)\}\]
 
-<p>We now have the basic blocs for inference. Of course, we could generate a
-completely different set of ground formulas and ground predicates if we
-applied, say, the constants \(\{William, Anastasia, Kara, Saul, Karl, Tory,
-Felix, Laura\}\), or any number of objects we're interested in. Also, we
-don't need to have full data on all predicates, I'll show examples where we
-have no information at all.</p>
+<p>Markov logic networks provide the structure to answer question of the type</p>
+
+\[P(Cancer(George) | Smoking(Jerry), Friend(Jerry, George)),\]
+
+<p>where our variable (in the probabilistic sense) are the ground predicates.
+Of course, we could generate a completely different set of ground formulas and
+ground predicates if we apply, say, the constants \(\{William, Anastasia,
+Kara, Saul, Karl, Tory, Felix, Laura\}\), or any number of objects we're
+interested in. Also, we don't need to have full data on all predicates, I'll
+show examples where we have no information at all.</p>
 
 <p>The next section is a demonstration, where I show a bit how Markov logic
 networks behave. It's followed by a section that explains the mathematics and
-show a full (albeit simple) example. These sections can be read in any order.</p>
+show a full (albeit simple) example of exact inference. These sections can be
+read in any order.</p>
 
 <h2>Code Example</h2>
 
-<p>At this point, you know enough to use Markov logic networks. In this section
-we'll perform an exact inference on a few MLNs, and I'll explain the maths in
-the next section.</p>
-
-<p>If you want to follow the examples, you can copy the library with:</p>
+<p>At this point, you know enough to use Markov logic networks. After all, it's
+just a set of weighted formulas. In this section we'll perform an exact
+inference on a few MLNs. If you want to follow the examples, you can copy the
+library with:</p>
 
 <div class='terminal'><pre>
 $ git clone https://github.com/PhDP/Manticore.git
@@ -159,12 +166,13 @@ $ cd Manticore
 $ cabal install
 </pre></div>
 
-<p>It's tested on both Linux and Windows, and it should work fine on OSX.
+<p>It's tested on both Linux and Windows, and it should work fine on OSX with
+the <a href='https://www.haskell.org/platform/'>Haskell platform installed</a>.
 Right now, it performs only exact inference, which is useful for tests...  but
 it does not scale (the Markov networks generated by Markov logic are
-humongous). It'll be enough for exploring a few models.</p>
+humongous). It'll be enough for exploring a few models though.</p>
 
-<p>First, launch an interactive console from the root of the code:</p>
+<p>First, we launch an interactive console from the root of the code:</p>
 
 <div class='terminal'><pre>
 $ cabal repl
@@ -414,7 +422,7 @@ to reason about objects and their relationships. I care mostly about
 first-order logic for its role in statistical relational learning (a branch of
 machine learning), <a href='2015-07-13-srl-code.html'>which I'll cover in
 another post</a>. Here, I just describe logic. If you want a more detailed
-explanation, see <a href='http://aima.cs.berkeley.edu/'>Russell and Norvig
+explanation, see <a href='http://aima.cs.berkeley.edu/'>Russell and Norvig's
 excellent A.I.  book.</a></p>
 
 <h2>Terms</h2>
@@ -428,42 +436,48 @@ reason why logic is so flexible. There are three types of terms:</p>
   <li><b>Functions</b> are mappings between a list of objects to another object, e.g. <i>CapitalOf</i> could take a country and return a city, while <i>Multiply</i> takes two numbers and returns a number. The number of arguments taken a function is called its arity.</li>
 </ol>
 
-<p>Examples:</p>
+<p>Example:</p>
 
 \[Add(x, 5)\]
 
-<p>Add is a function taking two numbers and returning a number, x is a
-variable, and 5 is a constant. Since a function is a term, it can be used
+<p>Here, <i>Add</i> is a function taking two numbers and returning a number, <i>x</i>
+is a variable, and 5 is a constant. Since a function is a term, it can be used
 within functions:</p>
 
 \[Add(Multiply(x, y), 5)\]
 
-<h2>Atomic sentences</h2>
+<h2>Predicates</h2>
 
 <p>Logic formulas ultimately resolve to a truth value: True or False, yet the
 terms we've seen return objects. To get a truth value, we need predicates. A
 predicate is like a function but it maps objects to a truth value, not another
-object. For example, if we want to say that adding 0 to a x yields x, we can
-write:</p>
-
-<ol style='list-style-type: upper-roman'>
-  <li><b>True</b> or <i>top</i>: \(\top\), and it's negation <b>False</b> or <i>bottom</i>: \(\bot\).</li>
-  <li><b>Predicates</b>, which are mappings between 0 or more <b>terms</b> to a truth value. They have the same form as functions but can be distinguished by the context: predicates are atomic sentences, not functions.</li>
-  <li><b>Identity</b>, represented by the mysterious = symbol, tests if two terms are the same. Identity can be (and often is) seen as a predicate with two arguments.</li>
-</ol>
+object. For example, if we want to say that adding 0 to a <i>x</i> yields
+<i>x</i>, we can write:</p>
 
 \[Equals(Add(x, 0), x)\]
+
+<p>It's common to use the equal sign for the "equals" (or identity) predicate:</p>
+
 \[Add(x, 0) = x\]
 
-<p><i>Equals</i> is a predicate, in this case it takes two numbers and returns
+<p><i>Equals</i> is a predicate. In this case it takes two numbers and returns
 true or false. We could have a predicate that takes three cities and return
 true if they are on the same continent:</p>
 
 \[SameContinent(Toronto, c, CapitalOf(LargestCountryOf(Europe)))\]
 
-<p>where SameContinent is a predicate, Toronto a constant, c a variable ranging
-over cities, and both CapitalOf and LargestCountryOf are functions taking a
-single argument.</p>
+<p>where <i>SameContinent</i> is a predicate, <i>Toronto</i> a constant,
+<i>c</i> a variable ranging over cities, and both <i>CapitalOf</i> and
+<i>LargestCountryOf</i> are functions taking a single argument.</p>
+
+<h2>Atomic sentences</h2>
+
+<p>An atomic sentence is something that, alone, is a valid first-order logic formula. A predicate
+is an atomic sentence since it returns a truth value, but we also have two special symbols: True and False.</p>
+
+<p><b>True</b> is also called <i>top</i>, and can be represented with the symbol \(\top\).</p>
+
+<p><b>False</b> is also called <i>bottom</i>, and can be represented with the symbol \(\bot\).</p>
 
 <h2>Connectives</h2>
 
@@ -484,43 +498,31 @@ doesn't fit how we use the term <i>implies</i>. For example:
 \(Equals(AgeOf(Earth), 42) \implies StillAlive(Elvis)\) is true. If you're
 confused, read again the description of <b>implies</b>.</p>
 
-<p>Before we see examples, we'll look at the last element we need to complete
-the language of first-order logic<./p>
+<p>Only one thing is left to have a full description of first-order logic: qualifiers.</p>
 
 <h2>Qualifiers</h2>
 
-<p>There are two qualifiers in first-order logic: the universal qualifiers "for
-all" denoted \(\forall\) , and the existential qualifiers "exists" denoted
+<p>There are two qualifiers in first-order logic: the universal qualifier "for
+all" denoted \(\forall\) , and the existential qualifier "exists" denoted
 \(\exists\)). They, well, qualify variables, e.g.:</p>
 
-\[\forall x: Multiply(x, 0) = 0,\]
+\[\forall x: Multiply(x, 0) = 0\]
 
-<p>means: for all x, multiplying x by 0 yields 0. Normally, all variables
+<p>reads "for all x, multiplying x by 0 yields 0". Normally, all variables
 should be qualified to determine their scope, e.g.:</p> 
 
 \[\forall x \exists y: GreaterThan(y, x)\]
 
-<p>which means, for all number x, there is a number y that is greater than x.
+<p>which means, "for all number x, there is a number y that is greater than x".
 If we had just</p>
 
 \[\forall x, y: GreaterThan(y, x)\]
 
 <p>that would be obviously wrong (say, for x = 3 and y = 1).</p>
 
-\[\forall y \exists c: IsWhite(y) \lor BritherThan(x, y).\]
+<p>We can express "there is a color c brighter than x, unless x is white" with:</p>
 
-<p>Either x is white, or there is a color y brighter than it.</p>
-
-\[\exists c: CapitalOf(c) = Tokyo.\]
-
-\[\exists s: NumberOfPredators(s) = 0.\]
-
-<p>Again, remember the = is basically just syntactic sugar for a predicate, we could write:</p>
-
-\[\exists s: Equals(NumberOfPredators(s), 0).\]
-
-\[PredatorOf(x, y) \land \lnot Parasite(x) \Rightarrow BiggerThan(x, y),\]
-\[Friend(x, y) \iff Friend(y, x).\]
+\[\forall x \exists c: IsWhite(x) \lor BritherThan(c, x).\]
 
 
 

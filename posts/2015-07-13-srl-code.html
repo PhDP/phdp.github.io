@@ -38,19 +38,20 @@
 <a href="https://twitter.com/share" class="twitter-share-button" data-text="A gentle introduction to statistical relational learning: maths, code, and examples" data-via="phdpqc">Tweet</a>
 <p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2015.07.13</p>
 <p>Statistical relational learning is a branch of machine learning (A.I.)
-mixing ideas from probability theory and logic. I'll write another post later
+devoted to unify probability theory and logic. I'll write another post later
 to explain the motivation and a bit of history of this fascinating branch of
-study but here I want to focus on a concrete example, with detailed
+study, but here I want to focus on a concrete example, with detailed
 maths and real code.</p>
 
 <p>The approach to statistical relational learning explained here is called
 Markov logic network (MLN), <a href="https://homes.cs.washington.edu/~pedrod/kbmn.pdf">discovered in 2006 by
-Richardson and Domingo.</a> Their paper has a nice simple example of MLN
+Richardson and Domingos.</a> Their paper has a nice simple example of MLN
 applied to the relationship between smoking and cancer. However, it's a bit
-hard to follow unless you understand logic and probabilistic graphical models
-well, so I'll go into much more details here. I'll also show an interactive
-session with <a href="https://github.com/PhDP/Manticore">Manticore</a>, a small
-implementation I wrote for interacting with models.</p>
+hard to follow unless you're used to read papers on both logic and
+probabilistic graphical models.  In this post, I will mostly follow their
+smoking/cancer example, but I will try to be much more explicit. I'll also do a
+demonstration with <a href="https://github.com/PhDP/Manticore">Manticore</a>, a
+small implementation I wrote for interacting with statistical relational models.</p>
 
 <p>A Markov logic network is simply a set of formulas written in first-order
 logic, each associated with a weight. We'll use this for our examples:</p>
@@ -70,64 +71,67 @@ logic, each associated with a weight. We'll use this for our examples:</p>
   </tr>
 </table>
 
-<p>Using a more formal representation for logic, we'll get:</p>
+<p>Using a more formal representation for logic, we get:</p>
 
 \[\forall x: Smoking(x) \Rightarrow Cancer(x), 1.5;\]
 \[\forall x, y: Friend(x, y) \land Smoking(x) \Rightarrow Smoking(y), 1.1;\]
 
-<p>If you don't know much about first-order logic, <a href="2015-07-13-fol.html">I wrote a short introduction here, it'll be more
-than enough to understand Markov logic</a>.</p>
+<p>And that's our Markov logic network. If you don't know much about
+first-order logic, <a href="2015-07-13-fol.html">I wrote a short introduction
+here that is more than enough to understand Markov logic networks</a>.</p>
 
 <p>The grand idea of statistical relational learning is that, in pure logic, a
-world is false if it violates a single formula, but in statistical relational
-learning, a world is less likely if it violates formulas, especially if it
-violates formula with a high weight. Formally, the weight is the log odds
-between a world where the formula is true and a world where it is false.
-Statistical relational learning has important advantages on probabilistic
-approaches too: a first-order logic formula is simple to understand and
-interpret, it can be manipulated by humans and computers in ways a naked
-probabilistic model can't.</p>
+world is false if it violates a single formula, but with Markov logic networks,
+a world is <i>less likely</i> if it violates formulas, especially if it violates
+formula with a high weight. Formally, the weight is the log odds between a
+world where the formula is true and a world where it is false. Statistical
+relational learning has important advantages on probabilistic approaches: a
+first-order logic formula is simple to understand and interpret, plus it can be
+manipulated by humans and computers in ways a naked probabilistic model
+can't. I think the greatest advantage of Markov logic networks, and
+statistical relational approaches in general, is to go beyond data models to
+form a general knowledge base. Just like old expert systems, but without
+the inflexibility of logic.</p>
 
-<p>But enough with the background, I'll write a longer post later on the history
-of statistical relational learning, and why it's awesome, here I'll focus on 
-examples, code, and equations.</p>
+<p>But enough with the background, let's look at an example.</p>
 
-<h2>Inference in Markov logic</h2>
+<h2>Grounding</h2>
 
 <p>Where's our network? It's called a Markov logic <i>network</i>, but all we
-got is a set of weighted first-order logic formulas. A Markov logic network is
-a template for Markov networks. Take the formula:</p>
+got is a set of weighted first-order logic formulas. A Markov logic network can
+be seen as a template for Markov networks. Take the formula:</p>
 
 \[\forall x: Smoking(x) \Rightarrow Cancer(x), 1.5;\]
 
 <p><i>x</i> is a variable, and to get a concrete model for inference from this
-template, we need to apply constant (real objects) to the MLN. So in
+template, we need to apply constants (real objects) to the MLN. So in
 essence:</p>
 
-\[\mbox{MLN + Constants} \rightarrow \mbox{Markov Network}\]
+\[\mbox{MLN (weighted formulas) + Constants} \rightarrow \mbox{Markov Network}\]
 
 <p>Let's say we are interested in the relationship between
-smoking/cancer/friendship for Jerry, Elaine, George, we can apply these
-constants to the formula to get a set of ground formulas.  The term <i>ground</i>
-means the variables are replaced by constants, that is, concrete objects. For
-example in mathematics you probably encountered first-order logic formulas
-like:</p>
+smoking/cancer/friendship for three constants: Jerry, Elaine, George. We can
+apply these constants to the formula to get a set of ground formulas.  The term
+<i>ground</i> means the variables are replaced by constants, that is, concrete
+objects. For example in mathematics you probably encountered first-order logic
+formulas like:</p>
 
 \[\forall x: Add(x, 0) = 0\]
 
-<p>For this formula, we can have grounding by replacing x with integers</p>
+<p>We can ground this first-order logic formula by replacing <i>x</i> with an
+actual integer:</p>
 
 \[Add(47, 0) = 0\]
 \[Add(1729, 0) = 0\]
 
-<p>Similarly, applying the set of constants \(\{Elaine, Jerry, George\}\) to our first formula yields a set of ground formulas:</p>
+<p>Similarly, applying the set of constants \(\{Elaine, Jerry, George\}\) to
+our first formula yields a set of ground formulas:</p>
 
 \[Smoking(Elaine) \Rightarrow Cancer(Elaine), 1.5;\]
 \[Smoking(Jerry) \Rightarrow Cancer(Jerry), 1.5;\]
 \[Smoking(George) \Rightarrow Cancer(George), 1.5;\]
 
-<p>We could do the same thing with the other formula, but now it has two
-variables:</p>
+<p>We could do the same thing with the other formula, which has two variables:</p>
 
 \[Friend(Elaine, Elaine) \land Smoking(Elaine) \Rightarrow Smoking(Elaine), 1.1;\]
 \[Friend(Elaine, Jerry) \land Smoking(Elaine) \Rightarrow Smoking(Jerry), 1.1;\]
@@ -151,24 +155,28 @@ variables:</p>
 
 \[Friend(George, Jerry), Friend(Jerry, George)\}\]
 
-<p>We now have the basic blocs for inference. Of course, we could generate a
-completely different set of ground formulas and ground predicates if we
-applied, say, the constants \(\{William, Anastasia, Kara, Saul, Karl, Tory,
-Felix, Laura\}\), or any number of objects we're interested in. Also, we
-don't need to have full data on all predicates, I'll show examples where we
-have no information at all.</p>
+<p>Markov logic networks provide the structure to answer question of the type</p>
+
+\[P(Cancer(George) | Smoking(Jerry), Friend(Jerry, George)),\]
+
+<p>where our variable (in the probabilistic sense) are the ground predicates.
+Of course, we could generate a completely different set of ground formulas and
+ground predicates if we apply, say, the constants \(\{William, Anastasia,
+Kara, Saul, Karl, Tory, Felix, Laura\}\), or any number of objects we're
+interested in. Also, we don't need to have full data on all predicates, I'll
+show examples where we have no information at all.</p>
 
 <p>The next section is a demonstration, where I show a bit how Markov logic
 networks behave. It's followed by a section that explains the mathematics and
-show a full (albeit simple) example. These sections can be read in any order.</p>
+show a full (albeit simple) example of exact inference. These sections can be
+read in any order.</p>
 
 <h2>Code Example</h2>
 
-<p>At this point, you know enough to use Markov logic networks. In this section
-we'll perform an exact inference on a few MLNs, and I'll explain the maths in
-the next section.</p>
-
-<p>If you want to follow the examples, you can copy the library with:</p>
+<p>At this point, you know enough to use Markov logic networks. After all, it's
+just a set of weighted formulas. In this section we'll perform an exact
+inference on a few MLNs. If you want to follow the examples, you can copy the
+library with:</p>
 
 <div class="terminal"><pre>
 $ git clone https://github.com/PhDP/Manticore.git
@@ -176,12 +184,13 @@ $ cd Manticore
 $ cabal install
 </pre></div>
 
-<p>It's tested on both Linux and Windows, and it should work fine on OSX.
+<p>It's tested on both Linux and Windows, and it should work fine on OSX with
+the <a href="https://www.haskell.org/platform/">Haskell platform installed</a>.
 Right now, it performs only exact inference, which is useful for tests...  but
 it does not scale (the Markov networks generated by Markov logic are
-humongous). It'll be enough for exploring a few models.</p>
+humongous). It'll be enough for exploring a few models though.</p>
 
-<p>First, launch an interactive console from the root of the code:</p>
+<p>First, we launch an interactive console from the root of the code:</p>
 
 <div class="terminal"><pre>
 $ cabal repl
