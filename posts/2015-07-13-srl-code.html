@@ -403,11 +403,11 @@ is friend with \(y\), then \(y\) is friend with \(x\), and if \(x\) is not frien
 with \(y\), then \(y\) is not friend with \(x\). Since it's probabilistic, it doesn't
 need to be true all the time, but I give it a fairly high weight. And now we have:</p>
 
-<pre><code class="haskell">ghci&gt; let mln'' = ML.tell &quot;ForAll x, y: Friend(x, y) iff Friend(y, z) 2.0&quot; mln
+<pre><code class="haskell">ghci&gt; let mln'' = ML.tell &quot;ForAll x, y: Friend(x, y) iff Friend(y, x) 2.0&quot; mln
 ghci&gt; putStrLn (ML.fmtMLN mln'')
 1.5                     ∀x Smoking(x) ⇒ Cancer(x)
 1.1                     ∀x ∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y)
-2.0                     ∀x ∀y Friend(x, y) ⇔ Friend(y, z)
+2.0                     ∀x ∀y Friend(x, y) ⇔ Friend(y, x)
 ghci&gt; let ask'' = ML.ask mln'' cs
 ghci&gt; ask'' &quot;P(Cancer(Jerry) | Smoking(George))&quot;
 Just 0.6506081590969105
