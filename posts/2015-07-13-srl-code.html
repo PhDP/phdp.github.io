@@ -358,7 +358,7 @@ the formula added. Let's say we want to add a rule that <i>friends of friends ar
 friends</i>, we could add this rule with a weight of 2.0 with:</p>
 
 <pre><code class="haskell">ghci&gt; let mln' = ML.tell &quot;2.0 A.x,y,z Friend(x, y) and Friend(y, z) =&gt; Friend(x, z)&quot; mln
-ghci&gt; putStrLn (fmtMLN mln')
+ghci&gt; putStrLn (ML.fmtMLN mln')
 1.5                     ∀x Smoking(x) ⇒ Cancer(x)
 2.0                     ∀x ∀y ∀z Friend(x, y) ∧ Friend(y, z) ⇒ Friend(x, z)
 1.1                     ∀x ∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y)</code></pre>
@@ -370,10 +370,10 @@ ghci&gt; putStrLn (fmtMLN mln')
 
 <p>Let's compare how our first MLN behaved compare to our new one:</p>
 
-<pre><code class="haskell">ghci&gt; ask' &quot;P(Smoking(George) | Smoking(Jerry), Friend(Jerry, Elaine), Friend(Elaine, George))&quot;
-Just 0.651941997726506
-ghci&gt; ask &quot;P(Smoking(George) | Smoking(Jerry), Friend(Jerry, Elaine), Friend(Elaine, George))&quot;
+<pre><code class="haskell">ghci&gt; ask &quot;P(Smoking(George) | Smoking(Jerry), Friend(Jerry, Elaine), Friend(Elaine, George))&quot;
 Just 0.5877406718485353
+ghci&gt; ask' &quot;P(Smoking(George) | Smoking(Jerry), Friend(Jerry, Elaine), Friend(Elaine, George))&quot;
+Just 0.7080082227672424
 </code></pre>
 
 <p>Same query, same information, but with a different model (the MLN), we get

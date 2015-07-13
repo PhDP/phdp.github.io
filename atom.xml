@@ -340,7 +340,7 @@ the formula added. Let's say we want to add a rule that <i>friends of friends ar
 friends</i>, we could add this rule with a weight of 2.0 with:</p>
 
 <pre><code class="haskell">ghci> let mln' = ML.tell "2.0 A.x,y,z Friend(x, y) and Friend(y, z) => Friend(x, z)" mln
-ghci> putStrLn (fmtMLN mln')
+ghci> putStrLn (ML.fmtMLN mln')
 1.5                     ∀x Smoking(x) ⇒ Cancer(x)
 2.0                     ∀x ∀y ∀z Friend(x, y) ∧ Friend(y, z) ⇒ Friend(x, z)
 1.1                     ∀x ∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y)</code></pre>
@@ -348,14 +348,14 @@ ghci> putStrLn (fmtMLN mln')
 <p>We'll build an ask function for this network using the same constants
 (Jerry, Elaine, George):</p>
 
-<pre><code class="haskell">ghci> let ask' = ML.ask cs mln'</code></pre>
+<pre><code class="haskell">ghci> let ask' = ML.ask mln' cs</code></pre>
 
 <p>Let's compare how our first MLN behaved compare to our new one:</p>
 
-<pre><code class="haskell">ghci> ask' "P(Smoking(George) | Smoking(Jerry), Friend(Jerry, Elaine), Friend(Elaine, George))"
-Just 0.651941997726506
-ghci> ask "P(Smoking(George) | Smoking(Jerry), Friend(Jerry, Elaine), Friend(Elaine, George))"
+<pre><code class="haskell">ghci> ask "P(Smoking(George) | Smoking(Jerry), Friend(Jerry, Elaine), Friend(Elaine, George))"
 Just 0.5877406718485353
+ghci> ask' "P(Smoking(George) | Smoking(Jerry), Friend(Jerry, Elaine), Friend(Elaine, George))"
+Just 0.7080082227672424
 </code></pre>
 
 <p>Same query, same information, but with a different model (the MLN), we get
@@ -385,11 +385,11 @@ is friend with \(y\), then \(y\) is friend with \(x\), and if \(x\) is not frien
 with \(y\), then \(y\) is not friend with \(x\). Since it's probabilistic, it doesn't
 need to be true all the time, but I give it a fairly high weight. And now we have:</p>
 
-<pre><code class="haskell">ghci> let mln'' = ML.tell "ForAll x, y: Friend(x, y) iff Friend(y, z) 2.0" mln
+<pre><code class="haskell">ghci> let mln'' = ML.tell "ForAll x, y: Friend(x, y) iff Friend(y, x) 2.0" mln
 ghci> putStrLn (ML.fmtMLN mln'')
 1.5                     ∀x Smoking(x) ⇒ Cancer(x)
 1.1                     ∀x ∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y)
-2.0                     ∀x ∀y Friend(x, y) ⇔ Friend(y, z)
+2.0                     ∀x ∀y Friend(x, y) ⇔ Friend(y, x)
 ghci> let ask'' = ML.ask mln'' cs
 ghci> ask'' "P(Cancer(Jerry) | Smoking(George))"
 Just 0.6506081590969105
