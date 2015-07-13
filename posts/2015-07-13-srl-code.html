@@ -213,23 +213,27 @@ it's the sum of the values of all possible assignments.</p>
 
 <p>Let's try to compute the probability of Kara and Lee being mutual friend,
 neither of them being friend with themselves, Kara smokes and has cancer, but
-Lee neither smokes nor has cancer. We'll get the following network:</p>
+Lee neither smokes nor has cancer. We'll get the following network (green = true predicates, red = false predicates):</p>
 
 <div class="imagecenter">
   <img src="../images/mln_kara_lee_factors_ass_p1.png" alt="Kara Lee network" />
 </div>
 
 <p>The value of the predicates can then be used to determine the factors that
-are true (worth 1, in green) and those that are false (worth 0, in red). If you
-are confused about the values, it's probably because you misinterpret the logic
-symbol implies \(\Rightarrow\), <a href="2015-07-13-fol.html">check here for
-clarifications</a>.</p>
+are true (worth 1, in green) and those that are false (worth 0, in red):</p>
 
 <div class="imagecenter">
   <img src="../images/mln_kara_lee_factors_ass_p2.png" alt="Kara Lee network" />
 </div>
 
-<p>Computing the probability:</p>
+<p>If you are confused about how factors are resolved, it's probably because
+you misinterpret the logic symbol implies \(\Rightarrow\),
+<a href="2015-07-13-fol.html">check here for clarifications</a>. For example,
+the factor for \(Smoking(Lee) \Rightarrow Cancer(Lee)\) is true, because
+\(False \Rightarrow x\) returns true regardless of whether <i>x</i> is true or
+false.</p>
+
+<p>With the factors resolved, we can compute the probability:</p>
 
 \[\frac{1}{Z}\exp\left(1 \times 1.1 + 1 \times 1.1 + 1 \times 1.1 + 0 \times 1.1 + 1 \times 1.5 + 1 \times 1.5\right),\]
 \[\frac{1}{Z}\exp\left(3 \times 1.1 + 2 \times 1.5\right),\]
