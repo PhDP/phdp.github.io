@@ -382,11 +382,11 @@ ghci&gt; ask &quot;P(Cancer(Jerry) | Smoking(George), Friend(Jerry, George))&quo
 Just 0.6506081590968945
 </code></pre>
 
-<p>The problem is that friendship is completely assymmetricial in this model.
-If we know George is friend with Jerry, there's a very good chance that Jerry
-is friend with George (and thus influeced by his smoking habit). The nice thing
-with Markov logic is that all formulas are connected, so we can fix this issue
-by adding a formula, our new Markov logic network is:</p>
+<p>The problem is that friendship is completely assymmetricial.  If we know
+George is friend with Jerry, there's a very good chance that Jerry is friend
+with George, and thus influeced by his smoking habit. The nice thing with
+Markov logic is that all formulas are connected, so we can fix this issue by
+adding a formula, our new Markov logic network is:</p>
 
 \[\forall x: Smoking(x) \Rightarrow Cancer(x), 1.5;\]
 \[\forall x, y: Friend(x, y) \land Smoking(x) \Rightarrow Smoking(y), 1.1;\]
@@ -412,8 +412,10 @@ ghci&gt; ask'' &quot;P(Cancer(Jerry) | Smoking(George), Friend(Jerry, George))&q
 Just 0.7018023327893508
 </code></pre>
 
-<p>Again, with the same information, the same query, just by adding a simple formula
-we were able to get a much better model.</p>
+<p>Again, with the same information, the same query, just by adding a simple
+formula we were able to get a richer model. Of course, there's much more to
+Markov logic networks than simple inference, we can learn new formulas from
+data, combine existing knowledge bases, transfer knowledge between domains...</p>
 
 
 
