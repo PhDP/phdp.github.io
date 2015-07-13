@@ -53,42 +53,43 @@ reason why logic is so flexible. There are three types of terms:</p>
 <ol type="I">
   <li><b>Constants</b> represent objects, e.g.: <i>Tokyo</i>, the number <i>47</i>, <i>Cylon</i>, <i>Lion</i>.</li>
   <li><b>Variables</b> range over objects, e.g. the variable <i>c</i> could represent a city, <i>x</i> an integer, <i>s</i> a species. By convention, variables start with a lowercase character.</li>
-  <li><b>Functions</b> are mappings between a list of objects to another object, e.g. <i>CapitalOf</i> could take a country and return a city, while <i>Multiply</i> takes two numbers and returns a number. The number of arguments taken a function is called its arity.</li>
+  <li><b>Functions</b> are mappings between a list of objects to another object, e.g. <i>CapitalOf</i> could take a country and return a city, while <i>Multiply</i> takes two numbers and returns a number.</li>
 </ol>
 
 <p>Example:</p>
 
-\[Add(x, 5)\]
+\[Add(x, 5).\]
 
-<p>Here, <i>Add</i> is a function taking two numbers and returning a number, <i>x</i>
+<p><i>Add</i> is a function taking two numbers and returning a number, <i>x</i>
 is a variable, and 5 is a constant. Since a function is a term, it can be used
 within functions:</p>
 
-\[Add(Multiply(x, y), 5)\]
+\[Add(Multiply(x, y), 5).\]
 
 <h2>Predicates</h2>
 
-<p>Logic formulas ultimately resolve to a truth value: True or False, yet the
-terms we've seen return objects. To get a truth value, we need predicates. A
-predicate is like a function but it maps objects to a truth value, not another
-object. For example, if we want to say that adding 0 to a <i>x</i> yields
-<i>x</i>, we can write:</p>
+<p>First-order logic formulas ultimately resolve to a truth value: True or
+False, yet the terms we've seen return objects. To get a truth value, we need
+predicates. A predicate is like a function but it maps terms to a truth value
+instead of mapping them to a term. For example, if we want to say that adding 0
+to <i>x</i> yields <i>x</i>, we can write:</p>
 
-\[Equals(Add(x, 0), x)\]
+\[Equals(Add(x, 0), x).\]
 
 <p>It's common to use the equal sign for the &quot;equals&quot; (or identity) predicate:</p>
 
-\[Add(x, 0) = x\]
+\[Add(x, 0) = x.\]
 
 <p><i>Equals</i> is a predicate. In this case it takes two numbers and returns
-true or false. We could have a predicate that takes three cities and return
+true or false. We could have a predicate taking three cities and return
 true if they are on the same continent:</p>
 
-\[SameContinent(Toronto, c, CapitalOf(LargestCountryOf(Europe)))\]
+\[SameContinent(Toronto, c, CapitalOf(LargestCountryOf(Europe))),\]
 
-<p>where <i>SameContinent</i> is a predicate, <i>Toronto</i> a constant,
-<i>c</i> a variable ranging over cities, and both <i>CapitalOf</i> and
-<i>LargestCountryOf</i> are functions taking a single argument.</p>
+<p>where <i>SameContinent</i> is a predicate, <i>Toronto</i> and <i>Europe</i>
+are constants, <i>c</i> a variable ranging over cities, and both
+<i>CapitalOf</i> and <i>LargestCountryOf</i> are functions taking a single
+argument.</p>
 
 <h2>Atomic sentences</h2>
 
@@ -101,7 +102,7 @@ is an atomic sentence since it returns a truth value, but we also have two speci
 
 <h2>Connectives</h2>
 
-<p>Atomic sentences are connected by connectives to form complex sentences. The
+<p>You can connect sentences with connectives to form complex sentences. The
 standard connectives are:</p>
 
 <ol style="list-style-type: upper-roman">
@@ -118,12 +119,10 @@ doesn't fit how we use the term <i>implies</i>. For example:
 \(Equals(AgeOf(Earth), 42) \implies StillAlive(Elvis)\) is true. If you're
 confused, read again the description of <b>implies</b>.</p>
 
-<p>Only one thing is left to have a full description of first-order logic: qualifiers.</p>
-
 <h2>Qualifiers</h2>
 
 <p>There are two qualifiers in first-order logic: the universal qualifier &quot;for
-all&quot; denoted \(\forall\) , and the existential qualifier &quot;exists&quot; denoted
+all&quot; denoted \(\forall\), and the existential qualifier &quot;exists&quot; denoted
 \(\exists\)). They, well, qualify variables, e.g.:</p>
 
 \[\forall x: Multiply(x, 0) = 0\]
@@ -131,16 +130,13 @@ all&quot; denoted \(\forall\) , and the existential qualifier &quot;exists&quot;
 <p>reads &quot;for all x, multiplying x by 0 yields 0&quot;. Normally, all variables
 should be qualified to determine their scope, e.g.:</p> 
 
-\[\forall x \exists y: GreaterThan(y, x)\]
+\[\forall x \exists y: RealNumber(x) \implies GreaterThan(y, x)\]
 
-<p>which means, &quot;for all number x, there is a number y that is greater than x&quot;.
-If we had just</p>
+<p>which means, &quot;for all real numbers x, there is a number y that is greater
+than x&quot;.</p>
 
-\[\forall x, y: GreaterThan(y, x)\]
-
-<p>that would be obviously wrong (say, for x = 3 and y = 1).</p>
-
-<p>We can express &quot;there is a color c brighter than x, unless x is white&quot; with:</p>
+<p>A last example: we can express &quot;there is a color c brighter than x, unless x
+is white&quot; with:</p>
 
 \[\forall x \exists c: IsWhite(x) \lor BritherThan(c, x).\]
 

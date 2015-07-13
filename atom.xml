@@ -22,7 +22,7 @@
 devoted to unify probability theory and logic. I'll write another post later
 to explain the motivation and a bit of history of this fascinating branch of
 study, but here I want to focus on a concrete example, with detailed
-maths and real code.</p>
+maths and code.</p>
 
 <p>The approach to statistical relational learning explained here is called
 Markov logic network (MLN), <a
@@ -33,7 +33,7 @@ hard to follow unless you're used to read papers on both logic and
 probabilistic graphical models.  In this post, I will mostly follow their
 smoking/cancer example, but I will try to be much more explicit. I'll also do a
 demonstration with <a href='https://github.com/PhDP/Manticore'>Manticore</a>, a
-small implementation I wrote for interacting with statistical relational models.</p>
+small implementation I wrote for playing with statistical relational models.</p>
 
 <p>A Markov logic network is simply a set of formulas written in first-order
 logic, each associated with a weight. We'll use this for our examples:</p>
@@ -64,39 +64,38 @@ here that is more than enough to understand Markov logic networks</a>.</p>
 
 <p>The grand idea of statistical relational learning is that, in pure logic, a
 world is false if it violates a single formula, but with Markov logic networks,
-a world is <i>less likely</i> if it violates formulas, especially if it violates
-formula with a high weight. Formally, the weight is the log odds between a
-world where the formula is true and a world where it is false. Statistical
-relational learning has important advantages on probabilistic approaches: a
-first-order logic formula is simple to understand and interpret, plus it can be
-manipulated by humans and computers in ways a naked probabilistic model
-can't. I think the greatest advantage of Markov logic networks, and
-statistical relational approaches in general, is to go beyond data models to
-form a general knowledge base. Just like old expert systems, but without
-the inflexibility of logic.</p>
+a world is <i>less likely</i> if it violates formulas, especially if it
+violates formula with a high weight. Statistical relational learning has
+important advantages on probabilistic approaches: a first-order logic formula
+is simple to understand and interpret, plus it can be manipulated by humans and
+computers in ways a naked probabilistic model can't. I think the greatest
+advantage of Markov logic networks, and statistical relational approaches in
+general, is to go beyond data models to form a general knowledge base. Just
+like old expert systems, but without the inflexibility of logic.</p>
 
 <p>But enough with the background, let's look at an example.</p>
 
-<h2>Grounding</h2>
+<h2>From Markov logic networks to inference in Markov networks</h2>
 
-<p>Where's our network? It's called a Markov logic <i>network</i>, but all we
+<p>The first odd with Markov logic networks, is that there's no network. All we
 got is a set of weighted first-order logic formulas. A Markov logic network can
-be seen as a template for Markov networks. Take the formula:</p>
+be seen as a template for Markov networks. That is: there is no network in the
+Markov logic network, but we'll use it to generate networks. Take the formula:</p>
 
 \[\forall x: Smoking(x) \Rightarrow Cancer(x), 1.5;\]
 
 <p><i>x</i> is a variable, and to get a concrete model for inference from this
-template, we need to apply constants (real objects) to the MLN. So in
-essence:</p>
+template, we need to apply constants (real objects) to the MLN so we can
+replace these variables. So in essence:</p>
 
 \[\mbox{MLN (weighted formulas) + Constants} \rightarrow \mbox{Markov Network}\]
 
-<p>Let's say we are interested in the relationship between
-smoking/cancer/friendship for three constants: Jerry, Elaine, George. We can
-apply these constants to the formula to get a set of ground formulas.  The term
-<i>ground</i> means the variables are replaced by constants, that is, concrete
-objects. For example in mathematics you probably encountered first-order logic
-formulas like:</p>
+<p>If you're confused, don't worry, it'll become clear with examples. Let's say
+we are interested in the relationship between smoking/cancer/friendship for
+three constants: Jerry, Elaine, George. We can apply these constants to the
+formula to get a set of ground formulas.  The term <i>ground</i> means the
+variables are replaced by constants, that is, concrete objects. For example in
+mathematics you probably encountered first-order logic formulas like:</p>
 
 \[\forall x: Add(x, 0) = 0\]
 
@@ -125,7 +124,8 @@ our first formula yields a set of ground formulas:</p>
 \[Friend(George, Jerry) \land Smoking(George) \Rightarrow Smoking(Jerry), 1.1;\]
 \[Friend(George, George) \land Smoking(George) \Rightarrow Smoking(George), 1.1;\]
 
-<p>From the groundings of the two formulas, we get a set of predicates:</p>
+<p>We'll get our network from these ground formulas. From the groundings of the
+two formulas, we get a set of predicates:</p>
 
 \[\{Smoking(Elaine), Smoking(Jerry), Smoking(George), Cancer(Elaine),\]
 
@@ -147,10 +147,10 @@ ground predicates if we apply, say, the constants \(\{William, Anastasia,
 Kara, Saul, Karl, Tory, Felix, Laura\}\), or any number of objects we're
 interested in.</p>
 
-<p>To finally see the network, we'll create one node for each ground predicate,
-and link all nodes that are in the same formula. In our example with the
-constants \(\{Elaine, Jerry, George\}\), we get the following Markov
-network:</p>
+<p>To finally see the network and answer probabilistic queries, we'll create
+one node for each ground predicate, and link all nodes that are in the same
+ground formula. In our example with the constants \(\{Elaine, Jerry, George\}\), we
+get the following Markov network:</p>
 
 <div class="imagecenter">
   <img src="../images/ground_seinfeld.png" alt="ground network"/>
@@ -166,7 +166,7 @@ get:</p>
 
 <p>To understand how to query the network, it's easier to focus on the factor
 graph. In the factor graph, there is a factor for all ground formulas, and all
-the ground predicates found in the ground formula ared linked to the factor:</p>
+the ground predicates found in the ground formula are linked to the factor:</p>
 
 <div class="imagecenter">
   <img src="../images/mln_kara_lee_factors.png" alt="Kara Lee network"/>
@@ -188,35 +188,42 @@ the equation</p>
 
 \[P(X = x) = \frac{1}{Z}\exp\left(\sum_i w_ig_i(x) \right),\]
 
-<p>where \(w_i\) is the weight of the ith factor, \(g_i\) is 1 if the formula
-is false given the values of the predicates or 0 if it's false, and \(Z\) is a
-normalizing constant (that is: it's the sum of the values of all possible
-assignments).</p>
+<p>where \(w_i\) is the weight of the formula associated with the <i>i</i>th
+factor, \(g_i\) equals 1 if the formula is true given the values of the
+predicates or 0 if it's false, and \(Z\) is a normalizing constant, that is:
+it's the sum of the values of all possible assignments.</p>
 
 <p>Let's try to compute the probability of Kara and Lee being mutual friend,
 neither of them being friend with themselves, Kara smokes and has cancer, but
-Lee neither smokes nor has cancer. We'll get the following network:</p>
+Lee neither smokes nor has cancer. We'll get the following network (green =
+true predicates, red = false predicates):</p>
 
 <div class="imagecenter">
   <img src="../images/mln_kara_lee_factors_ass_p1.png" alt="Kara Lee network"/>
 </div>
 
 <p>The value of the predicates can then be used to determine the factors that
-are true (worth 1, in green) and those that are false (worth 0, in red). If you
-are confused about the values, it's probably because you misinterpret the logic
-symbol implies \(\Rightarrow\), <a href='2015-07-13-fol.html'>check here for
-clarifications</a>.</p>
+are true (worth 1, in green) and those that are false (worth 0, in red):</p>
 
 <div class="imagecenter">
   <img src="../images/mln_kara_lee_factors_ass_p2.png" alt="Kara Lee network"/>
 </div>
 
+<p>If you are confused about how factors are resolved, it's probably because
+you misinterpret the logic symbol implies \(\Rightarrow\),
+<a href='2015-07-13-fol.html'>check here for clarifications</a>. For example,
+the factor for \(Smoking(Lee) \Rightarrow Cancer(Lee)\) is true, because
+\(False \Rightarrow x\) returns true regardless of whether <i>x</i> is true or
+false.</p>
+
+<p>With the factors resolved, we can compute the probability:</p>
+
 \[\frac{1}{Z}\exp\left(1 \times 1.1 + 1 \times 1.1 + 1 \times 1.1 + 0 \times 1.1 + 1 \times 1.5 + 1 \times 1.5\right),\]
 \[\frac{1}{Z}\exp\left(3 \times 1.1 + 2 \times 1.5\right),\]
 \[\frac{544.57}{Z}.\]
 
-<p>Computing the normalizing constant gives \(Z = 229210.5024\), so our
-probability is:</p>
+<p>The normalizing constant is \(Z = 229210.5024\), so our probability
+is:</p>
 
 \[\frac{544.57}{229210.5024} = 0.0023759.\]
 
@@ -238,8 +245,11 @@ $ cabal install
 <p>The code is tested on both Linux and Windows, and it should work fine on OSX
 with the <a href='https://www.haskell.org/platform/'>Haskell platform
 installed</a>. Right now, it performs only exact inference, which is useful for
-tests...  but it does not scale (the Markov networks generated by Markov logic
-are humongous). It'll be enough for exploring a few models though.</p>
+tests...  but it does not scale since the Markov networks generated by Markov
+logic are humongous even with a few constants. Hopefully there are many good
+algorithms for inference, but for now they are not sufficiently tested in
+Manticore. Anyway, exact inference will be enough for exploring a few
+models.</p>
 
 <p>First, we launch an interactive console from the root of the code:</p>
 
@@ -270,8 +280,8 @@ network:</p>
 1.5                     ∀x Smoking(x) ⇒ Cancer(x)
 1.1                     ∀x ∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y)</code></pre>
 
-<p>A Markov logic network is a template for Markov networks. To get a Markov
-network, we need to apply a set of constant to the Markov logic networks
+<p>Since a Markov logic network is a template for Markov networks. To get a
+Markov network, we need to apply a set of constant to the Markov logic networks
 Following our example in the last section we'll use:</p>
 
 <pre><code class="haskell">ghci> let cs = ["Elaine", "George", "Jerry"]</code></pre>
@@ -286,7 +296,8 @@ Just 0.6040175344121184</code></pre>
 of terms (represented as a list of strings), and a string query. It will return
 Just P, with P being a probability in the [0.0, 1.0] range, or Nothing if the
 parser fails to read the query. To make the process a bit easier we'll create
-a function ask that have already the mln and terms supplied:</p>
+a function <i>ask</i> with the first two arguments supplied so we don't need to
+repeat them ad nauseam:</p>
 
 <pre><code class="haskell">ghci> let ask = ML.ask mln cs</code></pre>
 
@@ -298,9 +309,9 @@ ghci> ask "P(Cancer(Jerry) | Smoking(Jerry))"
 Just 0.8175744761936782
 </code></pre>
 
-<p>While the formula look distinct, the fact that they share predicates link
-them. So, even if there is no direct relationship between friendship and
-cancer, we have:</p>
+<p>While the formulas look distinct in the Markov logic network, the fact that
+they share predicates link them. So, even if there is no direct relationship
+between friendship and cancer, we have:</p>
 
 <pre><code class="haskell">ghci> ask "P(Cancer(Jerry) | Smoking(Elaine))"
 Just 0.6506081590969498
@@ -326,9 +337,9 @@ to ground the formulas.</p>
 takes a string (just like <i>fromStrings</i> takes a list of strings), an
 existing Markov logic network, and will return a new Markov logic network with
 the formula added. Let's say we want to add a rule that <i>friends of friends are
-friends</i>, we could add this rule with a weight of 1.0 with:</p>
+friends</i>, we could add this rule with a weight of 2.0 with:</p>
 
-<pre><code class="haskell">ghci> let mln' = ML.tell "1.0 A.x,y,z Friend(x, y) and Friend(y, z) => Friend(x, z)" mln
+<pre><code class="haskell">ghci> let mln' = ML.tell "2.0 A.x,y,z Friend(x, y) and Friend(y, z) => Friend(x, z)" mln
 ghci> putStrLn (fmtMLN mln')
 1.5                     ∀x Smoking(x) ⇒ Cancer(x)
 2.0                     ∀x ∀y ∀z Friend(x, y) ∧ Friend(y, z) ⇒ Friend(x, z)
@@ -347,8 +358,8 @@ ghci> ask "P(Smoking(George) | Smoking(Jerry), Friend(Jerry, Elaine), Friend(Ela
 Just 0.5877406718485353
 </code></pre>
 
-<p>Same query, same information, but with a different model (the MLN) will
-yield different answers. Now, something is bugging me with the original model:</p>
+<p>Same query, same information, but with a different model (the MLN), we get
+different answers. Now, something is bugging me with the original model:</p>
 
 <pre><code class="haskell">ghci> ask "P(Cancer(Jerry) | Smoking(George))"
 Just 0.6506081590969498
@@ -358,11 +369,11 @@ ghci> ask "P(Cancer(Jerry) | Smoking(George), Friend(Jerry, George))"
 Just 0.6506081590968945
 </code></pre>
 
-<p>The problem is that friendship is completely assymmetricial in this model.
-If we know George is friend with Jerry, there's a very good chance that Jerry
-is friend with George (and thus influeced by his smoking habit). The nice thing
-with Markov logic is that all formulas are connected, so we can fix this issue
-by adding a formula, our new Markov logic network is:</p>
+<p>The problem is that friendship is assymmetricial in this MLN.  If we know
+George is friend with Jerry, there's a very good chance that Jerry is friend
+with George, and thus influenced by his smoking habit. The nice thing with
+Markov logic is that all formulas are connected, so we can fix this issue by
+adding a formula, our new Markov logic network is:</p>
 
 \[\forall x: Smoking(x) \Rightarrow Cancer(x), 1.5;\]
 \[\forall x, y: Friend(x, y) \land Smoking(x) \Rightarrow Smoking(y), 1.1;\]
@@ -388,8 +399,10 @@ ghci> ask'' "P(Cancer(Jerry) | Smoking(George), Friend(Jerry, George))"
 Just 0.7018023327893508
 </code></pre>
 
-<p>Again, with the same information, the same query, just by adding a simple formula
-we were able to get a much better model.</p>
+<p>Again, with the same information, the same query, just by adding a simple
+formula we were able to get a richer model. Of course, there's much more to
+Markov logic networks than simple inference, we can learn new formulas from
+data, combine existing knowledge bases, transfer knowledge between domains...</p>
 
 
 ]]></summary>
@@ -419,42 +432,43 @@ reason why logic is so flexible. There are three types of terms:</p>
 <ol type='I'>
   <li><b>Constants</b> represent objects, e.g.: <i>Tokyo</i>, the number <i>47</i>, <i>Cylon</i>, <i>Lion</i>.</li>
   <li><b>Variables</b> range over objects, e.g. the variable <i>c</i> could represent a city, <i>x</i> an integer, <i>s</i> a species. By convention, variables start with a lowercase character.</li>
-  <li><b>Functions</b> are mappings between a list of objects to another object, e.g. <i>CapitalOf</i> could take a country and return a city, while <i>Multiply</i> takes two numbers and returns a number. The number of arguments taken a function is called its arity.</li>
+  <li><b>Functions</b> are mappings between a list of objects to another object, e.g. <i>CapitalOf</i> could take a country and return a city, while <i>Multiply</i> takes two numbers and returns a number.</li>
 </ol>
 
 <p>Example:</p>
 
-\[Add(x, 5)\]
+\[Add(x, 5).\]
 
-<p>Here, <i>Add</i> is a function taking two numbers and returning a number, <i>x</i>
+<p><i>Add</i> is a function taking two numbers and returning a number, <i>x</i>
 is a variable, and 5 is a constant. Since a function is a term, it can be used
 within functions:</p>
 
-\[Add(Multiply(x, y), 5)\]
+\[Add(Multiply(x, y), 5).\]
 
 <h2>Predicates</h2>
 
-<p>Logic formulas ultimately resolve to a truth value: True or False, yet the
-terms we've seen return objects. To get a truth value, we need predicates. A
-predicate is like a function but it maps objects to a truth value, not another
-object. For example, if we want to say that adding 0 to a <i>x</i> yields
-<i>x</i>, we can write:</p>
+<p>First-order logic formulas ultimately resolve to a truth value: True or
+False, yet the terms we've seen return objects. To get a truth value, we need
+predicates. A predicate is like a function but it maps terms to a truth value
+instead of mapping them to a term. For example, if we want to say that adding 0
+to <i>x</i> yields <i>x</i>, we can write:</p>
 
-\[Equals(Add(x, 0), x)\]
+\[Equals(Add(x, 0), x).\]
 
 <p>It's common to use the equal sign for the "equals" (or identity) predicate:</p>
 
-\[Add(x, 0) = x\]
+\[Add(x, 0) = x.\]
 
 <p><i>Equals</i> is a predicate. In this case it takes two numbers and returns
-true or false. We could have a predicate that takes three cities and return
+true or false. We could have a predicate taking three cities and return
 true if they are on the same continent:</p>
 
-\[SameContinent(Toronto, c, CapitalOf(LargestCountryOf(Europe)))\]
+\[SameContinent(Toronto, c, CapitalOf(LargestCountryOf(Europe))),\]
 
-<p>where <i>SameContinent</i> is a predicate, <i>Toronto</i> a constant,
-<i>c</i> a variable ranging over cities, and both <i>CapitalOf</i> and
-<i>LargestCountryOf</i> are functions taking a single argument.</p>
+<p>where <i>SameContinent</i> is a predicate, <i>Toronto</i> and <i>Europe</i>
+are constants, <i>c</i> a variable ranging over cities, and both
+<i>CapitalOf</i> and <i>LargestCountryOf</i> are functions taking a single
+argument.</p>
 
 <h2>Atomic sentences</h2>
 
@@ -467,7 +481,7 @@ is an atomic sentence since it returns a truth value, but we also have two speci
 
 <h2>Connectives</h2>
 
-<p>Atomic sentences are connected by connectives to form complex sentences. The
+<p>You can connect sentences with connectives to form complex sentences. The
 standard connectives are:</p>
 
 <ol style='list-style-type: upper-roman'>
@@ -484,12 +498,10 @@ doesn't fit how we use the term <i>implies</i>. For example:
 \(Equals(AgeOf(Earth), 42) \implies StillAlive(Elvis)\) is true. If you're
 confused, read again the description of <b>implies</b>.</p>
 
-<p>Only one thing is left to have a full description of first-order logic: qualifiers.</p>
-
 <h2>Qualifiers</h2>
 
 <p>There are two qualifiers in first-order logic: the universal qualifier "for
-all" denoted \(\forall\) , and the existential qualifier "exists" denoted
+all" denoted \(\forall\), and the existential qualifier "exists" denoted
 \(\exists\)). They, well, qualify variables, e.g.:</p>
 
 \[\forall x: Multiply(x, 0) = 0\]
@@ -497,16 +509,13 @@ all" denoted \(\forall\) , and the existential qualifier "exists" denoted
 <p>reads "for all x, multiplying x by 0 yields 0". Normally, all variables
 should be qualified to determine their scope, e.g.:</p> 
 
-\[\forall x \exists y: GreaterThan(y, x)\]
+\[\forall x \exists y: RealNumber(x) \implies GreaterThan(y, x)\]
 
-<p>which means, "for all number x, there is a number y that is greater than x".
-If we had just</p>
+<p>which means, "for all real numbers x, there is a number y that is greater
+than x".</p>
 
-\[\forall x, y: GreaterThan(y, x)\]
-
-<p>that would be obviously wrong (say, for x = 3 and y = 1).</p>
-
-<p>We can express "there is a color c brighter than x, unless x is white" with:</p>
+<p>A last example: we can express "there is a color c brighter than x, unless x
+is white" with:</p>
 
 \[\forall x \exists c: IsWhite(x) \lor BritherThan(c, x).\]
 

@@ -41,7 +41,7 @@
 devoted to unify probability theory and logic. I'll write another post later
 to explain the motivation and a bit of history of this fascinating branch of
 study, but here I want to focus on a concrete example, with detailed
-maths and real code.</p>
+maths and code.</p>
 
 <p>The approach to statistical relational learning explained here is called
 Markov logic network (MLN), <a href="https://homes.cs.washington.edu/~pedrod/kbmn.pdf">discovered in 2006 by
@@ -51,7 +51,7 @@ hard to follow unless you're used to read papers on both logic and
 probabilistic graphical models.  In this post, I will mostly follow their
 smoking/cancer example, but I will try to be much more explicit. I'll also do a
 demonstration with <a href="https://github.com/PhDP/Manticore">Manticore</a>, a
-small implementation I wrote for interacting with statistical relational models.</p>
+small implementation I wrote for playing with statistical relational models.</p>
 
 <p>A Markov logic network is simply a set of formulas written in first-order
 logic, each associated with a weight. We'll use this for our examples:</p>
@@ -82,39 +82,38 @@ here that is more than enough to understand Markov logic networks</a>.</p>
 
 <p>The grand idea of statistical relational learning is that, in pure logic, a
 world is false if it violates a single formula, but with Markov logic networks,
-a world is <i>less likely</i> if it violates formulas, especially if it violates
-formula with a high weight. Formally, the weight is the log odds between a
-world where the formula is true and a world where it is false. Statistical
-relational learning has important advantages on probabilistic approaches: a
-first-order logic formula is simple to understand and interpret, plus it can be
-manipulated by humans and computers in ways a naked probabilistic model
-can't. I think the greatest advantage of Markov logic networks, and
-statistical relational approaches in general, is to go beyond data models to
-form a general knowledge base. Just like old expert systems, but without
-the inflexibility of logic.</p>
+a world is <i>less likely</i> if it violates formulas, especially if it
+violates formula with a high weight. Statistical relational learning has
+important advantages on probabilistic approaches: a first-order logic formula
+is simple to understand and interpret, plus it can be manipulated by humans and
+computers in ways a naked probabilistic model can't. I think the greatest
+advantage of Markov logic networks, and statistical relational approaches in
+general, is to go beyond data models to form a general knowledge base. Just
+like old expert systems, but without the inflexibility of logic.</p>
 
 <p>But enough with the background, let's look at an example.</p>
 
 <h2>From Markov logic networks to inference in Markov networks</h2>
 
-<p>Where's our network? It's called a Markov logic <i>network</i>, but all we
+<p>The first odd with Markov logic networks, is that there's no network. All we
 got is a set of weighted first-order logic formulas. A Markov logic network can
-be seen as a template for Markov networks. Take the formula:</p>
+be seen as a template for Markov networks. That is: there is no network in the
+Markov logic network, but we'll use it to generate networks. Take the formula:</p>
 
 \[\forall x: Smoking(x) \Rightarrow Cancer(x), 1.5;\]
 
 <p><i>x</i> is a variable, and to get a concrete model for inference from this
-template, we need to apply constants (real objects) to the MLN. So in
-essence:</p>
+template, we need to apply constants (real objects) to the MLN so we can
+replace these variables. So in essence:</p>
 
 \[\mbox{MLN (weighted formulas) + Constants} \rightarrow \mbox{Markov Network}\]
 
-<p>Let's say we are interested in the relationship between
-smoking/cancer/friendship for three constants: Jerry, Elaine, George. We can
-apply these constants to the formula to get a set of ground formulas.  The term
-<i>ground</i> means the variables are replaced by constants, that is, concrete
-objects. For example in mathematics you probably encountered first-order logic
-formulas like:</p>
+<p>If you're confused, don't worry, it'll become clear with examples. Let's say
+we are interested in the relationship between smoking/cancer/friendship for
+three constants: Jerry, Elaine, George. We can apply these constants to the
+formula to get a set of ground formulas.  The term <i>ground</i> means the
+variables are replaced by constants, that is, concrete objects. For example in
+mathematics you probably encountered first-order logic formulas like:</p>
 
 \[\forall x: Add(x, 0) = 0\]
 
@@ -143,7 +142,8 @@ our first formula yields a set of ground formulas:</p>
 \[Friend(George, Jerry) \land Smoking(George) \Rightarrow Smoking(Jerry), 1.1;\]
 \[Friend(George, George) \land Smoking(George) \Rightarrow Smoking(George), 1.1;\]
 
-<p>From the groundings of the two formulas, we get a set of predicates:</p>
+<p>We'll get our network from these ground formulas. From the groundings of the
+two formulas, we get a set of predicates:</p>
 
 \[\{Smoking(Elaine), Smoking(Jerry), Smoking(George), Cancer(Elaine),\]
 
@@ -165,10 +165,10 @@ ground predicates if we apply, say, the constants \(\{William, Anastasia,
 Kara, Saul, Karl, Tory, Felix, Laura\}\), or any number of objects we're
 interested in.</p>
 
-<p>To finally see the network, we'll create one node for each ground predicate,
-and link all nodes that are in the same formula. In our example with the
-constants \(\{Elaine, Jerry, George\}\), we get the following Markov
-network:</p>
+<p>To finally see the network and answer probabilistic queries, we'll create
+one node for each ground predicate, and link all nodes that are in the same
+ground formula. In our example with the constants \(\{Elaine, Jerry, George\}\), we
+get the following Markov network:</p>
 
 <div class="imagecenter">
   <img src="../images/ground_seinfeld.png" alt="ground network" />
@@ -184,7 +184,7 @@ get:</p>
 
 <p>To understand how to query the network, it's easier to focus on the factor
 graph. In the factor graph, there is a factor for all ground formulas, and all
-the ground predicates found in the ground formula ared linked to the factor:</p>
+the ground predicates found in the ground formula are linked to the factor:</p>
 
 <div class="imagecenter">
   <img src="../images/mln_kara_lee_factors.png" alt="Kara Lee network" />
@@ -213,7 +213,8 @@ it's the sum of the values of all possible assignments.</p>
 
 <p>Let's try to compute the probability of Kara and Lee being mutual friend,
 neither of them being friend with themselves, Kara smokes and has cancer, but
-Lee neither smokes nor has cancer. We'll get the following network (green = true predicates, red = false predicates):</p>
+Lee neither smokes nor has cancer. We'll get the following network (green =
+true predicates, red = false predicates):</p>
 
 <div class="imagecenter">
   <img src="../images/mln_kara_lee_factors_ass_p1.png" alt="Kara Lee network" />
@@ -239,8 +240,8 @@ false.</p>
 \[\frac{1}{Z}\exp\left(3 \times 1.1 + 2 \times 1.5\right),\]
 \[\frac{544.57}{Z}.\]
 
-<p>Computing the normalizing constant gives \(Z = 229210.5024\), so our
-probability is:</p>
+<p>The normalizing constant is \(Z = 229210.5024\), so our probability
+is:</p>
 
 \[\frac{544.57}{229210.5024} = 0.0023759.\]
 
@@ -262,8 +263,11 @@ $ cabal install
 <p>The code is tested on both Linux and Windows, and it should work fine on OSX
 with the <a href="https://www.haskell.org/platform/">Haskell platform
 installed</a>. Right now, it performs only exact inference, which is useful for
-tests...  but it does not scale (the Markov networks generated by Markov logic
-are humongous). It'll be enough for exploring a few models though.</p>
+tests...  but it does not scale since the Markov networks generated by Markov
+logic are humongous even with a few constants. Hopefully there are many good
+algorithms for inference, but for now they are not sufficiently tested in
+Manticore. Anyway, exact inference will be enough for exploring a few
+models.</p>
 
 <p>First, we launch an interactive console from the root of the code:</p>
 
@@ -294,8 +298,8 @@ network:</p>
 1.5                     ∀x Smoking(x) ⇒ Cancer(x)
 1.1                     ∀x ∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y)</code></pre>
 
-<p>A Markov logic network is a template for Markov networks. To get a Markov
-network, we need to apply a set of constant to the Markov logic networks
+<p>Since a Markov logic network is a template for Markov networks. To get a
+Markov network, we need to apply a set of constant to the Markov logic networks
 Following our example in the last section we'll use:</p>
 
 <pre><code class="haskell">ghci&gt; let cs = [&quot;Elaine&quot;, &quot;George&quot;, &quot;Jerry&quot;]</code></pre>
@@ -310,7 +314,8 @@ Just 0.6040175344121184</code></pre>
 of terms (represented as a list of strings), and a string query. It will return
 Just P, with P being a probability in the [0.0, 1.0] range, or Nothing if the
 parser fails to read the query. To make the process a bit easier we'll create
-a function ask that have already the mln and terms supplied:</p>
+a function <i>ask</i> with the first two arguments supplied so we don't need to
+repeat them ad nauseam:</p>
 
 <pre><code class="haskell">ghci&gt; let ask = ML.ask mln cs</code></pre>
 
@@ -322,9 +327,9 @@ ghci&gt; ask &quot;P(Cancer(Jerry) | Smoking(Jerry))&quot;
 Just 0.8175744761936782
 </code></pre>
 
-<p>While the formula look distinct, the fact that they share predicates link
-them. So, even if there is no direct relationship between friendship and
-cancer, we have:</p>
+<p>While the formulas look distinct in the Markov logic network, the fact that
+they share predicates link them. So, even if there is no direct relationship
+between friendship and cancer, we have:</p>
 
 <pre><code class="haskell">ghci&gt; ask &quot;P(Cancer(Jerry) | Smoking(Elaine))&quot;
 Just 0.6506081590969498
@@ -350,9 +355,9 @@ to ground the formulas.</p>
 takes a string (just like <i>fromStrings</i> takes a list of strings), an
 existing Markov logic network, and will return a new Markov logic network with
 the formula added. Let's say we want to add a rule that <i>friends of friends are
-friends</i>, we could add this rule with a weight of 1.0 with:</p>
+friends</i>, we could add this rule with a weight of 2.0 with:</p>
 
-<pre><code class="haskell">ghci&gt; let mln' = ML.tell &quot;1.0 A.x,y,z Friend(x, y) and Friend(y, z) =&gt; Friend(x, z)&quot; mln
+<pre><code class="haskell">ghci&gt; let mln' = ML.tell &quot;2.0 A.x,y,z Friend(x, y) and Friend(y, z) =&gt; Friend(x, z)&quot; mln
 ghci&gt; putStrLn (fmtMLN mln')
 1.5                     ∀x Smoking(x) ⇒ Cancer(x)
 2.0                     ∀x ∀y ∀z Friend(x, y) ∧ Friend(y, z) ⇒ Friend(x, z)
@@ -371,8 +376,8 @@ ghci&gt; ask &quot;P(Smoking(George) | Smoking(Jerry), Friend(Jerry, Elaine), Fr
 Just 0.5877406718485353
 </code></pre>
 
-<p>Same query, same information, but with a different model (the MLN) will
-yield different answers. Now, something is bugging me with the original model:</p>
+<p>Same query, same information, but with a different model (the MLN), we get
+different answers. Now, something is bugging me with the original model:</p>
 
 <pre><code class="haskell">ghci&gt; ask &quot;P(Cancer(Jerry) | Smoking(George))&quot;
 Just 0.6506081590969498
@@ -382,9 +387,9 @@ ghci&gt; ask &quot;P(Cancer(Jerry) | Smoking(George), Friend(Jerry, George))&quo
 Just 0.6506081590968945
 </code></pre>
 
-<p>The problem is that friendship is completely assymmetricial.  If we know
+<p>The problem is that friendship is assymmetricial in this MLN.  If we know
 George is friend with Jerry, there's a very good chance that Jerry is friend
-with George, and thus influeced by his smoking habit. The nice thing with
+with George, and thus influenced by his smoking habit. The nice thing with
 Markov logic is that all formulas are connected, so we can fix this issue by
 adding a formula, our new Markov logic network is:</p>
 
