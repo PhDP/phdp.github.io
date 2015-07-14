@@ -276,26 +276,26 @@ models.</p>
 $ cabal repl
 </pre></div>
 
-<p>Then, we'll load the Markov logic network module and name it ML:</p>
+<p>Then, we'll load the Markov logic network module:</p>
 
-<pre><code class="haskell">ghci&gt; import qualified Manticore.MarkovLogic as ML</code></pre>
+<pre><code class="haskell">ghci&gt; import Manticore.MarkovLogic</code></pre>
 
 <p>The most straightforward way to build a Markov logic network is with
 <i>fromStrings</i>. This function takes an array of strings, each of which must
 be a valid first-order logic formula followed (or preceded) by a number (the
 weight of the formula). In our smoking example we have:</p>
 
-<pre><code class="haskell">ghci&gt; let mln = ML.fromStrings [&quot;∀x Smoking(x) ⇒ Cancer(x) 1.5&quot;, &quot;∀x∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y) 1.1&quot;]</code></pre>
+<pre><code class="haskell">ghci&gt; let mln = fromStrings [&quot;∀x Smoking(x) ⇒ Cancer(x) 1.5&quot;, &quot;∀x∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y) 1.1&quot;]</code></pre>
 
 <p>The strings were copy-pasted from Richardson and Domingos' paper, but the
 parsers is flexible and will accept a keyboard-friendly form too:</p>
 
-<pre><code class="haskell">ghci&gt; ML.fromStrings [&quot;1.5 forall x Smoking(x) implies Cancer(x)&quot;, &quot;1.1 forall x, y Friend(x, y) and Smoking(x) implies Smoking(y)&quot;]</code></pre>
+<pre><code class="haskell">ghci&gt; fromStrings [&quot;1.5 forall x Smoking(x) implies Cancer(x)&quot;, &quot;1.1 forall x, y Friend(x, y) and Smoking(x) implies Smoking(y)&quot;]</code></pre>
 
 <p>We can use <i>fmtMLN</i> function to print the Markov logic
 network:</p>
 
-<pre><code class="haskell">ghci&gt; putStrLn (ML.fmtMLN mln)
+<pre><code class="haskell">ghci&gt; putStrLn (fmtMLN mln)
 1.5                     ∀x Smoking(x) ⇒ Cancer(x)
 1.1                     ∀x ∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y)</code></pre>
 
@@ -308,7 +308,7 @@ Following our example in the last section we'll use:</p>
 <p>Then, we can query the network, say, what is the probability that Jerry has
 cancer?</p>
 
-<pre><code class="haskell">ghci&gt; ML.ask mln cs &quot;P(Cancer(Jerry))&quot;
+<pre><code class="haskell">ghci&gt; ask mln cs &quot;P(Cancer(Jerry))&quot;
 Just 0.6040175344121184</code></pre>
 
 <p>The function <i>ask</i> takes a Markov logic network, a list
@@ -318,13 +318,13 @@ parser fails to read the query. To make the process a bit easier we'll create
 a function <i>ask</i> with the first two arguments supplied so we don't need to
 repeat them ad nauseam:</p>
 
-<pre><code class="haskell">ghci&gt; let ask = ML.ask mln cs</code></pre>
+<pre><code class="haskell">ghci&gt; let query = ask mln cs</code></pre>
 
 <p>Then we can ask queries with this function:</p>
 
-<pre><code class="haskell">ghci&gt; ask &quot;P(Cancer(Jerry), Cancer(Elaine))&quot;
+<pre><code class="haskell">ghci&gt; query &quot;P(Cancer(Jerry), Cancer(Elaine))&quot;
 Just 0.3696834237837972
-ghci&gt; ask &quot;P(Cancer(Jerry) | Smoking(Jerry))&quot;
+ghci&gt; query &quot;P(Cancer(Jerry) | Smoking(Jerry))&quot;
 Just 0.8175744761936782
 </code></pre>
 
@@ -332,9 +332,9 @@ Just 0.8175744761936782
 they share predicates link them. So, even if there is no direct relationship
 between friendship and cancer, we have:</p>
 
-<pre><code class="haskell">ghci&gt; ask &quot;P(Cancer(Jerry) | Smoking(Elaine))&quot;
+<pre><code class="haskell">ghci&gt; query &quot;P(Cancer(Jerry) | Smoking(Elaine))&quot;
 Just 0.6506081590969498
-ghci&gt; ask &quot;P(Cancer(Jerry) | Smoking(Elaine), Friend(Elaine, Jerry))&quot;
+ghci&gt; query &quot;P(Cancer(Jerry) | Smoking(Elaine), Friend(Elaine, Jerry))&quot;
 Just 0.7043948532279771
 </code></pre>
 
@@ -342,9 +342,9 @@ Just 0.7043948532279771
 friend increases the chance that Jerry is smoking, and if we know he doesn't
 we'll get:</p>
 
-<pre><code class="haskell">ghci&gt; ask &quot;P(Cancer(Jerry) | Smoking(Elaine), Friend(Elaine, Jerry), !Smoking(Jerry))&quot;
+<pre><code class="haskell">ghci&gt; query &quot;P(Cancer(Jerry) | Smoking(Elaine), Friend(Elaine, Jerry), !Smoking(Jerry))&quot;
 Just 0.4999999999999964
-ghci&gt; ask &quot;P(Cancer(Jerry) | !Smoking(Jerry))&quot;
+ghci&gt; query &quot;P(Cancer(Jerry) | !Smoking(Jerry))&quot;
 Just 0.5000000000000238
 </code></pre>
 
@@ -358,8 +358,8 @@ existing Markov logic network, and will return a new Markov logic network with
 the formula added. Let's say we want to add a rule that <i>friends of friends are
 friends</i>, we could add this rule with a weight of 2.0 with:</p>
 
-<pre><code class="haskell">ghci&gt; let mln' = ML.tell &quot;2.0 A.x,y,z Friend(x, y) and Friend(y, z) =&gt; Friend(x, z)&quot; mln
-ghci&gt; putStrLn (ML.fmtMLN mln')
+<pre><code class="haskell">ghci&gt; let mln' = tell &quot;2.0 A.x,y,z Friend(x, y) and Friend(y, z) =&gt; Friend(x, z)&quot; mln
+ghci&gt; putStrLn (fmtMLN mln')
 1.5                     ∀x Smoking(x) ⇒ Cancer(x)
 2.0                     ∀x ∀y ∀z Friend(x, y) ∧ Friend(y, z) ⇒ Friend(x, z)
 1.1                     ∀x ∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y)</code></pre>
@@ -367,24 +367,24 @@ ghci&gt; putStrLn (ML.fmtMLN mln')
 <p>We'll build an ask function for this network using the same constants
 (Jerry, Elaine, George):</p>
 
-<pre><code class="haskell">ghci&gt; let ask' = ML.ask mln' cs</code></pre>
+<pre><code class="haskell">ghci&gt; let query' = ask mln' cs</code></pre>
 
 <p>Let's compare how our first MLN behaved compare to our new one:</p>
 
-<pre><code class="haskell">ghci&gt; ask &quot;P(Smoking(George) | Smoking(Jerry), Friend(Jerry, Elaine), Friend(Elaine, George))&quot;
+<pre><code class="haskell">ghci&gt; query &quot;P(Smoking(George) | Smoking(Jerry), Friend(Jerry, Elaine), Friend(Elaine, George))&quot;
 Just 0.5877406718485353
-ghci&gt; ask' &quot;P(Smoking(George) | Smoking(Jerry), Friend(Jerry, Elaine), Friend(Elaine, George))&quot;
+ghci&gt; query' &quot;P(Smoking(George) | Smoking(Jerry), Friend(Jerry, Elaine), Friend(Elaine, George))&quot;
 Just 0.7080082227672424
 </code></pre>
 
 <p>Same query, same information, but with a different model (the MLN), we get
 different answers. Now, something is bugging me with the original model:</p>
 
-<pre><code class="haskell">ghci&gt; ask &quot;P(Cancer(Jerry) | Smoking(George))&quot;
+<pre><code class="haskell">ghci&gt; query &quot;P(Cancer(Jerry) | Smoking(George))&quot;
 Just 0.6506081590969498
-ghci&gt; ask &quot;P(Cancer(Jerry) | Smoking(George), Friend(George, Jerry))&quot;
+ghci&gt; query &quot;P(Cancer(Jerry) | Smoking(George), Friend(George, Jerry))&quot;
 Just 0.7043948532279771
-ghci&gt; ask &quot;P(Cancer(Jerry) | Smoking(George), Friend(Jerry, George))&quot;
+ghci&gt; query &quot;P(Cancer(Jerry) | Smoking(George), Friend(Jerry, George))&quot;
 Just 0.6506081590968945
 </code></pre>
 
@@ -404,17 +404,17 @@ is friend with \(y\), then \(y\) is friend with \(x\), and if \(x\) is not frien
 with \(y\), then \(y\) is not friend with \(x\). Since it's probabilistic, it doesn't
 need to be true all the time, but I give it a fairly high weight. And now we have:</p>
 
-<pre><code class="haskell">ghci&gt; let mln'' = ML.tell &quot;ForAll x, y: Friend(x, y) iff Friend(y, x) 2.0&quot; mln
-ghci&gt; putStrLn (ML.fmtMLN mln'')
+<pre><code class="haskell">ghci&gt; let mln'' = tell &quot;ForAll x, y: Friend(x, y) iff Friend(y, x) 2.0&quot; mln
+ghci&gt; putStrLn (fmtMLN mln'')
 1.5                     ∀x Smoking(x) ⇒ Cancer(x)
 1.1                     ∀x ∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y)
 2.0                     ∀x ∀y Friend(x, y) ⇔ Friend(y, x)
-ghci&gt; let ask'' = ML.ask mln'' cs
-ghci&gt; ask'' &quot;P(Cancer(Jerry) | Smoking(George))&quot;
+ghci&gt; let query'' = ask mln'' cs
+ghci&gt; query'' &quot;P(Cancer(Jerry) | Smoking(George))&quot;
 Just 0.6506081590969105
-ghci&gt; ask'' &quot;P(Cancer(Jerry) | Smoking(George), Friend(George, Jerry))&quot;
+ghci&gt; query'' &quot;P(Cancer(Jerry) | Smoking(George), Friend(George, Jerry))&quot;
 Just 0.7043948532279295
-ghci&gt; ask'' &quot;P(Cancer(Jerry) | Smoking(George), Friend(Jerry, George))&quot;
+ghci&gt; query'' &quot;P(Cancer(Jerry) | Smoking(George), Friend(Jerry, George))&quot;
 Just 0.7018023327893508
 </code></pre>
 
