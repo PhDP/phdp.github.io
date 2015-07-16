@@ -109,14 +109,14 @@ standard connectives are:</p>
   <li>The binary connective <b>and</b>: \(x \land y\), which is true only if both \(x\) and \(y\) are true. Like all other connective shown here, if \(x\) and \(y\) are sentences, then \(x \land y\) is also a valid sentence.</li>
   <li>The binary connective <b>or</b>: \(x \lor y\), which is true only if \(x\) is true, if \(y\) is true, or if both are true.</li>
   <li>The binary connective <b>implies</b>: \(x \Rightarrow y\), returns true in all cases, except if \(x\) is true and \(y\) is false.</li>
-  <li>The binary connective <b>iff</b>: \(x \leftrightarrow y\), returns true if \(x\) and \(y\) have the same value, that is if they are both true, or both false.</li>
+  <li>The binary connective <b>iff</b>: \(x \iff y\), returns true if \(x\) and \(y\) have the same value, that is if they are both true, or both false.</li>
   <li>The binary connective <b>xor</b> (exclusive or): \(x \oplus y\), returns true if \(x\) and \(y\) have different values.</li>
   <li>The unary connective <b>not</b>: \(\lnot x\), which is true only if \(x\) is false.</li>
 </ol>
 
 <p>Be careful with implication, there is nothing wrong with it, except that it
 doesn't fit how we use the term <i>implies</i>. For example:
-\(Equals(AgeOf(Earth), 42) \implies StillAlive(Elvis)\) is true. If you're
+\(Equals(AgeOf(Earth), 42) \Rightarrow StillAlive(Elvis)\) is true. If you're
 confused, read again the description of <b>implies</b>.</p>
 
 <h2>Qualifiers</h2>
@@ -130,7 +130,7 @@ all&quot; denoted \(\forall\), and the existential qualifier &quot;exists&quot; 
 <p>reads &quot;for all x, multiplying x by 0 yields 0&quot;. Normally, all variables
 should be qualified to determine their scope, e.g.:</p> 
 
-\[\forall x \exists y: RealNumber(x) \implies GreaterThan(y, x)\]
+\[\forall x \exists y: RealNumber(x) \Rightarrow GreaterThan(y, x)\]
 
 <p>which means, &quot;for all real numbers x, there is a number y that is greater
 than x&quot;.</p>
