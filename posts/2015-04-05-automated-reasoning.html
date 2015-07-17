@@ -10,25 +10,26 @@
   <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
   <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic" rel="stylesheet" type="text/css" />
   <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet" type="text/css" />
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
 
-<a href="https://github.com/PhDP/">
-  <img style="position: absolute; top: 0; left: 0; border: 0;" src="../images/forkme.png" alt="Fork me on GitHub">
-</a>
+<!-- <a href='https://github.com/PhDP/'>
+  <img style='position: absolute; top: 0; left: 0; border: 0;' src='/images/forkme.png' alt='Fork me on GitHub'>
+</a> -->
 
 <div id="header">
-  <h1><a href="mailto:philippe.d.proulx@gmail.com">Philippe Desjardins-Proulx</a></h1>
+  <!-- <h1><a href='mailto:philippe.d.proulx@gmail.com'>Philippe Desjardins-Proulx</a></h1> -->
   <nav>
     <ul>
-      <li>( sections</li>
+      <li>( Philippe Desjardins Proulx</li>
       <li><a href="../index.html">about</a></li>
-      <li>( writings</li>
-      <li><a href="../writings.html">english</a></li>
-      <li><a href="../writings-fr.html">français</a></li>
-      <li><a href="../writings-jp.html">日本語</a>)</li>
-      <li><a href="../contact.html">contact</a>)</li>
+      <li><a href="../blog.html">blog</a></li>
+      <li><a href="https://ca.linkedin.com/in/philippedp"><i class="fa fa-linkedin-square"></i></a></li>
+      <li><a href="https://github.com/PhDP"><i class="fa fa-github"></i></a></li>
+      <li><a href="https://twitter.com/phdpqc"><i class="fa fa-twitter"></i></a></li>
+      <li><a href="mailto:philippe.d.proulx@gmail.com"><i class="fa fa-envelope"></i></a> )</li>
     </ul>
   </nav>
 </div>
@@ -81,37 +82,37 @@ let simplify1 e =
     | Add (Const 0, x)
     | Add (x, Const 0)
     | Mul (x, Const 1)
-    | Mul (Const 1, x)        -&gt; x
+    | Mul (Const 1, x)        -> x
     | Mul (x, Const 0)
-    | Mul (Const 0, x)        -&gt; Const 0
-    | Add (Const a, Const b)  -&gt; Const (a + b)
-    | Mul (Const a, Const b)  -&gt; Const (a * b)
-    | _                       -&gt; e
+    | Mul (Const 0, x)        -> Const 0
+    | Add (Const a, Const b)  -> Const (a + b)
+    | Mul (Const a, Const b)  -> Const (a * b)
+    | _                       -> e
 
 /// Recursive function to simplify an entire expression.
 let rec simplify e =
     match e with
-    | Add (x, y) -&gt; Add (simplify x, simplify y)
-    | Mul (x, y) -&gt; Mul (simplify x, simplify y)
-    | _          -&gt; e
-    |&gt; simplify1
+    | Add (x, y) -> Add (simplify x, simplify y)
+    | Mul (x, y) -> Mul (simplify x, simplify y)
+    | _          -> e
+    |> simplify1
 
 /// Return the value string if the expression can be reduced to a constant.
 let exprStr e =
     match e with
-    | Const x -&gt; string x
-    | _       -&gt; &quot;The expression could not be simplified to a constant.&quot;
+    | Const x -> string x
+    | _       -> "The expression could not be simplified to a constant."
 
-/// The |&gt; operator sends the result on its left to its right, for example
-/// &quot;5.0 |&gt; log |&gt; sqrt&quot; computes log(5.0) and then the square root of the
+/// The |> operator sends the result on its left to its right, for example
+/// "5.0 |> log |> sqrt" computes log(5.0) and then the square root of the
 /// result. This is nice because it allows a more natural left-to-right
 /// flow for functional programming.
-[&lt;EntryPoint&gt;]
+[&lt;EntryPoint>]
 let main argv =
-    Add (Mul (Add (Const 1, Mul (Const 0, Var &quot;x&quot;)), Const 3), Const 12)
-    |&gt; simplify
-    |&gt; exprStr
-    |&gt; printf &quot;%s&quot;
+    Add (Mul (Add (Const 1, Mul (Const 0, Var "x")), Const 3), Const 12)
+    |> simplify
+    |> exprStr
+    |> printf "%s"
     0 /// F#'s main returns 0 for success à la C
 </code></pre>
 
@@ -121,19 +122,19 @@ to define an expression (Expr) as a variable (string) <b>or</b> a constant
 expressions). The <b>or</b> is important, object-oriented programming languages
 focuses on hierarchies of objects, while sum types define a type as a series of
 alternatives. Sum types are important for another reason: they provide
-an easy way to express things like &quot;this function <i>might</i> return
-an integer&quot;, for example in Haskell if we want a data structure that maps
+an easy way to express things like "this function <i>might</i> return
+an integer", for example in Haskell if we want a data structure that maps
 keys to values:</p>
 
 <pre><code class="haskell">import Data.Map (Map)
 import qualified Data.Map as Map
 
-capitals = Map.fromList [(&quot;Finland&quot;, &quot;Helsinki&quot;), (&quot;France&quot;, &quot;Paris&quot;),
-  (&quot;Japan&quot;, &quot;Tokyo&quot;), (&quot;South Korea&quot;, &quot;Seoul&quot;), (&quot;Arrakis&quot;, &quot;Arrakeen&quot;)]
+capitals = Map.fromList [("Finland", "Helsinki"), ("France", "Paris"),
+  ("Japan", "Tokyo"), ("South Korea", "Seoul"), ("Arrakis", "Arrakeen")]
 
 lookupCapitals country = case Map.lookup country capitals of
-  Just capital -&gt; &quot;The capital of &quot; ++ country ++ &quot; is &quot; ++ capital ++ &quot;.&quot;
-  Nothing      -&gt; &quot;Is &quot; ++ country ++ &quot; even a country?&quot;
+  Just capital -> "The capital of " ++ country ++ " is " ++ capital ++ "."
+  Nothing      -> "Is " ++ country ++ " even a country?"
 </code></pre>
 
 <p>The point is that a key-value store will only return a value if the key is
@@ -148,10 +149,10 @@ with sum types is to return a wrapped value and handling possibilities
 explicitly with pattern matching. It solves with types what many languages
 would solve with exceptions and try-catch apparatuses.</p>
 
-<pre><code class="haskell">ghci&gt; lookupCapitals &quot;Arrakis&quot;
-&quot;The capital of Arrakis is Arrakeen.&quot;
-ghci&gt; lookupCapitals &quot;Canada&quot;
-&quot;Is Canada even a country?&quot;</code></pre>
+<pre><code class="haskell">ghci> lookupCapitals "Arrakis"
+"The capital of Arrakis is Arrakeen."
+ghci> lookupCapitals "Canada"
+"Is Canada even a country?"</code></pre>
 
 <p>Speaking of Haskell, the code for the algorithm is:</p>
 
@@ -161,30 +162,30 @@ ghci&gt; lookupCapitals &quot;Canada&quot;
   | Add Expr Expr
   | Mult Expr Expr
 
-simplify1 :: Expr -&gt; Expr
+simplify1 :: Expr -> Expr
 simplify1 e = case e of
-  Add (Const 0) x           -&gt; x
-  Add x (Const 0)           -&gt; x
-  Add (Const a) (Const b)   -&gt; Const $ a + b
-  Mult x (Const 0)          -&gt; Const 0
-  Mult (Const 0) x          -&gt; Const 0
-  Mult x (Const 1)          -&gt; x
-  Mult (Const 1) x          -&gt; x
-  Mult (Const a) (Const b)  -&gt; Const $ a * b
-  _                         -&gt; e
+  Add (Const 0) x           -> x
+  Add x (Const 0)           -> x
+  Add (Const a) (Const b)   -> Const $ a + b
+  Mult x (Const 0)          -> Const 0
+  Mult (Const 0) x          -> Const 0
+  Mult x (Const 1)          -> x
+  Mult (Const 1) x          -> x
+  Mult (Const a) (Const b)  -> Const $ a * b
+  _                         -> e
 
-simplify :: Expr -&gt; Expr
+simplify :: Expr -> Expr
 simplify e = case e of
-  Add x y   -&gt; simplify1 $ Add (simplify x) (simplify y)
-  Mult x y  -&gt; simplify1 $ Mult (simplify x) (simplify y)
-  _         -&gt; simplify1 e
+  Add x y   -> simplify1 $ Add (simplify x) (simplify y)
+  Mult x y  -> simplify1 $ Mult (simplify x) (simplify y)
+  _         -> simplify1 e
 
-e = Add (Mult (Add (Const 1) (Mult (Const 0) (Var &quot;x&quot;))) (Const 3)) (Const 12)
+e = Add (Mult (Add (Const 1) (Mult (Const 0) (Var "x"))) (Const 3)) (Const 12)
 s = simplify e
 
 main = putStrLn $ case s of
-  Const x -&gt; show x
-  _ -&gt; &quot;Could not simplify the expression to a constant.&quot;
+  Const x -> show x
+  _ -> "Could not simplify the expression to a constant."
 </code></pre>
 
 <p>It's quite similar to F#. I decided to add types explicitly to
@@ -199,18 +200,18 @@ y = log $ sqrt $ exp 5.0
 </code></pre>
 
 <p>The operator is there to reduce visual clutter. In my opinion, F# is easier
-to read because the |&gt; operator enforces left-to-right reading, which is more
+to read because the |> operator enforces left-to-right reading, which is more
 natural than reading code inside-out:</p>
 
-<pre><code class="fsharp">let z = exp 5.0 |&gt; sqrt |&gt; log</code></pre>
+<pre><code class="fsharp">let z = exp 5.0 |> sqrt |> log</code></pre>
 
 <p>Although it's trivial to simulate this operator in Haskell:</p>
 
-<pre><code class="haskell">(|&gt;) :: t0 -&gt; (t0 -&gt; t1) -&gt; t1
-(|&gt;) x f = f x
+<pre><code class="haskell">(|>) :: t0 -> (t0 -> t1) -> t1
+(|>) x f = f x
 
 -- Now valid Haskell:
-z = exp 5.0 |&gt; sqrt |&gt; log</code></pre>
+z = exp 5.0 |> sqrt |> log</code></pre>
 
 <p>And now for something a bit different: Scala. It's also a static
 functional programming language with sum types, but its greater
@@ -224,31 +225,31 @@ integration with the object-oriented paradigm is evident:</p>
   case class Mult(left: Expr, right: Expr) extends Expr
 
   def evalOne(e: Expr): Expr = e match {
-    case Add(Const(0), r)         =&gt; r
-    case Add(l, Const(0))         =&gt; l
-    case Add(Const(a), Const(b))  =&gt; Const(a + b)
-    case Mult(Const(0), r)        =&gt; Const(0)
-    case Mult(l, Const(0))        =&gt; Const(0)
-    case Mult(Const(1), r)        =&gt; r
-    case Mult(l, Const(1))        =&gt; l
-    case Mult(Const(a), Const(b)) =&gt; Const(a * b)
-    case _                        =&gt; e
+    case Add(Const(0), r)         => r
+    case Add(l, Const(0))         => l
+    case Add(Const(a), Const(b))  => Const(a + b)
+    case Mult(Const(0), r)        => Const(0)
+    case Mult(l, Const(0))        => Const(0)
+    case Mult(Const(1), r)        => r
+    case Mult(l, Const(1))        => l
+    case Mult(Const(a), Const(b)) => Const(a * b)
+    case _                        => e
   }
 
   def eval(e: Expr): Expr = e match {
-    case Add(l, r)  =&gt; evalOne(Add(eval(l), eval(r)))
-    case Mult(l, r) =&gt; evalOne(Mult(eval(l), eval(r)))
-    case _          =&gt; e
+    case Add(l, r)  => evalOne(Add(eval(l), eval(r)))
+    case Mult(l, r) => evalOne(Mult(eval(l), eval(r)))
+    case _          => e
   }
 
   def show(e: Expr) = e match {
-    case Const(x) =&gt; print(x)
-    case _        =&gt;
-      print(&quot;The expression could not be simplified to a constant.&quot;)
+    case Const(x) => print(x)
+    case _        =>
+      print("The expression could not be simplified to a constant.")
   }
 
   def main(args: Array[String]) {
-    var e = Add(Mult(Add(Const(1), Mult(Const(0), Variable(&quot;x&quot;))),
+    var e = Add(Mult(Add(Const(1), Mult(Const(0), Variable("x"))),
               Const(3)), Const(12))
     var s = eval(e)
     print(s)
@@ -274,106 +275,106 @@ because solutions based only on the standard library are contrived and
 (B) because boost is almost standard, and I don't want to rely on third-party
 libraries.</p>
 
-<pre><code class="cpp">#include &lt;iostream&gt;
-#include &lt;string&gt;
-#include &lt;boost/variant&gt;
+<pre><code class="cpp">#include &lt;iostream>
+#include &lt;string>
+#include &lt;boost/variant>
 
 struct Add;
 struct Mult;
 
-using Expr = boost::variant&lt;
+using Expr = boost::variant<
   int,
   std::string,
-  boost::recursive_wrapper&lt;Add&gt;,
-  boost::recursive_wrapper&lt;Mult&gt;&gt;;
+  boost::recursive_wrapper&lt;Add>,
+  boost::recursive_wrapper&lt;Mult>>;
 
 struct Add {
   Expr left, right;
-  Add(const Expr &amp;left_, const Expr &amp;right_) : left(left_), right(right_) {
+  Add(const Expr &left_, const Expr &right_) : left(left_), right(right_) {
   }
 };
 
 struct Mult {
   Expr left, right;
-  Mult(const Expr &amp;left_, const Expr &amp;right_) : left(left_), right(right_) {
+  Mult(const Expr &left_, const Expr &right_) : left(left_), right(right_) {
   }
 };
 
-struct add_visit : public boost::static_visitor&lt;Expr&gt; {
+struct add_visit : public boost::static_visitor&lt;Expr> {
   Expr operator()(int l, int r) const {
     return Expr(l + r);
   }
-  template&lt;class X&gt; Expr operator()(int l, const X &amp;x) const {
+  template&lt;class X> Expr operator()(int l, const X &x) const {
     return l == 0? Expr(x) : Add(Expr(l), Expr(x));
   }
-  template&lt;class X&gt; Expr operator()(const X &amp;x, int r) const {
+  template&lt;class X> Expr operator()(const X &x, int r) const {
     return r == 0? Expr(x) : Add(Expr(r), Expr(x));
   }
-  template&lt;class X, class Y&gt;
-  Expr operator()(const X &amp;x, const Y &amp;y) const {
+  template&lt;class X, class Y>
+  Expr operator()(const X &x, const Y &y) const {
     return Add(Expr(x), Expr(y));
   }
 };
 
-struct mul_visit : public boost::static_visitor&lt;Expr&gt; {
+struct mul_visit : public boost::static_visitor&lt;Expr> {
   Expr operator()(int l, int r) const {
     return Expr(l * r);
   }
-  template&lt;class X&gt; Expr operator()(int l, const X &amp;x) const {
+  template&lt;class X> Expr operator()(int l, const X &x) const {
     return l == 0? Expr(0) : (l == 1? Expr(x) : Mult(Expr(l), Expr(x)));
   }
-  template&lt;class X&gt; Expr operator()(const X &amp;x, int r) const {
+  template&lt;class X> Expr operator()(const X &x, int r) const {
     return r == 0? Expr(0) : (r == 1? Expr(x) : Mult(Expr(r), Expr(x)));
   }
-  template&lt;class X, class Y&gt;
-  Expr operator()(const X &amp;x, const Y &amp;y) const {
+  template&lt;class X, class Y>
+  Expr operator()(const X &x, const Y &y) const {
     return Mult(Expr(x), Expr(y));
   }
 };
 
-struct simplify1 : public boost::static_visitor&lt;Expr&gt; {
-  Expr operator()(const Add &amp;a) const {
+struct simplify1 : public boost::static_visitor&lt;Expr> {
+  Expr operator()(const Add &a) const {
     return boost::apply_visitor(add_visit(), a.left, a.right);
   }
-  Expr operator()(const Mult &amp;m) const {
+  Expr operator()(const Mult &m) const {
     return boost::apply_visitor(mul_visit(), m.left, m.right);
   }
-  template&lt;class X&gt; Expr operator()(const X &amp;x) const {
+  template&lt;class X> Expr operator()(const X &x) const {
     return Expr(x);
   }
 };
 
-struct simplify : public boost::static_visitor&lt;Expr&gt; {
-  Expr operator()(const Add &amp;a) const {
+struct simplify : public boost::static_visitor&lt;Expr> {
+  Expr operator()(const Add &a) const {
     auto left = boost::apply_visitor(simplify(), a.left);
     auto right = boost::apply_visitor(simplify(), a.right);
     auto add_lr = boost::apply_visitor(add_visit(), left, right);
     return boost::apply_visitor(simplify1(), add_lr);
   }
-  Expr operator()(const Mult &amp;m) const {
+  Expr operator()(const Mult &m) const {
     auto left = boost::apply_visitor(simplify(), m.left);
     auto right = boost::apply_visitor(simplify(), m.right);
     auto mul_lr = boost::apply_visitor(mul_visit(), left, right);
     return boost::apply_visitor(simplify1(), mul_lr);
   }
-  template&lt;class X&gt; Expr operator()(const X &amp;x) const {
+  template&lt;class X> Expr operator()(const X &x) const {
     return x;
   }
 };
 
-struct print_expr : public boost::static_visitor&lt;std::string&gt; {
+struct print_expr : public boost::static_visitor&lt;std::string> {
   std::string operator()(int x) const { return std::to_string(x); };
-  std::string operator()(const Expr &amp;e) const {
-    return &quot;The expression could not be simplified to a constant.&quot;;
+  std::string operator()(const Expr &e) const {
+    return "The expression could not be simplified to a constant.";
   };
 };
 
 int main() {
   auto e = Expr(Add(
-      Expr(Mult(Expr(Add(Expr(1), Expr(Mult(Expr(0), Expr(&quot;x&quot;))))),
+      Expr(Mult(Expr(Add(Expr(1), Expr(Mult(Expr(0), Expr("x"))))),
       Expr(3))), Expr(12)));
   auto s = boost::apply_visitor(simplify(), e);
-  std::cout &lt;&lt; boost::apply_visitor(print_expr(), s) &lt;&lt; std::endl;
+  std::cout << boost::apply_visitor(print_expr(), s) << std::endl;
   return 0;
 }
 </code></pre>
@@ -409,10 +410,10 @@ Here's the algorithm in Julia:</p>
 
 <pre><code class="julia">abstract Expr
 
-type Const &lt;: Expr; val::Int end
-type Var &lt;: Expr; name::String end
-type Add &lt;: Expr; left::Expr; right::Expr end
-type Mult &lt;: Expr; left::Expr; right::Expr end
+type Const <: Expr; val::Int end
+type Var <: Expr; name::String end
+type Add <: Expr; left::Expr; right::Expr end
+type Mult <: Expr; left::Expr; right::Expr end
 
 add(x::Const, y::Const) = Const(x.val + y.val)
 add(x::Const, y::Expr) = x.val == 0? y : Add(x, y)
@@ -434,9 +435,9 @@ simplify(e::Expr) = e
 
 printExpr(c::Const) = print(c.val)
 printExpr(e::Expr) =
-  print(&quot;The expression could not be simplified to a constant.&quot;)
+  print("The expression could not be simplified to a constant.")
 
-e = Add(Mult(Add(Const(1), Mult(Const(0), Var(&quot;x&quot;))), Const(3)), Const(12))
+e = Add(Mult(Add(Const(1), Mult(Const(0), Var("x"))), Const(3)), Const(12))
 s = simplify(e)
 printExpr(s)
 </code></pre>
@@ -458,9 +459,9 @@ higher-order function (a function taking functions as input). As a concrete
 example, first-order logic has <i>predicates</i> mapping objects to a boolean,
 and <i>functions</i> mapping objects to objects. We'd like to do:</p>
 
-<pre><code class="julia">solve(pre::(Object -&gt; Bool), ...)
+<pre><code class="julia">solve(pre::(Object -> Bool), ...)
 
-solve(fun::(Object -&gt; Object), ...)
+solve(fun::(Object -> Object), ...)
 </code></pre>
 
 <p>But instead, we'd have to test the type of the return value inside the
@@ -477,7 +478,7 @@ declarations at some point.</a></p>
 
   <div id="hidden">
     <!-- "世界" |&gt; printf "Hello %s!" -->
-    let world = &quot;世界&quot; in print $ &quot;Hello &quot; ++ world ++ &quot;!&quot;
+    let world = "世界" in print $ "Hello " ++ world ++ "!"
   </div>
 </div>
 

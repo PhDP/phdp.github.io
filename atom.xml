@@ -45,15 +45,16 @@ logic, each associated with a weight. We'll use this for our examples:</p>
   </tr>
   <tr>
     <td>Smoking causes cancers</td>
-    <td align='center'>1.1</td>
+    <td align='center'>1.5</td>
   </tr>
   <tr>
     <td>If two people are friends and one smokes, then so does the other</td>
-    <td align='center'>1.5</td>
+    <td align='center'>1.1</td>
   </tr>
 </table>
 
-<p>Using a more formal representation for logic, we get:</p>
+<p>Using a more formal representation, with the weight following the
+first-order logic formula, we get:</p>
 
 \[\forall x: Smoking(x) \Rightarrow Cancer(x), 1.5;\]
 \[\forall x, y: Friend(x, y) \land Smoking(x) \Rightarrow Smoking(y), 1.1;\]
@@ -97,13 +98,13 @@ formula to get a set of ground formulas.  The term <i>ground</i> means the
 variables are replaced by constants, that is, concrete objects. For example in
 mathematics you probably encountered first-order logic formulas like:</p>
 
-\[\forall x: Add(x, 0) = 0\]
+\[\forall x: Add(x, 0) = x.\]
 
 <p>We can ground this first-order logic formula by replacing <i>x</i> with an
 actual integer:</p>
 
-\[Add(47, 0) = 0\]
-\[Add(1729, 0) = 0\]
+\[Add(47, 0) = 47.\]
+\[Add(1729, 0) = 1729.\]
 
 <p>Similarly, applying the set of constants \(\{Elaine, Jerry, George\}\) to
 our first formula yields a set of ground formulas:</p>
@@ -257,26 +258,26 @@ models.</p>
 $ cabal repl
 </pre></div>
 
-<p>Then, we'll load the Markov logic network module and name it ML:</p>
+<p>Then, we'll load the Markov logic network module:</p>
 
-<pre><code class="haskell">ghci> import qualified Manticore.MarkovLogic as ML</code></pre>
+<pre><code class="haskell">ghci> import Manticore.MarkovLogic</code></pre>
 
 <p>The most straightforward way to build a Markov logic network is with
 <i>fromStrings</i>. This function takes an array of strings, each of which must
 be a valid first-order logic formula followed (or preceded) by a number (the
 weight of the formula). In our smoking example we have:</p>
 
-<pre><code class="haskell">ghci> let mln = ML.fromStrings ["∀x Smoking(x) ⇒ Cancer(x) 1.5", "∀x∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y) 1.1"]</code></pre>
+<pre><code class="haskell">ghci> let mln = fromStrings ["∀x Smoking(x) ⇒ Cancer(x) 1.5", "∀x∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y) 1.1"]</code></pre>
 
 <p>The strings were copy-pasted from Richardson and Domingos' paper, but the
 parsers is flexible and will accept a keyboard-friendly form too:</p>
 
-<pre><code class="haskell">ghci> ML.fromStrings ["1.5 forall x Smoking(x) implies Cancer(x)", "1.1 forall x, y Friend(x, y) and Smoking(x) implies Smoking(y)"]</code></pre>
+<pre><code class="haskell">ghci> fromStrings ["1.5 forall x Smoking(x) implies Cancer(x)", "1.1 forall x, y Friend(x, y) and Smoking(x) implies Smoking(y)"]</code></pre>
 
 <p>We can use <i>fmtMLN</i> function to print the Markov logic
 network:</p>
 
-<pre><code class="haskell">ghci> putStrLn (ML.fmtMLN mln)
+<pre><code class="haskell">ghci> putStrLn (fmtMLN mln)
 1.5                     ∀x Smoking(x) ⇒ Cancer(x)
 1.1                     ∀x ∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y)</code></pre>
 
@@ -289,23 +290,23 @@ Following our example in the last section we'll use:</p>
 <p>Then, we can query the network, say, what is the probability that Jerry has
 cancer?</p>
 
-<pre><code class="haskell">ghci> ML.ask mln cs "P(Cancer(Jerry))"
+<pre><code class="haskell">ghci> ask mln cs "P(Cancer(Jerry))"
 Just 0.6040175344121184</code></pre>
 
 <p>The function <i>ask</i> takes a Markov logic network, a list
 of terms (represented as a list of strings), and a string query. It will return
 Just P, with P being a probability in the [0.0, 1.0] range, or Nothing if the
 parser fails to read the query. To make the process a bit easier we'll create
-a function <i>ask</i> with the first two arguments supplied so we don't need to
+a function <i>query</i> with the first two arguments supplied so we don't need to
 repeat them ad nauseam:</p>
 
-<pre><code class="haskell">ghci> let ask = ML.ask mln cs</code></pre>
+<pre><code class="haskell">ghci> let query = ask mln cs</code></pre>
 
 <p>Then we can ask queries with this function:</p>
 
-<pre><code class="haskell">ghci> ask "P(Cancer(Jerry), Cancer(Elaine))"
+<pre><code class="haskell">ghci> query "P(Cancer(Jerry), Cancer(Elaine))"
 Just 0.3696834237837972
-ghci> ask "P(Cancer(Jerry) | Smoking(Jerry))"
+ghci> query "P(Cancer(Jerry) | Smoking(Jerry))"
 Just 0.8175744761936782
 </code></pre>
 
@@ -313,9 +314,9 @@ Just 0.8175744761936782
 they share predicates link them. So, even if there is no direct relationship
 between friendship and cancer, we have:</p>
 
-<pre><code class="haskell">ghci> ask "P(Cancer(Jerry) | Smoking(Elaine))"
+<pre><code class="haskell">ghci> query "P(Cancer(Jerry) | Smoking(Elaine))"
 Just 0.6506081590969498
-ghci> ask "P(Cancer(Jerry) | Smoking(Elaine), Friend(Elaine, Jerry))"
+ghci> query "P(Cancer(Jerry) | Smoking(Elaine), Friend(Elaine, Jerry))"
 Just 0.7043948532279771
 </code></pre>
 
@@ -323,9 +324,9 @@ Just 0.7043948532279771
 friend increases the chance that Jerry is smoking, and if we know he doesn't
 we'll get:</p>
 
-<pre><code class="haskell">ghci> ask "P(Cancer(Jerry) | Smoking(Elaine), Friend(Elaine, Jerry), !Smoking(Jerry))"
+<pre><code class="haskell">ghci> query "P(Cancer(Jerry) | Smoking(Elaine), Friend(Elaine, Jerry), !Smoking(Jerry))"
 Just 0.4999999999999964
-ghci> ask "P(Cancer(Jerry) | !Smoking(Jerry))"
+ghci> query "P(Cancer(Jerry) | !Smoking(Jerry))"
 Just 0.5000000000000238
 </code></pre>
 
@@ -339,8 +340,8 @@ existing Markov logic network, and will return a new Markov logic network with
 the formula added. Let's say we want to add a rule that <i>friends of friends are
 friends</i>, we could add this rule with a weight of 2.0 with:</p>
 
-<pre><code class="haskell">ghci> let mln' = ML.tell "2.0 A.x,y,z Friend(x, y) and Friend(y, z) => Friend(x, z)" mln
-ghci> putStrLn (ML.fmtMLN mln')
+<pre><code class="haskell">ghci> let mln' = tell "2.0 A.x,y,z Friend(x, y) and Friend(y, z) => Friend(x, z)" mln
+ghci> putStrLn (fmtMLN mln')
 1.5                     ∀x Smoking(x) ⇒ Cancer(x)
 2.0                     ∀x ∀y ∀z Friend(x, y) ∧ Friend(y, z) ⇒ Friend(x, z)
 1.1                     ∀x ∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y)</code></pre>
@@ -348,24 +349,24 @@ ghci> putStrLn (ML.fmtMLN mln')
 <p>We'll build an ask function for this network using the same constants
 (Jerry, Elaine, George):</p>
 
-<pre><code class="haskell">ghci> let ask' = ML.ask mln' cs</code></pre>
+<pre><code class="haskell">ghci> let query' = ask mln' cs</code></pre>
 
 <p>Let's compare how our first MLN behaved compare to our new one:</p>
 
-<pre><code class="haskell">ghci> ask "P(Smoking(George) | Smoking(Jerry), Friend(Jerry, Elaine), Friend(Elaine, George))"
+<pre><code class="haskell">ghci> query "P(Smoking(George) | Smoking(Jerry), Friend(Jerry, Elaine), Friend(Elaine, George))"
 Just 0.5877406718485353
-ghci> ask' "P(Smoking(George) | Smoking(Jerry), Friend(Jerry, Elaine), Friend(Elaine, George))"
+ghci> query' "P(Smoking(George) | Smoking(Jerry), Friend(Jerry, Elaine), Friend(Elaine, George))"
 Just 0.7080082227672424
 </code></pre>
 
 <p>Same query, same information, but with a different model (the MLN), we get
 different answers. Now, something is bugging me with the original model:</p>
 
-<pre><code class="haskell">ghci> ask "P(Cancer(Jerry) | Smoking(George))"
+<pre><code class="haskell">ghci> query "P(Cancer(Jerry) | Smoking(George))"
 Just 0.6506081590969498
-ghci> ask "P(Cancer(Jerry) | Smoking(George), Friend(George, Jerry))"
+ghci> query "P(Cancer(Jerry) | Smoking(George), Friend(George, Jerry))"
 Just 0.7043948532279771
-ghci> ask "P(Cancer(Jerry) | Smoking(George), Friend(Jerry, George))"
+ghci> query "P(Cancer(Jerry) | Smoking(George), Friend(Jerry, George))"
 Just 0.6506081590968945
 </code></pre>
 
@@ -385,17 +386,17 @@ is friend with \(y\), then \(y\) is friend with \(x\), and if \(x\) is not frien
 with \(y\), then \(y\) is not friend with \(x\). Since it's probabilistic, it doesn't
 need to be true all the time, but I give it a fairly high weight. And now we have:</p>
 
-<pre><code class="haskell">ghci> let mln'' = ML.tell "ForAll x, y: Friend(x, y) iff Friend(y, x) 2.0" mln
-ghci> putStrLn (ML.fmtMLN mln'')
+<pre><code class="haskell">ghci> let mln'' = tell "ForAll x, y: Friend(x, y) iff Friend(y, x) 2.0" mln
+ghci> putStrLn (fmtMLN mln'')
 1.5                     ∀x Smoking(x) ⇒ Cancer(x)
 1.1                     ∀x ∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y)
 2.0                     ∀x ∀y Friend(x, y) ⇔ Friend(y, x)
-ghci> let ask'' = ML.ask mln'' cs
-ghci> ask'' "P(Cancer(Jerry) | Smoking(George))"
+ghci> let query'' = ask mln'' cs
+ghci> query'' "P(Cancer(Jerry) | Smoking(George))"
 Just 0.6506081590969105
-ghci> ask'' "P(Cancer(Jerry) | Smoking(George), Friend(George, Jerry))"
+ghci> query'' "P(Cancer(Jerry) | Smoking(George), Friend(George, Jerry))"
 Just 0.7043948532279295
-ghci> ask'' "P(Cancer(Jerry) | Smoking(George), Friend(Jerry, George))"
+ghci> query'' "P(Cancer(Jerry) | Smoking(George), Friend(Jerry, George))"
 Just 0.7018023327893508
 </code></pre>
 
@@ -488,14 +489,14 @@ standard connectives are:</p>
   <li>The binary connective <b>and</b>: \(x \land y\), which is true only if both \(x\) and \(y\) are true. Like all other connective shown here, if \(x\) and \(y\) are sentences, then \(x \land y\) is also a valid sentence.</li>
   <li>The binary connective <b>or</b>: \(x \lor y\), which is true only if \(x\) is true, if \(y\) is true, or if both are true.</li>
   <li>The binary connective <b>implies</b>: \(x \Rightarrow y\), returns true in all cases, except if \(x\) is true and \(y\) is false.</li>
-  <li>The binary connective <b>iff</b>: \(x \leftrightarrow y\), returns true if \(x\) and \(y\) have the same value, that is if they are both true, or both false.</li>
+  <li>The binary connective <b>iff</b>: \(x \iff y\), returns true if \(x\) and \(y\) have the same value, that is if they are both true, or both false.</li>
   <li>The binary connective <b>xor</b> (exclusive or): \(x \oplus y\), returns true if \(x\) and \(y\) have different values.</li>
   <li>The unary connective <b>not</b>: \(\lnot x\), which is true only if \(x\) is false.</li>
 </ol>
 
 <p>Be careful with implication, there is nothing wrong with it, except that it
 doesn't fit how we use the term <i>implies</i>. For example:
-\(Equals(AgeOf(Earth), 42) \implies StillAlive(Elvis)\) is true. If you're
+\(Equals(AgeOf(Earth), 42) \Rightarrow StillAlive(Elvis)\) is true. If you're
 confused, read again the description of <b>implies</b>.</p>
 
 <h2>Qualifiers</h2>
@@ -509,7 +510,7 @@ all" denoted \(\forall\), and the existential qualifier "exists" denoted
 <p>reads "for all x, multiplying x by 0 yields 0". Normally, all variables
 should be qualified to determine their scope, e.g.:</p> 
 
-\[\forall x \exists y: RealNumber(x) \implies GreaterThan(y, x)\]
+\[\forall x \exists y: RealNumber(x) \Rightarrow GreaterThan(y, x)\]
 
 <p>which means, "for all real numbers x, there is a number y that is greater
 than x".</p>
@@ -517,7 +518,7 @@ than x".</p>
 <p>A last example: we can express "there is a color c brighter than x, unless x
 is white" with:</p>
 
-\[\forall x \exists c: IsWhite(x) \lor BritherThan(c, x).\]
+\[\forall x \exists c: IsWhite(x) \lor BrighterThan(c, x).\]
 
 
 
@@ -1292,6 +1293,119 @@ Gravel. The case for open preprints in biology. <i>PLOS Biology</i> 11(5): e1001
 ]]></summary>
 </entry>
 <entry>
+    <title>L'intuition des Intelligences Artificielles</title>
+    <link href="http://phdp.github.io//posts/2013-04-29-intuition-ai.html" />
+    <id>http://phdp.github.io//posts/2013-04-29-intuition-ai.html</id>
+    <published>2013-04-29T00:00:00Z</published>
+    <updated>2013-04-29T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>L'intuition des Intelligences Artificielles</h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="L'intuition des Intelligences Artificielles" data-via="phdpqc">Tweet</a>
+<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2013.04.29</p>
+<p>En 1997, DeepBlue bat le champion d'échecs Garry Kasparov lors d'un match 
+de 6 parties. Depuis, les ordinateurs règnent en maîtres incontestés des 
+échecs. Pourtant, leur victoire est en quelque sorte décevante. C'est une 
+victoire de la force brute. DeepBlue, un dinosaure comparé aux programmes 
+modernes, pouvait évaluer 200 millions de positions par seconde alors que 
+les joueurs d'échecs ne considèrent que quelques coups par tour. Il est 
+clair que les ordinateurs nous surpassent, et ce depuis longtemps, pour 
+résoudre des problèmes mathématiques qui demandent une série bien définie 
+d'étapes. Par exemple, le calcul de n'importe quelle racine carrée est très 
+simple. Il suffit de suivre rigoureusement un certain nombre d'opérations et 
+voilà ! Simple pour un ordinateur mais pas pour nous. Les auteurs de 
+science-fiction nous offrent souvent la caricature d'ordinateurs incapables 
+de penser globalement, incapables d'intuition. Bref, des DeepBlue qui 
+écrasent l'être humain avec leur force de calcul. C'est une erreur. Toutes 
+les I.A. (Intelligence Artificielle) ne sont pas des DeepBlue et nous 
+développons actuellement des programmes qui ont une intelligence très 
+similaire à la nôtre. C'est une quête pour construire des I.A. capables de 
+raisonner sur des questions complexes. C'est une quête pour programmer 
+l'intuition.</p>
+
+<p>À première vue, l'intelligence humaine semble complètement différente des 
+ordinateurs. Ces derniers conservent la plupart des données dans les disques 
+durs qu'on peut voir comme de gigantesques tables. Pour accéder à un élément 
+(une mémoire), il suffit de connaître sa position qui est représentée par un 
+nombre. Mauvais nombre, mauvaise mémoire. À l'inverse, la mémoire humaine 
+est résiliente et associative. Si je vous demande le nom du très 
+charismatique premier ministre du Québec qui a dirigé la province entre 2003 
+et 2012, la plupart des gens seront capables de trouver la bonne réponse, 
+même si « très charismatique » colle difficilement au personnage. Autre 
+différence : la capacité de calculs (ou évaluation) de notre cerveau est 
+largement supérieure à DeepBlue. L'acte de reconnaître un objet (ceci est un 
+chat, ça c'est un arbre) est très difficile. Même le plus puissant 
+ordinateur serait incapable de se déplacer en forêt tout en évaluant la 
+position et la nature des objets, ce que nous faisons pourtant sans grands 
+efforts. Notre cerveau est donc très doué pour certains types d'analyses, 
+surtout celles qui demandent de regrouper plusieurs évidences. Les 
+spécialistes de l'I.A. tentent depuis longtemps de créer des I.A. qui 
+ressemblent à l'intelligence humaine. Et ils ont réussi. Les réseaux de 
+neurones artificiels font partie de ces techniques. Tout comme le cerveau 
+humain, ces réseaux ont une mémoire résiliente et associative. Ils sont 
+capables de prendre en compte un grand nombre d'évidences et les relations 
+complexes qui lient ces évidences.</p>
+
+<p>L'I.A. prend énormément d'expansion mais elle n'a pas la forme que les 
+gens imaginent. Google utilise déjà ces techniques pour son moteur de 
+recherche, pour traduire des textes, adapter les publicités. Amazon, 
+Microsoft, IBM, Fujitsu; pratiquement toutes les compagnies de haute 
+technologie investissent de grandes sommes en I.A. et les succès se 
+multiplient. Goeffrey Hinton est un des grands spécialistes des réseaux de 
+neurones artificiels. Il s'en sert pour apprendre à des programmes à 
+raisonner sur des tâches complexes. Par exemple, ces réseaux de neurones 
+peuvent reconnaître les chiffres (1, 2, 3, 4, …) mieux qu'un être humain. Si 
+vous croyez que c'est facile, demandez à un professeur de mathématiques. Les 
+formes des chiffres varient énormément et certains, moi par exemple, ont 
+développé une incroyable capacité à écrire des 4 qui ressemblent à des 9, ou 
+des 7 qui ressemblent à des 1. Personne n'a jamais réussi à écrire à la main 
+un programme capable de reconnaître les chiffres. Les réseaux de neurones 
+d'Hinton sont capables d'apprendre à les reconnaître et ils le font comme 
+les humains: on gave le réseau de chiffres en leur donnant la bonne réponse 
+(ça, c'est un quatre, ça, c'est un un, etc) et il apprend un modèle (très 
+complexe!) qui lui permet ensuite de déduire le chiffre à partir d'une 
+forme. Hinton n'écrit pas un programme pour reconnaître les chiffres, il 
+écrit un programme capable d'apprendre à reconnaître les chiffres. Mieux 
+encore: en 2012, Hinton et son équipe participent à un concours du géant 
+pharmaceutique Merk. L'objectif est de découvrir des molécules au potentiel 
+pharmaceutique. Les équipes de scientifiques qui participent à ce concours 
+sont des experts dans le domaine, certains y travaillent depuis des 
+décennies. L'équipe de Hinton arrive, en retard, au concours et n'a aucune 
+expérience dans le domaine. Pourtant, il gagne! Un réseau de neurones 
+artificiels, à qui on a donné une large base de données, a réussi à 
+apprendre comment flairer une bonne molécule mieux que les experts. Le choc 
+fut assez grand pour mériter à l'équipe d'Hinton un article dans le 
+prestigieux New York Times.</p>
+
+<p>Il faudra encore attendre plusieurs années avant de voir des I.A. 
+maîtriser toutes les subtilités du langage humain, une tâche où notre 
+cerveau est exceptionnellement bien adapté. Pour bien des tâches complexes 
+cependant, ils commencent déjà à développer une redoutable intuition.  
+L'intuition est un concept difficile à définir. Très brièvement, on peut 
+dire que c'est un raisonnement fondé sur un grand nombre d'évidences. Prises 
+individuellement, ces évidences peuvent être faibles, mais en groupe elles 
+forment un modèle solide. C'est exactement ce que les réseaux de neurones 
+font: ils analysent de grandes bases de données et apprennent à lire les 
+relations subtiles, tout comme les humains maîtrisent les subtilités de leur 
+métier après des années d'expérience. Ceci inclut plusieurs tâches: 
+comprendre les systèmes économiques, financiers, moléculaires, et... 
+écologiques. C'est ce qui m'a amené à l'I.A. Je m'intéresse aux forces qui 
+maintiennent la biodiversité. Ces forces sont multiples et complexes, 
+tellement complexes que je doute qu'on puisse enfermer Mère Nature dans une 
+simple équation. Les outils mathématiques traditionnels ont longtemps eu de 
+la difficulté à analyser les sujets complexes. Les I.A., cependant, ont tout 
+ce qu'il faut pour percer ces mystères, même s'il reste beaucoup de chemin à 
+faire. Le problème, c'est qu'on comprend encore mal l'intelligence. Un peu 
+comme les pionniers de l'aviation tentaient maladroitement d'imiter les 
+ailes des oiseaux, nous bâtissons des I.A. en imitant le cerveau humain. Une 
+meilleure science de l'information nous permettra de dépasser les limites du 
+cerveau humain, mais les succès actuels de l'I.A. sont tout de même 
+impressionnants. Il a fallu quelques milliards d'années pour que la vie sur 
+terre mène à une intelligence comme la nôtre. Les I.A. n'ont pas 100 ans et 
+ils révolutionnent déjà le monde de la technologie.</p>
+
+
+]]></summary>
+</entry>
+<entry>
     <title>Evolution of a transposon in Daphnia hybrid genomes</title>
     <link href="http://phdp.github.io//posts/2013-02-06-transposon.html" />
     <id>http://phdp.github.io//posts/2013-02-06-transposon.html</id>
@@ -1326,38 +1440,6 @@ immigration and dispersal limitation on the repeatability of niche and neutral
 communities. <i>PLOS ONE</i> 7(9): e46164.  <a
 href="http://dx.doi.org/10.1371/journal.pone.0046164">DOI:
 10.1371/journal.pone.0046164</a>. <a href="files/ai_2012.pdf">[PDF]</a></p>
-
-
-]]></summary>
-</entry>
-<entry>
-    <title>Wagner: a simple model to study speciation patterns</title>
-    <link href="http://phdp.github.io//posts/2012-09-12-wagner.html" />
-    <id>http://phdp.github.io//posts/2012-09-12-wagner.html</id>
-    <published>2012-09-12T00:00:00Z</published>
-    <updated>2012-09-12T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<h1>Wagner: a simple model to study speciation patterns</h1>
-<a href="https://twitter.com/share" class="twitter-share-button" data-text="Wagner: a simple model to study speciation patterns" data-via="phdpqc">Tweet</a>
-<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2012.09.12</p>
-  <p>This paper describes a very simple model to generate phylogeographies 
-  under allopatric/parapatric speciation. The C++11 code is on github: <a href=
-  "https://github.com/PhDP/wagner">github.com/PhDP/wagner</a>.</p>
-
-  <p>I have a love/hate relationship with this model. I love it as an 
-  algorithm: it's an elegant way to get a speciation-like behavior in space. 
-  I hate it because I increasingly doubt this kind of very simplistic 
-  'bottom-up' model can bring much ecological insights.</p>
-  
-  <p>I named this model <i>Wagner</i> in honor of Moritz Wagner, one of the 
-  first scientist to argue for the importance of geographic isolation
-  in speciation.</p>
-
-<h2>Reference</h2>
-
-  <p><b>P Desjardins-Proulx</b>, JL Rosindell, T Poisot, and D Gravel. A
-simple model to study phylogeographies and speciation patterns in space. <a
-href="http://arxiv.org/abs/1203.1790">arXiv: 1203.1790</a>, 2012. <a
-href="../files/desjardins-proulx_wagner.bib">[BIB]</a></p>
 
 
 ]]></summary>

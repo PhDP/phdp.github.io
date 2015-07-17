@@ -10,25 +10,26 @@
   <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
   <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic" rel="stylesheet" type="text/css" />
   <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet" type="text/css" />
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
 
-<a href="https://github.com/PhDP/">
-  <img style="position: absolute; top: 0; left: 0; border: 0;" src="../images/forkme.png" alt="Fork me on GitHub">
-</a>
+<!-- <a href='https://github.com/PhDP/'>
+  <img style='position: absolute; top: 0; left: 0; border: 0;' src='/images/forkme.png' alt='Fork me on GitHub'>
+</a> -->
 
 <div id="header">
-  <h1><a href="mailto:philippe.d.proulx@gmail.com">Philippe Desjardins-Proulx</a></h1>
+  <!-- <h1><a href='mailto:philippe.d.proulx@gmail.com'>Philippe Desjardins-Proulx</a></h1> -->
   <nav>
     <ul>
-      <li>( sections</li>
+      <li>( Philippe Desjardins Proulx</li>
       <li><a href="../index.html">about</a></li>
-      <li>( writings</li>
-      <li><a href="../writings.html">english</a></li>
-      <li><a href="../writings-fr.html">français</a></li>
-      <li><a href="../writings-jp.html">日本語</a>)</li>
-      <li><a href="../contact.html">contact</a>)</li>
+      <li><a href="../blog.html">blog</a></li>
+      <li><a href="https://ca.linkedin.com/in/philippedp"><i class="fa fa-linkedin-square"></i></a></li>
+      <li><a href="https://github.com/PhDP"><i class="fa fa-github"></i></a></li>
+      <li><a href="https://twitter.com/phdpqc"><i class="fa fa-twitter"></i></a></li>
+      <li><a href="mailto:philippe.d.proulx@gmail.com"><i class="fa fa-envelope"></i></a> )</li>
     </ul>
   </nav>
 </div>
@@ -278,24 +279,24 @@ $ cabal repl
 
 <p>Then, we'll load the Markov logic network module:</p>
 
-<pre><code class="haskell">ghci&gt; import Manticore.MarkovLogic</code></pre>
+<pre><code class="haskell">ghci> import Manticore.MarkovLogic</code></pre>
 
 <p>The most straightforward way to build a Markov logic network is with
 <i>fromStrings</i>. This function takes an array of strings, each of which must
 be a valid first-order logic formula followed (or preceded) by a number (the
 weight of the formula). In our smoking example we have:</p>
 
-<pre><code class="haskell">ghci&gt; let mln = fromStrings [&quot;∀x Smoking(x) ⇒ Cancer(x) 1.5&quot;, &quot;∀x∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y) 1.1&quot;]</code></pre>
+<pre><code class="haskell">ghci> let mln = fromStrings ["∀x Smoking(x) ⇒ Cancer(x) 1.5", "∀x∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y) 1.1"]</code></pre>
 
 <p>The strings were copy-pasted from Richardson and Domingos' paper, but the
 parsers is flexible and will accept a keyboard-friendly form too:</p>
 
-<pre><code class="haskell">ghci&gt; fromStrings [&quot;1.5 forall x Smoking(x) implies Cancer(x)&quot;, &quot;1.1 forall x, y Friend(x, y) and Smoking(x) implies Smoking(y)&quot;]</code></pre>
+<pre><code class="haskell">ghci> fromStrings ["1.5 forall x Smoking(x) implies Cancer(x)", "1.1 forall x, y Friend(x, y) and Smoking(x) implies Smoking(y)"]</code></pre>
 
 <p>We can use <i>fmtMLN</i> function to print the Markov logic
 network:</p>
 
-<pre><code class="haskell">ghci&gt; putStrLn (fmtMLN mln)
+<pre><code class="haskell">ghci> putStrLn (fmtMLN mln)
 1.5                     ∀x Smoking(x) ⇒ Cancer(x)
 1.1                     ∀x ∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y)</code></pre>
 
@@ -303,12 +304,12 @@ network:</p>
 Markov network, we need to apply a set of constant to the Markov logic networks
 Following our example in the last section we'll use:</p>
 
-<pre><code class="haskell">ghci&gt; let cs = [&quot;Elaine&quot;, &quot;George&quot;, &quot;Jerry&quot;]</code></pre>
+<pre><code class="haskell">ghci> let cs = ["Elaine", "George", "Jerry"]</code></pre>
 
 <p>Then, we can query the network, say, what is the probability that Jerry has
 cancer?</p>
 
-<pre><code class="haskell">ghci&gt; ask mln cs &quot;P(Cancer(Jerry))&quot;
+<pre><code class="haskell">ghci> ask mln cs "P(Cancer(Jerry))"
 Just 0.6040175344121184</code></pre>
 
 <p>The function <i>ask</i> takes a Markov logic network, a list
@@ -318,13 +319,13 @@ parser fails to read the query. To make the process a bit easier we'll create
 a function <i>query</i> with the first two arguments supplied so we don't need to
 repeat them ad nauseam:</p>
 
-<pre><code class="haskell">ghci&gt; let query = ask mln cs</code></pre>
+<pre><code class="haskell">ghci> let query = ask mln cs</code></pre>
 
 <p>Then we can ask queries with this function:</p>
 
-<pre><code class="haskell">ghci&gt; query &quot;P(Cancer(Jerry), Cancer(Elaine))&quot;
+<pre><code class="haskell">ghci> query "P(Cancer(Jerry), Cancer(Elaine))"
 Just 0.3696834237837972
-ghci&gt; query &quot;P(Cancer(Jerry) | Smoking(Jerry))&quot;
+ghci> query "P(Cancer(Jerry) | Smoking(Jerry))"
 Just 0.8175744761936782
 </code></pre>
 
@@ -332,9 +333,9 @@ Just 0.8175744761936782
 they share predicates link them. So, even if there is no direct relationship
 between friendship and cancer, we have:</p>
 
-<pre><code class="haskell">ghci&gt; query &quot;P(Cancer(Jerry) | Smoking(Elaine))&quot;
+<pre><code class="haskell">ghci> query "P(Cancer(Jerry) | Smoking(Elaine))"
 Just 0.6506081590969498
-ghci&gt; query &quot;P(Cancer(Jerry) | Smoking(Elaine), Friend(Elaine, Jerry))&quot;
+ghci> query "P(Cancer(Jerry) | Smoking(Elaine), Friend(Elaine, Jerry))"
 Just 0.7043948532279771
 </code></pre>
 
@@ -342,9 +343,9 @@ Just 0.7043948532279771
 friend increases the chance that Jerry is smoking, and if we know he doesn't
 we'll get:</p>
 
-<pre><code class="haskell">ghci&gt; query &quot;P(Cancer(Jerry) | Smoking(Elaine), Friend(Elaine, Jerry), !Smoking(Jerry))&quot;
+<pre><code class="haskell">ghci> query "P(Cancer(Jerry) | Smoking(Elaine), Friend(Elaine, Jerry), !Smoking(Jerry))"
 Just 0.4999999999999964
-ghci&gt; query &quot;P(Cancer(Jerry) | !Smoking(Jerry))&quot;
+ghci> query "P(Cancer(Jerry) | !Smoking(Jerry))"
 Just 0.5000000000000238
 </code></pre>
 
@@ -358,8 +359,8 @@ existing Markov logic network, and will return a new Markov logic network with
 the formula added. Let's say we want to add a rule that <i>friends of friends are
 friends</i>, we could add this rule with a weight of 2.0 with:</p>
 
-<pre><code class="haskell">ghci&gt; let mln' = tell &quot;2.0 A.x,y,z Friend(x, y) and Friend(y, z) =&gt; Friend(x, z)&quot; mln
-ghci&gt; putStrLn (fmtMLN mln')
+<pre><code class="haskell">ghci> let mln' = tell "2.0 A.x,y,z Friend(x, y) and Friend(y, z) => Friend(x, z)" mln
+ghci> putStrLn (fmtMLN mln')
 1.5                     ∀x Smoking(x) ⇒ Cancer(x)
 2.0                     ∀x ∀y ∀z Friend(x, y) ∧ Friend(y, z) ⇒ Friend(x, z)
 1.1                     ∀x ∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y)</code></pre>
@@ -367,24 +368,24 @@ ghci&gt; putStrLn (fmtMLN mln')
 <p>We'll build an ask function for this network using the same constants
 (Jerry, Elaine, George):</p>
 
-<pre><code class="haskell">ghci&gt; let query' = ask mln' cs</code></pre>
+<pre><code class="haskell">ghci> let query' = ask mln' cs</code></pre>
 
 <p>Let's compare how our first MLN behaved compare to our new one:</p>
 
-<pre><code class="haskell">ghci&gt; query &quot;P(Smoking(George) | Smoking(Jerry), Friend(Jerry, Elaine), Friend(Elaine, George))&quot;
+<pre><code class="haskell">ghci> query "P(Smoking(George) | Smoking(Jerry), Friend(Jerry, Elaine), Friend(Elaine, George))"
 Just 0.5877406718485353
-ghci&gt; query' &quot;P(Smoking(George) | Smoking(Jerry), Friend(Jerry, Elaine), Friend(Elaine, George))&quot;
+ghci> query' "P(Smoking(George) | Smoking(Jerry), Friend(Jerry, Elaine), Friend(Elaine, George))"
 Just 0.7080082227672424
 </code></pre>
 
 <p>Same query, same information, but with a different model (the MLN), we get
 different answers. Now, something is bugging me with the original model:</p>
 
-<pre><code class="haskell">ghci&gt; query &quot;P(Cancer(Jerry) | Smoking(George))&quot;
+<pre><code class="haskell">ghci> query "P(Cancer(Jerry) | Smoking(George))"
 Just 0.6506081590969498
-ghci&gt; query &quot;P(Cancer(Jerry) | Smoking(George), Friend(George, Jerry))&quot;
+ghci> query "P(Cancer(Jerry) | Smoking(George), Friend(George, Jerry))"
 Just 0.7043948532279771
-ghci&gt; query &quot;P(Cancer(Jerry) | Smoking(George), Friend(Jerry, George))&quot;
+ghci> query "P(Cancer(Jerry) | Smoking(George), Friend(Jerry, George))"
 Just 0.6506081590968945
 </code></pre>
 
@@ -404,17 +405,17 @@ is friend with \(y\), then \(y\) is friend with \(x\), and if \(x\) is not frien
 with \(y\), then \(y\) is not friend with \(x\). Since it's probabilistic, it doesn't
 need to be true all the time, but I give it a fairly high weight. And now we have:</p>
 
-<pre><code class="haskell">ghci&gt; let mln'' = tell &quot;ForAll x, y: Friend(x, y) iff Friend(y, x) 2.0&quot; mln
-ghci&gt; putStrLn (fmtMLN mln'')
+<pre><code class="haskell">ghci> let mln'' = tell "ForAll x, y: Friend(x, y) iff Friend(y, x) 2.0" mln
+ghci> putStrLn (fmtMLN mln'')
 1.5                     ∀x Smoking(x) ⇒ Cancer(x)
 1.1                     ∀x ∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y)
 2.0                     ∀x ∀y Friend(x, y) ⇔ Friend(y, x)
-ghci&gt; let query'' = ask mln'' cs
-ghci&gt; query'' &quot;P(Cancer(Jerry) | Smoking(George))&quot;
+ghci> let query'' = ask mln'' cs
+ghci> query'' "P(Cancer(Jerry) | Smoking(George))"
 Just 0.6506081590969105
-ghci&gt; query'' &quot;P(Cancer(Jerry) | Smoking(George), Friend(George, Jerry))&quot;
+ghci> query'' "P(Cancer(Jerry) | Smoking(George), Friend(George, Jerry))"
 Just 0.7043948532279295
-ghci&gt; query'' &quot;P(Cancer(Jerry) | Smoking(George), Friend(Jerry, George))&quot;
+ghci> query'' "P(Cancer(Jerry) | Smoking(George), Friend(Jerry, George))"
 Just 0.7018023327893508
 </code></pre>
 
@@ -428,7 +429,7 @@ data, combine existing knowledge bases, transfer knowledge between domains...</p
 
   <div id="hidden">
     <!-- "世界" |&gt; printf "Hello %s!" -->
-    let world = &quot;世界&quot; in print $ &quot;Hello &quot; ++ world ++ &quot;!&quot;
+    let world = "世界" in print $ "Hello " ++ world ++ "!"
   </div>
 </div>
 
