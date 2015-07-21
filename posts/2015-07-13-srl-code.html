@@ -23,13 +23,13 @@
   <!-- <h1><a href='mailto:philippe.d.proulx@gmail.com'>Philippe Desjardins-Proulx</a></h1> -->
   <nav>
     <ul>
-      <li>( Philippe Desjardins Proulx</li>
+      <li>{ Philippe Desjardins Proulx</li>
       <li><a href="../index.html">about</a></li>
       <li><a href="../blog.html">blog</a></li>
       <li><a href="https://ca.linkedin.com/in/philippedp"><i class="fa fa-linkedin-square"></i></a></li>
       <li><a href="https://github.com/PhDP"><i class="fa fa-github"></i></a></li>
       <li><a href="https://twitter.com/phdpqc"><i class="fa fa-twitter"></i></a></li>
-      <li><a href="mailto:philippe.d.proulx@gmail.com"><i class="fa fa-envelope"></i></a> )</li>
+      <li><a href="mailto:philippe.d.proulx@gmail.com"><i class="fa fa-envelope"></i></a>}</li>
     </ul>
   </nav>
 </div>
@@ -211,12 +211,15 @@ the equation</p>
 <p>where \(w_i\) is the weight of the formula associated with the <i>i</i>th
 factor, \(g_i\) equals 1 if the formula is true given the values of the
 predicates or 0 if it's false, and \(Z\) is a normalizing constant, that is:
-it's the sum of the values of all possible assignments.</p>
+it's the sum of the values of all possible assignments:</p>
 
-<p>Let's try to compute the probability of Kara and Lee being mutual friend,
-neither of them being friend with themselves, Kara smokes and has cancer, but
-Lee neither smokes nor has cancer. We'll get the following network (green =
-true predicates, red = false predicates):</p>
+\[Z = \sum_{x' \in \ \mathcal{X}}\exp\left(\sum_i w_ig_i(x') \right),\]
+
+<p>with \(\mathcal{X}\) being the set of possible assignments. Now, let's try
+to compute the probability of Kara and Lee being mutual friend, neither of them
+being friend with themselves, Kara smokes and has cancer, but Lee neither
+smokes nor has cancer. We'll get the following network (green = true
+predicates, red = false predicates):</p>
 
 <div class="imagecenter">
   <img src="../images/mln_kara_lee_factors_ass_p1.png" alt="Kara Lee network" />
@@ -428,7 +431,6 @@ data, combine existing knowledge bases, transfer knowledge between domains...</p
 
 
   <div id="hidden">
-    <!-- "世界" |&gt; printf "Hello %s!" -->
     let world = "世界" in print $ "Hello " ++ world ++ "!"
   </div>
 </div>
