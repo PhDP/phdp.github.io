@@ -55,8 +55,9 @@ Let's build a small example with PostgreSQL (v9.4, Linux x64):</p>
 <pre><code class="sql">=# CREATE TABLE eat (x text, y text);
 
 =# INSERT INTO eat
--# VALUES ('Wolf','Rabbit'), ('Sandworm','Vladimir Harkonen'),
--# ('Parasite wasp','Juicy tarantula'), ('Juicy tarantula','Cockroach');
+-# VALUES ('Wolf','Rabbit'), ('Wolf', 'Wapiti'),
+-# ('Sandworm','Vladimir Harkonen'), ('Parasite wasp','Juicy tarantula'),
+-# ('Juicy tarantula','Cockroach');
 
 =# SELECT * FROM eat;
         x        |         y
