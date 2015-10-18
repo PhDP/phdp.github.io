@@ -46,7 +46,7 @@
 
 <p>So, let's say we have the first-order logic formula</p>
 
-<p>\[\forall x, y: Eat(x, y) \land \lnot Parasite(x) \iff Predator(x).\]</p>
+<p>\[\forall x, y: Eat(x, y) \land \lnot Parasite(x) \Rightarrow Predator(x).\]</p>
 
 <p>The predicates (\(Eat, Parasite, Predator\)) can all be seen as tables (or
 relations in SQL parlance), with each argument of the predicate being a column.
@@ -75,7 +75,7 @@ Let's build a small example with PostgreSQL (v9.4, Linux x64):</p>
 -# VALUES ('Parasite wasp');
 
 =# SELECT * FROM parasite;
-       x  
+       x
 ---------------
  Parasite wasp
 (1 row)
@@ -94,7 +94,6 @@ with:</p>
 -# FROM   eat
 -# LEFT   JOIN parasite p USING (x)
 -# WHERE  p.x IS NULL;
-
         x
 -----------------
  Wolf
