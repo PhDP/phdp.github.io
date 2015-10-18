@@ -8,8 +8,91 @@
         <name>Philippe Desjardins-Proulx</name>
         <email>philippe.d.proulx@gmail.com</email>
     </author>
-    <updated>2015-07-13T00:00:00Z</updated>
+    <updated>2015-10-19T00:00:00Z</updated>
     <entry>
+    <title>SQL, relations, and logic</title>
+    <link href="http://phdp.github.io//posts/2015-10-19-logic2.html" />
+    <id>http://phdp.github.io//posts/2015-10-19-logic2.html</id>
+    <published>2015-10-19T00:00:00Z</published>
+    <updated>2015-10-19T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>SQL, relations, and logic</h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="SQL, relations, and logic" data-via="phdpqc">Tweet</a>
+<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2015.10.19</p>
+<p>In previous posts I wrote a short <a href='2015-07-13-srl-code.html'>intro
+  to logic</a> and <a href='2015-07-13-srl-code.html'>statistical relational
+  learning</a>. I just wanted to write a quick addendum to explain how logic is
+  related to SQL. It's pretty simple, but not everyone knows.</p>
+
+<p>So, let's say we have the first-order logic formula</p>
+
+<p>\[\forall x, y: Eat(x, y) \land \lnot Parasite(x) \iff Predator(x).\]</p>
+
+<p>The predicates (\(Eat, Parasite, Predator\)) can all be seen as tables (or
+relations in SQL parlance), with each argument of the predicate being a column.
+Let's build a small example with PostgreSQL (v9.4, Linux x64):</p>
+
+<pre><code class="sql">=# CREATE TABLE eat (x text, y text);
+
+=# INSERT INTO eat
+-# VALUES ('Wolf','Rabbit'), ('Sandworm','Vladimir Harkonen'),
+-# ('Parasite wasp','Juicy tarantula'), ('Juicy tarantula','Cockroach');
+
+=# SELECT * FROM eat;
+        x        |         y
+-----------------+-------------------
+ Wolf            | Rabbit
+ Wolf            | Wapiti
+ Sandworm        | Vladimir Harkonen
+ Parasite wasp   | Juicy tarantula
+ Juicy tarantula | Cockroach
+(5 rows)
+
+=# CREATE TABLE parasite (x text);
+
+=# INSERT INTO parasite
+-# VALUES ('Parasite wasp');
+
+=# SELECT * FROM parasite;
+       x  
+---------------
+ Parasite wasp
+(1 row)
+</code></pre>
+
+<p>Each entry is a ground predicate, that is, a predicate without variables
+or functions, so we find something like \(Eat(Wolf, Rabbit)\) but there is
+no way to have \(Eat(x, Rabbit)\) with \(x\) being a variable ranging on
+species. SQL is a subset of first-order logic, it's not as flexible.</p>
+
+<p>We are interested in the relation \(Predator\) but we don't have any table
+for it. No despair! SQL queries return relations, so we can get our predators
+with:</p>
+
+<pre><code class="sql">=# SELECT DISTINCT x
+-# FROM   eat
+-# LEFT   JOIN parasite p USING (x)
+-# WHERE  p.x IS NULL;
+
+        x
+-----------------
+ Wolf
+ Sandworm
+ Juicy tarantula
+(3 rows)
+</code></pre>
+
+<p>SQL uses the closed-world assumption (CWA): if a statement is true, it
+is known to be true. In short, in our table, \(parasite(hawk)\) is not true since
+hawk is absent from the parasite relation. It's assumed that, if it were true,
+the constant hawk would be present in the relation.</p>
+
+<p>But yeah, that's all, just think of tables as relations (or predicates).</p>
+
+
+
+]]></summary>
+</entry>
+<entry>
     <title>A gentle introduction to statistical relational learning: maths, code, and examples</title>
     <link href="http://phdp.github.io//posts/2015-07-13-srl-code.html" />
     <id>http://phdp.github.io//posts/2015-07-13-srl-code.html</id>
@@ -764,8 +847,8 @@ simplify as methods inside a singleton object. I named the functions
 <h2>C++</h2>
 
 <p>Few understand every corner of C++'s monstrous standard. It's huge.  Surely,
-with so many features, there must be something a quick way to solve this
-problem in C++.  Well... no. It's a well-known lacuna with C++,
+with so many features, there must something to solve this
+simple problem cleanly.  Well... no. It's a well-known lacuna with C++,
 see <a href="https://parasol.tamu.edu/~yuriys/pm/"><i>Open and
 Efficient Type Switch for C++</i></a> for a library built to implement
 pattern matching (the effort is directed by the creator
@@ -1423,26 +1506,6 @@ ils révolutionnent déjà le monde de la technologie.</p>
 Dufresne. Evolution of a transposon in <i>Daphnia</i> hybrid genomes.
 <i>Mobile DNA</i> 4:7, 2013.
 <a href="http://dx.doi.org/10.1186/1759-8753-4-7">DOI: 10.1186/1759-8753-4-7.</a></p>
-
-
-]]></summary>
-</entry>
-<entry>
-    <title>The repeatability of niche and neutral communities</title>
-    <link href="http://phdp.github.io//posts/2012-09-24-repeatability.html" />
-    <id>http://phdp.github.io//posts/2012-09-24-repeatability.html</id>
-    <published>2012-09-24T00:00:00Z</published>
-    <updated>2012-09-24T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<h1>The repeatability of niche and neutral communities</h1>
-<a href="https://twitter.com/share" class="twitter-share-button" data-text="The repeatability of niche and neutral communities" data-via="phdpqc">Tweet</a>
-<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2012.09.24</p>
-  <h2>Reference</h2>
-
-  <p>D Ai, <b>P Desjardins-Proulx</b>, C Chu, and G Wang. The influence of
-immigration and dispersal limitation on the repeatability of niche and neutral
-communities. <i>PLOS ONE</i> 7(9): e46164.  <a
-href="http://dx.doi.org/10.1371/journal.pone.0046164">DOI:
-10.1371/journal.pone.0046164</a>. <a href="files/ai_2012.pdf">[PDF]</a></p>
 
 
 ]]></summary>
