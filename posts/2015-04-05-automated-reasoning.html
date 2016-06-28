@@ -278,25 +278,28 @@ libraries.</p>
 
 <pre><code class="cpp">#include &lt;iostream>
 #include &lt;string>
-#include &lt;boost/variant>
+#include &lt;boost/variant.hpp>
 
-struct Add;
-struct Mult;
+struct add;
+struct mult;
 
-using Expr = boost::variant<
+using expr = boost::variant<
   int,
   std::string,
-  boost::recursive_wrapper&lt;Add>,
-  boost::recursive_wrapper&lt;Mult>>;
+  boost::recursive_wrapper&lt;add>,
+  boost::recursive_wrapper&lt;mult>>;
 
-struct Add {
-  Expr left, right;
+struct binary_op {
+};
+
+struct add : public binary_op {
+  expr left, right;
   Add(const Expr &left_, const Expr &right_) : left(left_), right(right_) {
   }
 };
 
-struct Mult {
-  Expr left, right;
+struct mult : public binary_op {
+  expr left, right;
   Mult(const Expr &left_, const Expr &right_) : left(left_), right(right_) {
   }
 };
@@ -370,11 +373,11 @@ struct print_expr : public boost::static_visitor&lt;std::string> {
   };
 };
 
-int main() {
-  auto e = Expr(Add(
-      Expr(Mult(Expr(Add(Expr(1), Expr(Mult(Expr(0), Expr("x"))))),
-      Expr(3))), Expr(12)));
-  auto s = boost::apply_visitor(simplify(), e);
+...
+
+auto main() -> int {
+  const auto e = (expr(1) + expr(0) * expr("x")) * expr(3) + expr(12);
+  const auto s = boost::apply_visitor(simplify(), e);
   std::cout << boost::apply_visitor(print_expr(), s) << std::endl;
   return 0;
 }
@@ -448,7 +451,7 @@ expression (the ? operator in Julia, just like C), or I could've used the match
 macro, but it's overkill here. It's not too inelegant, and at first I thought
 it was a good enough way to simulate sum types and pattern matching. It matters
 to the Julia ecosystem because these features are very useful to build solvers,
-logic and theorem proving systems, etc etc. Pretty nice for a technical 
+logic and theorem proving systems, etc etc. Pretty nice for a technical
 computing platform. Unfortunately, while Julia does well with this simple example,
 I think an oddity with the language would soon bite us: return type declarations
 are not allowed, and yes, it <i>is</i> a big deal.</p>
