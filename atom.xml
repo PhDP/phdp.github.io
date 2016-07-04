@@ -8,8 +8,190 @@
         <name>Philippe Desjardins-Proulx</name>
         <email>philippe.d.proulx@gmail.com</email>
     </author>
-    <updated>2015-11-02T00:00:00Z</updated>
+    <updated>2016-07-05T00:00:00Z</updated>
     <entry>
+    <title>Can AlphaGo beat Imperial?</title>
+    <link href="http://phdp.github.io//posts/2016-07-05-can-alphago.html" />
+    <id>http://phdp.github.io//posts/2016-07-05-can-alphago.html</id>
+    <published>2016-07-05T00:00:00Z</published>
+    <updated>2016-07-05T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>Can AlphaGo beat Imperial?</h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="Can AlphaGo beat Imperial?" data-via="phdpqc">Tweet</a>
+<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2016.07.05</p>
+<p><a
+href='http://www.theverge.com/2016/3/10/11192774/demis-hassabis-interview-alphago-google-deepmind-ai'>DeepMind's
+Demis Hassabis recently singled out StarCraft as a potential challenge for
+AlphaGo.</a> It's a fascinating, and bold, target. StarCraft is a partial
+information game with many different short- and long-term trade offs, and
+because you have so many units, ways to position them, research options,
+buildings, resources, StarCraft's game tree size dwarfs Go's. Compared to
+chess, Go is complex, but in the grand scheme of things, a game involves
+roughly 75 decisions with less than 361 legal moves. I'm not saying this to
+diminish AlphaGo's achievement. On the contrary, I never thought an AI would
+dominate a match against a top player this soon. It seems like yesterday that
+Go AIs were, at best, playing at the level of good amateurs.</p>
+
+<p>Still, how far can AlphaGo go? Or perhaps more generally, how far can <a
+href='https://www.nervanasys.com/demystifying-deep-reinforcement-learning/'>
+deep reinforcement learning</a> go? I'd love to see hard numbers, but the game
+tree size of the {Starcraft, Fire Emblem, Civilization} of this world must be
+humongous. Players have to make several decisions every seconds, if not several
+decisions per second. Yet, personally, I'm equally interested in seeing how far
+deep learning-based reinforcement learning can go for board games. <a
+href='https://arxiv.org/abs/1509.01549'>Chess</a> is certainly on the table,
+but what about other board games? Take one of my favorites: <a
+href='https://boardgamegeek.com/boardgame/24181/imperial'>Imperial</a>.</p>
+
+<p>So what the hell is Imperial? Like chess and Go, Imperial is a deterministic
+perfect-information game. While Go is complex, it is relatively "flat" in the
+sense that the game is a grid with one object (the stone). In contrast,
+Imperial has many different objects. Military units and factories make the game
+look like a standard variation of Risk, but the game has a twist: players are
+not assigned to a country at the beginning of the game. Countries make their
+moves in turn, but who control the country at any given time is determined by
+who has the most invested in this country. This simple rule creates complex
+strategies where players will take control of countries in poor shape to help
+their investments elsewhere.</a>
+
+<p>I doubt Google cares about an obscure (yet awesome) board game like
+Imperial, but maybe they should, because (I think) it highlights a bit of a
+blind spot for deep reinforcement learning. The main issue with Imperial is not
+that the game is very complex (it isn't), or that a particular rule would trip
+the AI. The issue is simply that we have no large databases of games to feed to
+an algorithm. Data deluge or not, it's typical to have little data when faced
+with a new problem, and it's not the end of the world for all machine learning
+approaches. We can encode a rough model ourselves, something fairly common with
+probabilistic graphical and statistical relational models, or by transferring
+knowledge from a similar problem.</p>
+
+<p>Putting together a reinforcement learning agent based on my (upcoming)
+open-source C++ library for statistical relational learning is very high on my
+priority list, we'll see if it can beat Imperial. That said, I'd also like to
+see deep reinforcement learning tackle this kind of problem, after all transfer
+learning is high on the radar of <a
+href='http://www.iro.umontreal.ca/~bengioy/talks/DL-Tutorial-NIPS2015.pdf'>deep
+learning researchers</a>, and we can't really talk of general intelligence as
+long as the A.I. needs the learn everything from 0.</p>
+
+
+]]></summary>
+</entry>
+<entry>
+    <title>Data Scientists: This is not your grandmother's C++</title>
+    <link href="http://phdp.github.io//posts/2016-06-28-not-your-grandmother-cpp.html" />
+    <id>http://phdp.github.io//posts/2016-06-28-not-your-grandmother-cpp.html</id>
+    <published>2016-06-28T00:00:00Z</published>
+    <updated>2016-06-28T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>Data Scientists: This is not your grandmother's C++</h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="Data Scientists: This is not your grandmother's C++" data-via="phdpqc">Tweet</a>
+<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2016.06.28</p>
+<p>A quick note. I saw a few lines of antiquated C++ in a Python presentation
+for the obligatory "look-how-C++-sucks" bit. If you like Python, good for you,
+I'm not here to bash it. But for the love of Hopper, stop freaking people out
+with old, outdated C++. Many (most?) high-performance machine learning
+libraries are written in modern C++, often with a Python interface. If you want
+to understand how hot new tools like <a
+href='https://github.com/tensorflow/tensorflow'>TensorFlow</a> or <a
+href='https://github.com/Microsoft/CNTK'>CNTK</a> work: you'll learn a lot by
+diving into their C++ core.</p>
+
+<p>The scary C++ examples follow a common theme: show how something simple is
+absurdly contrived in C++ compared to Python. Hey let's create a vector (well,
+it'll be a list in Python) of sets and print the result in some format:</p>
+
+<pre><code class="python">sets = [{1, 2, 3}, {4, 5, 6}, {42, 47, 15}]
+
+for set in sets:
+  print('{ ', end='')
+  for i in set:
+    print(str(i) + ' ', end='')
+  print('}')</code></pre>
+
+<p>Clean and simple. Now the C++ version, Frankenstein's monster in coding
+form, look how ugly it is:</p>
+
+<pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;set&gt;
+#include &lt;vector&gt;
+
+int main() {
+  using namespace std;
+
+  vector&lt;set&lt;int&gt; &gt; sets;
+
+  {
+    set&lt;int&gt; tmp;
+    tmp.insert(1);
+    tmp.insert(2);
+    tmp.insert(3);
+    sets.push_back(tmp);
+
+    tmp.clear();
+    tmp.insert(4);
+    tmp.insert(5);
+    tmp.insert(6);
+    sets.push_back(tmp);
+
+    tmp.clear();
+    tmp.insert(42);
+    tmp.insert(47);
+    tmp.insert(15);
+    sets.push_back(tmp);
+  }
+
+  vector&lt;set&lt;int&gt; &gt;::const_iterator it = sets.begin();
+  for (; it != sets.end(); ++it) {
+    cout &lt;&lt; "{ ";
+    for (set&lt;int&gt;::const_iterator j = it-&gt;begin(); j != it-&gt;end(); ++j)
+      cout &lt;&lt; *j &lt;&lt; ' ';
+    cout &lt;&lt; "}\n";
+  }
+
+  return 0;
+}</code></pre>
+
+<p>Kill it! Kill it with fire (a certain unemployed red priestess could help)!
+Everything from creating the vector of sets to looping is awful... Except
+that's C++98. Nobody in their right mind is using C++98 unless they're forced
+to. I'm not even sure this is good C++98 code, I haven't written with this
+standard in ages. It's easy to forget not so long ago we couldn't write
+vector&lt;set&lt;int&gt; &gt; without adding a space between the two &gt;&gt;.
+In modern C++, the code looks like this:</p>
+
+<pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;set&gt;
+#include &lt;vector&gt;
+
+auto main() -&gt; int {
+  using namespace std;
+
+  auto const sets = vector&lt;set&lt;int&gt;&gt;{{1, 2, 3}, {4, 5, 6}, {42, 47, 15}};
+
+  for (auto const& set : sets) {
+    cout &lt;&lt; "{ ";
+    for (int i : set)
+      cout &lt;&lt; i &lt;&lt; ' ';
+    cout &lt;&lt; "}\n";
+  }
+
+  return 0;
+}</code></pre>
+
+<p>That's C++11 in action. I prefer this code to the Python version: it
+type-checks, compiles to efficient code, and gives you better control over
+memory (using references vs copy). You might prefer the Python version, fine,
+but it's not <i>that</i> much simpler. Plus, as Python and C++
+follow similar paradigms (except for type checking), the things that tend to be
+annoying to write in C++, <a href='2015-04-05-automated-reasoning.html'>e.g.
+handling abstract syntax trees</a>, are equally painful in Python. So stop what
+you're doing, <a
+href='http://www.informit.com/store/discovering-modern-c-plus-plus-an-intensive-course-9780134383699'>grab
+a good book</a>, and learn modern C++.</p>
+
+
+]]></summary>
+</entry>
+<entry>
     <title>Scientific theories &amp; machine learning</title>
     <link href="http://phdp.github.io//posts/2015-11-02-theory-and-ml.html" />
     <id>http://phdp.github.io//posts/2015-11-02-theory-and-ml.html</id>
@@ -311,7 +493,7 @@ here that is more than enough to understand Markov logic networks</a>.</p>
 <p>The grand idea of statistical relational learning is that, in pure logic, a
 world is false if it violates a single formula, but with Markov logic networks,
 a world is <i>less likely</i> if it violates formulas, especially if it
-violates formula with a high weight. Statistical relational learning has
+violates a formula with a high weight. Statistical relational learning has
 important advantages on probabilistic approaches: a first-order logic formula
 is simple to understand and interpret, plus it can be manipulated by humans and
 computers in ways a naked probabilistic model can't. I think the greatest
@@ -522,10 +704,9 @@ parsers is flexible and will accept a keyboard-friendly form too:</p>
 
 <pre><code class="haskell">ghci> fromStrings ["1.5 forall x Smoking(x) implies Cancer(x)", "1.1 forall x, y Friend(x, y) and Smoking(x) implies Smoking(y)"]</code></pre>
 
-<p>We can use <i>fmtMLN</i> function to print the Markov logic
-network:</p>
+<p>We can see the structure of the network simply by typing its name:</p>p>
 
-<pre><code class="haskell">ghci> putStrLn (fmtMLN mln)
+<pre><code class="haskell">ghci> mln
 1.5                     ∀x Smoking(x) ⇒ Cancer(x)
 1.1                     ∀x ∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y)</code></pre>
 
@@ -589,7 +770,7 @@ the formula added. Let's say we want to add a rule that <i>friends of friends ar
 friends</i>, we could add this rule with a weight of 2.0 with:</p>
 
 <pre><code class="haskell">ghci> let mln' = tell "2.0 A.x,y,z Friend(x, y) and Friend(y, z) => Friend(x, z)" mln
-ghci> putStrLn (fmtMLN mln')
+ghci> mln'
 1.5                     ∀x Smoking(x) ⇒ Cancer(x)
 2.0                     ∀x ∀y ∀z Friend(x, y) ∧ Friend(y, z) ⇒ Friend(x, z)
 1.1                     ∀x ∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y)</code></pre>
@@ -635,7 +816,7 @@ with \(y\), then \(y\) is not friend with \(x\). Since it's probabilistic, it do
 need to be true all the time, but I give it a fairly high weight. And now we have:</p>
 
 <pre><code class="haskell">ghci> let mln'' = tell "ForAll x, y: Friend(x, y) iff Friend(y, x) 2.0" mln
-ghci> putStrLn (fmtMLN mln'')
+ghci> mln''
 1.5                     ∀x Smoking(x) ⇒ Cancer(x)
 1.1                     ∀x ∀y Friend(x, y) ∧ Smoking(x) ⇒ Smoking(y)
 2.0                     ∀x ∀y Friend(x, y) ⇔ Friend(y, x)
@@ -1021,25 +1202,28 @@ libraries.</p>
 
 <pre><code class="cpp">#include &lt;iostream>
 #include &lt;string>
-#include &lt;boost/variant>
+#include &lt;boost/variant.hpp>
 
-struct Add;
-struct Mult;
+struct add;
+struct mult;
 
-using Expr = boost::variant<
+using expr = boost::variant<
   int,
   std::string,
-  boost::recursive_wrapper&lt;Add>,
-  boost::recursive_wrapper&lt;Mult>>;
+  boost::recursive_wrapper&lt;add>,
+  boost::recursive_wrapper&lt;mult>>;
 
-struct Add {
-  Expr left, right;
+struct binary_op {
+};
+
+struct add : public binary_op {
+  expr left, right;
   Add(const Expr &left_, const Expr &right_) : left(left_), right(right_) {
   }
 };
 
-struct Mult {
-  Expr left, right;
+struct mult : public binary_op {
+  expr left, right;
   Mult(const Expr &left_, const Expr &right_) : left(left_), right(right_) {
   }
 };
@@ -1113,11 +1297,11 @@ struct print_expr : public boost::static_visitor&lt;std::string> {
   };
 };
 
-int main() {
-  auto e = Expr(Add(
-      Expr(Mult(Expr(Add(Expr(1), Expr(Mult(Expr(0), Expr("x"))))),
-      Expr(3))), Expr(12)));
-  auto s = boost::apply_visitor(simplify(), e);
+...
+
+auto main() -> int {
+  const auto e = (expr(1) + expr(0) * expr("x")) * expr(3) + expr(12);
+  const auto s = boost::apply_visitor(simplify(), e);
   std::cout << boost::apply_visitor(print_expr(), s) << std::endl;
   return 0;
 }
@@ -1192,7 +1376,7 @@ expression (the ? operator in Julia, just like C), or I could've used the match
 macro, but it's overkill here. It's not too inelegant, and at first I thought
 it was a good enough way to simulate sum types and pattern matching. It matters
 to the Julia ecosystem because these features are very useful to build solvers,
-logic and theorem proving systems, etc etc. Pretty nice for a technical 
+logic and theorem proving systems, etc etc. Pretty nice for a technical
 computing platform. Unfortunately, while Julia does well with this simple example,
 I think an oddity with the language would soon bite us: return type declarations
 are not allowed, and yes, it <i>is</i> a big deal.</p>
@@ -1536,138 +1720,6 @@ found in ecology.</p>
 Gravel. The case for open preprints in biology. <i>PLOS Biology</i> 11(5): e1001563, 2013.
 <a href="http://www.plosbiology.org/article/info%3Adoi%2F10.1371%2Fjournal.pbio.1001563">[URL]</a>
 </p>
-
-
-]]></summary>
-</entry>
-<entry>
-    <title>L'intuition des Intelligences Artificielles</title>
-    <link href="http://phdp.github.io//posts/2013-04-29-intuition-ai.html" />
-    <id>http://phdp.github.io//posts/2013-04-29-intuition-ai.html</id>
-    <published>2013-04-29T00:00:00Z</published>
-    <updated>2013-04-29T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<h1>L'intuition des Intelligences Artificielles</h1>
-<a href="https://twitter.com/share" class="twitter-share-button" data-text="L'intuition des Intelligences Artificielles" data-via="phdpqc">Tweet</a>
-<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2013.04.29</p>
-<p>En 1997, DeepBlue bat le champion d'échecs Garry Kasparov lors d'un match 
-de 6 parties. Depuis, les ordinateurs règnent en maîtres incontestés des 
-échecs. Pourtant, leur victoire est en quelque sorte décevante. C'est une 
-victoire de la force brute. DeepBlue, un dinosaure comparé aux programmes 
-modernes, pouvait évaluer 200 millions de positions par seconde alors que 
-les joueurs d'échecs ne considèrent que quelques coups par tour. Il est 
-clair que les ordinateurs nous surpassent, et ce depuis longtemps, pour 
-résoudre des problèmes mathématiques qui demandent une série bien définie 
-d'étapes. Par exemple, le calcul de n'importe quelle racine carrée est très 
-simple. Il suffit de suivre rigoureusement un certain nombre d'opérations et 
-voilà ! Simple pour un ordinateur mais pas pour nous. Les auteurs de 
-science-fiction nous offrent souvent la caricature d'ordinateurs incapables 
-de penser globalement, incapables d'intuition. Bref, des DeepBlue qui 
-écrasent l'être humain avec leur force de calcul. C'est une erreur. Toutes 
-les I.A. (Intelligence Artificielle) ne sont pas des DeepBlue et nous 
-développons actuellement des programmes qui ont une intelligence très 
-similaire à la nôtre. C'est une quête pour construire des I.A. capables de 
-raisonner sur des questions complexes. C'est une quête pour programmer 
-l'intuition.</p>
-
-<p>À première vue, l'intelligence humaine semble complètement différente des 
-ordinateurs. Ces derniers conservent la plupart des données dans les disques 
-durs qu'on peut voir comme de gigantesques tables. Pour accéder à un élément 
-(une mémoire), il suffit de connaître sa position qui est représentée par un 
-nombre. Mauvais nombre, mauvaise mémoire. À l'inverse, la mémoire humaine 
-est résiliente et associative. Si je vous demande le nom du très 
-charismatique premier ministre du Québec qui a dirigé la province entre 2003 
-et 2012, la plupart des gens seront capables de trouver la bonne réponse, 
-même si « très charismatique » colle difficilement au personnage. Autre 
-différence : la capacité de calculs (ou évaluation) de notre cerveau est 
-largement supérieure à DeepBlue. L'acte de reconnaître un objet (ceci est un 
-chat, ça c'est un arbre) est très difficile. Même le plus puissant 
-ordinateur serait incapable de se déplacer en forêt tout en évaluant la 
-position et la nature des objets, ce que nous faisons pourtant sans grands 
-efforts. Notre cerveau est donc très doué pour certains types d'analyses, 
-surtout celles qui demandent de regrouper plusieurs évidences. Les 
-spécialistes de l'I.A. tentent depuis longtemps de créer des I.A. qui 
-ressemblent à l'intelligence humaine. Et ils ont réussi. Les réseaux de 
-neurones artificiels font partie de ces techniques. Tout comme le cerveau 
-humain, ces réseaux ont une mémoire résiliente et associative. Ils sont 
-capables de prendre en compte un grand nombre d'évidences et les relations 
-complexes qui lient ces évidences.</p>
-
-<p>L'I.A. prend énormément d'expansion mais elle n'a pas la forme que les 
-gens imaginent. Google utilise déjà ces techniques pour son moteur de 
-recherche, pour traduire des textes, adapter les publicités. Amazon, 
-Microsoft, IBM, Fujitsu; pratiquement toutes les compagnies de haute 
-technologie investissent de grandes sommes en I.A. et les succès se 
-multiplient. Goeffrey Hinton est un des grands spécialistes des réseaux de 
-neurones artificiels. Il s'en sert pour apprendre à des programmes à 
-raisonner sur des tâches complexes. Par exemple, ces réseaux de neurones 
-peuvent reconnaître les chiffres (1, 2, 3, 4, …) mieux qu'un être humain. Si 
-vous croyez que c'est facile, demandez à un professeur de mathématiques. Les 
-formes des chiffres varient énormément et certains, moi par exemple, ont 
-développé une incroyable capacité à écrire des 4 qui ressemblent à des 9, ou 
-des 7 qui ressemblent à des 1. Personne n'a jamais réussi à écrire à la main 
-un programme capable de reconnaître les chiffres. Les réseaux de neurones 
-d'Hinton sont capables d'apprendre à les reconnaître et ils le font comme 
-les humains: on gave le réseau de chiffres en leur donnant la bonne réponse 
-(ça, c'est un quatre, ça, c'est un un, etc) et il apprend un modèle (très 
-complexe!) qui lui permet ensuite de déduire le chiffre à partir d'une 
-forme. Hinton n'écrit pas un programme pour reconnaître les chiffres, il 
-écrit un programme capable d'apprendre à reconnaître les chiffres. Mieux 
-encore: en 2012, Hinton et son équipe participent à un concours du géant 
-pharmaceutique Merk. L'objectif est de découvrir des molécules au potentiel 
-pharmaceutique. Les équipes de scientifiques qui participent à ce concours 
-sont des experts dans le domaine, certains y travaillent depuis des 
-décennies. L'équipe de Hinton arrive, en retard, au concours et n'a aucune 
-expérience dans le domaine. Pourtant, il gagne! Un réseau de neurones 
-artificiels, à qui on a donné une large base de données, a réussi à 
-apprendre comment flairer une bonne molécule mieux que les experts. Le choc 
-fut assez grand pour mériter à l'équipe d'Hinton un article dans le 
-prestigieux New York Times.</p>
-
-<p>Il faudra encore attendre plusieurs années avant de voir des I.A. 
-maîtriser toutes les subtilités du langage humain, une tâche où notre 
-cerveau est exceptionnellement bien adapté. Pour bien des tâches complexes 
-cependant, ils commencent déjà à développer une redoutable intuition.  
-L'intuition est un concept difficile à définir. Très brièvement, on peut 
-dire que c'est un raisonnement fondé sur un grand nombre d'évidences. Prises 
-individuellement, ces évidences peuvent être faibles, mais en groupe elles 
-forment un modèle solide. C'est exactement ce que les réseaux de neurones 
-font: ils analysent de grandes bases de données et apprennent à lire les 
-relations subtiles, tout comme les humains maîtrisent les subtilités de leur 
-métier après des années d'expérience. Ceci inclut plusieurs tâches: 
-comprendre les systèmes économiques, financiers, moléculaires, et... 
-écologiques. C'est ce qui m'a amené à l'I.A. Je m'intéresse aux forces qui 
-maintiennent la biodiversité. Ces forces sont multiples et complexes, 
-tellement complexes que je doute qu'on puisse enfermer Mère Nature dans une 
-simple équation. Les outils mathématiques traditionnels ont longtemps eu de 
-la difficulté à analyser les sujets complexes. Les I.A., cependant, ont tout 
-ce qu'il faut pour percer ces mystères, même s'il reste beaucoup de chemin à 
-faire. Le problème, c'est qu'on comprend encore mal l'intelligence. Un peu 
-comme les pionniers de l'aviation tentaient maladroitement d'imiter les 
-ailes des oiseaux, nous bâtissons des I.A. en imitant le cerveau humain. Une 
-meilleure science de l'information nous permettra de dépasser les limites du 
-cerveau humain, mais les succès actuels de l'I.A. sont tout de même 
-impressionnants. Il a fallu quelques milliards d'années pour que la vie sur 
-terre mène à une intelligence comme la nôtre. Les I.A. n'ont pas 100 ans et 
-ils révolutionnent déjà le monde de la technologie.</p>
-
-
-]]></summary>
-</entry>
-<entry>
-    <title>Evolution of a transposon in Daphnia hybrid genomes</title>
-    <link href="http://phdp.github.io//posts/2013-02-06-transposon.html" />
-    <id>http://phdp.github.io//posts/2013-02-06-transposon.html</id>
-    <published>2013-02-06T00:00:00Z</published>
-    <updated>2013-02-06T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<h1>Evolution of a transposon in Daphnia hybrid genomes</h1>
-<a href="https://twitter.com/share" class="twitter-share-button" data-text="Evolution of a transposon in Daphnia hybrid genomes" data-via="phdpqc">Tweet</a>
-<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2013.02.06</p>
-  <h2>Reference</h2>
-
-  <p>R Vergilino, TA Elliott, <b>P Desjardins-Proulx</b>, TJ Crease and F
-Dufresne. Evolution of a transposon in <i>Daphnia</i> hybrid genomes.
-<i>Mobile DNA</i> 4:7, 2013.
-<a href="http://dx.doi.org/10.1186/1759-8753-4-7">DOI: 10.1186/1759-8753-4-7.</a></p>
 
 
 ]]></summary>
