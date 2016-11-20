@@ -37,8 +37,12 @@
 
 <div id="content">
   <h1>A gentle introduction to statistical relational learning: maths, code, and examples</h1>
+
 <a href="https://twitter.com/share" class="twitter-share-button" data-text="A gentle introduction to statistical relational learning: maths, code, and examples" data-via="phdpqc">Tweet</a>
-<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>2015.07.13</p>
+<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  2015.07.13
+</p>
+
 <p>Statistical relational learning is a branch of machine learning (A.I.)
 devoted to unify probability theory and logic. I'll write another post later
 to explain the motivation and a bit of history of this fascinating branch of
@@ -98,10 +102,11 @@ like old expert systems, but without the inflexibility of logic.</p>
 
 <h2>From Markov logic networks to inference in Markov networks</h2>
 
-<p>The first odd with Markov logic networks, is that there's no network. All we
-got is a set of weighted first-order logic formulas. A Markov logic network can
-be seen as a template for Markov networks. That is: there is no network in the
-Markov logic network, but we'll use it to generate networks. Take the formula:</p>
+<p>The first odd thing with Markov logic networks, is that there's no network
+(yet). All we got is a set of weighted first-order logic formulas. A Markov
+logic network can be seen as a template for Markov networks. That is: there is
+no network in the Markov logic network, but we'll use it to generate networks.
+Take the formula:</p>
 
 \[\forall x: Smoking(x) \Rightarrow Cancer(x), 1.5;\]
 
@@ -426,7 +431,6 @@ Just 0.7018023327893508
 formula we were able to get a richer model. Of course, there's much more to
 Markov logic networks than simple inference, we can learn new formulas from
 data, combine existing knowledge bases, transfer knowledge between domains...</p>
-
 
 
 
