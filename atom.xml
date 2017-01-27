@@ -8,8 +8,46 @@
         <name>Philippe Desjardins-Proulx</name>
         <email>philippe.d.proulx@gmail.com</email>
     </author>
-    <updated>2016-07-05T00:00:00Z</updated>
+    <updated>2017-01-27T00:00:00Z</updated>
     <entry>
+    <title>Ten years on Linux</title>
+    <link href="http://phdp.github.io//posts/2017-01-27-linux.html" />
+    <id>http://phdp.github.io//posts/2017-01-27-linux.html</id>
+    <published>2017-01-27T00:00:00Z</published>
+    <updated>2017-01-27T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>Ten years on Linux</h1>
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="Ten years on Linux" data-via="phdpqc">Tweet</a>
+<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  2017.01.27
+</p>
+
+<p>I moved from Windows to <a href='https://www.linuxfoundation.org/'>Linux</a>
+at the end of 2007, roughly ten years ago. I did many of the crazy things new
+users do, from <a href='https://www.gentoo.org/'>Gentoo</a> to <a
+href='https://www.archlinux.org/'>Arch</a>, but mostly used <a
+href='https://getfedora.org/'>Fedora</a> and <a
+href='https://www.ubuntu.com/'>Ubuntu</a>.</p>
+
+<p>I thought ten years was worth writing about... but honestly, the big thing
+to write about may be that there's little to write about. I installed Linux on
+roughly a dozen machines in 2016 (my machines, plus some owned by friends and
+family). The only issue I remember is having to install Ubuntu server on my
+desktop computer because the graphical installer couldn't work with my the GTX
+1080. I installed the server version, then NVIDIA's drivers, then the graphical
+interface, et voilà... A few days ago I completely removed Windows from an MSI
+laptop (yeppie, GTX 1070 GPU!). It just works.</p>
+
+<p>Linux is boring in a very nice, productivity-friendly way. Almost everything
+I need, from Cuda 8 to compilers and librairies, can be installed with a simple
+'sudo apt install'. It's probably not for everyone, but for machine learning
+research I cannot imagine a better platform.</p>
+
+<p style='text-align: center;'><img src='../images/2017_setup.png' alt='Setup 2017'/></p>
+
+]]></summary>
+</entry>
+<entry>
     <title>Can AlphaGo beat Imperial?</title>
     <link href="http://phdp.github.io//posts/2016-07-05-can-alphago.html" />
     <id>http://phdp.github.io//posts/2016-07-05-can-alphago.html</id>
@@ -1769,32 +1807,6 @@ Deep transfer is about determining what is relevant in previous data-sets
 and use this information to design better models, and faster! My thesis
 focuses on doing just that, using the complex heterogeneous data-sets
 found in ecology.</p>
-
-]]></summary>
-</entry>
-<entry>
-    <title>The case for open preprints in biology</title>
-    <link href="http://phdp.github.io//posts/2013-05-14-case-preprint.html" />
-    <id>http://phdp.github.io//posts/2013-05-14-case-preprint.html</id>
-    <published>2013-05-14T00:00:00Z</published>
-    <updated>2013-05-14T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<h1>The case for open preprints in biology</h1>
-
-<a href="https://twitter.com/share" class="twitter-share-button" data-text="The case for open preprints in biology" data-via="phdpqc">Tweet</a>
-<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-  2013.05.14
-</p>
-
-  <p>Initiated by a <a href="http://jabberwocky.weecology.org/2012/07/18/esa-journals-do-not-allow-papers-with-preprints/">simple tweet</a>, 
-  this collaboration on preprints in biology was ultimately accepted in PLOS Biology. The whole writing
-  process was done on GitHub (<a href="https://github.com/PhDP/article_preprint">here's the repo</a>).</p>
-
-  <h2>Reference</h2>
-
-  <p><b>P Desjardins-Proulx</b>, EP White, JJ Adamson, K Ram, T Poisot, and D
-Gravel. The case for open preprints in biology. <i>PLOS Biology</i> 11(5): e1001563, 2013.
-<a href="http://www.plosbiology.org/article/info%3Adoi%2F10.1371%2Fjournal.pbio.1001563">[URL]</a>
-</p>
 
 ]]></summary>
 </entry>
