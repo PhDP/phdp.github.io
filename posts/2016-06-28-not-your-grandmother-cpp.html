@@ -63,7 +63,7 @@ for set in sets:
     print(str(i) + ' ', end='')
   print('}')</code></pre>
 
-<p>Clean and simple. Now the C++ version, Frankenstein's monster in coding
+<p>Clean and simple. Now the C++ version, Frankenstein's monster in code
 form, look how ugly it is:</p>
 
 <pre><code class="cpp">#include &lt;iostream&gt;
@@ -106,13 +106,12 @@ int main() {
   return 0;
 }</code></pre>
 
-<p>Kill it! Kill it with fire (a certain unemployed red priestess could help)!
-Everything from creating the vector of sets to looping is awful... Except
-that's C++98. Nobody in their right mind is using C++98 unless they're forced
-to. I'm not even sure this is good C++98 code, I haven't written with this
-standard in ages. It's easy to forget not so long ago we couldn't write
-vector&lt;set&lt;int&gt; &gt; without adding a space between the two &gt;&gt;.
-In modern C++, the code looks like this:</p>
+<p>Kill it! Kill it with fire! Everything from creating the vector of sets to
+looping is awful... Except that's C++98. Nobody in their right mind is using
+C++98 unless they're forced to. I'm not even sure this is good C++98 code, I
+haven't written with this standard in ages. It's easy to forget not so long ago
+we couldn't write vector&lt;set&lt;int&gt; &gt; without adding a space between
+the two &gt;&gt;.  In modern C++, the code looks like this:</p>
 
 <pre><code class="cpp">#include &lt;iostream&gt;
 #include &lt;set&gt;
@@ -135,12 +134,12 @@ auto main() -&gt; int {
 
 <p>That's C++11 in action. I prefer this code to the Python version: it
 type-checks, compiles to efficient code, and gives you better control over
-memory (using references vs copy). You might prefer the Python version, fine,
-but it's not <i>that</i> much simpler. Plus, as Python and C++
-follow similar paradigms (except for type checking), the things that tend to be
-annoying to write in C++, <a href="2015-04-05-automated-reasoning.html">e.g.
-handling abstract syntax trees</a>, are equally painful in Python. So stop what
-you're doing, <a href="http://www.informit.com/store/discovering-modern-c-plus-plus-an-intensive-course-9780134383699">grab
+memory (using references vs copy). You may prefer the Python version, fine, but
+it's not <i>that</i> different. Plus, as Python and C++ follow similar
+paradigms (except for type checking), the things that tend to be annoying to
+write in C++, <a href="2015-04-05-automated-reasoning.html">e.g.  handling
+abstract syntax trees</a>, are equally painful in Python. So stop what you're
+doing, <a href="http://www.informit.com/store/discovering-modern-c-plus-plus-an-intensive-course-9780134383699">grab
 a good book</a>, and learn modern C++.</p>
 
 
