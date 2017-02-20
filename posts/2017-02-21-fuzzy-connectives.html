@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Philippe Desjardins-Proulx</title>
+  <link rel="stylesheet" media="screen" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" media="screen" href="../css/code.css" />
+  <!-- <link href='http://fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'> -->
+  <!-- <link href='http://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'> -->
+  <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic" rel="stylesheet" type="text/css" />
+  <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet" type="text/css" />
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<!-- <a href='https://github.com/PhDP/'>
+  <img style='position: absolute; top: 0; left: 0; border: 0;' src='/images/forkme.png' alt='Fork me on GitHub'>
+</a> -->
+
+<div id="header">
+  <!-- <h1><a href='mailto:philippe.d.proulx@gmail.com'>Philippe Desjardins-Proulx</a></h1> -->
+  <nav>
+    <ul>
+      <li>( Philippe Desjardins-Proulx</li>
+      <li><a href="../index.html">about</a></li>
+      <li><a href="../blog.html">blog</a></li>
+      <li><a href="https://ca.linkedin.com/in/philippedp"><i class="fa fa-linkedin-square"></i></a></li>
+      <li><a href="https://github.com/PhDP"><i class="fa fa-github"></i></a></li>
+      <li><a href="https://twitter.com/phdpqc"><i class="fa fa-twitter"></i></a></li>
+      <li><a href="mailto:philippe.d.proulx@gmail.com"><i class="fa fa-envelope"></i></a>)</li>
+    </ul>
+  </nav>
+</div>
+
+<div id="content">
+  <h1>Fun with fuzzy knowledge and fuzzy logic connectives</h1>
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="Fun with fuzzy knowledge and fuzzy logic connectives" data-via="phdpqc">Tweet</a>
+<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  2017.02.21
+</p>
+
+<p>Interesting things are going on in the world of many-valued logic <a href="https://arxiv.org/abs/1603.06318">as recent approaches to combine
+first-order logic rules with deep learning tend to involve fuzzying the logic
+predicates</a>. Whereas fuzzy logic is fairly simple to understand intuitively,
+it has more connectives, or to be exact, alternative ways to define them.</p>
+
+<p>In this post I'll explain a bit why fuzzy logic is interesting in the
+context of knowledge representation. Then, I'll introduce various fuzzy logic
+connectives and explain how they're connected. Fuzzy logic connectives are
+based on triangular norms (T-norms), and the more formal treatments of the
+subject tend to care only about conjunction (for good reason, we'll see why).
+Here, my goal is to be very explicit and get derive the formulas to compute the
+truth values. The maths are really simple, but hopefully the discussion will
+still be interesting.</p>
+
+<h2>From expert systems to scientific knowledge</h2>
+
+<p>Fuzzy logic is a radical departure from normal logic. Everything you've done
+in mathematics, computer science, and even probability theory, was bivalent.
+True or false, and nothing else. Sure, you can say the probability a moron will
+get elected US president is 30%, but in the end, he will either be elected or
+not elected. Again: true or false. Fuzzy logic breaks the mold, considering
+truth be be a gradient from 0 (false) to 1 (true). There are many many-valued
+("fuzzy") logics, but here we'll always consider the truth values to be real
+numbers in the [0, 1] closed range. An important thing to remember is that
+fuzzy logic is a strict superset of bivalent logic, it's more general, and thus
+the connectives should behave exactly like bivalent logic connectives when the
+truth values are 0s and 1s.</p>
+
+<p>There's a long tradition in A.I. of building expert systems, the most famous
+being probably MYCIN, which was used for infections, but what if we wanted a
+system flexible enough to include complex scientific theories. Turns out,
+that's tricky. We've made a lot of progress on this front, with frameworks like
+<a href="http://phdp.github.io/posts/2015-07-13-srl-code.html">Markov logic</a>
+allowing first-order logic rules to be associated with a weight, which in allow
+probabilistic queries. You're still limited to true/false values for predicates
+though. Take for example this seemighly simple idea: when a population is small
+and has plenty of preys (or is an autotroph, in which case it has no preys), it
+will experience exponential growth, or in logic (with \(s\) for a species,
+\(l\) for a location, and \(t\) for time):</p>
+
+\[SmallPop(s, l) \land (HasPreys(s, l) \lor Autotroph(s)) \Rightarrow N(s, l, t + 1) = R(s) \times N(s, l, t).\]
+
+<p>Where \(SmallPop\) establishes whether the population is small, \(HasPreys\)
+whether it has preys, \(Autotroph\) whether it needs preys, and the right-side
+of the implication if the traditional formula for exponential growth in discrete
+time (R is the rate of growth).</p>
+
+<p>Even a probability of being true is just not enough, because we never expect
+this rule to be exactly true. If you predict 102 rabbits and get 101, it's
+"false". Furthermore, predicates like \(SmallPop\) and \(HasPreys\) are better
+represented with nuances. With fuzzy logic, we could give a truth value for
+SmallPop based on the current population size compared to a normal-sized
+population, we could also quantify HasPreys depending on the population
+densities of the preys, and perhaps more importantly, we could have an
+\(ExponentialGrowth\) predicate and establish its truth value by compairing the
+predicted population size to the real population size. In this framework,
+predicting 102 rabbits when there are 101 would yield a truth value of 0.99
+instead of 0. Note that it's still possible to assign weights to fuzzy rules,
+in fact, it's exactly that <a href="http://stephenbach.net/files/kimmig-probprog12.pdf">probabilistic soft
+logic</a> is about.</p>
+
+<h2>Normal logic is fuzzy logic with boring values</h2>
+
+<p>With False = 0 and True = 1, you get the following connectives and truth
+tables for standard logic:</p>
+
+<table style="width: 80%; text-align:center;">
+  <tr>
+    <th>Connective</th>
+    <th>Informal name</th>
+    <th>Symbol</th>
+    <th>1 x 1</th><th>1 x 0</th><th>0 x 1</th><th>0 x 0</th>
+  </tr>
+  <tr>
+    <td>Conjunction</td>
+    <td>and</td>
+    <td>\(\land\)</td>
+    <td>1</td><td>0</td><td>0</td><td>0</td>
+  </tr>
+  <tr>
+    <td>Disjunction</td>
+    <td>or</td>
+    <td>\(\lor\)</td>
+    <td>1</td><td>1</td><td>1</td><td>0</td>
+  </tr>
+  <tr>
+    <td>Implication</td>
+    <td>implies</td>
+    <td>\(\Rightarrow\)</td>
+    <td>1</td><td>0</td><td>1</td><td>1</td>
+  </tr>
+  <tr>
+    <td>Equivalence</td>
+    <td>iff</td>
+    <td>\(\leftrightarrow\)</td>
+    <td>1</td><td>0</td><td>0</td><td>1</td>
+  </tr>
+  <tr>
+    <td>Exclusive disjunction</td>
+    <td>xor</td>
+    <td>\(\veebar\)</td>
+    <td>0</td><td>1</td><td>1</td><td>0</td>
+  </tr>
+</table>
+
+<p>Plus, we have one unary connective, negation, represented by \(\neg\). In
+practice all the connectives can be defined with only negation and
+conjunction:</p>
+
+\[x \land y.\]
+\[x \lor y = \neg(\neg x \land \neg y).\]
+\[x \Rightarrow y = \neg x \lor y = \neg (x \land \neg y).\]
+\[x \leftrightarrow y = (x \Rightarrow y) \land (y \Rightarrow x) = \neg (x \land \neg y) \land \neg (y \land \neg x).\]
+\[x \veebar y = \neg (x \leftrightarrow y) = \neg (\neg (x \land \neg y) \land \neg (y \land \neg x)).\]
+
+<p>The definition of disjunction using only negation and conjunction leads us
+to the famous De Morgan laws:</p>
+
+\[\neg(x \land y) = \neg x \lor \neg y\]
+\[\neg(x \lor y) = \neg x \land \neg y\]
+
+<p>We won't talk a lot about qualifiers (forall \(\forall\) and exists
+\(\exists\)), let's just say that, even in this case, for a formula \(x\), the
+qualified formula \(\exists x\) could be written \(\neg \forall \neg x\). I say
+this because, while we explore all the connectives here, formal texts will
+often define the smallest possible set of symbols. The larger set of
+connectives and qualifiers are mostly there for us, to make things easier to
+read and understand. Typical pandering to humans :P. As a quick side note,
+there's intriguing work being done on <a href="http://link.springer.com/chapter/10.1007/978-3-319-40566-7_5">soft
+qualifiers</a> for fuzzy logic. But back to the connectives...</p>
+
+<h2>A first bite of fuzzy connectives</h2>
+
+<p>With False = 0 and True = 1, and given that we expect the fuzzy connectives
+to behave the same as bivalent connectives, we can have:</p>
+
+\[\neg x = 1 - x.\]
+\[x \land y = min(x, y).\]
+\[x \lor y = max(x, y).\]
+
+<p>So \(\neg 1 = 0\), \(1 \land 0 = 0\), \(0 \land 1 = 1\), you can check,
+these connectives behave like normal bivalent connectives when they need to
+but they're also defined for other values: with \(x = 0.1\) and \(y = 0.7\)
+we get \(x \land y = 0.1\) and \(x \lor y = 0.7\). Let's try to see if
+our definition of disjunction using only conjunction and negation works
+too:</p>
+
+\[x \lor y = \neg(\neg x \land \neg y).\]
+\[x \lor y = \neg min(\neg x, \neg y).\]
+\[x \lor y = 1 - min(1 - x, 1 - y).\]
+
+<p>Turns out, \(max(x, y)\) is indeed the same as \(1 - min(1 - x, 1 - y)\).
+To see why it's helpful to use a more geometric formula for the minimum and
+maximum:</p>
+
+\[max(a, b) = \frac{a + b + |a - b|}{2}.\]
+\[min(a, b) = \frac{a + b - |a - b|}{2}.\]
+
+<p>The intuition behind the formulas above is that the maximum is the mid-point
+\((a + b)/2\) <emph>plus</emph> half the distance between \(a\) and \(b\) (i.e.:
+\(|a - b|\)), while the minimum is the mid-point <emph>minus</emph> half the
+distance. Back to our definition of disjunction:</p>
+
+\[max(x, y) = 1 - min(1 - x, 1 - y),\]
+\[max(x, y) = 1 - 0.5(1 - x + 1 - y - |1 - x - 1 + y|),\]
+\[max(x, y) = 0.5(x + y + |y - x|).\]
+
+<p>...and that's our definition of max (remember that \(|a| = |-a|\).</p>
+
+<p>Alright! We have our simple, happy definitions for conjunction and
+disjunction with continuous values. These definition are awesome: they are both
+simpler and more general than the truth tables we normally get for logic
+connectives... but there's a catch: there are other ways to define the fuzzy
+connectives. For example</p>
+
+\[x \land y = max(0, x + y - 1).\]
+\[x \lor y = min(1, x + y).\]
+
+<p>Our first definitions for fuzzy connectives were based on the Gödel T-norm,
+while these are based on the Lukasiewicz T-norm. Again, is our definition of
+disjunction from conjunction valid?</p>
+
+\[x \lor y = \neg(\neg x \land \neg y),\]
+\[min(1, x + y) = \neg max(0, \neg x + \neg y - 1),\]
+\[min(1, x + y) = 1 - max(0, 1 - x + 1 - y - 1),\]
+\[min(1, x + y) = 1 - max(0, 1 - x - y),\]
+\[0.5(1 + x + y - |1 - x - y|) = 1 - 0.5(0 + (1 - x - y) + |0 - (1 - x - y)|),\]
+\[0.5(1 + x + y - |1 - x - y|) = 1 - 0.5(1 - x - y + |x + y - 1|),\]
+\[0.5(1 + x + y - |1 - x - y|) = 0.5(1 + x + y - |x + y - 1|),\]
+
+<p>Works fine! These definitions might look needlessly complicated compared to
+the simple \(min(x, y)\) for conjunction, but they tend to make more sense. Take
+a rule like this:</p>
+
+\[SmallPop(x) \land (HasPreys(x) \lor Autotroph(x)) \Rightarrow ExponentialGrowth(x),\]
+
+<p>Basically, this rules says that if you have a small population size, that
+the species either has preys or don't need preys (autotroph), then the species
+will experience exponential growth. Say you have a formula to compute the truth
+values of SmallPop based on the current population size of the species relative
+to the average population size for this species, and another formula to for
+\(HasPreys(x)\) based on the need of the species. Autotroph is a bivalent
+predicates: it's either 0 or 1. I highly recommend you to play with this rule
+using different truth values, the appendix at the end of the post has the
+formulas for different systems. You'll see that the connectives with
+Lukasiewicz logic really combine truth values. If you set Autotroph to 1 and
+HasPreys to 0.5, changing the truth values for SmallPop from 0.5 to 1.0 won't
+change anything if disjunction is simply the minimum. In Lukasiewicz, it
+does.</p>
+
+<p>Defining implication in Lukasiewicz logic is straightforward:</p>
+
+\[x \Rightarrow y = \neg x \lor y,\]
+\[x \Rightarrow y = min(1, 1 - x + y).\]
+
+<p>As for equivalence:</p>
+
+\[x \leftrightarrow y = (x \Rightarrow y) \land (y \Rightarrow x),\]
+\[x \leftrightarrow y = min(1, 1 - x + y) \land min(1, 1 - y + x),\]
+\[x \leftrightarrow y = max(0, min(1, 1 - x + y) + min(1, 1 - y + x) - 1),\]
+\[x \leftrightarrow y = max(0, 0.5(4 - x + y - y + x - | x - y| - |y - x|) - 1),\]
+\[x \leftrightarrow y = max(0, 1 - |x - y|).\]
+
+<p>Technically, this is the definition of equivalence, but in practice since
+\(x - y\) can never be greater than 1 with the truth values restricted to the
+[0, 1] range, we can simplify to</p>
+
+\[x \leftrightarrow y = 1 - |x - y|.\]
+
+<p>And we'll define exclusive disjunction from there:</p>
+
+\[x \veebar y = \neg (x \leftrightarrow y),\]
+\[x \veebar y = 1 - (1 - |x - y|),\]
+\[x \veebar y = |x - y|.\]
+
+<p>We have all our connectives, plus two versions of disjunction and
+conjunction. We'll now explore T-norm, which is used to define different types
+of fuzzy logics. Yes, there are more possible connectives.</p>
+
+<h2>Triangular norm (T-norm)</h2>
+
+<p>So we have two ways to define conjunction, are there any other? Yes! A
+T-norm is a function from \([0, 1]^2 \rightarrow [0, 1]\) that satisfies the
+following properties given \(x, y, z, z', y' \in [0, 1]\):</p>
+
+<ol type="I">
+  <li>\(t(x, 0) = 0\).</li>
+  <li>\(t(x, 1) = x\).</li>
+  <li>Commutativity: \(t(x, y) = t(y, x)\).</li>
+  <li>Associativity: \(t(x, t(y, z)) = t(t(x, y), z)\).</li>
+  <li>Monotonicity: If \(x \leq x', y \leq y'\), then \(t(x, y) \leq t(x', y')\).</li>
+</ol>
+
+<p>We also have the T-conorm, which has the same properties as the T-norm
+except the the first two properties are changed to \(t(x, 0) = x\) and \(t(x,
+1) = 1\).</p>
+
+<p>So what is a T-norm? Multiplication, yes, simple plain multiplication, is a
+valid T-norm:</p>
+
+\[x \land y = x \times y.\]
+\[x \lor y = 1 - ((1 - x) \times (1 - y)).\]
+\[x \lor y = y + x - xy.\]
+
+<p>At this point we have three ways to define conjunction: \(min(x, y)\), which
+is called Gödel's T-norm (or Gödel-Dummett), \(max(0, x + y - 1)\) which is
+Lukasiewicz' T-norm, and finally we have simple multiplication, often
+called the product T-norm.</p>
+
+<h2>Appendix: Connectives for the three T-norms</h2>
+
+<p>Equations for all connectives for the three most common T-norms used in
+many-valued logic.</p>
+
+<table style="width: 80%">
+  <tr><th>Connective</th>             <th>Gödel-Dummett</th></tr>
+  <tr><td>Conjunction</td>            <td>\(min(x, y)\)</td></tr>
+  <tr><td>Disjunction</td>            <td>\(max(x, y)\)</td></tr>
+  <tr><td>Implication</td>            <td>\(max(1 - x, y)\)</td></tr>
+  <tr><td>Equivalence</td>            <td>\(min(max(1 - x, y), max(1 - y, x))\)</td></tr>
+  <tr><td>Exclusive disjunction</td>  <td>\(max(min(1 - x, y), min(1 - y, x))\)</td></tr>
+
+  <tr><th>Connective</th>             <th>Łukasiewicz</th></tr>
+  <tr><td>Conjunction</td>            <td>\(max(0, x + y - 1)\)</td></tr>
+  <tr><td>Disjunction</td>            <td>\(min(1, x + y)\)</td></tr>
+  <tr><td>Implication</td>            <td>\(min(1, 1 - x + y)\)</td></tr>
+  <tr><td>Equivalence</td>            <td>\(1 - |x - y|\)</td></tr>
+  <tr><td>Exclusive disjunction</td>  <td>\(|x - y|\)</td></tr>
+
+  <tr><th>Connective</th>             <th>Product</th></tr>
+  <tr><td>Conjunction</td>            <td>\(xy\)</td></tr>
+  <tr><td>Disjunction</td>            <td>\(x + y - xy\)</td></tr>
+  <tr><td>Implication</td>            <td>\(1 - x + xy\)</td></tr>
+  <tr><td>Equivalence</td>            <td>\((1 - x + xy)(1 - y + xy)\)</td></tr>
+  <tr><td>Exclusive disjunction</td>  <td>\(1 - (1 - x + xy)(1 - y + xy)\)</td></tr>
+</table>
+
+
+
+  <div id="hidden">
+    let world = "世界" in print $ "Hello " ++ world ++ "!"
+  </div>
+</div>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="../js/highlight.pack.js"></script>
+<script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+
+</body>
+</html>
