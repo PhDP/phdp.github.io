@@ -61,48 +61,49 @@ still be interesting.</p>
 
 <p>Fuzzy logic is a radical departure from normal logic. Everything you've done
 in mathematics, computer science, and even probability theory, was bivalent.
-True or false, and nothing else. Sure, you can say the probability a moron will
-get elected US president is 30%, but in the end, he will either be elected or
-not elected. Again: true or false. Fuzzy logic breaks the mold, considering
-truth be be a gradient from 0 (false) to 1 (true). There are many many-valued
-("fuzzy") logics, but here we'll always consider the truth values to be real
-numbers in the [0, 1] closed range. An important thing to remember is that
-fuzzy logic is a strict superset of bivalent logic, it's more general, and thus
-the connectives should behave exactly like bivalent logic connectives when the
-truth values are 0s and 1s.</p>
+True or false, and nothing else. Sure, you can say the probability to pick a
+queen from a deck of cards is 1/13, but in the end, you'll either have a queen
+or not. Again: true or false. Fuzzy logic breaks the mold, considering truth be
+be a gradient from 0 (false) to 1 (true). There are many many-valued ("fuzzy")
+logics, but here we'll always consider the truth values to be real numbers in
+the [0, 1] closed range. An important thing to remember is that fuzzy logic is
+a strict superset of bivalent logic, it's more general, and thus the
+connectives should behave exactly like bivalent logic connectives when the
+truth values are restricted to 0s and 1s.</p>
 
 <p>There's a long tradition in A.I. of building expert systems, the most famous
 being probably MYCIN, which was used for infections, but what if we wanted a
-system flexible enough to include complex scientific theories. Turns out,
-that's tricky. We've made a lot of progress on this front, with frameworks like
-<a href="http://phdp.github.io/posts/2015-07-13-srl-code.html">Markov logic</a>
-allowing first-order logic rules to be associated with a weight, which in allow
-probabilistic queries. You're still limited to true/false values for predicates
-though. Take for example this seemighly simple idea: when a population is small
-and has plenty of preys (or is an autotroph, in which case it has no preys), it
-will experience exponential growth, or in logic (with \(s\) for a species,
-\(l\) for a location, and \(t\) for time):</p>
+system flexible enough to include complex scientific theories. Turns out that's
+tricky. We've made a lot of progress on this front, with frameworks like <a href="http://phdp.github.io/posts/2015-07-13-srl-code.html">Markov logic</a>
+allowing first-order logic rules to be associated with a weight, which in turn
+allows probabilistic queries. Yet you're still limited to true/false values for
+predicates. Take for example this seemingly simple idea: when a population is
+small and has plenty of preys (or is an autotroph, in which case it has no
+preys), it will experience exponential growth, or in logic (with \(s\) for a
+species, \(l\) for a location, and \(t\) for time):</p>
 
 \[SmallPop(s, l) \land (HasPreys(s, l) \lor Autotroph(s)) \Rightarrow N(s, l, t + 1) = R(s) \times N(s, l, t).\]
 
 <p>Where \(SmallPop\) establishes whether the population is small, \(HasPreys\)
 whether it has preys, \(Autotroph\) whether it needs preys, and the right-side
 of the implication is the traditional formula for exponential growth in discrete
-time (R is the rate of growth).</p>
+time (\(R\) is the rate of growth).</p>
 
 <p>Even a probability of being true is just not enough, because we never expect
 this rule to be exactly true. If you predict 102 rabbits and get 101, it's
 "false". Furthermore, predicates like \(SmallPop\) and \(HasPreys\) are better
 represented with nuances. With fuzzy logic, we could give a truth value for
-SmallPop based on the current population size compared to a normal-sized
-population, we could also quantify HasPreys depending on the population
-densities of the preys, and perhaps more importantly, we could have an
-\(ExponentialGrowth\) predicate and establish its truth value by compairing the
-predicted population size to the real population size. In this framework,
-predicting 102 rabbits when there are 101 would yield a truth value of 0.99
-instead of 0. Note that it's still possible to assign weights to fuzzy rules,
-in fact, it's exactly that <a href="http://stephenbach.net/files/kimmig-probprog12.pdf">probabilistic soft
-logic</a> is about.</p>
+\(SmallPop\) based on the current population size compared to a normal-sized
+population, we could also quantify \(HasPreys\) on the population densities of
+the preys, and perhaps more importantly, we could have an \(ExponentialGrowth\)
+predicate and establish its truth value by comparing the predicted population
+size to the real population size. In this framework, predicting 102 rabbits
+when there are 101 would yield a truth value of 0.99 instead of 0. Note that
+it's still possible to assign weights to fuzzy rules, in fact, it's exactly
+what <a href="http://stephenbach.net/files/kimmig-probprog12.pdf">probabilistic
+soft logic</a> is about.</p>
+
+<p>But enough exposition, let's explore how the connectives work.</p>
 
 <h2>Normal logic is fuzzy logic with boring values</h2>
 
@@ -164,14 +165,14 @@ to the famous De Morgan laws:</p>
 \[\neg(x \land y) = \neg x \lor \neg y\]
 \[\neg(x \lor y) = \neg x \land \neg y\]
 
-<p>We won't talk a lot about qualifiers (forall \(\forall\) and exists
-\(\exists\)), let's just say that, even in this case, for a formula \(x\), the
-qualified formula \(\exists x\) could be written \(\neg \forall \neg x\). I say
-this because, while we explore all the connectives here, formal texts will
-often define the smallest possible set of symbols. The larger set of
-connectives and qualifiers are mostly there for us, to make things easier to
-read and understand. Typical pandering to humans :P. As a quick side note,
-there's intriguing work being done on <a href="http://link.springer.com/chapter/10.1007/978-3-319-40566-7_5">soft
+<p>We won't talk about qualifiers (forall \(\forall\) and exists \(\exists\)),
+let's just say that, even in this case, for a formula \(x\), the qualified
+formula \(\exists x\) could be written \(\neg \forall \neg x\). I say this
+because, while we explore all the connectives here, formal texts will often
+define the smallest possible set of symbols. The larger set of connectives and
+qualifiers are mostly there for us, to make things easier to read and
+understand. Typical pandering to humans :P. As a quick side note, there's
+intriguing work being done on <a href="http://link.springer.com/chapter/10.1007/978-3-319-40566-7_5">soft
 qualifiers</a> for fuzzy logic. But back to the connectives...</p>
 
 <h2>A first bite of fuzzy connectives</h2>
@@ -210,7 +211,7 @@ distance. Back to our definition of disjunction:</p>
 \[max(x, y) = 1 - 0.5(1 - x + 1 - y - |1 - x - 1 + y|),\]
 \[max(x, y) = 0.5(x + y + |y - x|).\]
 
-<p>...and that's our definition of max (remember that \(|a| = |-a|\).</p>
+<p>...and that's our definition of maximum (remember that \(|a| = |-a|\).</p>
 
 <p>Alright! We have our simple, happy definitions for conjunction and
 disjunction with continuous values. These definition are awesome: they are both
@@ -264,12 +265,12 @@ minimum.</p>
 \[x \veebar y = |x - y|.\]
 
 <p>We have all our connectives, plus two versions of disjunction and
-conjunction. We'll now explore T-norm, which is used to define different types
-of fuzzy logics. Yes, there are more possible connectives.</p>
+conjunction. We'll now explore T-norm. Yes, there are more possible
+connectives.</p>
 
 <h2>Triangular norm (T-norm)</h2>
 
-<p>So we have two ways to define conjunction, are there any other? Yes! A
+<p>So we have two ways to define conjunction, are there others? Yes! A
 T-norm is a function from \([0, 1]^2 \rightarrow [0, 1]\) that satisfies the
 following properties given \(x, y, z, z', y' \in [0, 1]\):</p>
 
@@ -296,6 +297,10 @@ valid T-norm:</p>
 is called Gödel's T-norm (or Gödel-Dummett), \(max(0, x + y - 1)\) which is
 Lukasiewicz' T-norm, and finally we have simple multiplication, often
 called the product T-norm.</p>
+
+<p>In practice I mostly saw the Lukasiewicz connectives, but it's interesting
+to see how many variants are possible while still being consistent with
+standard bivalent logic.</p>
 
 <h2>Appendix: Connectives for the three T-norms</h2>
 
