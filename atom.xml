@@ -8,8 +8,345 @@
         <name>Philippe Desjardins-Proulx</name>
         <email>philippe.d.proulx@gmail.com</email>
     </author>
-    <updated>2017-01-27T00:00:00Z</updated>
+    <updated>2017-02-21T00:00:00Z</updated>
     <entry>
+    <title>Fuzzy knowledge and fuzzy logic connectives</title>
+    <link href="http://phdp.github.io//posts/2017-02-21-fuzzy-connectives.html" />
+    <id>http://phdp.github.io//posts/2017-02-21-fuzzy-connectives.html</id>
+    <published>2017-02-21T00:00:00Z</published>
+    <updated>2017-02-21T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>Fuzzy knowledge and fuzzy logic connectives</h1>
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="Fuzzy knowledge and fuzzy logic connectives" data-via="phdpqc">Tweet</a>
+<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  2017.02.21
+</p>
+
+<p>Interesting things are going on in the world of many-valued logic <a
+href='https://arxiv.org/abs/1603.06318'>as recent approaches to combine
+first-order logic rules with deep learning tend to involve fuzzying the logic
+predicates</a>. Whereas fuzzy logic is fairly simple to understand intuitively,
+it has more connectives, or to be exact, alternative ways to define them.</p>
+
+<p>In this post I'll explain a bit why fuzzy logic is interesting in the
+context of knowledge representation. Then, I'll introduce various fuzzy logic
+connectives and explain how they're connected. Fuzzy logic connectives are
+based on triangular norms (T-norms), and the more formal treatments of the
+subject tend to care only about conjunction (for good reason, we'll see why).
+Here, my goal is to be very explicit and get derive the formulas to compute the
+truth values. The maths are really simple, but hopefully the discussion will
+still be interesting.</p>
+
+<h2>From expert systems to scientific knowledge</h2>
+
+<p>Fuzzy logic is a radical departure from normal logic. Everything you've done
+in mathematics, computer science, and even probability theory, was bivalent.
+True or false, and nothing else. Sure, you can say the probability a moron will
+get elected US president is 30%, but in the end, he will either be elected or
+not elected. Again: true or false. Fuzzy logic breaks the mold, considering
+truth be be a gradient from 0 (false) to 1 (true). There are many many-valued
+("fuzzy") logics, but here we'll always consider the truth values to be real
+numbers in the [0, 1] closed range. An important thing to remember is that
+fuzzy logic is a strict superset of bivalent logic, it's more general, and thus
+the connectives should behave exactly like bivalent logic connectives when the
+truth values are 0s and 1s.</p>
+
+<p>There's a long tradition in A.I. of building expert systems, the most famous
+being probably MYCIN, which was used for infections, but what if we wanted a
+system flexible enough to include complex scientific theories. Turns out,
+that's tricky. We've made a lot of progress on this front, with frameworks like
+<a href='http://phdp.github.io/posts/2015-07-13-srl-code.html'>Markov logic</a>
+allowing first-order logic rules to be associated with a weight, which in allow
+probabilistic queries. You're still limited to true/false values for predicates
+though. Take for example this seemighly simple idea: when a population is small
+and has plenty of preys (or is an autotroph, in which case it has no preys), it
+will experience exponential growth, or in logic (with \(s\) for a species,
+\(l\) for a location, and \(t\) for time):</p>
+
+\[SmallPop(s, l) \land (HasPreys(s, l) \lor Autotroph(s)) \Rightarrow N(s, l, t + 1) = R(s) \times N(s, l, t).\]
+
+<p>Where \(SmallPop\) establishes whether the population is small, \(HasPreys\)
+whether it has preys, \(Autotroph\) whether it needs preys, and the right-side
+of the implication is the traditional formula for exponential growth in discrete
+time (R is the rate of growth).</p>
+
+<p>Even a probability of being true is just not enough, because we never expect
+this rule to be exactly true. If you predict 102 rabbits and get 101, it's
+"false". Furthermore, predicates like \(SmallPop\) and \(HasPreys\) are better
+represented with nuances. With fuzzy logic, we could give a truth value for
+SmallPop based on the current population size compared to a normal-sized
+population, we could also quantify HasPreys depending on the population
+densities of the preys, and perhaps more importantly, we could have an
+\(ExponentialGrowth\) predicate and establish its truth value by compairing the
+predicted population size to the real population size. In this framework,
+predicting 102 rabbits when there are 101 would yield a truth value of 0.99
+instead of 0. Note that it's still possible to assign weights to fuzzy rules,
+in fact, it's exactly that <a
+href='http://stephenbach.net/files/kimmig-probprog12.pdf'>probabilistic soft
+logic</a> is about.</p>
+
+<h2>Normal logic is fuzzy logic with boring values</h2>
+
+<p>With False = 0 and True = 1, you get the following connectives and truth
+tables for standard logic:</p>
+
+<table style='width: 80%; text-align:center;'>
+  <tr>
+    <th>Connective</th>
+    <th>Informal name</th>
+    <th>Symbol</th>
+    <th>1 x 1</th><th>1 x 0</th><th>0 x 1</th><th>0 x 0</th>
+  </tr>
+  <tr>
+    <td>Conjunction</td>
+    <td>and</td>
+    <td>\(\land\)</td>
+    <td>1</td><td>0</td><td>0</td><td>0</td>
+  </tr>
+  <tr>
+    <td>Disjunction</td>
+    <td>or</td>
+    <td>\(\lor\)</td>
+    <td>1</td><td>1</td><td>1</td><td>0</td>
+  </tr>
+  <tr>
+    <td>Implication</td>
+    <td>implies</td>
+    <td>\(\Rightarrow\)</td>
+    <td>1</td><td>0</td><td>1</td><td>1</td>
+  </tr>
+  <tr>
+    <td>Equivalence</td>
+    <td>iff</td>
+    <td>\(\leftrightarrow\)</td>
+    <td>1</td><td>0</td><td>0</td><td>1</td>
+  </tr>
+  <tr>
+    <td>Exclusive disjunction</td>
+    <td>xor</td>
+    <td>\(\veebar\)</td>
+    <td>0</td><td>1</td><td>1</td><td>0</td>
+  </tr>
+</table>
+
+<p>Plus, we have one unary connective, negation, represented by \(\neg\). In
+practice all the connectives can be defined with only negation and
+conjunction:</p>
+
+\[x \land y.\]
+\[x \lor y = \neg(\neg x \land \neg y).\]
+\[x \Rightarrow y = \neg x \lor y = \neg (x \land \neg y).\]
+\[x \leftrightarrow y = (x \Rightarrow y) \land (y \Rightarrow x) = \neg (x \land \neg y) \land \neg (y \land \neg x).\]
+\[x \veebar y = \neg (x \leftrightarrow y) = \neg (\neg (x \land \neg y) \land \neg (y \land \neg x)).\]
+
+<p>The definition of disjunction using only negation and conjunction leads us
+to the famous De Morgan laws:</p>
+
+\[\neg(x \land y) = \neg x \lor \neg y\]
+\[\neg(x \lor y) = \neg x \land \neg y\]
+
+<p>We won't talk a lot about qualifiers (forall \(\forall\) and exists
+\(\exists\)), let's just say that, even in this case, for a formula \(x\), the
+qualified formula \(\exists x\) could be written \(\neg \forall \neg x\). I say
+this because, while we explore all the connectives here, formal texts will
+often define the smallest possible set of symbols. The larger set of
+connectives and qualifiers are mostly there for us, to make things easier to
+read and understand. Typical pandering to humans :P. As a quick side note,
+there's intriguing work being done on <a
+href='http://link.springer.com/chapter/10.1007/978-3-319-40566-7_5'>soft
+qualifiers</a> for fuzzy logic. But back to the connectives...</p>
+
+<h2>A first bite of fuzzy connectives</h2>
+
+<p>With False = 0 and True = 1, and given that we expect the fuzzy connectives
+to behave the same as bivalent connectives, we can have:</p>
+
+\[\neg x = 1 - x.\]
+\[x \land y = min(x, y).\]
+\[x \lor y = max(x, y).\]
+
+<p>So \(\neg 1 = 0\), \(1 \land 0 = 0\), \(0 \land 1 = 1\), you can check,
+these connectives behave like normal bivalent connectives when they need to
+but they're also defined for other values: with \(x = 0.1\) and \(y = 0.7\)
+we get \(x \land y = 0.1\) and \(x \lor y = 0.7\). Let's try to see if
+our definition of disjunction using only conjunction and negation works
+too:</p>
+
+\[x \lor y = \neg(\neg x \land \neg y).\]
+\[x \lor y = \neg min(\neg x, \neg y).\]
+\[x \lor y = 1 - min(1 - x, 1 - y).\]
+
+<p>Turns out, \(max(x, y)\) is indeed the same as \(1 - min(1 - x, 1 - y)\).
+To see why it's helpful to use a more geometric formula for the minimum and
+maximum:</p>
+
+\[max(a, b) = \frac{a + b + |a - b|}{2}.\]
+\[min(a, b) = \frac{a + b - |a - b|}{2}.\]
+
+<p>The intuition behind the formulas above is that the maximum is the mid-point
+\((a + b)/2\) <emph>plus</emph> half the distance between \(a\) and \(b\) (i.e.:
+\(|a - b|\)), while the minimum is the mid-point <emph>minus</emph> half the
+distance. Back to our definition of disjunction:</p>
+
+\[max(x, y) = 1 - min(1 - x, 1 - y),\]
+\[max(x, y) = 1 - 0.5(1 - x + 1 - y - |1 - x - 1 + y|),\]
+\[max(x, y) = 0.5(x + y + |y - x|).\]
+
+<p>...and that's our definition of max (remember that \(|a| = |-a|\).</p>
+
+<p>Alright! We have our simple, happy definitions for conjunction and
+disjunction with continuous values. These definition are awesome: they are both
+simpler and more general than the truth tables we normally get for logic
+connectives... but there's a catch: there are other ways to define the fuzzy
+connectives. For example</p>
+
+\[x \land y = max(0, x + y - 1).\]
+\[x \lor y = min(1, x + y).\]
+
+<p>Our first definitions for fuzzy connectives were based on the Gödel T-norm,
+while these are based on the Lukasiewicz T-norm. Again, is our definition of
+disjunction from conjunction valid?</p>
+
+\[x \lor y = \neg(\neg x \land \neg y),\]
+\[min(1, x + y) = \neg max(0, \neg x + \neg y - 1),\]
+\[min(1, x + y) = 1 - max(0, 1 - x + 1 - y - 1),\]
+\[min(1, x + y) = 1 - max(0, 1 - x - y),\]
+\[0.5(1 + x + y - |1 - x - y|) = 1 - 0.5(0 + (1 - x - y) + |0 - (1 - x - y)|),\]
+\[0.5(1 + x + y - |1 - x - y|) = 1 - 0.5(1 - x - y + |x + y - 1|),\]
+\[0.5(1 + x + y - |1 - x - y|) = 0.5(1 + x + y - |x + y - 1|),\]
+
+<p>Works fine! These definitions might look needlessly complicated compared to
+the simple \(min(x, y)\) for conjunction, but they often make more sense since
+they combine the truth values instead of just discarding one like the
+minimum.</p>
+
+<p>Defining implication in Lukasiewicz logic is straightforward:</p>
+
+\[x \Rightarrow y = \neg x \lor y,\]
+\[x \Rightarrow y = min(1, 1 - x + y).\]
+
+<p>As for equivalence:</p>
+
+\[x \leftrightarrow y = (x \Rightarrow y) \land (y \Rightarrow x),\]
+\[x \leftrightarrow y = min(1, 1 - x + y) \land min(1, 1 - y + x),\]
+\[x \leftrightarrow y = max(0, min(1, 1 - x + y) + min(1, 1 - y + x) - 1),\]
+\[x \leftrightarrow y = max(0, 0.5(4 - x + y - y + x - | x - y| - |y - x|) - 1),\]
+\[x \leftrightarrow y = max(0, 1 - |x - y|).\]
+
+<p>Technically, this is the definition of equivalence, but in practice since
+\(x - y\) can never be greater than 1 with the truth values restricted to the
+[0, 1] range, we can simplify to</p>
+
+\[x \leftrightarrow y = 1 - |x - y|.\]
+
+<p>And we'll define exclusive disjunction from there:</p>
+
+\[x \veebar y = \neg (x \leftrightarrow y),\]
+\[x \veebar y = 1 - (1 - |x - y|),\]
+\[x \veebar y = |x - y|.\]
+
+<p>We have all our connectives, plus two versions of disjunction and
+conjunction. We'll now explore T-norm, which is used to define different types
+of fuzzy logics. Yes, there are more possible connectives.</p>
+
+<h2>Triangular norm (T-norm)</h2>
+
+<p>So we have two ways to define conjunction, are there any other? Yes! A
+T-norm is a function from \([0, 1]^2 \rightarrow [0, 1]\) that satisfies the
+following properties given \(x, y, z, z', y' \in [0, 1]\):</p>
+
+<ol type="I">
+  <li>\(t(x, 0) = 0\).</li>
+  <li>\(t(x, 1) = x\).</li>
+  <li>Commutativity: \(t(x, y) = t(y, x)\).</li>
+  <li>Associativity: \(t(x, t(y, z)) = t(t(x, y), z)\).</li>
+  <li>Monotonicity: If \(x \leq x', y \leq y'\), then \(t(x, y) \leq t(x', y')\).</li>
+</ol>
+
+<p>We also have the T-conorm, which has the same properties as the T-norm
+except the the first two properties are changed to \(t(x, 0) = x\) and \(t(x,
+1) = 1\).</p>
+
+<p>So what is a T-norm? Multiplication, yes, simple plain multiplication, is a
+valid T-norm:</p>
+
+\[x \land y = x \times y.\]
+\[x \lor y = 1 - ((1 - x) \times (1 - y)).\]
+\[x \lor y = y + x - xy.\]
+
+<p>At this point we have three ways to define conjunction: \(min(x, y)\), which
+is called Gödel's T-norm (or Gödel-Dummett), \(max(0, x + y - 1)\) which is
+Lukasiewicz' T-norm, and finally we have simple multiplication, often
+called the product T-norm.</p>
+
+<h2>Appendix: Connectives for the three T-norms</h2>
+
+<p>Equations for all connectives for the three most common T-norms used in
+many-valued logic.</p>
+
+<table style='width: 80%'>
+  <tr><th>Connective</th>             <th>Gödel-Dummett</th></tr>
+  <tr><td>Conjunction</td>            <td>\(min(x, y)\)</td></tr>
+  <tr><td>Disjunction</td>            <td>\(max(x, y)\)</td></tr>
+  <tr><td>Implication</td>            <td>\(max(1 - x, y)\)</td></tr>
+  <tr><td>Equivalence</td>            <td>\(min(max(1 - x, y), max(1 - y, x))\)</td></tr>
+  <tr><td>Exclusive disjunction</td>  <td>\(max(min(1 - x, y), min(1 - y, x))\)</td></tr>
+
+  <tr><th>Connective</th>             <th>Łukasiewicz</th></tr>
+  <tr><td>Conjunction</td>            <td>\(max(0, x + y - 1)\)</td></tr>
+  <tr><td>Disjunction</td>            <td>\(min(1, x + y)\)</td></tr>
+  <tr><td>Implication</td>            <td>\(min(1, 1 - x + y)\)</td></tr>
+  <tr><td>Equivalence</td>            <td>\(1 - |x - y|\)</td></tr>
+  <tr><td>Exclusive disjunction</td>  <td>\(|x - y|\)</td></tr>
+
+  <tr><th>Connective</th>             <th>Product</th></tr>
+  <tr><td>Conjunction</td>            <td>\(xy\)</td></tr>
+  <tr><td>Disjunction</td>            <td>\(x + y - xy\)</td></tr>
+  <tr><td>Implication</td>            <td>\(1 - x + xy\)</td></tr>
+  <tr><td>Equivalence</td>            <td>\((1 - x + xy)(1 - y + xy)\)</td></tr>
+  <tr><td>Exclusive disjunction</td>  <td>\(1 - (1 - x + xy)(1 - y + xy)\)</td></tr>
+</table>
+
+]]></summary>
+</entry>
+<entry>
+    <title>CMake project templates for C++11 and CUDA with google test/benchmark support</title>
+    <link href="http://phdp.github.io//posts/2017-01-30-cmake.html" />
+    <id>http://phdp.github.io//posts/2017-01-30-cmake.html</id>
+    <published>2017-01-30T00:00:00Z</published>
+    <updated>2017-01-30T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>CMake project templates for C++11 and CUDA with google test/benchmark support</h1>
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="CMake project templates for C++11 and CUDA with google test/benchmark support" data-via="phdpqc">Tweet</a>
+<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  2017.01.30
+</p>
+
+<p>Books generally don't cover project organization and few introductions to
+C++ discuss testing frameworks, let alone benchmarking. In my experience, many
+science students compile without optimization flags, don't know how to separate
+header and source files, tests, etc etc. So I created two simple <a
+href='https://cmake.org/'>cmake</a> project templates. One for C++11 (with a
+library and an executable) and one for CUDA. Both support testing with <a
+href='https://github.com/google/googletest'>Google Test</a> and benchmarks with
+<a href='https://github.com/google/benchmark'>Google Benchmark</a>.</p>
+
+<ul>
+  <li><a href='https://github.com/PhDP/cmake-gtest-gbench-starter'>C++11 cmake project with google test / google benchmark support.</a></li>
+  <li><a href='https://github.com/PhDP/cuda-cmake-gtest-gbench-starter'>C++/CUDA cmake project with google test / google benchmark support.</a></li>
+</ul>
+
+<p><a href='https://cmake.org/'>CMake</a> is a popular tool for building
+cross-platform C++ applications, you shouldn't have any issue installing
+it.</p>
+
+<p>The C++ project template works on both Linux/UNIX and Windows, while the
+CUDA project is tested only on Linux. Feel free to fork / suggest
+improvements.</p>
+
+]]></summary>
+</entry>
+<entry>
     <title>Ten years on Linux</title>
     <link href="http://phdp.github.io//posts/2017-01-27-linux.html" />
     <id>http://phdp.github.io//posts/2017-01-27-linux.html</id>
@@ -33,7 +370,7 @@ href='https://www.ubuntu.com/'>Ubuntu</a>.</p>
 to write about may be that there's little to write about. I installed Linux on
 roughly a dozen machines in 2016 (my machines, plus some owned by friends and
 family). The only issue I remember is having to install Ubuntu server on my
-desktop computer because the graphical installer couldn't work with my the GTX
+desktop computer because the graphical installer couldn't work with the GTX
 1080. I installed the server version, then NVIDIA's drivers, then the graphical
 interface, et voilà... A few days ago I completely removed Windows from an MSI
 laptop (yeppie, GTX 1070 GPU!). It just works.</p>
@@ -152,7 +489,7 @@ for set in sets:
     print(str(i) + ' ', end='')
   print('}')</code></pre>
 
-<p>Clean and simple. Now the C++ version, Frankenstein's monster in coding
+<p>Clean and simple. Now the C++ version, Frankenstein's monster in code
 form, look how ugly it is:</p>
 
 <pre><code class="cpp">#include &lt;iostream&gt;
@@ -195,13 +532,12 @@ int main() {
   return 0;
 }</code></pre>
 
-<p>Kill it! Kill it with fire (a certain unemployed red priestess could help)!
-Everything from creating the vector of sets to looping is awful... Except
-that's C++98. Nobody in their right mind is using C++98 unless they're forced
-to. I'm not even sure this is good C++98 code, I haven't written with this
-standard in ages. It's easy to forget not so long ago we couldn't write
-vector&lt;set&lt;int&gt; &gt; without adding a space between the two &gt;&gt;.
-In modern C++, the code looks like this:</p>
+<p>Kill it! Kill it with fire! Everything from creating the vector of sets to
+looping is awful... Except that's C++98. Nobody in their right mind is using
+C++98 unless they're forced to. I'm not even sure this is good C++98 code, I
+haven't written with this standard in ages. It's easy to forget not so long ago
+we couldn't write vector&lt;set&lt;int&gt; &gt; without adding a space between
+the two &gt;&gt;.  In modern C++, the code looks like this:</p>
 
 <pre><code class="cpp">#include &lt;iostream&gt;
 #include &lt;set&gt;
@@ -224,13 +560,12 @@ auto main() -&gt; int {
 
 <p>That's C++11 in action. I prefer this code to the Python version: it
 type-checks, compiles to efficient code, and gives you better control over
-memory (using references vs copy). You might prefer the Python version, fine,
-but it's not <i>that</i> much simpler. Plus, as Python and C++
-follow similar paradigms (except for type checking), the things that tend to be
-annoying to write in C++, <a href='2015-04-05-automated-reasoning.html'>e.g.
-handling abstract syntax trees</a>, are equally painful in Python. So stop what
-you're doing, <a
-href='http://www.informit.com/store/discovering-modern-c-plus-plus-an-intensive-course-9780134383699'>grab
+memory (using references vs copy). You may prefer the Python version, fine, but
+it's not <i>that</i> different. Plus, as Python and C++ follow similar
+paradigms (except for type checking), the things that tend to be annoying to
+write in C++, <a href='2015-04-05-automated-reasoning.html'>e.g.  handling
+abstract syntax trees</a>, are equally painful in Python. So stop what you're
+doing, <a href='http://www.informit.com/store/discovering-modern-c-plus-plus-an-intensive-course-9780134383699'>grab
 a good book</a>, and learn modern C++.</p>
 
 ]]></summary>
@@ -756,7 +1091,7 @@ parsers is flexible and will accept a keyboard-friendly form too:</p>
 
 <pre><code class="haskell">ghci> fromStrings ["1.5 forall x Smoking(x) implies Cancer(x)", "1.1 forall x, y Friend(x, y) and Smoking(x) implies Smoking(y)"]</code></pre>
 
-<p>We can see the structure of the network simply by typing its name:</p>p>
+<p>We can see the structure of the network simply by typing its name:</p>
 
 <pre><code class="haskell">ghci> mln
 1.5                     ∀x Smoking(x) ⇒ Cancer(x)
@@ -1630,183 +1965,6 @@ how different ideas and evidence can be combined.</p>
 <p>[3] T Poisot, DB Stouffer, and D Gravel. <a href='http://dx.doi.org/10.1101/001677'>Beyond species: why ecological interactions vary through space and time</a>. <i>bioRxiV</i>, 2014.</p>
 
 <p>[4] M Richardson and P Domingos. Markov logic networks. <i>Machine Learning</i> <b>62</b> (1-2): 107–136, 2006.</p>
-
-]]></summary>
-</entry>
-<entry>
-    <title>Scriptoria.info - Tracking science manuscripts under revision control systems</title>
-    <link href="http://phdp.github.io//posts/2013-07-22-scriptopia.html" />
-    <id>http://phdp.github.io//posts/2013-07-22-scriptopia.html</id>
-    <published>2013-07-22T00:00:00Z</published>
-    <updated>2013-07-22T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<h1>Scriptoria.info - Tracking science manuscripts under revision control systems</h1>
-
-<a href="https://twitter.com/share" class="twitter-share-button" data-text="Scriptoria.info - Tracking science manuscripts under revision control systems" data-via="phdpqc">Tweet</a>
-<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-  2013.07.22
-</p>
-
-<p><i><b>Update 2014-09-06</b>: I wanted Scriptoria to be a group effort,
-something built by several scientists, especially since I never intended to
-stay in academia after the Ph.D. I failed to create enough momentum around the
-project, so I'm moving on...</i></p>
-
-<p>There is widespread dissatisfaction with the way scientific publishing is
-done, but fortunately many (cheaper) alternatives are emerging. Among these
-alternatives is git (and revision control systems). Karthik Ram recently
-wrote a piece on the use of git in science: <a href=
-"http://www.scfbm.org/content/8/1/7/">http://www.scfbm.org/content/8/1/7/</a>.
-Highly suggested reading.</p>
-
-<p>The put it bluntly: revision control systems are more modern and
-efficient than our peer-review system (my words, not his). With git and
-github (a hosting service for git), <a href=
-"https://github.com/PhDP/article_preprint/commits/master">changes are
-tracked, with the full history of the document preserved in the repository
-</a>. Collaborators can easily fork the repository of the manuscript, make
-changes, and then push back the changes to a main repository.</p>
-
-<p>Git was built to allow potentially thousands of developers to work on the
-same code, create branches to test new ideas, and push back their changes
-(if they want to merge everything into a single version). Better: websites
-like <a href= "https://github.com/">GitHub</a>, <a href=
-"https://bitbucket.org/">BitBucket</a>, <a href="https://code.google.com/">
-Google Code</a>, Microsoft's <a href ="http://www.codeplex.com/">CodePlex</a>,
-or <a href="http://gitorious.org/" >Gitorious</a> (itself an open source
-project), allow the users to create open git repositories free of charge,
-with wiki systems and bug tracking included.</p>
-
-<p>Bug tracking is particularly great for science. Bug tracking systems are
-essentially the software equivalent of asking a revision in a peer-review.
-Found a problem with some paper? <a href=
-"https://github.com/weecology/data-sharing-paper/issues/71"> Open a freaking
-issue!</a> Open manuscripts and open reviews, all free, and all this thanks
-to git, an open-source piece of software originally written for the Linux
-kernel.</p>
-
-<p>Git, and other similar systems, are potentially very disruptive and not
-only for science, see <a href=
-"http://www.ted.com/talks/clay_shirky_how_the_internet_will_one_day_transform_
-government.html">Clay Shirky's great talk on the subject</a>. These systems
-were built by software engineers with a great deal of experience on close
-collaborations. Several scientists are already using git to write
-manuscripts... the problem is, there is no way to search these manuscripts,
-no way to know where they are.</p>
-
-<p>Git et al. are decentralized and it's fine. Actually, I would rather not
-have all scientific manuscripts at the same place. However, we need a tool
-to track the manuscripts being developed on github, bitbucket, google code.
-We need this tool both to browse these open manuscripts but also to create
-incentives for scientists to push their manuscripts online as soon as
-possible.</p>
-
-<p>This is Scriptoria.info, a project to track manuscripts being written on
-github, bitbucket, gitorious, and other hosting services git revision
-control systems. The goal of Scriptoria is not to host repositories but
-simply track them in the various hosting services, allow them to be search,
-and offer a simple API. I see the project as a thin layer over an already
-well-established system. Scriptoria is not ready (as of 2013.07.22), it's
-just started! The code will be developed on <a href=
-"https://github.com/PhDP/Scriptoria">github</a> and everyone is free to
-contribute. <a href="https://twitter.com/recology_">Scott Chamberlain</a>
-already suggested <a href= "https://github.com/PhDP/Scriptoria/issues/7">
-(via an issue!)</a>
- a way to track the manuscripts...</p>
-
-]]></summary>
-</entry>
-<entry>
-    <title>Machine learning and deep transfer learning</title>
-    <link href="http://phdp.github.io//posts/2013-07-05-dtl.html" />
-    <id>http://phdp.github.io//posts/2013-07-05-dtl.html</id>
-    <published>2013-07-05T00:00:00Z</published>
-    <updated>2013-07-05T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<h1>Machine learning and deep transfer learning</h1>
-
-<a href="https://twitter.com/share" class="twitter-share-button" data-text="Machine learning and deep transfer learning" data-via="phdpqc">Tweet</a>
-<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-  2013.07.05
-</p>
-
-<p>This short text explains the basic idea behind deep
-transfer learning, an ambitious attempt to build machine learning algorithms
-capable of exploiting prior knowledge. If you're looking for a technical
-treatment, I highly suggest Mihalkova's <a href=
-"http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.119.241&rep=rep1&typ
-e=pdf">Mapping and Revising Markov Logic Networks for Transfer Learning</a>,
-one of the best algorithm for deep transfer. Also, I do not dwell on
-the distinctions between deep and shallow transfer, and the various subtypes
-of machine learning algorithms (supervised vs nonsupervised, online vs
-batch): I want to provide a strategic overview of what deep transfer learning
-is about and why it's important.</p>
-
-<h2>The standard approach to machine learning</h2>
-
-<p>Machine learning is straightforward: data is fed to an algorithm that
-builds a model and, hopefully, generate good predictions:</p>
-
-<div class="imagecenter">
-  <img src="../images/ml-900.png" alt="Machine learning">
-</div>
-
-<p>The data can be pretty much anything from ecological data to movie
-preferences. Machine learning algorithms can build effective models because
-they are tailored for the input data. It is hard, if not impossible, to
-build by hand the right mathematical model to solve complex problems such as
-handwriting recognition, spam detection, language processing and many, many,
-other problems where no simple equation can be found. In these cases, we
-have to step back and, instead of focusing on building the model ourselves,
-we design algorithms to do it in our place. That's the essence of machine
-learning. This approach has been incredibly powerful to solve a wide array
-of difficult problems in pretty much all fields of inquiry: it's the <a href=
-"http://www.csee.wvu.edu/~gidoretto/courses/2011-fall-cp/reading/TheUnreasonable%20EffectivenessofData_IEEE_IS2009.pdf">
-unreasonable effectiveness of data.</a></p>
-
-<p>Building models this way is good, but it has a few problems. What can we
-do when we have little data? If the situation has changed since we collected
-our data, is our model still good? When we face a similar situation, can we
-reuse our previous model or do we need to build a new one?</p>
-
-<h2>Deep transfer learning algorithms</h2>
-
-<p>Machine learning algorithms use a <i>Tabula rasa</i> approach: the
-algorithms start with nothing and build the model only with the supplied
-data. It's simple, but it's also inefficient. Deep transfer learning is
-about transferring knowledge between different tasks. Instead of starting
-from scratch, deep transfer algorithms can exploit accumulated knowledge to
-learn faster (we also have good reasons to think deep transfer is a key
-component to build reliable models, but that's a more complicated topic). It
-looks like this:</p>
-
-<div class="imagecenter">
-  <img src="../images/ml-transfer-900.png" alt="Deep transfer learning">
-</div>
-
-<p>The algorithm, instead of simply reading the input data, will exploit
-data from a large data-set of prior knowledge. This, in itself, is tricky.
-The algorithm must make a judgment call: what is relevant to the present
-subject, what can be used, and what should be discarded? Certainly, our
-model for US presidential elections will be awful if we try, say, <a href=
-"http://en.wikipedia.org/wiki/Redskins_Rule">to bring data from football
-games</a>. So there are risks to deep transfer learning, but the benefits
-are huge.</p>
-
-<p>To make an analogy with human learning, imagine you need to learn to run.
-Of course, running is very similar to walking so you won't start from zero.
-You're able to see that running and walking are similar tasks and thus you
-can transfer your knowledge of walking into running. It allows you to learn
-much faster, and also yield interesting information on how the two tasks are
-related to each other. If you need to learn Mandarin though, running and
-walking won't serve you. It's a more general approach: a very conservative
-deep transfer learning algorithm could choose to always reject prior
-information and would build the model just as before.</p>
-
-<p>Machine learning starts from 0. Big data is nice, but it would be
-much nicer if we could build models with more than a tiny fraction of it.
-Deep transfer is about determining what is relevant in previous data-sets
-and use this information to design better models, and faster! My thesis
-focuses on doing just that, using the complex heterogeneous data-sets
-found in ecology.</p>
 
 ]]></summary>
 </entry>

@@ -36,9 +36,9 @@
 </div>
 
 <div id="content">
-  <h1>Fun with fuzzy knowledge and fuzzy logic connectives</h1>
+  <h1>Fuzzy knowledge and fuzzy logic connectives</h1>
 
-<a href="https://twitter.com/share" class="twitter-share-button" data-text="Fun with fuzzy knowledge and fuzzy logic connectives" data-via="phdpqc">Tweet</a>
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="Fuzzy knowledge and fuzzy logic connectives" data-via="phdpqc">Tweet</a>
 <p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
   2017.02.21
 </p>
@@ -87,7 +87,7 @@ will experience exponential growth, or in logic (with \(s\) for a species,
 
 <p>Where \(SmallPop\) establishes whether the population is small, \(HasPreys\)
 whether it has preys, \(Autotroph\) whether it needs preys, and the right-side
-of the implication if the traditional formula for exponential growth in discrete
+of the implication is the traditional formula for exponential growth in discrete
 time (R is the rate of growth).</p>
 
 <p>Even a probability of being true is just not enough, because we never expect
@@ -234,24 +234,9 @@ disjunction from conjunction valid?</p>
 \[0.5(1 + x + y - |1 - x - y|) = 0.5(1 + x + y - |x + y - 1|),\]
 
 <p>Works fine! These definitions might look needlessly complicated compared to
-the simple \(min(x, y)\) for conjunction, but they tend to make more sense. Take
-a rule like this:</p>
-
-\[SmallPop(x) \land (HasPreys(x) \lor Autotroph(x)) \Rightarrow ExponentialGrowth(x),\]
-
-<p>Basically, this rules says that if you have a small population size, that
-the species either has preys or don't need preys (autotroph), then the species
-will experience exponential growth. Say you have a formula to compute the truth
-values of SmallPop based on the current population size of the species relative
-to the average population size for this species, and another formula to for
-\(HasPreys(x)\) based on the need of the species. Autotroph is a bivalent
-predicates: it's either 0 or 1. I highly recommend you to play with this rule
-using different truth values, the appendix at the end of the post has the
-formulas for different systems. You'll see that the connectives with
-Lukasiewicz logic really combine truth values. If you set Autotroph to 1 and
-HasPreys to 0.5, changing the truth values for SmallPop from 0.5 to 1.0 won't
-change anything if disjunction is simply the minimum. In Lukasiewicz, it
-does.</p>
+the simple \(min(x, y)\) for conjunction, but they often make more sense since
+they combine the truth values instead of just discarding one like the
+minimum.</p>
 
 <p>Defining implication in Lukasiewicz logic is straightforward:</p>
 
