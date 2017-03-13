@@ -44,15 +44,15 @@ in mathematics, computer science, and even probability theory, was bivalent.
 True or false, and nothing else. Sure, you can say the probability to pick a
 queen from a deck of cards is 1/13, but in the end, you'll either have a queen
 or not. Again: true or false. Fuzzy logic breaks the mold, considering truth be
-be a gradient from 0 (false) to 1 (true). There are many many-valued ("fuzzy")
+be a gradient from 0 (false) to 1 (true). There are various many-valued ("fuzzy")
 logics, but here we'll always consider the truth values to be real numbers in
 the [0, 1] closed range. An important thing to remember is that fuzzy logic is
 a strict superset of bivalent logic, it's more general, and thus the
 connectives should behave exactly like bivalent logic connectives when the
 truth values are restricted to 0s and 1s.</p>
 
-<p>There's a long tradition in A.I. of building expert systems, the most famous
-being probably MYCIN, which was used for infections, but what if we wanted a
+<p>There's a long tradition in A.I. of building expert systems, arguably the
+most famous being MYCIN, which was used for infections, but what if we wanted a
 system flexible enough to include complex scientific theories. Turns out that's
 tricky. We've made a lot of progress on this front, with frameworks like <a
 href='http://phdp.github.io/posts/2015-07-13-srl-code.html'>Markov logic</a>
@@ -60,8 +60,9 @@ allowing first-order logic rules to be associated with a weight, which in turn
 allows probabilistic queries. Yet you're still limited to true/false values for
 predicates. Take for example this seemingly simple idea: when a population is
 small and has plenty of preys (or is an autotroph, in which case it has no
-preys), it will experience exponential growth, or in logic (with \(s\) for a
-species, \(l\) for a location, and \(t\) for time):</p>
+preys), it will experience exponential growth. With \(s\) for a species, \(l\)
+for a location, and \(t\) for time, we could express the rule in predicate
+logic as:</p>
 
 \[SmallPop(s, l) \land (HasPreys(s, l) \lor Autotroph(s)) \Rightarrow N(s, l, t + 1) = R(s) \times N(s, l, t).\]
 
