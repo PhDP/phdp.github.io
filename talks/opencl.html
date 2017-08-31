@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Intro to OpenCL</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/ki.css" id="theme">
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <script>
+      if (window.location.search.match(/print-pdf/gi)) {
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'css/print/pdf.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+      }
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section>
+          <h1>A brutal, painful, and potentially lethal introduction to OpenCL for scientific computing</h1>
+          <p>
+            <a href='mailto:philippe.d.proulx@gmail.com'>Philippe Desjardins-Proulx</a>
+          </p>
+        </section>
+
+        <section>
+          <h2>Objectives</h2>
+          <ol>
+            <li>Why OpenCL is worth your time</li>
+            <li></li>
+            <li></li>
+            <li>Projects: theoretical ecology &amp; deep learning</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>References</h2>
+          <ol>
+            <li>M Scarpino. <a href='http://www.manning.com/scarpino2/'>OpenCL in Action</a>. Manning, 2011.</li>
+            B Gaster et al. <a href=''>Heterogeneous Computing with OpenCL</a>. 
+          </ol>
+          <p>J Shen et al. Performance Traps in OpenCL for CPUs. XXX, XXX.</p>
+        </section>
+
+        <section>
+          <h2>OpenCL</h2>
+          <ul>
+            <li>1.0 (2009) First version</li>
+            <li>1.1 (2010)</li>
+            <li>1.2 (2011)</li>
+            <li>2.0 (2013)</li>
+          </ul>
+
+          <p>In practice, since NVIDIA is very slow to implement OpenCL and many of their cards are at version
+          1.1, we need to stick with this version for portability reasons.</p>
+
+        </section>
+        
+        <section>
+          <h2>Implementations</h2>
+          <ul>
+            <p>Intel for their integrated graphics and multiple integrated core architecture (MIC).</p>
+            <p>NVIDIA for their GeForce, Quadro, and Tesla graphic cards.</p>
+            <p>AMD for their APUs and GPUs (e.g. FirePro).</p>
+            <p>IBM for their Power processors.</p>
+            <p>Qualcoom (ARM?)</p>
+            <p>Apple (WTF?) for their hardware. This is an odd one, e.g. AMD cards and Intel integrated graphics
+            use the Apple implementation on their hardware.</p>
+          </ul>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+    <script>
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Parallax scrolling
+        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        // parallaxBackgroundSize: '2100px 900px',
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+    </script>
+    <script type="text/javascript"
+      src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+  </body>
+</html>

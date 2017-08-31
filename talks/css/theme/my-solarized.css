@@ -1,9 +1,9 @@
-@import url(https://fonts.googleapis.com/css?family=Questrial);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:700);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic);
 
 body {
-  background: #FFFFFF;
-  background-color: #FFFFFF;
+  background: #fdf6e3;
+  background-color: #fdf6e3;
 }
 
 .reveal {
@@ -11,17 +11,17 @@ body {
   font-size: 30px;
   font-weight: normal;
   letter-spacing: -0.02em;
-  color: #768295;
+  color: #586e75;
 }
 
 ::selection {
   color: white;
-  background: #00905d;
+  background: #cb4b16;
   text-shadow: none; }
 
 ::-moz-selection {
   color: white;
-  background: #00905d;
+  background: #cb4b16;
   text-shadow: none; }
 
 .reveal h1,
@@ -31,8 +31,8 @@ body {
 .reveal h5,
 .reveal h6 {
   margin: 0 0 20px 0;
-  color: #768295;
-  font-family: "Questrial", sans-serif;
+  color: #586e75;
+  font-family: "Montserrat", sans-serif;
   line-height: 0.9em;
   letter-spacing: -0.03em;
   text-transform: none;
@@ -40,18 +40,18 @@ body {
 }
 
 .reveal h1 {
-  color: #00905d;
+  color: #cb4b16;
   font-size: 3em;
 }
 
 .reveal h2 {
-  color: #00905d;
+  color: #cb4b16;
   font-size: 2em;
 }
 
 .reveal h3 {
   font-family: "Open Sans", sans-serif;
-  color: #768295;
+  color: #586e75;
   font-size: 1em;
 }
 
@@ -59,11 +59,11 @@ body {
   font-family: "Open Sans", sans-serif;
   text-align: left;
   font-weight: bold;
-  color: #768295;
+  color: #586e75;
 }
 
 .reveal a:not(.image) {
-  color: #00905d;
+  color: #800000;
   text-decoration: none;
   webkit-transition: color .15s ease;
   -moz-transition: color .15s ease;
@@ -72,7 +72,7 @@ body {
   transition: color .15s ease; }
 
 .reveal a:not(.image):hover {
-  color: #00905d;
+  color: #cb4b16;
   text-shadow: none;
   border: none; }
 
@@ -111,16 +111,16 @@ body {
   border-top-color: #838996; }
 
 .reveal .controls div.navigate-left.enabled:hover {
-  border-right-color: #00905d; }
+  border-right-color: #cb4b16; }
 
 .reveal .controls div.navigate-right.enabled:hover {
-  border-left-color: #00905d; }
+  border-left-color: #cb4b16; }
 
 .reveal .controls div.navigate-up.enabled:hover {
-  border-bottom-color: #00905d; }
+  border-bottom-color: #cb4b16; }
 
 .reveal .controls div.navigate-down.enabled:hover {
-  border-top-color: #00905d; }
+  border-top-color: #cb4b16; }
 
 .reveal .progress {
   background: rgba(0, 0, 0, 0.2); }

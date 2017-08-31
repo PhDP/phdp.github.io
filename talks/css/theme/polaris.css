@@ -1,5 +1,6 @@
-@import url(https://fonts.googleapis.com/css?family=Questrial);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:700);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic);
+@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic,700italic);
 
 body {
   background: #FFFFFF;
@@ -11,17 +12,17 @@ body {
   font-size: 30px;
   font-weight: normal;
   letter-spacing: -0.02em;
-  color: #768295;
+  color: #000000;
+}
+
+div.terminal {
+  font-family: "Ubuntu Mono";
+  font-size: 120%;
 }
 
 ::selection {
   color: white;
-  background: #00905d;
-  text-shadow: none; }
-
-::-moz-selection {
-  color: white;
-  background: #00905d;
+  background: #000;
   text-shadow: none; }
 
 .reveal h1,
@@ -31,8 +32,8 @@ body {
 .reveal h5,
 .reveal h6 {
   margin: 0 0 20px 0;
-  color: #768295;
-  font-family: "Questrial", sans-serif;
+  color: #000;
+  font-family: "Montserrat", sans-serif;
   line-height: 0.9em;
   letter-spacing: -0.03em;
   text-transform: none;
@@ -40,39 +41,31 @@ body {
 }
 
 .reveal h1 {
-  color: #00905d;
-  font-size: 3em;
+  color: #000;
+  font-size: 2.5em;
 }
 
 .reveal h2 {
-  color: #00905d;
+  color: #000;
   font-size: 2em;
 }
 
-.reveal h3 {
-  font-family: "Open Sans", sans-serif;
-  color: #768295;
-  font-size: 1em;
-}
-
-.reveal h4 {
-  font-family: "Open Sans", sans-serif;
-  text-align: left;
-  font-weight: bold;
-  color: #768295;
+.reveal h2 {
+  color: #000;
+  font-size: 1.5em;
 }
 
 .reveal a:not(.image) {
-  color: #00905d;
+  color: #3D85C6;
   text-decoration: none;
-  webkit-transition: color .15s ease;
+  -webkit-transition: color .15s ease;
   -moz-transition: color .15s ease;
   -ms-transition: color .15s ease;
   -o-transition: color .15s ease;
   transition: color .15s ease; }
 
 .reveal a:not(.image):hover {
-  color: #00905d;
+  color: #003399;
   text-shadow: none;
   border: none; }
 

@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Questrial);
+@import url(http://fonts.googleapis.com/css?family=Questrial);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic);
 
 body {
@@ -16,12 +16,12 @@ body {
 
 ::selection {
   color: white;
-  background: #00905d;
+  background: #AA0000;
   text-shadow: none; }
 
 ::-moz-selection {
   color: white;
-  background: #00905d;
+  background: #AA0000;
   text-shadow: none; }
 
 .reveal h1,
@@ -40,12 +40,12 @@ body {
 }
 
 .reveal h1 {
-  color: #00905d;
+  color: #AA0000;
   font-size: 3em;
 }
 
 .reveal h2 {
-  color: #00905d;
+  color: #AA0000;
   font-size: 2em;
 }
 
@@ -63,7 +63,7 @@ body {
 }
 
 .reveal a:not(.image) {
-  color: #00905d;
+  color: #AA0000;
   text-decoration: none;
   webkit-transition: color .15s ease;
   -moz-transition: color .15s ease;
@@ -72,7 +72,7 @@ body {
   transition: color .15s ease; }
 
 .reveal a:not(.image):hover {
-  color: #00905d;
+  color: #AA0000;
   text-shadow: none;
   border: none; }
 
@@ -111,16 +111,16 @@ body {
   border-top-color: #838996; }
 
 .reveal .controls div.navigate-left.enabled:hover {
-  border-right-color: #00905d; }
+  border-right-color: #AA0000; }
 
 .reveal .controls div.navigate-right.enabled:hover {
-  border-left-color: #00905d; }
+  border-left-color: #AA0000; }
 
 .reveal .controls div.navigate-up.enabled:hover {
-  border-bottom-color: #00905d; }
+  border-bottom-color: #AA0000; }
 
 .reveal .controls div.navigate-down.enabled:hover {
-  border-top-color: #00905d; }
+  border-top-color: #AA0000; }
 
 .reveal .progress {
   background: rgba(0, 0, 0, 0.2); }

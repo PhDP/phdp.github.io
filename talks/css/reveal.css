@@ -323,7 +323,7 @@ body {
 
   text-align: left;
   font-size: 0.55em;
-  font-family: monospace;
+  font-family: "Ubuntu Mono";
   line-height: 1.2em;
 
   word-wrap: break-word;
@@ -331,7 +331,7 @@ body {
   box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
 }
 .reveal code {
-  font-family: monospace;
+  font-family: "Ubuntu Mono";
 }
 .reveal pre code {
   padding: 5px;
