@@ -1,0 +1,585 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% Simple LaTeX CV Template %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% NOTE: If you find that it says                                     %%
+%%                                                                    %%
+%%                           1 of ??                                  %%
+%%                                                                    %%
+%% at the bottom of your first page, this means that the AUX file     %%
+%% was not available when you ran LaTeX on this source. Simply RERUN  %%
+%% LaTeX to get the ``??'' replaced with the number of the last page  %%
+%% of the document. The AUX file will be generated on the first run   %%
+%% of LaTeX and used on the second run to fill in all of the          %%
+%% references.                                                        %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Document Setup %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Don't like 10pt? Try 11pt or 12pt
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+
+% The automated optical recognition software used to digitize resume
+% information works best with fonts that do not have serifs. This
+% command uses a sans serif font throughout. Uncomment both lines (or at
+% least the second) to restore a Roman font (i.e., a font with serifs).
+%\usepackage{times}
+%\renewcommand{\familydefault}{\sfdefault}
+
+% This is a helpful package that puts math inside length specifications
+\usepackage{calc}
+\usepackage[usenames,dvipsnames]{xcolor}
+
+\def\us{\char`\_}
+
+% Layout: Puts the section titles on left side of page
+\reversemarginpar
+
+%
+%         PAPER SIZE, PAGE NUMBER, AND DOCUMENT LAYOUT NOTES:
+%
+% The next \usepackage line changes the layout for CV style section
+% headings as marginal notes. It also sets up the paper size as either
+% letter or A4. By default, letter was used. If A4 paper is desired,
+% comment out the letterpaper lines and uncomment the a4paper lines.
+%
+% As you can see, the margin widths and section title widths can be
+% easily adjusted.
+%
+% ALSO: Notice that the includefoot option can be commented OUT in order
+% to put the PAGE NUMBER *IN* the bottom margin. This will make the
+% effective text area larger.
+%
+% IF YOU WISH TO REMOVE THE ``of LASTPAGE'' next to each page number,
+% see the note about the +LP and -LP lines below. Comment out the +LP
+% and uncomment the -LP.
+%
+% IF YOU WISH TO REMOVE PAGE NUMBERS, be sure that the includefoot line
+% is uncommented and ALSO uncomment the \pagestyle{empty} a few lines
+% below.
+%
+
+%% Use these lines for letter-sized paper
+\usepackage[paper=letterpaper,
+            %includefoot, % Uncomment to put page number above margin
+            marginparwidth=1.2in,     % Length of section titles
+            marginparsep=.05in,       % Space between titles and text
+            margin=1in,               % 1 inch margins
+            includemp]{geometry}
+
+%% Use these lines for A4-sized paper
+%\usepackage[paper=a4paper,
+%            %includefoot, % Uncomment to put page number above margin
+%            marginparwidth=30.5mm,    % Length of section titles
+%            marginparsep=1.5mm,       % Space between titles and text
+%            margin=25mm,              % 25mm margins
+%            includemp]{geometry}
+
+%% More layout: Get rid of indenting throughout entire document
+\setlength{\parindent}{0in}
+
+\usepackage[shortlabels]{enumitem}
+
+% Simpler bibsections for CV sections
+% (thanks to natbib for inspiration)
+%
+% * For lists of references with hanging indents and no numbers:
+%
+%   \begin{bibsection}
+%       \item ...
+%   \end{bibsection}
+%
+% * For numbered lists of references (with hanging indents):
+%
+%   \begin{bibenum}
+%       \item ...
+%   \end{bibenum}
+%
+%   Note that bibenum numbers continuously throughout. To reset the
+%   counter, use
+%
+%   \restartlist{bibenum}
+%
+%   at the place where you want the numbering to reset.
+
+\makeatletter
+\newlength{\bibhang}
+\setlength{\bibhang}{1em}
+\newlength{\bibsep}
+ {\@listi \global\bibsep\itemsep \global\advance\bibsep by\parsep}
+\newlist{bibsection}{itemize}{3}
+\setlist[bibsection]{label=,leftmargin=\bibhang,%
+        itemindent=-\bibhang,
+        itemsep=\bibsep,parsep=\z@,partopsep=0pt,
+        topsep=0pt}
+\newlist{bibenum}{enumerate}{3}
+\setlist[bibenum]{label=[\arabic*],resume,leftmargin={\bibhang+\widthof{[999]}},%
+        itemindent=-\bibhang,
+        itemsep=\bibsep,parsep=\z@,partopsep=0pt,
+        topsep=0pt}
+\let\oldendbibenum\endbibenum
+\def\endbibenum{\oldendbibenum\vspace{-.6\baselineskip}}
+\let\oldendbibsection\endbibsection
+\def\endbibsection{\oldendbibsection\vspace{-.6\baselineskip}}
+\makeatother
+
+%% Reference the last page in the page number
+%
+% NOTE: comment the +LP line and uncomment the -LP line to have page
+%       numbers without the ``of ##'' last page reference)
+%
+% NOTE: uncomment the \pagestyle{empty} line to get rid of all page
+%       numbers (make sure includefoot is commented out above)
+%
+\usepackage{fancyhdr,lastpage}
+\pagestyle{fancy}
+%\pagestyle{empty}      % Uncomment this to get rid of page numbers
+\fancyhf{}\renewcommand{\headrulewidth}{0pt}
+\fancyfootoffset{\marginparsep+\marginparwidth}
+\newlength{\footpageshift}
+\setlength{\footpageshift}
+          {0.5\textwidth+0.5\marginparsep+0.5\marginparwidth-2in}
+\lfoot{\hspace{\footpageshift}%
+       \parbox{4in}{\, \hfill %
+                    \arabic{page} of \protect\pageref*{LastPage} % +LP
+%                    \arabic{page}                               % -LP
+                    \hfill \,}}
+
+% Finally, give us PDF bookmarks
+\usepackage{color,hyperref}
+\definecolor{myBlue}{HTML}{0C62AF}
+\hypersetup{colorlinks,breaklinks,
+            linkcolor=myBlue,
+            urlcolor=myBlue,
+            anchorcolor=myBlue,
+            citecolor=myBlue}
+
+%%%%%%%%%%%%%%%%%%%%%%%% End Document Setup %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% HEADING AT TOP OF CURRICULUM VITAE
+
+% The title (name) with a horizontal rule under it
+% (optional argument typesets an object right-justified across from name
+%  as well)
+%
+% Usage: \makeheading{name}
+%        OR
+%        \makeheading[right_object]{name}
+%
+% Place at top of document. It should be the first thing.
+% If ``right_object'' is provided in the square-braced optional
+% argument, it will be right justified on the same line as ``name'' at
+% the top of the CV. For example:
+%
+%       \makeheading[\emph{Curriculum vitae}]{Your Name}
+%
+% will put an emphasized ``Curriculum vitae'' at the top of the document
+% as a title. Likewise, a picture could be included:
+%
+%   \makeheading[\includegraphics[height=1.5in]{my_picutre}]{Your Name}
+%
+% the picture will be flush right across from the name.
+\newcommand{\makeheading}[2][]%
+        {\hspace*{-\marginparsep minus \marginparwidth}%
+         \begin{minipage}[t]{\textwidth+\marginparwidth+\marginparsep}%
+             {{\LARGE {\bfseries #2}} \hfill {\small\emph{#1}}}\\[-0.15\baselineskip]%
+                 \rule{\columnwidth}{1pt}%
+         \end{minipage}}
+
+%%% SECTION HEADINGS
+
+% The section headings. Flush left in small caps down pseudo-margin.
+%
+% Usage: \section{section name}
+\renewcommand{\section}[1]{\pagebreak[3]%
+    \vspace{1.3\baselineskip}%
+    \phantomsection\addcontentsline{toc}{section}{#1}%
+    \noindent\llap{\scshape\smash{\parbox[t]{\marginparwidth}{\hyphenpenalty=10000\raggedright #1}}}%
+    \vspace{-\baselineskip}\par}
+
+%%% LISTS
+
+% This macro alters a list by removing some of the space that follows the list
+% (is used by lists below)
+\newcommand*\fixendlist[1]{%
+    \expandafter\let\csname preFixEndListend#1\expandafter\endcsname\csname end#1\endcsname
+    \expandafter\def\csname end#1\endcsname{\csname preFixEndListend#1\endcsname\vspace{-0.6\baselineskip}}}
+
+% These macros help ensure that items in outer-type lists do not get
+% separated from the next line by a page break
+% (they are used by lists below)
+\let\originalItem\item
+\newcommand*\fixouterlist[1]{%
+    \expandafter\let\csname preFixOuterList#1\expandafter\endcsname\csname #1\endcsname
+    \expandafter\def\csname #1\endcsname{\csname preFixOuterList#1\endcsname\let\oldItem\item\def\item{\pagebreak[2]\oldItem}}
+    \expandafter\let\csname preFixOuterListend#1\expandafter\endcsname\csname end#1\endcsname
+    \expandafter\def\csname end#1\endcsname{\let\item\oldItem\csname preFixOuterListend#1\endcsname}}
+\newcommand*\fixinnerlist[1]{%
+    \expandafter\let\csname preFixInnerList#1\expandafter\endcsname\csname #1\endcsname
+    \expandafter\def\csname #1\endcsname{\let\oldItem\item\let\item\originalItem\csname preFixInnerList#1\endcsname}
+    \expandafter\let\csname preFixInnerListend#1\expandafter\endcsname\csname end#1\endcsname
+    \expandafter\def\csname end#1\endcsname{\csname preFixInnerListend#1\endcsname\let\item\oldItem}}
+
+% An itemize-style list with lots of space between items
+%
+% Usage:
+%   \begin{outerlist}
+%       \item ...    % (or \item[] for no bullet)
+%   \end{outerlist}
+\newlist{outerlist}{itemize}{3}
+    \setlist[outerlist]{label=\enskip\textbullet,leftmargin=*}
+    \fixendlist{outerlist}
+    \fixouterlist{outerlist}
+
+% An environment IDENTICAL to outerlist that has better pre-list spacing
+% when used as the first thing in a \section
+%
+% Usage:
+%   \begin{lonelist}
+%       \item ...    % (or \item[] for no bullet)
+%   \end{lonelist}
+\newlist{lonelist}{itemize}{3}
+    \setlist[lonelist]{label=\enskip\textbullet,leftmargin=*,partopsep=0pt,topsep=0pt}
+    \fixendlist{lonelist}
+    \fixouterlist{lonelist}
+
+% An itemize-style list with little space between items
+%
+% Usage:
+%   \begin{innerlist}
+%       \item ...    % (or \item[] for no bullet)
+%   \end{innerlist}
+\newlist{innerlist}{itemize}{3}
+    \setlist[innerlist]{label=\enskip\textbullet,leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt}
+    \fixinnerlist{innerlist}
+
+% An environment IDENTICAL to innerlist that has better pre-list spacing
+% when used as the first thing in a \section
+%
+% Usage:
+%   \begin{loneinnerlist}
+%       \item ...    % (or \item[] for no bullet)
+%   \end{loneinnerlist}
+\newlist{loneinnerlist}{itemize}{3}
+    \setlist[loneinnerlist]{label=\enskip\textbullet,leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt}
+    \fixendlist{loneinnerlist}
+    \fixinnerlist{loneinnerlist}
+
+%%% EXTRA SPACE
+
+% To add some paragraph space between lines.
+% This also tells LaTeX to preferably break a page on one of these gaps
+% if there is a needed pagebreak nearby.
+\newcommand{\blankline}{\quad\pagebreak[3]}
+\newcommand{\halfblankline}{\quad\vspace{-0.5\baselineskip}\pagebreak[3]}
+
+%%% FORMATTING MACROS
+
+% Uses hyperref to link DOI
+\newcommand\doilink[1]{\href{http://dx.doi.org/#1}{#1}}
+\newcommand\doi[1]{doi:\doilink{#1}}
+
+% For \url{SOME_URL}, links SOME_URL to the url SOME_URL
+\providecommand*\url[1]{\href{#1}{#1}}
+% Same as above, but pretty-prints SOME_URL in teletype fixed-width font
+\renewcommand*\url[1]{\href{#1}{\texttt{#1}}}
+
+% For \email{ADDRESS}, links ADDRESS to the url mailto:ADDRESS
+\providecommand*\email[1]{\href{mailto:#1}{#1}}
+% Same as above, but pretty-prints ADDRESS in teletype fixed-width font
+%\renewcommand*\email[1]{\href{mailto:#1}{\texttt{#1}}}
+
+%\providecommand\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+%    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+%\providecommand\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+%    \TeX}}
+\providecommand\BibTeX{{B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    \TeX}}
+\providecommand\Matlab{\textsc{Matlab}}
+
+% Custom hyphenation rules for words that LaTeX has trouble with
+\hyphenation{bio-mim-ic-ry bio-in-spi-ra-tion re-us-a-ble pro-vid-er}
+
+%%%%%%%%%%%%%%%%%%%%%%%% End Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Begin CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\makeheading[\today]{Philippe Desjardins-Proulx}
+
+\section{Current Position}
+
+Ph.D. candidate, Universit\'e de Sherbrooke, Canada,\\
+\href{http://ielab.recherche.usherbrooke.ca/}{Canada Research Chair on Integrative ecology, Canada},\\
+\href{http://poisotlab.io/}{Poisot Lab, Universit\'e de Montr\'eal, Canada},\\
+\href{http://qcbs.ca/}{Quebec Center for Biodiversity Science, Canada}.
+
+\section{Contact}
+
+\textit{email:} \email{philippe.d.proulx@gmail.com}\\
+\textit{email (alt.):} \email{philippe.desjardins.proulx@usherbrooke.ca}\\
+\textit{phone:} +1-418-732-9877\\
+\textit{skype:} philippe.desjardins-proulx\\
+\textit{www:} \href{http://phdp.github.io/}{http://phdp.github.io/}\\
+\textit{github:} \href{https://github.com/phdp/}{https://github.com/phdp/}\\
+\textit{twitter:} \href{https://twitter.com/phdpqc}{phqpqc}
+
+%\section{Citizenship}
+%
+%Canada
+%
+%\section{Languages}
+%
+%\textsc{French}: Native language\\
+%\textsc{English}: Full professional proficiency\\
+%\textsc{Japanese}: Elementary proficiency
+
+\section{Expertise}
+
+\begin{innerlist}
+
+  \item \textbf{Machine Learning:} My thesis focuses on theory revision in
+    statistical relational learning (the union of logic with probability),
+    and how deep learning can be used with symbolic systems.
+
+  \item \textbf{Scientific computing:} I worked four years (2009-2012) as a research professional,
+    focusing on C/C++ simulations and GPU computing with CUDA/OpenCL on the Canada Research Chair on
+    Terrestrial Ecosystems' scientific cluster.
+
+  \item \textbf{Bioinformatics:} My main Ph.D. project involved machine learning in ecology. I also
+    contributed to theoretical evolutionary ecology (speciation, community ecology) and worked with
+    several biological data-sets.
+
+\end{innerlist}
+
+\section{Education}
+
+\href{http://www.usherbrooke.ca/biologie/}{\textbf{Department of Biology, Universit\'e de Sherbrooke, Canada.}}
+\begin{outerlist}
+\item[] Ph.D., September 2012 -- Fall 2017
+  \begin{innerlist}
+    \item \textbf{Thesis Proposal}: \emph{Automatic Theory Revision and the Problem of Biodiversity}
+    \item \textbf{Adviser}: \href{http://chaire-eec.uqar.ca/dom.php}{Dr. Dominique Gravel}
+    \item \textbf{Co-adviser}: \href{http://timotheepoisot.fr/}{Dr. Timoth\'ee Poisot}
+    \item \textbf{Area of Study}: Machine learning, molecular ecology, population genetics.
+    \item \textbf{Comprehensive exam}: Maximum Entropy in Ecology \& Evolution.
+    \item \textbf{Courses}: Advanced Distributed Computing (A13), Business Intelligence (S15).
+  \end{innerlist}
+\end{outerlist}
+
+\hspace{.5cm}
+
+\href{http://engineering.uic.edu/}{\textbf{College of Engineering, University of Illinois at Chicago, Chicago, USA.}}
+\begin{outerlist}
+\item[] Graduate Certificate in Bioinformatics, 2012,
+  \begin{innerlist}
+    \item \textbf{Area of Study}: Data Mining \& Biostatistics.
+  \end{innerlist}
+\end{outerlist}
+
+\hspace{.5cm}
+
+\href{http://www.uquebec.ca/}{\textbf{Universit\'e du Qu\'ebec, Qu\'ebec, Canada.}}
+\begin{outerlist}
+\item[] B.S., 2009,
+  \begin{innerlist}
+    \item Major in Biology,
+    \item Minor in Mathematics \& Computer Science.
+  \end{innerlist}
+\end{outerlist}
+
+\section{Awards}
+
+\href{http://www.nserc-crsng.gc.ca/students-etudiants/pg-cs/bellandpostgrad-belletsuperieures_eng.asp}{Alexander Graham Bell Graduate Scholarship} (2012)
+\begin{innerlist}
+  \item \href{http://www.nserc-crsng.gc.ca/}{\textbf{From:} Natural Sciences and Engineering Research Council of Canada}
+  \item \textbf{Description:} Most competitive Canadian scholarship in science.
+  \item \textbf{Value:} 105 000 CAD (equivalent to 105 000 USD or 8 150 000 JPY, 2012 est.)
+\end{innerlist}
+
+\vspace{0.3cm}
+
+\href{http://research.microsoft.com/en-us/projects/azure/}{Windows Azure Research Award} (2013)
+\begin{innerlist}
+  \item \href{http://research.microsoft.com/en-us/}{\textbf{From:} Microsoft Research}
+  \item \textbf{Description:} The first group of 32 awards given by Microsoft (~1000 applications). Gives a generous access to Microsoft Azure (in my case, Linux VMs) for research purpose.
+  \item \textbf{Proposal:} \emph{Growing Intelligence with Cloud Markov Logic}.
+  \item \textbf{Value:} $>$40 000 USD.
+\end{innerlist}
+
+\vspace{0.3cm}
+
+\href{https://registration.nvidia.com/ahr.aspx}{NVIDIA hardware donation program} (2014)
+\begin{innerlist}
+  \item \textbf{Description:} I was awarded an NVIDIA card for high-performance computing.
+  \item \textbf{Proposal:} \emph{Transfer Learning, Deep Learning, and the Puzzle of Biodiversity}.
+\end{innerlist}
+
+\section{Refereed Journal Publications}
+
+\begin{bibenum}
+
+  \item \textbf{P Desjardins-Proulx}, I Bartomeus, T Poisot, D Gravel. Combining Ecological Theories with Machine Learning using Fuzzy Logic, 2017.\\ \emph{In preparation}
+
+  \item \textbf{P Desjardins-Proulx}, I Bartomeus, T Poisot, D Gravel. A simple (and boring) algorithm to effectively predict ecological interactions, 2017.\\ \emph{In preparation}
+
+  \item \textbf{P Desjardins-Proulx}, T Poisot, D Gravel. Automatic theory revision for ecological interactions with Markov logic, 2017.\\ \emph{In preparation}
+
+  \item \textbf{P Desjardins-Proulx}, D Gravel, T Poisot. Scientific Theories and Artificial Intelligence, 2017.\\ \href{http://www.biorxiv.org/content/early/2017/07/10/161125}{bioRxiv}
+
+  \item \textbf{P Desjardins-Proulx}, D Gravel, T Poisot. Ecological Interactions and the Netflix Problem.\\ \emph{Submitted}.
+
+  \item D Beauchesne, \textbf{P Desjardins-Proulx}, P Archambault, D Gravel
+    Thinking outside the box: Predicting biotic interactions in data-poor environments.\\
+    \emph{Vie \& Milieu}, 2007 (Accepted).
+
+  \item MG Matias, D Gravel, F Guilhaumon, \textbf{P Desjardins‐Proulx}, M Loreau, T Münkemüller, N Mouquet
+    Estimates of species extinctions from species–area relationships strongly depend on ecological context.\\
+    \emph{Ecography} 37(5): 431-442.
+
+  \item D Gravel, T Poisot, \textbf{P Desjardins-Proulx}
+    Using neutral theory to reveal the contribution of meta-community processes to assembly in complex landscapes.\\
+    \emph{Journal of Limnology} 73 (s1).
+
+  \item \textbf{P Desjardins-Proulx}, EP White, JJ Adamson, K Ram, T Poisot, and
+    D Gravel. The case for open preprints in biology.\\ \emph{PLoS Biology} 11(5): e1001563
+
+  \item R Vergilino, TA Elliott, \textbf{P Desjardins-Proulx}, TJ Crease and F
+Dufresne.  Evolution of a transposon in \emph{Daphnia} hybrid genomes.
+\emph{Mobile DNA} 4-7, 2013.\\
+\href{http://dx.doi.org/10.1186/1759-8753-4-7}{DOI: 10.1186/1759-8753-4-7}
+
+  \item D Ai, \textbf{P Desjardins-Proulx}, C Chu, and G Wang. The influence of
+immigration and dispersal limitation on the repeatability of niche and neutral
+communities. \emph{PLOS ONE} 7(9): e46164, 2012.\\
+\href{http://dx.doi.org/10.1371/journal.pone.0046164}{DOI: 10.1371/journal.pone.0046164}
+
+  \item \textbf{P Desjardins-Proulx} and D Gravel. A complex speciation-richness
+relationship in a simple neutral model. \emph{Ecology and Evolution} 2(8):
+1781--1790, 2012.\\
+\href{http://dx.doi.org/10.1002/ece3.292}{DOI: 10.1002/ece3.292}
+
+  \item \textbf{P Desjardins-Proulx} and D Gravel. How likely is speciation in
+neutral ecology? \emph{The American Naturalist} 179(1):137-144, 2012.\\
+\href{http://dx.doi.org/10.1086/663196}{DOI: 10.1086/663196}\\
+
+\end{bibenum}
+
+\section{Other Contributions}
+
+\begin{bibenum}
+  \item \textbf{P Desjardins-Proulx}. The case for arXiv and a broader
+conception of peer-reviews. Invited blog, International Network of
+Next-Generation Ecologists, 2012.\\
+    \href{http://www.innge.net/?q=node/330}{http://www.innge.net/?q=node/330}.
+
+  \item \textbf{P Desjardins-Proulx}, JL Rosindell, T Poisot, and D
+    Gravel. A simple model to study phylogeographies and speciation patterns
+    in space, 2012.\\
+    \href{http://arxiv.org/abs/1203.1790}{arXiv: 1203.1790}.
+
+  \item \textbf{P Desjardins-Proulx}. A foot in the neutral trap.\\
+    Invited comment for \emph{Trends in Ecology \& Evolution}, 2012.
+
+  \item \textbf{P Desjardins-Proulx}. L'origine de la Biodiversit\'e. Le
+Mouton Noir, Mai-Juin. Cahier Sp\'ecial sur la Biodiversit\'e p.2, 2010.
+\textit{Selected and republished by GaiaPresse, a group sponsored by the
+Universit\'e Laval}.
+
+\end{bibenum}
+
+\section{Job \\Experiences}
+
+\textbf{Research Professional, Canada Research Chair on Terrestrial Ecosystem}
+\begin{innerlist}
+  \item From 2009 to 2012.
+  \item \textbf{Supervisor}: \href{http://chaire-eec.uqar.ca/dom.php}{Dr. Dominique Gravel}
+  \item \textbf{Responsabilities}: Programming high-performance simulations in C, C++, and CUDA on a distributed cluster (Xeon processors + Tesla cards); Design ecological models to understand biodiversity; Teaching scientific computing to graduate students (C, C++, CUDA, UNIX tools).
+\end{innerlist}
+
+\section{Teaching \\Experiences}
+
+\href{http://www.uquebec.ca/}{\textbf{Universit\'e du Qu\'ebec, Qu\'ebec, Canada.}}
+\begin{innerlist}
+  \item 2013. I organized a series of meetings on information theory and inference.
+  \item 2012. CUDA training (intensive one-day course).
+  \item 2012. Scientific computing with C and C++ (grad. students/post-docs).
+  \item 2011. Scientific computing with C and C++ (grad. students/post-docs).
+\end{innerlist}
+
+\section{Referee \\Service}
+
+\emph{Physica A: Statistical Mechanics and its Applications; Molecular Ecology
+Ressources; Methods in Ecology and Evolution; Ecology Letters; Journal of
+Theoretical Biology; Theoretical Ecology; Acta Biotheoretica; The American
+Naturalist; Journal of Plant Ecology}.
+
+%\section{Professional \\Memberships}
+%
+%\begin{innerlist}
+%  \item Institute of Electrical and Electronics Engineers      \hfill 2012--2016
+%  \item IEEE Computational Intelligence Society                \hfill 2012--2016
+%  \item Quebec Center for Biodiversity Science                 \hfill 2012--2017
+%  \item Society for the Study of Evolution                     \hfill 2008--2012
+%\end{innerlist}
+
+\section{Programming skills}
+
+I have some experience with many programming languages, libraries, frameworks.
+I only list here my current working tools:
+
+\begin{innerlist}
+  \item \textbf{Languages}: \emph{Expert} C++11/14, C; \emph{Intermediate} Rust, Python, Haskell, Scala; \emph{Basic} Java, R, F\#.
+  \item \textbf{High performance computing}: CUDA, OpenCL, OpenMP, basic MPI.
+  \item \textbf{Operating Systems}: Linux (mostly Debian/Ubuntu-based).
+  \item \textbf{Cloud:} Azure (Linux VMs), Google, Amazon.
+  \item \textbf{Writing}: \LaTeXe.
+\end{innerlist}
+
+\section{Graduate \\Courses}
+
+\begin{innerlist}
+  \item 2015. Business Intelligence [A, 3 credits] \hfill Athabasca
+  \item 2013. Advanced Distributed Computing [A, 3 credits] \hfill Athabasca
+  \item 2012. Datamining (machine learning) [A, 4 credits] \hfill \href{http://www.uic.edu/}{UIC}
+  \item 2011. Biostatistics [A, 4 credits] \hfill \href{http://www.uic.edu/}{UIC}
+  \item 2010. Intro. to bioinformatics [A, 4 credits] \hfill \href{http://www.uic.edu/}{UIC}
+  \item 2010. Reading course on Ancestral Recombination Graphs [A+, 3 credits] \hfill \href{http://www.uqar.ca/}{UQAR}
+\end{innerlist}
+
+\section{Online \\Courses}
+
+\begin{innerlist}
+  \item 2014. Technology Entrepreneurship \hfill NovoEd/Stanford
+\end{innerlist}
+
+%\section{Referees}
+%
+%On request.
+%
+%\textbf{Dr.~Dominique Gravel}
+%\begin{innerlist}
+%  \item Professor (Universit\'e du Qu\'ebec \`a Rimouski)
+%  \item Canada Research Chair.
+%  \item e-mail:~\href{MAILTO:dominique_gravel@uqar.qc.ca}{dominique\_gravel@uqar.qc.ca}
+%  \item phone: 1.418.723.1986 \#1752
+%  \item[$\star$] \emph{I worked as a research profesionnal in Dr. Gravel's lab from September 2009 to August 2012, we also collaborated on many scientific projects.}
+%\end{innerlist}
+%
+%\halfblankline
+%
+%\textbf{Dr.~James Rosindell}
+%\begin{innerlist}
+%  \item Post-doctoral researcher, Imperial College London, UK.
+%  \item e-mail:~\href{MAILTO:j.rosindell@imperial.ac.uk}{j.rosindell@imperial.ac.uk}
+%  \item phone: +44 (0)2075 942263
+%  \item[$\star$] \emph{I have collaborated with Dr. Rosindell on several occasions.}
+%\end{innerlist}
+
+\end{document}
+
