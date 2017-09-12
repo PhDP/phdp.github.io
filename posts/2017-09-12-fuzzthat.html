@@ -101,13 +101,20 @@ matrix-speech, the \(ith\) column of the \(xth\) row) is:</p>
 
 \[C^*_{x, i} = \bigvee_{n \in N(x)} C_{n, i} \land S_{x, n},\]
 
-<p>where \(N(x\) is the neighbourhood of \(x\) (basically all points except
+<p>where \(N(x)\) is the neighbourhood of \(x\) (basically all points except
 \(x\)), \(C_{n, i}\) is the binary class of \(ith\) point of item \(n\) and
 \(S_{x, n}\) is the similarity between \(x\) and \(n\). Like the KNN you need
 to define some measure of similarity, and there are different ways to define
 disjunction and conjunction (again see <a href="2017-02-21-fuzzy-connectives.html">here</a>). Since \(C^*_{x, i}\) will
-sometimes not be either 0 or 1, we can predict 1 is it has a truth value
-greater than 0.5. As a simple example, let's say we have:</p>
+sometimes take a value between 0 and 1, we can predict 1 is it has a truth
+value greater than 0.5. An interesting extension would use Type-2 fuzzy logic
+to handle uncertainty, but in this simple case, with no uncertainty and binary
+classes, the result reduces to:</p>
+
+\[C^*_{x, i} = \bigvee_{n \in N^+(x)} S_{x, n},\]
+
+<p>Where \(N^+(x)\) is the set of neighbours with a positive class \(C_{n, i} =
+1\). As a simple example, let's say we have:</p>
 
 \[\begin{bmatrix}? & 1 & 1 & 0 \\ 0 & 0 & 0 & 0 \\ 1 & 1 & 0 & 0 \\ 1 & 0 & 0 & 0\end{bmatrix}\]
 
@@ -118,15 +125,13 @@ last would be 1/3, giving us:</p>
 
 \[C^*_{0, 0} = (0 \land 1/3) \lor (1 \land 2/3) \lor (1 \land 1/3) = 2/3 \lor 1/3.\]
 
-<p>Because in this case the class is either 0 or 1, the definition
-of conjunction does not matter. The definition of \(\lor\) does matter,
-it would be \(max(2/3, 1/3) = 2/3\) under the Gödel-Dummett norm, or
-\(x + y - xy = 7/9\) under the product norm (which, in my experience, gives
-better results). In either cases I'd predict an interaction since the truth
-value is above 0.5. One advantage of the \(KNN\) algorithm is that you
+<p>\(C^*_{0, 0}\) would be \(max(2/3, 1/3) = 2/3\) under the Gödel-Dummett
+norm, or \(x + y - xy = 7/9\) under the product norm (which, in my experience,
+gives better results). In either cases I'd predict an interaction since the
+truth value is above 0.5. One advantage of the \(KNN\) algorithm is that you
 don't need to bother with all neighbours, just the \(K\) closest. However,
-there are many conditions where you can stop FuzzThatNeighbour before
-scanning all elements, especially if the data-points are in a cover tree.</p>
+there are many conditions where you can stop FuzzThatNeighbour before scanning
+all elements, especially if the data-points are in a cover tree.</p>
 
 <p>So, is it working?</p>
 
