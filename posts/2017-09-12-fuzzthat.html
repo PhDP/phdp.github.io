@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Philippe Desjardins-Proulx</title>
+  <link rel="stylesheet" media="screen" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" media="screen" href="../css/code.css" />
+  <!-- <link href='http://fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'> -->
+  <!-- <link href='http://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'> -->
+  <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic" rel="stylesheet" type="text/css" />
+  <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet" type="text/css" />
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<!-- <a href='https://github.com/PhDP/'>
+  <img style='position: absolute; top: 0; left: 0; border: 0;' src='/images/forkme.png' alt='Fork me on GitHub'>
+</a> -->
+
+<div id="header">
+  <!-- <h1><a href='mailto:philippe.d.proulx@gmail.com'>Philippe Desjardins-Proulx</a></h1> -->
+  <nav>
+    <ul>
+      <li>( Philippe Desjardins-Proulx</li>
+      <li><a href="../index.html">about</a></li>
+      <li><a href="../blog.html">blog</a></li>
+      <li><a href="../papers.html">papers</a></li>
+      <li><a href="https://ca.linkedin.com/in/philippedp"><i class="fa fa-linkedin-square"></i></a></li>
+      <li><a href="https://github.com/PhDP"><i class="fa fa-github"></i></a></li>
+      <li><a href="https://twitter.com/phdpqc"><i class="fa fa-twitter"></i></a></li>
+      <li><a href="mailto:philippe.d.proulx@gmail.com"><i class="fa fa-envelope"></i></a>)</li>
+    </ul>
+  </nav>
+</div>
+
+<div id="content">
+  <h1>Fuzz that neighbour! An hopelessly naive, yet good, machine learning algorithm</h1>
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="Fuzz that neighbour! An hopelessly naive, yet good, machine learning algorithm" data-via="phdpqc">Tweet</a>
+<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  2017.09.12
+</p>
+
+<p>Working on ecological interactions taught me that the simple \(K\) nearest
+neighbour algorithm (KNN) can be surprisingly powerful. In a nutshell, in the
+context of imputation (i.e. filling holes in a matrix), if you want to predict
+the value of the point on the \(ith\) column of the \(xth\) row, you need to
+find the \(K\) rows which are most similar to \(x\) and then pick the most
+common value on their \(ith\) column. The figure below shows this process for
+\(K = 3\). Since two of the three most similar rows are red, the \(KNN\)
+algorithm would fill the missing entry with red.</p>
+
+<div class="imagecenter">
+  <img src="../images/knn.png" alt="knn" />
+</div>
+
+<p>Here's the problem: for ecological interactions, imputation with the plain
+\(KNN\) does not work that well. It tends to predict many non-interactions
+where it should predict an interaction. But here's the frustrating part: in
+many cases, a few of the \(K\) nearests will have an interaction, just not
+enough to be the majority. So one way to improve the algorithm is to add a
+parameter to the \(KNN\) algorithm: a threshold \(T\). Essentially. instead of
+predicting an interaction if a majority of the \(K\) nearests have that
+interaction, we only ask for more than \(n/K > T\), with \(n\) being the number
+of observed interactions (in short: it reduces to the standard KNN algorithm
+with \(T = 0.5\)). And it works pretty well:</p>
+
+<div class="imagecenter">
+  <img src="../images/knn_t.png" alt="knn_t" />
+</div>
+
+<p>This is from a paper I'm working on (I'll put the bioRxiv link here). The
+number used to measure effectiveness is the <a href="http://onlinelibrary.wiley.com/doi/10.1111/j.1365-2664.2006.01214.x/abstract">TSS
+(True Skill Statistic) score</a>, and we can see that lower thresholds perform
+better than the standard majority rule. For this data-set, this variant even
+beats supervised learning algorithms such as random forests using species'
+traits.</p>
+
+<h2>Fuzz that!</h2>
+
+<p>The parameter \(K\) is pretty arbitrary and it tends to have a larger effect
+on imputation than recommendation. Can we get rid of it? Well there's the <a href="https://www.jstor.org/stable/3088801?seq=1#page_scan_tab_contents">probabilistic
+nearest neighbour algorithm</a>, and while it would also require some sort of
+threshold-like fix, I'm sure it's doable. However, the threshold itself is
+pretty arbitrary and working on the automatic revision of ecologicial
+theories with logic gave me a really simple idea: what if, for all
+neighbour, we would take the fuzzy conjunction (and) of their class (in ecology, 0 for a
+non-interaction, 1 for an interaction) and their similarity to our
+data-point of interest, and then take the fuzzy disjunction (or) of
+all these values. The reason it may work is that fuzzy disjunction, like
+the \(KNN\) variant with the threshold, would mostly ignore negative
+evidences, while the conjunction would strongly penalize neighbour with
+low similarity. I explained how conjunction and disjunction worked in
+fuzzy logic <a href="2017-02-21-fuzzy-connectives.html">here</a></p>
+
+<p>More formally, the class of the \(ith\) point of item \(x\) (or, in
+matrix-speech, the \(ith\) column of the \(xth\) row) is:</p>
+
+\[C^*_{x, i} = \bigvee_{n \in N(x)} C_{n, i} \land S_{x, n},\]
+
+<p>where \(N(x\) is the neighbourhood of \(x\) (basically all points except
+\(x\)), \(C_{n, i}\) is the binary class of \(ith\) point of item \(n\) and
+\(S_{x, n}\) is the similarity between \(x\) and \(n\). Like the KNN you need
+to define some measure of similarity, and there are different ways to define
+disjunction and conjunction (again see <a href="2017-02-21-fuzzy-connectives.html">here</a>). Since \(C^*_{x, i}\) will
+sometimes not be either 0 or 1, we can predict 1 is it has a truth value
+greater than 0.5. As a simple example, let's say we have:</p>
+
+\[\begin{bmatrix}? & 1 & 1 & 0 \\ 0 & 0 & 0 & 0 \\ 1 & 1 & 0 & 0\end{bmatrix}\]
+
+<p>And the similarity is measured will use the Hamming distance. So, the
+similarity between the first row and the second would be 1/3 and between
+the first and the third would be 2/3, giving us:</p>
+
+\[C^*_{0, 0} = (0 \land 1/3) \lor (1 \land 2/3) = 2/3.\]
+
+<p>(Note: because in this case the class is either 0 or 1, the definition
+of conjunction does not matter).</p>
+
+<p>So, is it working?</p>
+
+<p>Yeah. It seems definitely better than the \(KNN\) approach (without the
+threshold), and unless you count the T-norm as a parameter, it has no
+parameters. Testing on the data-set used for <a href="https://peerj.com/articles/3644/">this paper</a>, the KNN has a TSS of
+0.543371 compared to 0.775659 for FuzzThatNeighbour (with the product norms).
+It feels less general than the \(KNN\) since it is so biased toward positive
+evidences, but in some cases, it's exactly what you want. Also, there is a
+natural way to extend fuzzy logic to add uncertainty using Type-2 fuzzy logic,
+so this approach would work well even if there's is uncertainty in the data.
+There is definitely value in ultra-simple algorithms where both success and
+failure have clear interpretations.</p>
+
+
+<h2>C++11 code</h2>
+
+<p>All the functions needed for the FuzzThatNeighbour algorithm. This is what I
+used for the results shown above. Data is represented as a vector of sets and
+similarity is measured with the <a href="https://en.wikipedia.org/wiki/Jaccard_index">Tanimoto index.</a></p>
+
+<pre><code class="cpp">template&lt;typename T&gt;
+using ordered_set = boost::container::flat_set&lt;T&gt;; // or std::set...
+
+template&lt;typename T&gt;
+using dataset = std::vector&lt;ordered_set&lt;T&gt;&gt;;
+
+/** \brief Computes the size of the intersection of two sets. */
+template&lt;typename T&gt;
+auto set_intersection_size(ordered_set&lt;T&gt; const& xs,
+                           ordered_set&lt;T&gt; const& ys) noexcept -&gt; size_t {
+  auto const xs_end = xs.end(), ys_end = ys.end();
+  auto xs_it = xs.begin(), ys_it = ys.begin();
+  size_t count = 0;
+
+  while (xs_it != xs_end && ys_it != ys_end) {
+    if (*xs_it &lt; *ys_it) {
+      ++xs_it;
+    } else {
+      count += !(*ys_it &lt; *xs_it);
+      ++ys_it;
+    }
+  }
+  return count;
+}
+
+/** \brief Computes the Tanimoto similarity index between two sets
+           (size of the intersection divided by the size of the union
+           of the sets). */
+template&lt;typename T&gt;
+auto tanimoto(ordered_set&lt;T&gt; const& xs,
+              ordered_set&lt;T&gt; const& ys) noexcept -&gt; double {
+  if (xs.empty() || ys.empty()) return 0.0;
+  size_t const i = set_intersection_size(xs, ys);
+  return (double)i / (xs.size() + ys.size() - i);
+}
+
+class norm {
+ public:
+  using norm_type = std::function&lt;double(double, double)&gt;;
+
+  norm(std::string const& name,
+       norm_type const& t_norm,
+       norm_type const& s_norm)
+    noexcept : m_name(name), m_t_norm(t_norm), m_s_norm(s_norm) {
+  }
+
+  auto name() const noexcept -&gt; std::string const& {
+    return m_name;
+  }
+
+  auto t(double x, double y) const noexcept -&gt; double {
+    return m_t_norm(x, y);
+  }
+
+  auto s(double x, double y) const noexcept -&gt; double {
+    return m_s_norm(x, y);
+  }
+
+ private:
+  std::string m_name;
+  norm_type m_t_norm;
+  norm_type m_s_norm;
+};
+
+auto const god_norm = norm(
+  "Gödel-Dummett",
+  [](double x, double y) { return std::min(x, y); },
+  [](double x, double y) { return std::max(x, y); }
+);
+
+auto const pro_norm = norm(
+  "Product",
+  [](double x, double y) { return x * y; },
+  [](double x, double y) { return x + y - x * y; }
+);
+
+auto const luk_norm = norm(
+  "Łukasiewicz",
+  [](double x, double y) { return std::max(0.0, x + y - 1.0); },
+  [](double x, double y) { return std::min(1.0, x + y); }
+);
+
+template&lt;typename Integer&gt;
+auto fuzzthat(Integer x, Integer a, dataset&lt;Integer&gt; const& ds,
+              norm const& n) -&gt; double {
+  auto ans = 0.0;
+  for (Integer y = 0; y &lt; ds.size(); ++y) {
+    if (x == y) continue;
+    double const similarity = tanimoto(ds[x], ds[y]);
+    ans = n.s(ans, n.t(similarity, double(ds[y].find(a) != ds[y].end())));
+  }
+  return ans;
+}</code></pre>
+
+
+
+  <div id="hidden">
+    let world = "世界" in print $ "Hello " ++ world ++ "!"
+  </div>
+</div>
+
+<script type="text/javascript" src="../js/bower/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="../js/highlight.pack.js"></script>
+<script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+
+</body>
+</html>

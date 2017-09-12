@@ -8,8 +8,218 @@
         <name>Philippe Desjardins-Proulx</name>
         <email>philippe.d.proulx@gmail.com</email>
     </author>
-    <updated>2017-02-21T00:00:00Z</updated>
+    <updated>2017-09-12T00:00:00Z</updated>
     <entry>
+    <title>Fuzz that neighbour! An hopelessly naive, yet good, machine learning algorithm</title>
+    <link href="http://phdp.github.io//posts/2017-09-12-fuzzthat.html" />
+    <id>http://phdp.github.io//posts/2017-09-12-fuzzthat.html</id>
+    <published>2017-09-12T00:00:00Z</published>
+    <updated>2017-09-12T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>Fuzz that neighbour! An hopelessly naive, yet good, machine learning algorithm</h1>
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="Fuzz that neighbour! An hopelessly naive, yet good, machine learning algorithm" data-via="phdpqc">Tweet</a>
+<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  2017.09.12
+</p>
+
+<p>Working on ecological interactions taught me that the simple \(K\) nearest
+neighbour algorithm (KNN) can be surprisingly powerful. In a nutshell, in the
+context of imputation (i.e. filling holes in a matrix), if you want to predict
+the value of the point on the \(ith\) column of the \(xth\) row, you need to
+find the \(K\) rows which are most similar to \(x\) and then pick the most
+common value on their \(ith\) column. The figure below shows this process for
+\(K = 3\). Since two of the three most similar rows are red, the \(KNN\)
+algorithm would fill the missing entry with red.</p>
+
+<div class="imagecenter">
+  <img src="../images/knn.png" alt="knn"/>
+</div>
+
+<p>Here's the problem: for ecological interactions, imputation with the plain
+\(KNN\) does not work that well. It tends to predict many non-interactions
+where it should predict an interaction. But here's the frustrating part: in
+many cases, a few of the \(K\) nearests will have an interaction, just not
+enough to be the majority. So one way to improve the algorithm is to add a
+parameter to the \(KNN\) algorithm: a threshold \(T\). Essentially. instead of
+predicting an interaction if a majority of the \(K\) nearests have that
+interaction, we only ask for more than \(n/K > T\), with \(n\) being the number
+of observed interactions (in short: it reduces to the standard KNN algorithm
+with \(T = 0.5\)). And it works pretty well:</p>
+
+<div class="imagecenter">
+  <img src="../images/knn_t.png" alt="knn_t"/>
+</div>
+
+<p>This is from a paper I'm working on (I'll put the bioRxiv link here). The
+number used to measure effectiveness is the <a
+href='http://onlinelibrary.wiley.com/doi/10.1111/j.1365-2664.2006.01214.x/abstract'>TSS
+(True Skill Statistic) score</a>, and we can see that lower thresholds perform
+better than the standard majority rule. For this data-set, this variant even
+beats supervised learning algorithms such as random forests using species'
+traits.</p>
+
+<h2>Fuzz that!</h2>
+
+<p>The parameter \(K\) is pretty arbitrary and it tends to have a larger effect
+on imputation than recommendation. Can we get rid of it? Well there's the <a
+href='https://www.jstor.org/stable/3088801?seq=1#page_scan_tab_contents'>probabilistic
+nearest neighbour algorithm</a>, and while it would also require some sort of
+threshold-like fix, I'm sure it's doable. However, the threshold itself is
+pretty arbitrary and working on the automatic revision of ecologicial
+theories with logic gave me a really simple idea: what if, for all
+neighbour, we would take the fuzzy conjunction (and) of their class (in ecology, 0 for a
+non-interaction, 1 for an interaction) and their similarity to our
+data-point of interest, and then take the fuzzy disjunction (or) of
+all these values. The reason it may work is that fuzzy disjunction, like
+the \(KNN\) variant with the threshold, would mostly ignore negative
+evidences, while the conjunction would strongly penalize neighbour with
+low similarity. I explained how conjunction and disjunction worked in
+fuzzy logic <a href='2017-02-21-fuzzy-connectives.html'>here</a></p>
+
+<p>More formally, the class of the \(ith\) point of item \(x\) (or, in
+matrix-speech, the \(ith\) column of the \(xth\) row) is:</p>
+
+\[C^*_{x, i} = \bigvee_{n \in N(x)} C_{n, i} \land S_{x, n},\]
+
+<p>where \(N(x\) is the neighbourhood of \(x\) (basically all points except
+\(x\)), \(C_{n, i}\) is the binary class of \(ith\) point of item \(n\) and
+\(S_{x, n}\) is the similarity between \(x\) and \(n\). Like the KNN you need
+to define some measure of similarity, and there are different ways to define
+disjunction and conjunction (again see <a
+href='2017-02-21-fuzzy-connectives.html'>here</a>). Since \(C^*_{x, i}\) will
+sometimes not be either 0 or 1, we can predict 1 is it has a truth value
+greater than 0.5. As a simple example, let's say we have:</p>
+
+\[\begin{bmatrix}? & 1 & 1 & 0 \\ 0 & 0 & 0 & 0 \\ 1 & 1 & 0 & 0\end{bmatrix}\]
+
+<p>And the similarity is measured will use the Hamming distance. So, the
+similarity between the first row and the second would be 1/3 and between
+the first and the third would be 2/3, giving us:</p>
+
+\[C^*_{0, 0} = (0 \land 1/3) \lor (1 \land 2/3) = 2/3.\]
+
+<p>(Note: because in this case the class is either 0 or 1, the definition
+of conjunction does not matter).</p>
+
+<p>So, is it working?</p>
+
+<p>Yeah. It seems definitely better than the \(KNN\) approach (without the
+threshold), and unless you count the T-norm as a parameter, it has no
+parameters. Testing on the data-set used for <a
+href='https://peerj.com/articles/3644/'>this paper</a>, the KNN has a TSS of
+0.543371 compared to 0.775659 for FuzzThatNeighbour (with the product norms).
+It feels less general than the \(KNN\) since it is so biased toward positive
+evidences, but in some cases, it's exactly what you want. Also, there is a
+natural way to extend fuzzy logic to add uncertainty using Type-2 fuzzy logic,
+so this approach would work well even if there's is uncertainty in the data.
+There is definitely value in ultra-simple algorithms where both success and
+failure have clear interpretations.</p>
+
+
+<h2>C++11 code</h2>
+
+<p>All the functions needed for the FuzzThatNeighbour algorithm. This is what I
+used for the results shown above. Data is represented as a vector of sets and
+similarity is measured with the <a
+href='https://en.wikipedia.org/wiki/Jaccard_index'>Tanimoto index.</a></p>
+
+<pre><code class="cpp">template&lt;typename T&gt;
+using ordered_set = boost::container::flat_set&lt;T&gt;; // or std::set...
+
+template&lt;typename T&gt;
+using dataset = std::vector&lt;ordered_set&lt;T&gt;&gt;;
+
+/** \brief Computes the size of the intersection of two sets. */
+template&lt;typename T&gt;
+auto set_intersection_size(ordered_set&lt;T&gt; const& xs,
+                           ordered_set&lt;T&gt; const& ys) noexcept -&gt; size_t {
+  auto const xs_end = xs.end(), ys_end = ys.end();
+  auto xs_it = xs.begin(), ys_it = ys.begin();
+  size_t count = 0;
+
+  while (xs_it != xs_end && ys_it != ys_end) {
+    if (*xs_it &lt; *ys_it) {
+      ++xs_it;
+    } else {
+      count += !(*ys_it &lt; *xs_it);
+      ++ys_it;
+    }
+  }
+  return count;
+}
+
+/** \brief Computes the Tanimoto similarity index between two sets
+           (size of the intersection divided by the size of the union
+           of the sets). */
+template&lt;typename T&gt;
+auto tanimoto(ordered_set&lt;T&gt; const& xs,
+              ordered_set&lt;T&gt; const& ys) noexcept -&gt; double {
+  if (xs.empty() || ys.empty()) return 0.0;
+  size_t const i = set_intersection_size(xs, ys);
+  return (double)i / (xs.size() + ys.size() - i);
+}
+
+class norm {
+ public:
+  using norm_type = std::function&lt;double(double, double)&gt;;
+
+  norm(std::string const& name,
+       norm_type const& t_norm,
+       norm_type const& s_norm)
+    noexcept : m_name(name), m_t_norm(t_norm), m_s_norm(s_norm) {
+  }
+
+  auto name() const noexcept -&gt; std::string const& {
+    return m_name;
+  }
+
+  auto t(double x, double y) const noexcept -&gt; double {
+    return m_t_norm(x, y);
+  }
+
+  auto s(double x, double y) const noexcept -&gt; double {
+    return m_s_norm(x, y);
+  }
+
+ private:
+  std::string m_name;
+  norm_type m_t_norm;
+  norm_type m_s_norm;
+};
+
+auto const god_norm = norm(
+  "Gödel-Dummett",
+  [](double x, double y) { return std::min(x, y); },
+  [](double x, double y) { return std::max(x, y); }
+);
+
+auto const pro_norm = norm(
+  "Product",
+  [](double x, double y) { return x * y; },
+  [](double x, double y) { return x + y - x * y; }
+);
+
+auto const luk_norm = norm(
+  "Łukasiewicz",
+  [](double x, double y) { return std::max(0.0, x + y - 1.0); },
+  [](double x, double y) { return std::min(1.0, x + y); }
+);
+
+template&lt;typename Integer&gt;
+auto fuzzthat(Integer x, Integer a, dataset&lt;Integer&gt; const& ds,
+              norm const& n) -&gt; double {
+  auto ans = 0.0;
+  for (Integer y = 0; y &lt; ds.size(); ++y) {
+    if (x == y) continue;
+    double const similarity = tanimoto(ds[x], ds[y]);
+    ans = n.s(ans, n.t(similarity, double(ds[y].find(a) != ds[y].end())));
+  }
+  return ans;
+}</code></pre>
+
+]]></summary>
+</entry>
+<entry>
     <title>Fuzzy knowledge and fuzzy logic connectives</title>
     <link href="http://phdp.github.io//posts/2017-02-21-fuzzy-connectives.html" />
     <id>http://phdp.github.io//posts/2017-02-21-fuzzy-connectives.html</id>
@@ -1844,133 +2054,6 @@ declarations at some point.</a></p>
 
 <p>Sum types and pattern matching are awesome.</p>
 
-
-]]></summary>
-</entry>
-<entry>
-    <title>Knowledge representation and species interactions</title>
-    <link href="http://phdp.github.io//posts/2014-06-11-food-webs.html" />
-    <id>http://phdp.github.io//posts/2014-06-11-food-webs.html</id>
-    <published>2014-06-11T00:00:00Z</published>
-    <updated>2014-06-11T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<h1>Knowledge representation and species interactions</h1>
-
-<a href="https://twitter.com/share" class="twitter-share-button" data-text="Knowledge representation and species interactions" data-via="phdpqc">Tweet</a>
-<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-  2014.06.11
-</p>
-
-<h2>The food web</h2>
-
-<p>One of the most fascinating aspect of ecology is the complex web of
-interactions between individuals (or populations, or species), and how it
-shapes the structure of communities. But what is the best way to represent
-these interactions?</p>
-
-<p>The classical representation is a
-directed network. <a href='http://mangal.uqar.ca/data/network/17/'>Here's
-one from the mangal database</a> [2]. We can have predator-prey interactions,
-parasitism, mutualism, competition, etc etc...</p>
-
-<p>However, it's a somewhat limited representation. A good way to evaluate a
-knowledge representation is to look at the possible queries. What questions
-can be answered? What questions cannot be answered? How expressive can the
-queries be? How expressive are the answers?</p>
-
-<p>Despite their widespread use, these interactions networks can only answer
-one question: is there a binary interaction between X and Y? The <i>binary
-</i> part is important, because these networks cannot deal with indirect
-relationships such as: X eats Y except when W is there.</p>
-
-<p>It doesn't scale well either: two species might only interact in a given
-region, a problem solved with distinct networks, but we would need distinct
-networks for every region with distinct interactions and a lot of information
-will be repeated.</p>
-
-<h2>Going stochastic</h2>
-
-<p>Instead of saying X eats Y, we could say X eats Y with probability Z.
-Adopting a probabilistic perspective does solve quite a few issues. We can
-now handle uncertainty and to some extent spatio-temporal variations. That
-said, we still cannot handle indirect relationships, and it doesn't scale
-that well.</p>
-
-<p>For example, if species A and B compete on the west coast with probability
-0.9 but only with probability 0.1 on the east coast, we would lose important
-information by having a network say they compete with probability 0.5. Dividing
-the network in two would improve our model's accuracy, but we are again getting
-in the messy network-of-networks business.  </p>
-
-<p>My supervisors, Timothée Poisot and Dominique Gravel, recently proposed a
-metaweb concept that includes, among many other ideas, probabilistic links, but
-in their case it's more than just adding probabilities to links [3].</p>
-
-<h2>A unified path to unification</h2>
-
-<p>To criticize an approach to ecology for missing some features is too easy.
-All representations have limitations, and any approach to science relies on
-some simplification of reality. However, in this case we can have our cake and
-eat it too by looking at what is going on in the field of knowledge
-representation (KR), which has been defined as [0]:</p>
-
-<p><blockquote>[...] the scientific domain concerned with the study of
-computational models able to explicitly represent knowledge by symbols and
-to process these symbols in order to produce new ones representing other
-pieces of knowledge. Systems built upon such computational models are called
-knowledge-based systems. Their main components are a knowledge base and a
-reasoning engine.</blockquote></p>
-
-<p>To illustrate, let's look at two lizards: <i>P. cinereus</i> and <i>P.
-hoffmani</i> [1]. The two species essentially hunt the same preys but, when
-they are found in the same region, character displacement pushes them to
-specialize on different preys. This fact cannot be easily express with
-standard knowledge representations for food webs, but we can with a bit
-of logic:</p>
-
-\[presence(\mbox{cinereus}, r) \land presence(\mbox{hoffmani}, r) \Rightarrow eat(\mbox{cinereus}, A, r).\]
-
-<p>The formula reads: the presence of cinereus in region \(r\) and the presence
-of hoffmani in \(r\) implies that cinereus eats prey A in \(r\). Formulas like
-this be seen as templates: presence(cinereus) will be either true or false at
-any given place, but a probability is assigned to the entire formula so it can
-be revised with new evidence [4]. This is an important point, it means we can
-use the standard food webs as evidence to build these logical formulas, but we
-still get a probabilistic model capable of handling uncertainty.</p>
-
-<p>The formula is readable, can be used with modern inference tools, and is
-very flexible, but there's better. What if the presence of cinereus in \(r\)
-could be predicted with a few conditions, we could have something like
-this:</p>
-
-\[northAmerica(r) \land (presence(A, r) \lor presence(B, r)) \Rightarrow presence(\mbox{cinereus}, r).\]
-
-<p>If the region \(r\) is in north America and if either species A or B are
-present, then cinereus will be present. Again, this equation would be
-assigned a probability. This is a simplistic model of presence/absence, but
-the point is that this knowledge representation allows different formula to
-be combined. Various evidence can be used together instead of having a wall
-between ecological facts, and such database of probabilistic logical formula
-supports sophisticated queries.</p>
-
-<p>There are many discussions about having integrative frameworks and
-theories in ecology. This is especially true for interaction networks, which
-are often present in one form or another in ecology. Ironically, these
-discussions of integration are often ignoring modern research in
-other fields. Knowledge representation offers powerful tools with mature
-software that are worth checking, especially if we want to understand
-how different ideas and evidence can be combined.</p>
-
-<h2>References</h2>
-
-<p>[0] M Chein and M-L Mugnier. <i>Graph-based Knowledge Representation</i>. Springer, 2009.</p>
-
-<p>[1] JB Losos. <a href='http://www.oeb.harvard.edu/faculty/losos/jblosos/pdfs/pnas.pdf'>Ecological character displacement and the study of adaptation</a>. PNAS, 2000.</p>
-
-<p>[2] T Poisot, B Baiser, JA Dunne, S Kéfi, F Massol, N Mouquet, TN Romanuk, DB Stouffer, SA Wood, and D Gravel. <a href='http://dx.doi.org/10.1101/002634'>Mangal - making complex ecological network analysis simpler</a>. <i>bioRxiV</i>, 2014.</p>
-
-<p>[3] T Poisot, DB Stouffer, and D Gravel. <a href='http://dx.doi.org/10.1101/001677'>Beyond species: why ecological interactions vary through space and time</a>. <i>bioRxiV</i>, 2014.</p>
-
-<p>[4] M Richardson and P Domingos. Markov logic networks. <i>Machine Learning</i> <b>62</b> (1-2): 107–136, 2006.</p>
 
 ]]></summary>
 </entry>
