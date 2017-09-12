@@ -123,7 +123,10 @@ of conjunction does not matter. The definition of \(\lor\) does matter,
 it would be \(max(2/3, 1/3) = 2/3\) under the Gödel-Dummett norm, or
 \(x + y - xy = 7/9\) under the product norm (which, in my experience, gives
 better results). In either cases I'd predict an interaction since the truth
-value is above 0.5.</p>
+value is above 0.5. One advantage of the \(KNN\) algorithm is that you
+don't need to bother with all neighbours, just the \(K\) closest. However,
+there are many conditions where you can stop FuzzThatNeighbour before
+scanning all elements, especially if the data-points are in a cover tree.</p>
 
 <p>So, is it working?</p>
 
@@ -134,7 +137,7 @@ parameters. Testing on the data-set used for <a href="https://peerj.com/articles
 It feels less general than the \(KNN\) since it is so biased toward positive
 evidences, but in some cases, it's exactly what you want. Also, there is a
 natural way to extend fuzzy logic to add uncertainty using Type-2 fuzzy logic,
-so this approach would work well even if there's is uncertainty in the data.
+so this approach would work well even if there's uncertainty in the data.
 There is definitely value in ultra-simple algorithms where both success and
 failure have clear interpretations.</p>
 
