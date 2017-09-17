@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Theory revision with fuzzy logic</title>
+
+    <meta name="description" content="Markov Logic: Logic, Probability, Learning">
+    <meta name="author" content="Philippe Desjardins-Proulx">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/polaris.css" id="theme">
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <script>
+      if (window.location.search.match(/print-pdf/gi)) {
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'css/print/pdf.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+      }
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section>
+          <h1>Automatic Revision of Ecological Theories</h1>
+          <p>by <a href="http://phdp.github.io/">Philippe Desjardins-Proulx</a></small></p>
+        </section>
+
+        <section>
+          <section>
+            <h1>Motivation</h1>
+          </section>
+          <section>
+            <img src='img/amnat12.png' alt='amnat12'/>
+          </section>
+          <section>
+            <img src='img/eco-evo-paper.png' alt='ecoevo'/>
+          </section>
+          <section>
+            <img src='img/hahn08.png' alt='hahn08'/>
+          </section>
+          <section>
+            <h2>[Supervised] learning in a nutshell</h2>
+            <img src='img/ml-900.png' alt='machine learning'/>
+          </section>
+          <section>
+            <img src='img/biorxiv-scientifictheories.png' alt='biorxiv'/>
+          </section>
+          <section>
+            <img src='img/reasoning_systems.png' alt='reasoning systems'/>
+          </section>
+          <section>
+            \[\frac{dx}{dt} = \alpha x - \beta xy \mbox{ and } \frac{dy}{dt} = \delta xy - \gamma y.\]
+          </section>
+          <section>
+            \[\forall x, y: PPreyOn(x, y) = \alpha \times \exp\left[-\left(\frac{N(y) - D(x)}{R(x)/2}\right)^2\right]\]
+          </section>
+          <section>
+            \[\forall x, l, t: SmallP(x, l, t) \mbox{ and } Resources(x, l, t) \Rightarrow P(x, l, t + 1) = G(x) \times P(x, l, t).\]
+          </section>
+          <section>
+            <h2>Theory revision wishlist</h2>
+            <p>Handling deterministic and probabilistic theories</p>
+            <p>Fast algorithms for theory revision</p>
+            <p>Handling arbitrarily large knowledge bases</p>
+            <p>...with multi-objective theory revision</p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>Ecological Interactions</h1>
+          </section>
+          <section>
+            <img src='img/ecological-netflix-paper.png' alt='paper'/>
+          </section>
+          <section>
+            <img src='img/pearson.svg' alt='pearson'/>
+          </section>
+          <section>
+            \[tanimoto(\mathbf{x}, \mathbf{y}) = \frac{\left\vert\mathbf{x} \cap \mathbf{y}\right\vert}{\left\vert\mathbf{x} \cup \mathbf{y}\right\vert}\]
+
+\begin{align}
+  tanimoto(\mathbf{x}, \mathbf{y}) &= \frac{\left\vert\{A, B, C\} \cap \{A, C, D, E, F\}\right\vert}{\left\vert\{A, B, C\} \cup \{A, C, D, E, F\}\right\vert}\\
+                                   &= \frac{\left\vert\{A, C\}\right\vert}{\left\vert\{A, B, C, D, E, F\}\right\vert} = \frac{2}{6}.
+\end{align}
+
+
+          </section>
+          <section>
+            <img src='img/knn-paper.png' alt='knn'/>
+          </section>
+          <section>
+            \[TSS = \frac{(tp \times tn) - (fp \times fn)}{(tp + fn)(fp + tn)}\]
+
+            <p><i>tp, tn, fp, fn</i> are the true positives, true negatives, false positives,
+            and false negaties, respectively.</p>
+
+            <p>The <i>TSS</i> ranges from -1 to 1.</p>
+
+          </section>
+          <section>
+            <img src='img/ht_acc.svg' width='80%' alt='acc'/>
+          </section>
+          <section>
+            <img src='img/ht_tss.png' width='80%' alt='acc'/>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>Markov logic</h1>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>Fuzzy Logic</h1>
+          </section>
+          <section>
+            <h2>Structure</h2>
+            \[\mathbf{If} \mbox{ } antecedants \mbox{ } \mathbf{then} \mbox { } consequents.\]
+            \[\mathbf{If} \mbox{ } antecedants \mbox{ } \mathbf{then} \mbox { } consequents.\]
+            \[\mathbf{If} \mbox{ } antecedants \mbox{ } \mathbf{then} \mbox { } consequents.\]
+            \[...\]
+
+            <br/>
+            <br/>
+
+            \[\mathbf{If} \mbox{ } A_0 \land A_1 \land A_2 \land ... \mbox{ } \mathbf{then} \mbox { } C_0.\]
+          </section>
+          <section>
+            <h2>Data</h2>
+          </section>
+          <section>
+            <h2>Initial model</h2>
+            <ul style='width: 100%'>
+              <li><b>If</b> KNN is high <b>then</b> interaction.</li>
+              <li><b>If</b> KNN is low <b>then</b> no interaction.</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Current approach for learning (Python script)</h2>
+            <h3>Evolution</h3>
+            <ol start='0'>
+              <li>Start with the initial knowledge base with the two KNN rules.</li>
+              <li>Randomly generate a rule, add it to the knowledge base.</li>
+              <li>If the new knowledge base beats the old by 0.004 accuracy, keep the rule.</li>
+              <li>Repeat \(\phi\) times</li>
+            </ol>
+            <br/><br/>
+            <h3>Pseudo-ensemble approach</h3>
+            <ol start='0'>
+              <li>Make \(n\) evolutions.</li>
+              <li>Count the frequency of the rules in the evolutions</li>
+              <li>Try to add the rule one by one from most frequent to least</li>
+              <li>Keep if accuracy improve by at least 0.004.</li>
+            </ol>
+          </section>
+          <section>
+            <ul style='width: 100%; font-size: 80%'>
+              <li><b>If</b> Plant nectar tube depth is average <b>then</b> \(I^+\).</li>
+              <li><b>If</b> Pollinator body size is small <b>then</b> \(I^+\).</li>
+              <li><b>If</b> KNN is high <b>then</b> \(I^+\).</li>
+              <li><b>If</b> Pollinator is specialist <b>and</b> Plant nectar tube dim is small <b>then</b> \(I^+\).</li>
+              <li><b>If</b> Plant flower width is average <b>then</b> \(I^+\).</li>
+              <li><b>If</b> Plant flower width is small <b>and</b> Pollinator tongue length is small <b>then</b> \(I^+\).</li>
+              <li><b>If</b> KNN is low <b>then</b> \(I^-\).</li>
+            </ul>
+          </section>
+          <section>
+            <ul style='width: 100%; font-size: 70%'>
+              <li>[120] <b>If</b> KNN is high <b>then</b> \(I^+\).</li>
+              <li>[100] <b>If</b> KNN is low <b>then</b> this pollinator/plant \(I^-\).</li>
+              <li>[33] <b>If</b> Pollinator is specialist <b>then</b> \(I^+\).</li>
+              <li>[25] <b>If</b> PlantFlowerWidth is small <b>then</b> \(I^+\).</li>
+              <li>[25] <b>If</b> PlantFlowerWidth is average <b>then</b> \(I^+\).</li>
+              <li>[23] <b>If</b> PlantNectarTubeDepth is average <b>then</b> \(I^+\).</li>
+              <li>[21] <b>If</b> PollTongueLength is average <b>then</b> \(I^+\).</li>
+              <li>[19] <b>If</b> PollIT is small <b>then</b> \(I^+\).</li>
+              <li>[15] <b>If</b> Pollinator is generalist <b>then</b> \(I^+\).</li>
+              <li>[14] <b>If</b> PlantNectarTubeDim is average <b>then</b> \(I^+\).</li>
+              <li>[14] <b>If</b> PollIT is large <b>then</b> \(I^+\).</li>
+              <li>[8] <b>If</b> KNN is low <b>and</b> Pollinator is specialist <b>then</b> \(I^+\).</li>
+              <li>[7] <b>If</b> PollTongueLength is small <b>and</b> KNN is high <b>then</b> \(I^+\).</li>
+              <li>[6] <b>If</b> PlantNectarTubeDim is average <b>and</b> PlantFlowerWidth is average <b>then</b> \(I^+\).</li>
+              <li>[6] <b>If</b> KNN is high <b>and</b> PlantFlowerWidth is average <b>then</b> \(I^+\).</li>
+              <li>...</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Results on pollinator-plant data-set</h2>
+            <table style="width:100%; text-align:center;">
+              <tr>
+                <th>Model</th>
+                <th>Accuracy (10% testing data)</th>
+              </tr>
+              <tr>
+                <td>Fuzzy (initial model with two KNN rules)</td>
+                <td>0.8105</td>
+              </tr>
+              <tr>
+                <td>Fuzzy (after evolution)</td>
+                <td>0.9281</td>
+              </tr>
+              <tr>
+                <td>Supervised learning (SVM, traits only)</td>
+                <td>0.8013</td>
+              </tr>
+              <tr>
+                <td>Supervised learning (SVM, with KNN)</td>
+                <td>0.7576 (WTF?)</td>
+              </tr>
+              <tr>
+                <td>Supervised learning (random forest, traits only)</td>
+                <td>0.8074</td>
+              </tr>
+              <tr>
+                <td>Supervised learning (random forest, with KNN)</td>
+                <td>0.9113</td>
+              </tr>
+            </table>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>Next</h1>
+          </section>
+          <section>
+            <h2>Genetic (or evolutionary) algorithms</h2>
+            <img src='./img/generic-algorithms.png' alt='evolutionary algorithms'/>
+          </section>
+          <section>
+            <h2>Multi-objective learning</h2>
+            <p><a href='http://ieeexplore.ieee.org/document/996017/'>NSGA-II</a> and large fuzzy knowledge base</p>
+            <ul style='width: 100%'>
+              <li><b>If</b> \(A_{0}, A_{4}, A_{8}\) <b>then</b> \(C_{0}\).</li>
+              <li><b>If</b> \(A_{4}, A_{10}\) <b>then</b> \(C_{4}\).</li>
+              <li><b>If</b> \(A_{9}, A_{11}, A_{12}\) <b>then</b> \(C_{8}\).</li>
+              <li><b>If</b> \(A_{1}, A_{5}\) <b>then</b> \(C_{0}\).</li>
+              <li><b>If</b> \(A_{9}, A_{11}, A_{18}, A_{22}\) <b>then</b> \(C_{2}\).</li>
+              <li><b>If</b> \(A_{0}\) <b>then</b> \(C_{0}\).</li>
+              <li><b>If</b> \(A_{3}, A_{20}, A_{28}\) <b>then</b> \(C_{5}\).</li>
+              <li>...</li>
+            </ul>
+            <br/><br/>
+            <p>Given an input, select the rules which can be decided and return relevant predictions.</p>
+          </section>
+          <section>
+            <h2>Type-2 fuzzy sets</h2>
+            <img src='./img/t2.png' alt='t2 fuzzy sets'/>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>Questions?</h1>
+          </section>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+    <script>
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        width: "70%",
+        height: "100%",
+        margin: 0,
+        minScale: 1,
+        maxScale: 1,
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Parallax scrolling
+        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        // parallaxBackgroundSize: '2100px 900px',
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+    </script>
+    <script type="text/javascript" src="../../js/bower/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </body>
+</html>
