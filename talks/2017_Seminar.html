@@ -147,10 +147,10 @@
             <p>Plant-pollinator interactions were collected across 16 sites in
             the southwest of the iberian peninsula (Huelva and Seville) from
             March to June 2015. All sites are dominated by Mediterranean open
-            forests with a flowery understory including \textit{Cistus sp.},
-            \textit{Lavandula sp.}, \textit{Rosmarinus officinalis}, ...
-            Sampling was conducted on seven rounds per site along the season
-            and each round consisted in three types of censuses. </p>
+            forests with a flowery understory including <i>Cistus sp.</i>,
+            <i>Lavandula sp.</i>, <i>Rosmarinus officinalis</i>, ... Sampling
+            was conducted on seven rounds per site along the season and each
+            round consisted in three types of censuses.</p>
 
             <p>The data-set has 739 pollinator-plant interactions. We randomly
             pick 739 pollinator-plant pairs that are not interacting to build a
@@ -183,7 +183,45 @@
           </section>
           <section>
             <h2>Salix data-set</h2>
+            <img src='img/salix.png' alt='salix'/>
           </section>
+          <section>
+            <h2>Learning weights (but not really rules)</h2>
+\[ 6.44 : HighNumSalix(x)\]
+\[ 5.60 : \neg ModerateCooccurrence(x,y)\]
+\[ 4.38 : \neg PreyOnAt(x,y,a3)\]
+\[ 4.33 : \neg HighCooccurrence(x,y)\]
+\[ 3.08 : \neg PresenceAt(x,y)\]
+\[ 1.68 : \neg PreyOn(x,y)\]
+\[ 1.38 : \neg IsSalix(x)\]
+\[ 0.59 : \neg IsGaller(x)\]
+\[ 0.59 : \neg CloselyRelated(x,y)\]
+\[ 0.57 : \neg HigherPhyloValue(x,y)\]
+\[ 0.47 : HighNumGaller(x)\]
+\[ 0.24 : HighNumSpecies(x)\]
+\[ 0.19 : HighFoodWebLinkDensity(x)\]
+\[ 0.18 : \neg IsParasitoid(x)\]
+\[ 0.14 : \neg HighFoodWebConnectance(x)\]
+\[ 0.01 : \neg HighTotalPrecipiration(x)\]
+\[ 0.01 : \neg HighMeanTemperature(x)\]
+\[ 0.01 : \negPreyOn(x,x)\]
+\[ 0.00 : HighNumParasites(x)\]
+          </section>
+
+          <section>
+\[ 5.20 : PreyOnAt(x,y,z) \Rightarrow PreyOn(x,y)\]
+\[ 4.22 : HighCooccurrence(x,y) \Rightarrow PreyOn(x,y)\]
+\[ 4.15 : IsGaller(x) \land PreyOn(x,y) \Rightarrow IsSalix(y)\]
+\[ 3.49 : IsParasitoid(y) \land PreyOn(y,x) \Rightarrow IsGaller(x)\]
+\[ 1.57 : PreyOn(x,y) \Rightarrow HighCooccurrence(x,y)\]
+\[ 1.52 : PreyOn(x,y) \Rightarrow PreyOn(x,x)\]
+\[ 1.13 : HigherPhyloValue(x,y) \Rightarrow PreyOn(x,y)\]
+\[-0.59 : HigherPhyloValue(x,y) \Rightarrow HighCooccurrence(x,y)\]
+\[ 0.45 : PreyOn(x,x) \Rigtharrow PreyOn(x,y)\]
+\[ 0.02 : !IsSalix(x) \lor !PreyOn(x,y)\]
+\[ 0.00 : CloselyRelated(x,y) \land PreyOn(x,z) \Rightarrow PreyOn(y,z)\]
+          </section>
+
         </section>
 
         <section>
