@@ -252,9 +252,6 @@
             \[\mathbf{If} \mbox{ } A_0 \land A_1 \land A_2 \land ... \mbox{ } \mathbf{then} \mbox { } C_0.\]
           </section>
           <section>
-            <h2>Data</h2>
-          </section>
-          <section>
             <h2>Initial model</h2>
             <ul style='width: 100%'>
               <li><b>If</b> KNN is high <b>then</b> interaction.</li>
@@ -281,32 +278,32 @@
           </section>
           <section>
             <ul style='width: 100%; font-size: 80%'>
-              <li><b>If</b> Plant nectar tube depth is average <b>then</b> \(I^+\).</li>
-              <li><b>If</b> Pollinator body size is small <b>then</b> \(I^+\).</li>
-              <li><b>If</b> KNN is high <b>then</b> \(I^+\).</li>
-              <li><b>If</b> Pollinator is specialist <b>and</b> Plant nectar tube dim is small <b>then</b> \(I^+\).</li>
-              <li><b>If</b> Plant flower width is average <b>then</b> \(I^+\).</li>
-              <li><b>If</b> Plant flower width is small <b>and</b> Pollinator tongue length is small <b>then</b> \(I^+\).</li>
-              <li><b>If</b> KNN is low <b>then</b> \(I^-\).</li>
+              <li><b>If</b> Plant nectar tube depth is average <b>then</b> interaction.</li>
+              <li><b>If</b> Pollinator body size is small <b>then</b> interaction.</li>
+              <li><b>If</b> KNN is high <b>then</b> interaction.</li>
+              <li><b>If</b> Pollinator is specialist <b>and</b> Plant nectar tube dim is small <b>then</b> interaction.</li>
+              <li><b>If</b> Plant flower width is average <b>then</b> interaction.</li>
+              <li><b>If</b> Plant flower width is small <b>and</b> Pollinator tongue length is small <b>then</b> interaction.</li>
+              <li><b>If</b> KNN is low <b>then</b> non-interaction.</li>
             </ul>
           </section>
           <section>
             <ul style='width: 100%; font-size: 70%'>
-              <li>[120] <b>If</b> KNN is high <b>then</b> \(I^+\).</li>
-              <li>[100] <b>If</b> KNN is low <b>then</b> this pollinator/plant \(I^-\).</li>
-              <li>[33] <b>If</b> Pollinator is specialist <b>then</b> \(I^+\).</li>
-              <li>[25] <b>If</b> PlantFlowerWidth is small <b>then</b> \(I^+\).</li>
-              <li>[25] <b>If</b> PlantFlowerWidth is average <b>then</b> \(I^+\).</li>
-              <li>[23] <b>If</b> PlantNectarTubeDepth is average <b>then</b> \(I^+\).</li>
-              <li>[21] <b>If</b> PollTongueLength is average <b>then</b> \(I^+\).</li>
-              <li>[19] <b>If</b> PollIT is small <b>then</b> \(I^+\).</li>
-              <li>[15] <b>If</b> Pollinator is generalist <b>then</b> \(I^+\).</li>
-              <li>[14] <b>If</b> PlantNectarTubeDim is average <b>then</b> \(I^+\).</li>
-              <li>[14] <b>If</b> PollIT is large <b>then</b> \(I^+\).</li>
-              <li>[8] <b>If</b> KNN is low <b>and</b> Pollinator is specialist <b>then</b> \(I^+\).</li>
-              <li>[7] <b>If</b> PollTongueLength is small <b>and</b> KNN is high <b>then</b> \(I^+\).</li>
-              <li>[6] <b>If</b> PlantNectarTubeDim is average <b>and</b> PlantFlowerWidth is average <b>then</b> \(I^+\).</li>
-              <li>[6] <b>If</b> KNN is high <b>and</b> PlantFlowerWidth is average <b>then</b> \(I^+\).</li>
+              <li>[120] <b>If</b> KNN is high <b>then</b> interaction.</li>
+              <li>[100] <b>If</b> KNN is low <b>then</b> this pollinator/plant non-interaction.</li>
+              <li>[33] <b>If</b> Pollinator is specialist <b>then</b> interaction.</li>
+              <li>[25] <b>If</b> PlantFlowerWidth is small <b>then</b> interaction.</li>
+              <li>[25] <b>If</b> PlantFlowerWidth is average <b>then</b> interaction.</li>
+              <li>[23] <b>If</b> PlantNectarTubeDepth is average <b>then</b> interaction.</li>
+              <li>[21] <b>If</b> PollTongueLength is average <b>then</b> interaction.</li>
+              <li>[19] <b>If</b> PollIT is small <b>then</b> interaction.</li>
+              <li>[15] <b>If</b> Pollinator is generalist <b>then</b> interaction.</li>
+              <li>[14] <b>If</b> PlantNectarTubeDim is average <b>then</b> interaction.</li>
+              <li>[14] <b>If</b> PollIT is large <b>then</b> interaction.</li>
+              <li>[8] <b>If</b> KNN is low <b>and</b> Pollinator is specialist <b>then</b> interaction.</li>
+              <li>[7] <b>If</b> PollTongueLength is small <b>and</b> KNN is high <b>then</b> interaction.</li>
+              <li>[6] <b>If</b> PlantNectarTubeDim is average <b>and</b> PlantFlowerWidth is average <b>then</b> interaction.</li>
+              <li>[6] <b>If</b> KNN is high <b>and</b> PlantFlowerWidth is average <b>then</b> interaction.</li>
               <li>...</li>
             </ul>
           </section>
@@ -343,18 +340,29 @@
 
         <section>
           <section>
-            <h1>Next</h1>
+            <h1>Conclusions and What's Next</h1>
+          </section>
+          <section>
+            <ul width='100%'>
+              <li>KNN is an effective, widely applicable, and simple approach.</li>
+              <li>KNN with threshold works well with TSS scores.</li>
+              <li>Supervised learning algorithms (esp. random forests) can predict interactions with few real-valued traits.</li>
+              <li>Fuzzy knowledge bases are both clear and accurate.</li>
+              <li>Even a silly revision algorithm yields very good results for fuzzy logic.</li>
+              <li>Knowledge representation in ecology is an interesting topic in itself.</li>
+              <li>Markov logic has issues (computational, binary) but modern variant could be promising.</li>
+            </ul>
           </section>
           <section>
             <h2>Genetic (or evolutionary) algorithms</h2>
             <img src='./img/generic-algorithms.png' alt='evolutionary algorithms'/>
           </section>
           <section>
-            <h2>Probabilistic Soft Logic meets Salix</h2>
+            <h2>Salix part II?</h2>
             <img src='./img/psl_paper.png' alt='psl paper'/>
           </section>
           <section>
-            <h2>Fuzzy Logic meets Salix</h2>
+            <h2>...also fuzzy logic meets Salix</h2>
           </section>
           <section>
             <h2>Type-2 fuzzy sets</h2>
