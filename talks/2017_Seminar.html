@@ -91,6 +91,21 @@
             <img src='img/ecological-netflix-paper.png' alt='paper'/>
           </section>
           <section>
+            <h2>Data</h2>
+
+            <p>The first data-set was obtained from the study of Digel et al.
+            (2014) , who documented the presence and absence of interactions
+            among 881 species from 48 forest soil food webs, details of which
+            are provided in the original publication. A total of 34,193 unique
+            interactions were observed across the 48 food webs, and a total of
+            215,418 absence of interactions.</p>
+
+            <p>Traits: \(body mass\), \(Ph0\), \(Ph1\) plus 25 binary traits
+            (e.g. AboveGround, Detritivore, Bacteria, Jumps, LongLegs,
+            UsePoison).</p>
+
+          </section>
+          <section>
             <img src='img/pearson.svg' alt='pearson'/>
           </section>
           <section>
@@ -106,7 +121,42 @@
 
           </section>
           <section>
+
+            <p>Supervised learning Random forests predict correctly 99.55% of
+            the non-interactions and 96.81% of the interactions, for a
+            <i>TSS</i> of 0.96. Much of this accuracy is due to the three
+            real-valued traits (\(body mass\), \(Ph0\), \(Ph1\)). Without them,
+            too many entries have the same feature vector x, making it
+            impossible for the algorithm to classify them correctly. Removing
+            the binary traits has little effect on the model. With only \(body
+            mass\), \(Ph0\), \(Ph1\), the <i>TSS</i> of the random forests is
+            0.94.</p>
+
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>KNN with Threshold</h2>
+          </section>
+          <section>
             <img src='img/knn-paper.png' alt='knn'/>
+          </section>
+          <section>
+            <h2>I Bartomeus's pollinator-plant data-set</h2>
+
+            <p>Plant-pollinator interactions were collected across 16 sites in
+            the southwest of the iberian peninsula (Huelva and Seville) from
+            March to June 2015. All sites are dominated by Mediterranean open
+            forests with a flowery understory including \textit{Cistus sp.},
+            \textit{Lavandula sp.}, \textit{Rosmarinus officinalis}, ...
+            Sampling was conducted on seven rounds per site along the season
+            and each round consisted in three types of censuses. </p>
+
+            <p>The data-set has 739 pollinator-plant interactions. We randomly
+            pick 739 pollinator-plant pairs that are not interacting to build a
+            data-set of 1478 entries, half of interactions, half of
+            non-interactions.</p>
+
           </section>
           <section>
             \[TSS = \frac{(tp \times tn) - (fp \times fn)}{(tp + fn)(fp + tn)}.\]
@@ -131,11 +181,22 @@
           <section>
             <h1>Markov logic</h1>
           </section>
+          <section>
+            <h2>Salix data-set</h2>
+          </section>
         </section>
 
         <section>
           <section>
             <h1>Fuzzy Logic</h1>
+          </section>
+          <section>
+            <h2>I Bartomeus's pollinator-plant data-set (part II)</h2>
+
+            <p>Seven real-valued traits: Plant's nectar tube dimension, Plant's
+            nectar tube depth, Plant's flower width, Pollinator's body size,
+            Pollinator's tongue length, Pollinator generalism, \(K\) nearest
+            neighbour ratio.</p>
           </section>
           <section>
             <h2>Structure</h2>
@@ -213,31 +274,27 @@
             <table style="width:100%; text-align:center;">
               <tr>
                 <th>Model</th>
-                <th>Accuracy (10% testing data)</th>
+                <th>TSS (10% testing data)</th>
+              </tr>
+              <tr>
+                <td>Support Vector Machine</td>
+                <td>0.564</td>
               </tr>
               <tr>
                 <td>Fuzzy (initial model with two KNN rules)</td>
-                <td>0.8105</td>
+                <td>0.689</td>
               </tr>
               <tr>
-                <td>Fuzzy (after evolution)</td>
-                <td>0.9281</td>
+                <td>Random forests</td>
+                <td>0.795</td>
               </tr>
               <tr>
-                <td>Supervised learning (SVM, traits only)</td>
-                <td>0.8013</td>
+                <td>Decision tree</td>
+                <td>0.723</td>
               </tr>
               <tr>
-                <td>Supervised learning (SVM, with KNN)</td>
-                <td>0.7576 (WTF?)</td>
-              </tr>
-              <tr>
-                <td>Supervised learning (random forest, traits only)</td>
-                <td>0.8074</td>
-              </tr>
-              <tr>
-                <td>Supervised learning (random forest, with KNN)</td>
-                <td>0.9113</td>
+                <td>Fuzzy (after theory revision)</td>
+                <td>0.841</td>
               </tr>
             </table>
           </section>
@@ -252,20 +309,11 @@
             <img src='./img/generic-algorithms.png' alt='evolutionary algorithms'/>
           </section>
           <section>
-            <h2>Multi-objective learning</h2>
-            <p><a href='http://ieeexplore.ieee.org/document/996017/'>NSGA-II</a> and large fuzzy knowledge base</p>
-            <ul style='width: 100%'>
-              <li><b>If</b> \(A_{0}, A_{4}, A_{8}\) <b>then</b> \(C_{0}\).</li>
-              <li><b>If</b> \(A_{4}, A_{10}\) <b>then</b> \(C_{4}\).</li>
-              <li><b>If</b> \(A_{9}, A_{11}, A_{12}\) <b>then</b> \(C_{8}\).</li>
-              <li><b>If</b> \(A_{1}, A_{5}\) <b>then</b> \(C_{0}\).</li>
-              <li><b>If</b> \(A_{9}, A_{11}, A_{18}, A_{22}\) <b>then</b> \(C_{2}\).</li>
-              <li><b>If</b> \(A_{0}\) <b>then</b> \(C_{0}\).</li>
-              <li><b>If</b> \(A_{3}, A_{20}, A_{28}\) <b>then</b> \(C_{5}\).</li>
-              <li>...</li>
-            </ul>
-            <br/><br/>
-            <p>Given an input, select the rules which can be decided and return relevant predictions.</p>
+            <h2>Probabilistic Soft Logic meets Salix</h2>
+            <img src='./img/psl_paper.png' alt='psl paper'/>
+          </section>
+          <section>
+            <h2>Fuzzy Logic meets Salix</h2>
           </section>
           <section>
             <h2>Type-2 fuzzy sets</h2>
