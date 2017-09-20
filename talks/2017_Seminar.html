@@ -76,10 +76,10 @@
           </section>
           <section>
             <h2>Lotka-Volterra framework</h2>
-            \[\frac{dx}{dt} = \alpha x - \beta xy \land \frac{dy}{dt} = \delta xy - \gamma y.\]
+            \[\frac{dx}{dt} = \alpha x - \beta xy \mbox{ and } \frac{dy}{dt} = \delta xy - \gamma y.\]
           </section>
           <section>
-            <h2>Probabilistic Niche Model</h2>
+            <h2>Probabilistic niche model</h2>
             \[\forall x, y: PPreyOn(x, y) = \alpha \times \exp\left[-\left(\frac{N(y) - D(x)}{R(x)/2}\right)^2\right].\]
           </section>
           <section>
@@ -88,7 +88,7 @@
             \[\forall x, t: P(x, t + 1) = G(x) \times P(x, t).\]
             <br/>
             <p>To</p>
-            \[\forall x, t: SmallP(x, t) \land Resources(x, t) \Rightarrow P(x, t + 1) = G(x) \times P(x, t).\]
+            \[\forall x, t: SmallP(x, t) \mbox{ and } Resources(x, t) \Rightarrow P(x, t + 1) = G(x) \times P(x, t).\]
           </section>
           <section>
             <h2>Theory revision wishlist</h2>
@@ -197,9 +197,9 @@
             <h1>Markov Logic</h1>
           </section>
           <section>
-            \[\forall x, y, z: Friends(x, y) \land Friends(y, z) \Rightarrow Friends(x, z), 0.7.\]
+            \[\forall x, y, z: Friends(x, y) \mbox{ and } Friends(y, z) \Rightarrow Friends(x, z), 0.7.\]
             \[\forall x: Smoking(x) \Rightarrow Cancer(x), 1.5.\]
-            \[\forall x, y: Friends(x, y) \land Smoking(x) \Rightarrow Smoking(y), 1.1.\]
+            \[\forall x, y: Friends(x, y) \mbox{ and } Smoking(x) \Rightarrow Smoking(y), 1.1.\]
 
             <br/><br/>
 
@@ -207,7 +207,7 @@
 
             <br/>
 
-            \[P(Cancer(Bob) | Smoking(Anna) \land Friends(Anna, Bob)).\]
+            \[P(Cancer(Bob) | Smoking(Anna) \mbox{ and } Friends(Anna, Bob)).\]
             \[P(Cancer(Bob) | Smoking(Anna), \forall x, y: Friends(x, y) \Rightarrow Friends(y, x)).\]
 
           </section>
@@ -244,15 +244,15 @@
           <section>
 \[ 5.20 : PreyOnAt(x,y,z) \Rightarrow PreyOn(x,y)\]
 \[ 4.22 : HighCooccurrence(x,y) \Rightarrow PreyOn(x,y)\]
-\[ 4.15 : IsGaller(x) \land PreyOn(x,y) \Rightarrow IsSalix(y)\]
-\[ 3.49 : IsParasitoid(y) \land PreyOn(y,x) \Rightarrow IsGaller(x)\]
+\[ 4.15 : IsGaller(x) \mbox{ and } PreyOn(x,y) \Rightarrow IsSalix(y)\]
+\[ 3.49 : IsParasitoid(y) \mbox{ and } PreyOn(y,x) \Rightarrow IsGaller(x)\]
 \[ 1.57 : PreyOn(x,y) \Rightarrow HighCooccurrence(x,y)\]
 \[ 1.52 : PreyOn(x,y) \Rightarrow PreyOn(x,x)\]
 \[ 1.13 : HigherPhyloValue(x,y) \Rightarrow PreyOn(x,y)\]
 \[-0.59 : HigherPhyloValue(x,y) \Rightarrow HighCooccurrence(x,y)\]
 \[ 0.45 : PreyOn(x,x) \Rightarrow PreyOn(x,y)\]
-\[ 0.02 : \neg IsSalix(x) \lor \neg PreyOn(x,y)\]
-\[ 0.00 : CloselyRelated(x,y) \land PreyOn(x,z) \Rightarrow PreyOn(y,z)\]
+\[ 0.02 : \neg IsSalix(x) \mbox{ or } \neg PreyOn(x,y)\]
+\[ 0.00 : CloselyRelated(x,y) \mbox{ and } PreyOn(x,z) \Rightarrow PreyOn(y,z)\]
           </section>
 
         </section>
@@ -279,7 +279,7 @@
             <br/>
             <br/>
 
-            \[\mathbf{If} \mbox{ } A_0 \land A_1 \land} A_2 \land ... \mbox{ } \mathbf{then} \mbox { } C_0.\]
+            \[\mathbf{If} \mbox{ } A_0 \mbox{ and } A_1 \mbox{ and }} A_2 \mbox{ and } ... \mbox{ } \mathbf{then} \mbox { } C_0.\]
           </section>
           <section>
             <h2>Initial model</h2>
