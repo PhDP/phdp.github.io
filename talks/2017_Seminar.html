@@ -126,16 +126,15 @@
           <section>
             <h2>Data</h2>
 
-            <p>The first data-set was obtained from the study of Digel et al.
-            (2014) , who documented the presence and absence of interactions
-            among 881 species from 48 forest soil food webs, details of which
-            are provided in the original publication. A total of 34,193 unique
-            interactions were observed across the 48 food webs, and a total of
-            215,418 absence of interactions.</p>
-
-            <p>Traits: \(body mass\), \(Ph0\), \(Ph1\) plus 25 binary traits
-            (e.g. AboveGround, Detritivore, Bacteria, Jumps, LongLegs,
-            UsePoison).</p>
+            <ul width='100%'>
+              <li>Assembled by Isabelle Daigle, mostly from Digel et al. (2014)</li>
+              <li>48 soil food webs</li>
+              <li>881 species</li>
+              <li>34 193 unique interactions</li>
+              <li>215,418 absence of interactions</li>
+              <li>3 real valued-traits: \(body mass\), \(Ph0\), \(Ph1\)</li>
+              <li>25 binary traits (e.g. AboveGround, Detritivore, Bacteria, Jumps, LongLegs, UsePoison).</li>
+            </ul>
 
           </section>
           <section>
@@ -168,13 +167,11 @@
 
             <p>Supervised learning Random forests predict correctly 99.55% of
             the non-interactions and 96.81% of the interactions, for a
-            <i>TSS</i> of 0.96. Much of this accuracy is due to the three
-            real-valued traits (\(body mass\), \(Ph0\), \(Ph1\)). Without them,
-            too many entries have the same feature vector x, making it
-            impossible for the algorithm to classify them correctly. Removing
-            the binary traits has little effect on the model. With only \(body
-            mass\), \(Ph0\), \(Ph1\), the <i>TSS</i> of the random forests is
-            0.94.</p>
+            <i>TSS</i> of 0.96.</p>
+
+            <p>Removing the binary traits has little effect on the model. With
+            only \(body mass\), \(Ph0\), \(Ph1\), the <i>TSS</i> of the random
+            forest is 0.94.</p>
 
           </section>
         </section>
@@ -188,19 +185,20 @@
           <section>
             <h2>I Bartomeus's pollinator-plant data-set</h2>
 
-            <p>Plant-pollinator interactions were collected across 16 sites in
-            the southwest of the iberian peninsula (Huelva and Seville) from
-            March to June 2015. All sites are dominated by Mediterranean open
-            forests with a flowery understory including <i>Cistus sp.</i>,
-            <i>Lavandula sp.</i>, <i>Rosmarinus officinalis</i>, ... Sampling
-            was conducted on seven rounds per site along the season and each
-            round consisted in three types of censuses.</p>
+            <ul width='100%'>
+              <li>Plant-pollinator interactions were collected across 16 sites in
+              the southwest of the iberian peninsula (Huelva and Seville).</li>
 
-            <p>The data-set has 739 pollinator-plant interactions. We randomly
-            pick 739 pollinator-plant pairs that are not interacting to build a
-            data-set of 1478 entries, half of interactions, half of
-            non-interactions.</p>
+              <li>65 pollinators.</li>
 
+              <li>277 plants.</li>
+
+              <li>739 pollinator=plant interactions.</li>
+
+              <p>We randomly pick 739 pollinator-plant pairs that are not
+              interacting to build a data-set of 1478 entries, half of
+              interactions, half of non-interactions.</p>
+            </ul>
           </section>
           <section>
             <h2>Accuracy</h2>
@@ -228,12 +226,13 @@
             <br/>
 
             \[P(Cancer(Bob) | Smoking(Anna) \mbox{ and } Friends(Anna, Bob)).\]
-            \[P(Cancer(Bob) | Smoking(Anna), \mbox{Forall } x, y: Friends(x, y) \Leftrightarrow Friends(y, x)).\]
+            \[P(Cancer(Bob) | Smoking(Anna), Friends(x, y) \Leftrightarrow Friends(y, x)).\]
 
           </section>
           <section>
             <h2>Salix data-set</h2>
             <img src='img/salix.png' alt='salix'/>
+            \[Parasites \rightarrow Galler \rightarrow Salix\]
           </section>
           <section>
             <h2>Learning weights (but not really rules)</h2>
