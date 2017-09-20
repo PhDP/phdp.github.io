@@ -53,10 +53,10 @@
             <img src='img/eco-evo-paper.png' alt='ecoevo'/>
           </section>
           <section>
-            <img src='img/complex-0.svg' width='100%' alt='complex fig 0'/>
+            <img src='img/complex-1.svg' width='70%' alt='complex fig 1'/>
           </section>
           <section>
-            <img src='img/complex-1.svg' width='70%' alt='complex fig 1'/>
+            <img src='img/complex-0.svg' width='100%' alt='complex fig 0'/>
           </section>
           <section>
             <img src='img/wagner.png' alt='wagner'/>
@@ -69,8 +69,19 @@
             <img src='img/ml-900.png' alt='machine learning'/>
           </section>
           <section>
+          <section>
+            <h2>Random forests</h2>
+            <img src='img/random_forests.png' alt='machine learning'/>
+          </section>
+          <section>
             <img src='img/biorxiv-scientifictheories.png' alt='biorxiv'/>
           </section>
+    <section>
+            <h2>The thesis' thesis</h2>
+      <p></p>
+      <br/>
+      <p></p>
+    </section>
           <section>
             <img src='img/reasoning_systems.png' alt='reasoning systems'/>
           </section>
@@ -185,9 +196,11 @@
 
           </section>
           <section>
+            <h2>Accuracy</h2>
             <img src='img/ht_acc.svg' width='80%' alt='acc'/>
           </section>
           <section>
+            <h2>TSS</h2>
             <img src='img/ht_tss.png' width='80%' alt='acc'/>
           </section>
         </section>
@@ -279,7 +292,7 @@
             <br/>
             <br/>
 
-            \[\mathbf{If} \mbox{ } A_0 \mbox{ and } A_1 \mbox{ and }} A_2 \mbox{ and } ... \mbox{ } \mathbf{then} \mbox { } C_0.\]
+            \[\mathbf{If} \mbox{ } A_0 \mbox{ and } A_1 \mbox{ and } A_2 \mbox{ and } ... \mbox{ } \mathbf{then} \mbox { } C_0.\]
           </section>
           <section>
             <h2>Initial model</h2>
@@ -294,7 +307,7 @@
             <ol start='0'>
               <li>Start with the initial knowledge base with the two KNN rules.</li>
               <li>Randomly generate a rule, add it to the knowledge base.</li>
-              <li>If the new knowledge base beats the old by 0.004 accuracy, keep the rule.</li>
+              <li>If the new knowledge base beats the old by 0.004 TSS, keep the rule.</li>
               <li>Repeat \(\phi\) times</li>
             </ol>
             <br/><br/>
@@ -303,38 +316,18 @@
               <li>Make \(n\) evolutions.</li>
               <li>Count the frequency of the rules in the evolutions</li>
               <li>Try to add the rule one by one from most frequent to least</li>
-              <li>Keep if accuracy improve by at least 0.004.</li>
+              <li>Keep if TSS improves by at least 0.004.</li>
             </ol>
           </section>
           <section>
             <ul style='width: 100%; font-size: 80%'>
-              <li><b>If</b> Plant nectar tube depth is average <b>then</b> interaction.</li>
-              <li><b>If</b> Pollinator body size is small <b>then</b> interaction.</li>
-              <li><b>If</b> KNN is high <b>then</b> interaction.</li>
-              <li><b>If</b> Pollinator is specialist <b>and</b> Plant nectar tube dim is small <b>then</b> interaction.</li>
-              <li><b>If</b> Plant flower width is average <b>then</b> interaction.</li>
-              <li><b>If</b> Plant flower width is small <b>and</b> Pollinator tongue length is small <b>then</b> interaction.</li>
-              <li><b>If</b> KNN is low <b>then</b> non-interaction.</li>
-            </ul>
-          </section>
-          <section>
-            <ul style='width: 100%; font-size: 70%'>
-              <li>[120%] <b>If</b> KNN is high <b>then</b> interaction.</li>
-              <li>[100%] <b>If</b> KNN is low <b>then</b> this pollinator/plant non-interaction.</li>
-              <li>[33%] <b>If</b> Pollinator is specialist <b>then</b> interaction.</li>
-              <li>[25%] <b>If</b> PlantFlowerWidth is small <b>then</b> interaction.</li>
-              <li>[25%] <b>If</b> PlantFlowerWidth is average <b>then</b> interaction.</li>
-              <li>[23%] <b>If</b> PlantNectarTubeDepth is average <b>then</b> interaction.</li>
-              <li>[21%] <b>If</b> PollTongueLength is average <b>then</b> interaction.</li>
-              <li>[19%] <b>If</b> PollIT is small <b>then</b> interaction.</li>
-              <li>[15%] <b>If</b> Pollinator is generalist <b>then</b> interaction.</li>
-              <li>[14%] <b>If</b> PlantNectarTubeDim is average <b>then</b> interaction.</li>
-              <li>[14%] <b>If</b> PollIT is large <b>then</b> interaction.</li>
-              <li>[8%] <b>If</b> KNN is low <b>and</b> Pollinator is specialist <b>then</b> interaction.</li>
-              <li>[7%] <b>If</b> PollTongueLength is small <b>and</b> KNN is high <b>then</b> interaction.</li>
-              <li>[6%] <b>If</b> PlantNectarTubeDim is average <b>and</b> PlantFlowerWidth is average <b>then</b> interaction.</li>
-              <li>[6%] <b>If</b> KNN is high <b>and</b> PlantFlowerWidth is average <b>then</b> interaction.</li>
-              <li>...</li>
+              <li style='color:#246325'><b>If</b> Plant nectar tube depth is average <b>then</b> interaction.</li>
+              <li style='color:#246325'><b>If</b> Pollinator body size is small <b>then</b> interaction.</li>
+              <li style='color:#246325'><b>If</b> KNN is high <b>then</b> interaction.</li>
+              <li style='color:#246325'><b>If</b> Pollinator is specialist <b>and</b> Plant nectar tube dim is small <b>then</b> interaction.</li>
+              <li style='color:#246325'><b>If</b> Plant flower width is average <b>then</b> interaction.</li>
+              <li style='color:#246325'><b>If</b> Plant flower width is small <b>and</b> Pollinator tongue length is small <b>then</b> interaction.</li>
+              <li style='color:#632427'><b>If</b> KNN is low <b>then</b> non-interaction.</li>
             </ul>
           </section>
           <section>
