@@ -75,13 +75,13 @@
             <img src='img/reasoning_systems.png' alt='reasoning systems'/>
           </section>
           <section>
-            \[\frac{dx}{dt} = \alpha x - \beta xy \mbox{ and } \frac{dy}{dt} = \delta xy - \gamma y.\]
+            \[\frac{dx}{dt} = \alpha x - \beta xy \land \frac{dy}{dt} = \delta xy - \gamma y.\]
           </section>
           <section>
             \[\forall x, y: PPreyOn(x, y) = \alpha \times \exp\left[-\left(\frac{N(y) - D(x)}{R(x)/2}\right)^2\right].\]
           </section>
           <section>
-            \[\forall x, l, t: SmallP(x, l, t) \mbox{ and } Resources(x, l, t) \Rightarrow P(x, l, t + 1) = G(x) \times P(x, l, t).\]
+            \[\forall x, l, t: SmallP(x, l, t) \land Resources(x, l, t) \Rightarrow P(x, l, t + 1) = G(x) \times P(x, l, t).\]
           </section>
           <section>
             <h2>Theory revision wishlist</h2>
@@ -188,6 +188,19 @@
         <section>
           <section>
             <h1>Markov Logic</h1>
+          </section>
+          <section>
+            \[\forall x, y, z: Friends(x, y) \land Friends(y, z) \Rightarrow Friends(x, z), 0.7.\]
+            \[\forall x: Smoking(x) \Rightarrow Cancer(x), 1.5.\]
+            \[\forall x, y: Friends(x, y) \land Smoking(x) \Rightarrow Smoking(y), 1.1.\]
+
+            <br/>
+
+            <p>Can answer any query of the form:</p>
+
+            \[P(Cancer(Bob) | Smoking(Anna) \land Friends(Anna, Bob)).\]
+            \[P(Cancer(Bob) | Smoking(Anna), \forall x, y: Friends(x, y) \Rightarrow Friends(y, x)\).\]
+
           </section>
           <section>
             <h2>Salix data-set</h2>
