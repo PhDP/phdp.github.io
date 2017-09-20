@@ -76,19 +76,19 @@
           </section>
           <section>
             <h2>Lotka-Volterra framework</h2>
-            \[Forall x, y: \frac{dx}{dt} = \alpha x - \beta xy \mbox{ and } \frac{dy}{dt} = \delta xy - \gamma y.\]
+            \[\frac{dx}{dt} = \alpha x - \beta xy \mbox{ and } \frac{dy}{dt} = \delta xy - \gamma y.\]
           </section>
           <section>
             <h2>Probabilistic niche model</h2>
-            \[Forall x, y: PPreyOn(x, y) = \alpha \times \exp\left[-\left(\frac{N(y) - D(x)}{R(x)/2}\right)^2\right].\]
+            \[ PPreyOn(x, y) = \alpha \times \exp\left[-\left(\frac{N(y) - D(x)}{R(x)/2}\right)^2\right].\]
           </section>
           <section>
             <h2>Exponential growth</h2>
             <p>From</p>
-            \[Forall x, t: P(x, t + 1) = G(x) \times P(x, t).\]
+            \[P(x, t + 1) = G(x) \times P(x, t).\]
             <br/>
             <p>To</p>
-            \[Forall x, t: SmallP(x, t) \mbox{ and } Resources(x, t) \Rightarrow P(x, t + 1) = G(x) \times P(x, t).\]
+            \[SmallP(x, t) \mbox{ and } Resources(x, t) \Rightarrow P(x, t + 1) = G(x) \times P(x, t).\]
           </section>
           <section>
             <h2>Theory revision wishlist</h2>
@@ -197,9 +197,9 @@
             <h1>Markov Logic</h1>
           </section>
           <section>
-            \[Forall x, y, z: Friends(x, y) \mbox{ and } Friends(y, z) \Rightarrow Friends(x, z), 0.7.\]
-            \[Forall x: Smoking(x) \Rightarrow Cancer(x), 1.5.\]
-            \[Forall x, y: Friends(x, y) \mbox{ and } Smoking(x) \Rightarrow Smoking(y), 1.1.\]
+            \[\mbox{Forall } x, y, z: Friends(x, y) \mbox{ and } Friends(y, z) \Rightarrow Friends(x, z), 0.7.\]
+            \[\mbox{Forall } x: Smoking(x) \Rightarrow Cancer(x), 1.5.\]
+            \[\mbox{Forall } x, y: Friends(x, y) \mbox{ and } Smoking(x) \Rightarrow Smoking(y), 1.1.\]
 
             <br/><br/>
 
@@ -208,7 +208,7 @@
             <br/>
 
             \[P(Cancer(Bob) | Smoking(Anna) \mbox{ and } Friends(Anna, Bob)).\]
-            \[P(Cancer(Bob) | Smoking(Anna), \forall x, y: Friends(x, y) \Rightarrow Friends(y, x)).\]
+            \[P(Cancer(Bob) | Smoking(Anna), \mbox{Forall } x, y: Friends(x, y) \Rightarrow Friends(y, x)).\]
 
           </section>
           <section>
