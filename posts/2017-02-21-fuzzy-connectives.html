@@ -187,11 +187,11 @@ to behave the same as bivalent connectives, we can have:</p>
 \[x \lor y = max(x, y).\]
 
 <p>So \(\neg 1 = 0\), \(1 \land 0 = 0\), \(0 \land 1 = 1\), you can check,
-these connectives behave like normal bivalent connectives when they need to
-but they're also defined for other values: with \(x = 0.1\) and \(y = 0.7\)
-we get \(x \land y = 0.1\) and \(x \lor y = 0.7\). Let's try to see if
-our definition of disjunction using only conjunction and negation works
-too:</p>
+these connectives behave like normal bivalent connectives when they need to but
+they're also defined for other values: with \(x = 0.1\) and \(y = 0.7\) we get
+\(x \land y = 0.1\) and \(x \lor y = 0.7\). Negation can (and sometime is)
+defined differently, but we'll stick with \(1 - x\). Let's try to see if our
+definition of disjunction using only conjunction and negation works too:</p>
 
 \[x \lor y = \neg(\neg x \land \neg y).\]
 \[x \lor y = \neg min(\neg x, \neg y).\]
