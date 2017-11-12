@@ -44,23 +44,23 @@
   2015.07.13
 </p>
 
-<p>This is a short but complete description of first-order logic, a rich system
-to reason about objects and their relationships. I care mostly about
-first-order logic for its role in statistical relational learning (a branch of
-machine learning), <a href="2015-07-13-srl-code.html">which I'll cover in
-another post</a>. Here, I just describe logic. If you want a more detailed
-explanation, see <a href="http://aima.cs.berkeley.edu/">Russell and Norvig's
-excellent A.I.  book.</a></p>
+<p>This is a short but reasonably complete description of first-order logic, a
+rich system to reason about objects and their relationships. I care mostly
+about first-order logic for its role in statistical relational learning (a
+branch of machine learning), <a href="2015-07-13-srl-code.html">which I'll
+cover in another post</a>. If you want a more detailed explanation, see <a href="http://aima.cs.berkeley.edu/">Russell and Norvig's excellent A.I.
+book.</a></p>
 
 <h2>Terms</h2>
 
 <p>Terms represent objects and relationships between objects, they are the
-reason why logic is so flexible. There are three types of terms:</p>
+reason why first-order logic is so flexible. There are three types of
+terms:</p>
 
 <ol type="I">
   <li><b>Constants</b> represent objects, e.g.: <i>Tokyo</i>, the number <i>47</i>, <i>Cylon</i>, <i>Lion</i>.</li>
-  <li><b>Variables</b> range over objects, e.g. the variable <i>c</i> could represent a city, <i>x</i> an integer, <i>s</i> a species. By convention, variables start with a lowercase character.</li>
-  <li><b>Functions</b> are mappings between a list of objects to another object, e.g. <i>CapitalOf</i> could take a country and return a city, while <i>Multiply</i> takes two numbers and returns a number.</li>
+  <li><b>Variables</b> range over objects, e.g. the variable <i>c</i> could represent a city, <i>x</i> an integer, <i>s</i> a species. By convention, variables will start with a lowercase character (it's not a universal convention, in fact it's common to have the opposite).</li>
+  <li><b>Functions</b> map lists of terms to a term, e.g. <i>CapitalOf</i> could take a country and return a city, while <i>Multiply</i> takes two numbers and returns a number.</li>
 </ol>
 
 <p>Example:</p>
@@ -76,10 +76,11 @@ within functions:</p>
 <h2>Predicates</h2>
 
 <p>First-order logic formulas ultimately resolve to a truth value: True or
-False, yet the terms we've seen return objects. To get a truth value, we need
-predicates. A predicate is like a function but it maps terms to a truth value
-instead of mapping them to a term. For example, if we want to say that adding 0
-to <i>x</i> yields <i>x</i>, we can write:</p>
+False, yet the terms we've seen can represent cities, numbers, pretty much
+anything. To get a truth value, we need predicates. A predicate is like a
+function but it maps terms to a truth value instead of mapping them to a term.
+For example, if we want to say that adding 0 to <i>x</i> yields <i>x</i>, we
+can write:</p>
 
 \[Equals(Add(x, 0), x).\]
 
@@ -98,10 +99,10 @@ are constants, <i>c</i> a variable ranging over cities, and both
 <i>CapitalOf</i> and <i>LargestCountryOf</i> are functions taking a single
 argument.</p>
 
-<h2>Atomic sentences</h2>
+<h2>Atomic formulas</h2>
 
-<p>An atomic sentence is something that, alone, is a valid first-order logic formula. A predicate
-is an atomic sentence since it returns a truth value, but we also have two special symbols: True and False.</p>
+<p>An atomic formula is something that, alone, is a valid first-order logic formula. A predicate
+is an atomic formula since it returns a truth value, but we also have two special symbols: True and False.</p>
 
 <p><b>True</b> is also called <i>top</i>, and can be represented with the symbol \(\top\).</p>
 
@@ -109,11 +110,11 @@ is an atomic sentence since it returns a truth value, but we also have two speci
 
 <h2>Connectives</h2>
 
-<p>You can connect sentences with connectives to form complex sentences. The
+<p>You can connect formulas with connectives to form complex formulas. The
 standard connectives are:</p>
 
 <ol style="list-style-type: upper-roman">
-  <li>The binary connective <b>and</b>: \(x \land y\), which is true only if both \(x\) and \(y\) are true. Like all other connectives shown here, if \(x\) and \(y\) are sentences, then \(x \land y\) is also a valid sentence.</li>
+  <li>The binary connective <b>and</b>: \(x \land y\), which is true only if both \(x\) and \(y\) are true. Like all other connectives shown here, if \(x\) and \(y\) are valid formulas, then \(x \land y\) is also a valid formula.</li>
   <li>The binary connective <b>or</b>: \(x \lor y\), which is true only if \(x\) is true, if \(y\) is true, or if both are true.</li>
   <li>The binary connective <b>implies</b>: \(x \Rightarrow y\), returns true in all cases, except if \(x\) is true and \(y\) is false.</li>
   <li>The binary connective <b>iff</b>: \(x \iff y\), returns true if \(x\) and \(y\) have the same value, that is if they are both true, or both false.</li>
@@ -124,7 +125,47 @@ standard connectives are:</p>
 <p>Be careful with implication, there is nothing wrong with it, except that it
 doesn't fit how we use the term <i>implies</i>. For example:
 \(Equals(AgeOf(Earth), 42) \Rightarrow StillAlive(Elvis)\) is true. If you're
-confused, read again the description of <b>implies</b>.</p>
+confused, read again the description of <b>implies</b>. Here's the truth
+vables for the binary connectives:</p>
+
+<table style="width: 80%; text-align:center;">
+  <tr>
+    <th>Connective</th>
+    <th>Informal name</th>
+    <th>Symbol</th>
+    <th>\(\top \times \top\)</th><th>\(\top \times \bot\)</th><th>\(\bot \times \top\)</th><th>\(\bot \times \bot\)</th>
+  </tr>
+  <tr>
+    <td>Conjunction</td>
+    <td>and</td>
+    <td>\(\land\)</td>
+    <td>\(\top\)</td><td>\(\bot\)</td><td>\(\bot\)</td><td>\(\bot\)</td>
+  </tr>
+  <tr>
+    <td>Disjunction</td>
+    <td>or</td>
+    <td>\(\lor\)</td>
+    <td>\(\top\)</td><td>\(\top\)</td><td>\(\top\)</td><td>\(\bot\)</td>
+  </tr>
+  <tr>
+    <td>Implication</td>
+    <td>implies</td>
+    <td>\(\Rightarrow\)</td>
+    <td>\(\top\)</td><td>\(\bot\)</td><td>\(\top\)</td><td>\(\top\)</td>
+  </tr>
+  <tr>
+    <td>Equivalence</td>
+    <td>iff</td>
+    <td>\(\leftrightarrow\)</td>
+    <td>\(\top\)</td><td>\(\bot\)</td><td>\(\bot\)</td><td>\(\top\)</td>
+  </tr>
+  <tr>
+    <td>Exclusive disjunction</td>
+    <td>xor</td>
+    <td>\(\veebar\)</td>
+    <td>\(\bot\)</td><td>\(\top\)</td><td>\(\top\)</td><td>\(\bot\)</td>
+  </tr>
+</table>
 
 <h2>Qualifiers</h2>
 
@@ -134,18 +175,17 @@ all" denoted \(\forall\), and the existential qualifier "exists" denoted
 
 \[\forall x: Multiply(x, 0) = 0\]
 
-<p>reads "for all x, multiplying x by 0 yields 0". Normally, all variables
-should be qualified to determine their scope, e.g.:</p> 
+<p>reads "for all x, multiplying x by 0 yields 0". Another example:</p>
 
-\[\forall x \exists y: RealNumber(x) \Rightarrow GreaterThan(y, x)\]
+\[\forall x: \exists y: RealNumber(x) \Rightarrow y > x.\]
 
 <p>which means, "for all real numbers x, there is a number y that is greater
-than x".</p>
+than x". Note that both \(RealNumber\) and the &gt; sign are predicates.</p>
 
 <p>A last example: we can express "there is a color c brighter than x, unless x
 is white" with:</p>
 
-\[\forall x \exists c: IsWhite(x) \lor BrighterThan(c, x).\]
+\[\forall x: IsWhite(x) \lor (\exists c BrighterThan(c, x)).\]
 
 
 
