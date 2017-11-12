@@ -177,7 +177,7 @@ all" denoted \(\forall\), and the existential qualifier "exists" denoted
 
 <p>reads "for all x, multiplying x by 0 yields 0". Another example:</p>
 
-\[\forall x: \exists y: RealNumber(x) \Rightarrow y > x.\]
+\[\forall x \exists y: RealNumber(x) \Rightarrow y > x.\]
 
 <p>which means, "for all real numbers x, there is a number y that is greater
 than x". Note that both \(RealNumber\) and the &gt; sign are predicates.</p>
@@ -185,7 +185,7 @@ than x". Note that both \(RealNumber\) and the &gt; sign are predicates.</p>
 <p>A last example: we can express "there is a color c brighter than x, unless x
 is white" with:</p>
 
-\[\forall x: IsWhite(x) \lor (\exists c BrighterThan(c, x)).\]
+\[\forall x: IsWhite(x) \lor (\exists c: BrighterThan(c, x)).\]
 
 
 
