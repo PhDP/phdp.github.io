@@ -104,9 +104,9 @@ argument.</p>
 <p>An atomic formula is something that, alone, is a valid first-order logic formula. A predicate
 is an atomic formula since it returns a truth value, but we also have two special symbols: True and False.</p>
 
-<p><b>True</b> is also called <i>top</i>, and can be represented with the symbol \(\top\).</p>
+<p><b>True</b> is also called <i>top</i>, and can be represented with the symbol \(\top\) or just T.</p>
 
-<p><b>False</b> is also called <i>bottom</i>, and can be represented with the symbol \(\bot\).</p>
+<p><b>False</b> is also called <i>bottom</i>, and can be represented with the symbol \(\bot\) or just F.</p>
 
 <h2>Connectives</h2>
 
@@ -128,42 +128,42 @@ doesn't fit how we use the term <i>implies</i>. For example:
 confused, read again the description of <b>implies</b>. Here's the truth
 vables for the binary connectives:</p>
 
-<table style="width: 80%; text-align:center;">
+<table style="width: 100%; text-align:center;">
   <tr>
     <th>Connective</th>
     <th>Informal name</th>
     <th>Symbol</th>
-    <th>\(\top \times \top\)</th><th>\(\top \times \bot\)</th><th>\(\bot \times \top\)</th><th>\(\bot \times \bot\)</th>
+    <th>T x T</th><th>T x F</th><th>F x T</th><th>F x F</th>
   </tr>
   <tr>
     <td>Conjunction</td>
     <td>and</td>
     <td>\(\land\)</td>
-    <td>\(\top\)</td><td>\(\bot\)</td><td>\(\bot\)</td><td>\(\bot\)</td>
+    <td>T</td><td>F</td><td>F</td><td>F</td>
   </tr>
   <tr>
     <td>Disjunction</td>
     <td>or</td>
     <td>\(\lor\)</td>
-    <td>\(\top\)</td><td>\(\top\)</td><td>\(\top\)</td><td>\(\bot\)</td>
+    <td>T</td><td>T</td><td>T</td><td>F</td>
   </tr>
   <tr>
     <td>Implication</td>
     <td>implies</td>
     <td>\(\Rightarrow\)</td>
-    <td>\(\top\)</td><td>\(\bot\)</td><td>\(\top\)</td><td>\(\top\)</td>
+    <td>T</td><td>F</td><td>T</td><td>T</td>
   </tr>
   <tr>
     <td>Equivalence</td>
     <td>iff</td>
     <td>\(\leftrightarrow\)</td>
-    <td>\(\top\)</td><td>\(\bot\)</td><td>\(\bot\)</td><td>\(\top\)</td>
+    <td>T</td><td>F</td><td>F</td><td>T</td>
   </tr>
   <tr>
     <td>Exclusive disjunction</td>
     <td>xor</td>
     <td>\(\veebar\)</td>
-    <td>\(\bot\)</td><td>\(\top\)</td><td>\(\top\)</td><td>\(\bot\)</td>
+    <td>F</td><td>T</td><td>T</td><td>F</td>
   </tr>
 </table>
 
