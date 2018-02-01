@@ -8,218 +8,8 @@
         <name>Philippe Desjardins-Proulx</name>
         <email>philippe.d.proulx@gmail.com</email>
     </author>
-    <updated>2017-09-12T00:00:00Z</updated>
+    <updated>2017-02-21T00:00:00Z</updated>
     <entry>
-    <title>Fuzz that neighbour! An hopelessly naive, yet good, machine learning algorithm</title>
-    <link href="http://phdp.github.io//posts/2017-09-12-fuzzthat.html" />
-    <id>http://phdp.github.io//posts/2017-09-12-fuzzthat.html</id>
-    <published>2017-09-12T00:00:00Z</published>
-    <updated>2017-09-12T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<h1>Fuzz that neighbour! An hopelessly naive, yet good, machine learning algorithm</h1>
-
-<a href="https://twitter.com/share" class="twitter-share-button" data-text="Fuzz that neighbour! An hopelessly naive, yet good, machine learning algorithm" data-via="phdpqc">Tweet</a>
-<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-  2017.09.12
-</p>
-
-<p>Working on ecological interactions taught me that the simple \(K\) nearest
-neighbour algorithm (KNN) can be surprisingly powerful. In a nutshell, in the
-context of imputation (i.e. filling holes in a matrix), if you want to predict
-the value of the point on the \(ith\) column of the \(xth\) row, you need to
-find the \(K\) rows which are most similar to \(x\) and then pick the most
-common value on their \(ith\) column. The figure below shows this process for
-\(K = 3\). Since two of the three most similar rows are red, the \(KNN\)
-algorithm would fill the missing entry with red.</p>
-
-<div class="imagecenter">
-  <img src="../images/knn.png" alt="knn"/>
-</div>
-
-<p>Here's the problem: for ecological interactions, imputation with the plain
-\(KNN\) does not work that well. It tends to predict many non-interactions
-where it should predict an interaction. But here's the frustrating part: in
-many cases, a few of the \(K\) nearests will have an interaction, just not
-enough to be the majority. So one way to improve the algorithm is to add a
-parameter to the \(KNN\) algorithm: a threshold \(T\). Essentially. instead of
-predicting an interaction if a majority of the \(K\) nearests have that
-interaction, we only ask for more than \(n/K > T\), with \(n\) being the number
-of observed interactions (in short: it reduces to the standard KNN algorithm
-with \(T = 0.5\)). And it works pretty well:</p>
-
-<div class="imagecenter">
-  <img src="../images/knn_t.png" alt="knn_t"/>
-</div>
-
-<p>This is from a paper I'm working on (I'll put the bioRxiv link here). The
-number used to measure effectiveness is the <a
-href='http://onlinelibrary.wiley.com/doi/10.1111/j.1365-2664.2006.01214.x/abstract'>TSS
-(True Skill Statistic) score</a>, and we can see that lower thresholds perform
-better than the standard majority rule. For this data-set, this variant even
-beats supervised learning algorithms such as random forests using species'
-traits.</p>
-
-<h2>Fuzz that!</h2>
-
-<p>The parameter \(K\) is pretty arbitrary and it tends to have a larger effect
-on imputation than recommendation. Can we get rid of it? Well there's the <a
-href='https://www.jstor.org/stable/3088801?seq=1#page_scan_tab_contents'>probabilistic
-nearest neighbour algorithm</a>, and while it would also require some sort of
-threshold-like fix, I'm sure it's doable. However, the threshold itself is
-pretty arbitrary and working on the automatic revision of ecologicial
-theories with logic gave me a really simple idea: what if, for all
-neighbour, we would take the fuzzy conjunction (and) of their class (in ecology, 0 for a
-non-interaction, 1 for an interaction) and their similarity to our
-data-point of interest, and then take the fuzzy disjunction (or) of
-all these values. The reason it may work is that fuzzy disjunction, like
-the \(KNN\) variant with the threshold, would mostly ignore negative
-evidences, while the conjunction would strongly penalize neighbour with
-low similarity. I explained how conjunction and disjunction worked in
-fuzzy logic <a href='2017-02-21-fuzzy-connectives.html'>here</a></p>
-
-<p>More formally, the class of the \(ith\) point of item \(x\) (or, in
-matrix-speech, the \(ith\) column of the \(xth\) row) is:</p>
-
-\[C^*_{x, i} = \bigvee_{n \in N(x)} C_{n, i} \land S_{x, n},\]
-
-<p>where \(N(x\) is the neighbourhood of \(x\) (basically all points except
-\(x\)), \(C_{n, i}\) is the binary class of \(ith\) point of item \(n\) and
-\(S_{x, n}\) is the similarity between \(x\) and \(n\). Like the KNN you need
-to define some measure of similarity, and there are different ways to define
-disjunction and conjunction (again see <a
-href='2017-02-21-fuzzy-connectives.html'>here</a>). Since \(C^*_{x, i}\) will
-sometimes not be either 0 or 1, we can predict 1 is it has a truth value
-greater than 0.5. As a simple example, let's say we have:</p>
-
-\[\begin{bmatrix}? & 1 & 1 & 0 \\ 0 & 0 & 0 & 0 \\ 1 & 1 & 0 & 0\end{bmatrix}\]
-
-<p>And the similarity is measured will use the Hamming distance. So, the
-similarity between the first row and the second would be 1/3 and between
-the first and the third would be 2/3, giving us:</p>
-
-\[C^*_{0, 0} = (0 \land 1/3) \lor (1 \land 2/3) = 2/3.\]
-
-<p>(Note: because in this case the class is either 0 or 1, the definition
-of conjunction does not matter).</p>
-
-<p>So, is it working?</p>
-
-<p>Yeah. It seems definitely better than the \(KNN\) approach (without the
-threshold), and unless you count the T-norm as a parameter, it has no
-parameters. Testing on the data-set used for <a
-href='https://peerj.com/articles/3644/'>this paper</a>, the KNN has a TSS of
-0.543371 compared to 0.775659 for FuzzThatNeighbour (with the product norms).
-It feels less general than the \(KNN\) since it is so biased toward positive
-evidences, but in some cases, it's exactly what you want. Also, there is a
-natural way to extend fuzzy logic to add uncertainty using Type-2 fuzzy logic,
-so this approach would work well even if there's is uncertainty in the data.
-There is definitely value in ultra-simple algorithms where both success and
-failure have clear interpretations.</p>
-
-
-<h2>C++11 code</h2>
-
-<p>All the functions needed for the FuzzThatNeighbour algorithm. This is what I
-used for the results shown above. Data is represented as a vector of sets and
-similarity is measured with the <a
-href='https://en.wikipedia.org/wiki/Jaccard_index'>Tanimoto index.</a></p>
-
-<pre><code class="cpp">template&lt;typename T&gt;
-using ordered_set = boost::container::flat_set&lt;T&gt;; // or std::set...
-
-template&lt;typename T&gt;
-using dataset = std::vector&lt;ordered_set&lt;T&gt;&gt;;
-
-/** \brief Computes the size of the intersection of two sets. */
-template&lt;typename T&gt;
-auto set_intersection_size(ordered_set&lt;T&gt; const& xs,
-                           ordered_set&lt;T&gt; const& ys) noexcept -&gt; size_t {
-  auto const xs_end = xs.end(), ys_end = ys.end();
-  auto xs_it = xs.begin(), ys_it = ys.begin();
-  size_t count = 0;
-
-  while (xs_it != xs_end && ys_it != ys_end) {
-    if (*xs_it &lt; *ys_it) {
-      ++xs_it;
-    } else {
-      count += !(*ys_it &lt; *xs_it);
-      ++ys_it;
-    }
-  }
-  return count;
-}
-
-/** \brief Computes the Tanimoto similarity index between two sets
-           (size of the intersection divided by the size of the union
-           of the sets). */
-template&lt;typename T&gt;
-auto tanimoto(ordered_set&lt;T&gt; const& xs,
-              ordered_set&lt;T&gt; const& ys) noexcept -&gt; double {
-  if (xs.empty() || ys.empty()) return 0.0;
-  size_t const i = set_intersection_size(xs, ys);
-  return (double)i / (xs.size() + ys.size() - i);
-}
-
-class norm {
- public:
-  using norm_type = std::function&lt;double(double, double)&gt;;
-
-  norm(std::string const& name,
-       norm_type const& t_norm,
-       norm_type const& s_norm)
-    noexcept : m_name(name), m_t_norm(t_norm), m_s_norm(s_norm) {
-  }
-
-  auto name() const noexcept -&gt; std::string const& {
-    return m_name;
-  }
-
-  auto t(double x, double y) const noexcept -&gt; double {
-    return m_t_norm(x, y);
-  }
-
-  auto s(double x, double y) const noexcept -&gt; double {
-    return m_s_norm(x, y);
-  }
-
- private:
-  std::string m_name;
-  norm_type m_t_norm;
-  norm_type m_s_norm;
-};
-
-auto const god_norm = norm(
-  "Gödel-Dummett",
-  [](double x, double y) { return std::min(x, y); },
-  [](double x, double y) { return std::max(x, y); }
-);
-
-auto const pro_norm = norm(
-  "Product",
-  [](double x, double y) { return x * y; },
-  [](double x, double y) { return x + y - x * y; }
-);
-
-auto const luk_norm = norm(
-  "Łukasiewicz",
-  [](double x, double y) { return std::max(0.0, x + y - 1.0); },
-  [](double x, double y) { return std::min(1.0, x + y); }
-);
-
-template&lt;typename Integer&gt;
-auto fuzzthat(Integer x, Integer a, dataset&lt;Integer&gt; const& ds,
-              norm const& n) -&gt; double {
-  auto ans = 0.0;
-  for (Integer y = 0; y &lt; ds.size(); ++y) {
-    if (x == y) continue;
-    double const similarity = tanimoto(ds[x], ds[y]);
-    ans = n.s(ans, n.t(similarity, double(ds[y].find(a) != ds[y].end())));
-  }
-  return ans;
-}</code></pre>
-
-]]></summary>
-</entry>
-<entry>
     <title>Fuzzy knowledge and fuzzy logic connectives</title>
     <link href="http://phdp.github.io//posts/2017-02-21-fuzzy-connectives.html" />
     <id>http://phdp.github.io//posts/2017-02-21-fuzzy-connectives.html</id>
@@ -357,14 +147,14 @@ to the famous De Morgan laws:</p>
 \[\neg(x \land y) = \neg x \lor \neg y\]
 \[\neg(x \lor y) = \neg x \land \neg y\]
 
-<p>We won't talk about qualifiers (forall \(\forall\) and exists \(\exists\)),
-let's just say that, even in this case, for a formula \(x\), the qualified
-formula \(\exists x\) could be written \(\neg \forall \neg x\). I say this
-because, while we explore all the connectives here, formal texts will often
-define the smallest possible set of symbols. The larger set of connectives and
-qualifiers are mostly there for us, to make things easier to read and
-understand. Typical pandering to humans :P. As a quick side note, there's
-intriguing work being done on <a
+<p>We won't talk about quantifiers (forall \(\forall\) and exists \(\exists\)),
+let's just say that, even in this case, for a formula \(x\), the formula
+\(\exists x\) could be written \(\neg \forall \neg x\). I say this because,
+while we explore all the connectives here, formal texts will often define the
+smallest possible set of symbols. The larger set of connectives and qualifiers
+are mostly there for us, to make things easier to read and understand. Typical
+pandering to humans :P. As a quick side note, there's intriguing work being
+done on <a
 href='http://link.springer.com/chapter/10.1007/978-3-319-40566-7_5'>soft
 qualifiers</a> for fuzzy logic. But back to the connectives...</p>
 
@@ -491,36 +281,17 @@ is called Gödel's T-norm (or Gödel-Dummett), \(max(0, x + y - 1)\) which is
 Lukasiewicz' T-norm, and finally we have simple multiplication, often
 called the product T-norm.</p>
 
-<p>In practice I mostly saw the Lukasiewicz connectives, but it's interesting
-to see how many variants are possible while still being consistent with
-standard bivalent logic.</p>
-
-<h2>Appendix: Connectives for the three T-norms</h2>
-
-<p>Equations for all connectives for the three most common T-norms used in
-many-valued logic.</p>
+<h2>Appendix: Connectives all in one place for Łukasiewicz logic</h2>
 
 <table style='width: 80%'>
-  <tr><th>Connective</th>             <th>Gödel-Dummett</th></tr>
-  <tr><td>Conjunction</td>            <td>\(min(x, y)\)</td></tr>
-  <tr><td>Disjunction</td>            <td>\(max(x, y)\)</td></tr>
-  <tr><td>Implication</td>            <td>\(max(1 - x, y)\)</td></tr>
-  <tr><td>Equivalence</td>            <td>\(min(max(1 - x, y), max(1 - y, x))\)</td></tr>
-  <tr><td>Exclusive disjunction</td>  <td>\(max(min(1 - x, y), min(1 - y, x))\)</td></tr>
-
-  <tr><th>Connective</th>             <th>Łukasiewicz</th></tr>
+  <tr><th>Connective</th>             <th>Equation</th></tr>
   <tr><td>Conjunction</td>            <td>\(max(0, x + y - 1)\)</td></tr>
+  <tr><td>Weak Conjunction</td>       <td>\(min(x, y)\)</td></tr>
   <tr><td>Disjunction</td>            <td>\(min(1, x + y)\)</td></tr>
+  <tr><td>Weak Disjunction</td>       <td>\(max(x, y)\)</td></tr>
   <tr><td>Implication</td>            <td>\(min(1, 1 - x + y)\)</td></tr>
   <tr><td>Equivalence</td>            <td>\(1 - |x - y|\)</td></tr>
   <tr><td>Exclusive disjunction</td>  <td>\(|x - y|\)</td></tr>
-
-  <tr><th>Connective</th>             <th>Product</th></tr>
-  <tr><td>Conjunction</td>            <td>\(xy\)</td></tr>
-  <tr><td>Disjunction</td>            <td>\(x + y - xy\)</td></tr>
-  <tr><td>Implication</td>            <td>\(1 - x + xy\)</td></tr>
-  <tr><td>Equivalence</td>            <td>\((1 - x + xy)(1 - y + xy)\)</td></tr>
-  <tr><td>Exclusive disjunction</td>  <td>\(1 - (1 - x + xy)(1 - y + xy)\)</td></tr>
 </table>
 
 ]]></summary>
@@ -1452,23 +1223,24 @@ data, combine existing knowledge bases, transfer knowledge between domains...</p
   2015.07.13
 </p>
 
-<p>This is a short but complete description of first-order logic, a rich system
-to reason about objects and their relationships. I care mostly about
-first-order logic for its role in statistical relational learning (a branch of
-machine learning), <a href='2015-07-13-srl-code.html'>which I'll cover in
-another post</a>. Here, I just describe logic. If you want a more detailed
-explanation, see <a href='http://aima.cs.berkeley.edu/'>Russell and Norvig's
-excellent A.I.  book.</a></p>
+<p>This is a short but reasonably complete description of first-order logic, a
+rich system to reason about objects and their relationships. I care mostly
+about first-order logic for its role in statistical relational learning (a
+branch of machine learning), <a href='2015-07-13-srl-code.html'>which I'll
+cover in another post</a>. If you want a more detailed explanation, see <a
+href='http://aima.cs.berkeley.edu/'>Russell and Norvig's excellent A.I.
+book.</a></p>
 
 <h2>Terms</h2>
 
 <p>Terms represent objects and relationships between objects, they are the
-reason why logic is so flexible. There are three types of terms:</p>
+reason why first-order logic is so flexible. There are three types of
+terms:</p>
 
 <ol type='I'>
   <li><b>Constants</b> represent objects, e.g.: <i>Tokyo</i>, the number <i>47</i>, <i>Cylon</i>, <i>Lion</i>.</li>
-  <li><b>Variables</b> range over objects, e.g. the variable <i>c</i> could represent a city, <i>x</i> an integer, <i>s</i> a species. By convention, variables start with a lowercase character.</li>
-  <li><b>Functions</b> are mappings between a list of objects to another object, e.g. <i>CapitalOf</i> could take a country and return a city, while <i>Multiply</i> takes two numbers and returns a number.</li>
+  <li><b>Variables</b> range over objects, e.g. the variable <i>c</i> could represent a city, <i>x</i> an integer, <i>s</i> a species. By convention, variables will start with a lowercase character (it's not a universal convention, in fact it's common to have the opposite).</li>
+  <li><b>Functions</b> map lists of terms to a term, e.g. <i>CapitalOf</i> could take a country and return a city, while <i>Multiply</i> takes two numbers and returns a number.</li>
 </ol>
 
 <p>Example:</p>
@@ -1484,10 +1256,11 @@ within functions:</p>
 <h2>Predicates</h2>
 
 <p>First-order logic formulas ultimately resolve to a truth value: True or
-False, yet the terms we've seen return objects. To get a truth value, we need
-predicates. A predicate is like a function but it maps terms to a truth value
-instead of mapping them to a term. For example, if we want to say that adding 0
-to <i>x</i> yields <i>x</i>, we can write:</p>
+False, yet the terms we've seen can represent cities, numbers, pretty much
+anything. To get a truth value, we need predicates. A predicate is like a
+function but it maps terms to a truth value instead of mapping them to a term.
+For example, if we want to say that adding 0 to <i>x</i> yields <i>x</i>, we
+can write:</p>
 
 \[Equals(Add(x, 0), x).\]
 
@@ -1506,22 +1279,22 @@ are constants, <i>c</i> a variable ranging over cities, and both
 <i>CapitalOf</i> and <i>LargestCountryOf</i> are functions taking a single
 argument.</p>
 
-<h2>Atomic sentences</h2>
+<h2>Atomic formulas</h2>
 
-<p>An atomic sentence is something that, alone, is a valid first-order logic formula. A predicate
-is an atomic sentence since it returns a truth value, but we also have two special symbols: True and False.</p>
+<p>An atomic formula is something that, alone, is a valid first-order logic formula. A predicate
+is an atomic formula since it returns a truth value, but we also have two special symbols: True and False.</p>
 
-<p><b>True</b> is also called <i>top</i>, and can be represented with the symbol \(\top\).</p>
+<p><b>True</b> is also called <i>top</i>, and can be represented with the symbol \(\top\) or just T.</p>
 
-<p><b>False</b> is also called <i>bottom</i>, and can be represented with the symbol \(\bot\).</p>
+<p><b>False</b> is also called <i>bottom</i>, and can be represented with the symbol \(\bot\) or just F.</p>
 
 <h2>Connectives</h2>
 
-<p>You can connect sentences with connectives to form complex sentences. The
+<p>You can connect formulas with connectives to form complex formulas. The
 standard connectives are:</p>
 
 <ol style='list-style-type: upper-roman'>
-  <li>The binary connective <b>and</b>: \(x \land y\), which is true only if both \(x\) and \(y\) are true. Like all other connectives shown here, if \(x\) and \(y\) are sentences, then \(x \land y\) is also a valid sentence.</li>
+  <li>The binary connective <b>and</b>: \(x \land y\), which is true only if both \(x\) and \(y\) are true. Like all other connectives shown here, if \(x\) and \(y\) are valid formulas, then \(x \land y\) is also a valid formula.</li>
   <li>The binary connective <b>or</b>: \(x \lor y\), which is true only if \(x\) is true, if \(y\) is true, or if both are true.</li>
   <li>The binary connective <b>implies</b>: \(x \Rightarrow y\), returns true in all cases, except if \(x\) is true and \(y\) is false.</li>
   <li>The binary connective <b>iff</b>: \(x \iff y\), returns true if \(x\) and \(y\) have the same value, that is if they are both true, or both false.</li>
@@ -1532,29 +1305,67 @@ standard connectives are:</p>
 <p>Be careful with implication, there is nothing wrong with it, except that it
 doesn't fit how we use the term <i>implies</i>. For example:
 \(Equals(AgeOf(Earth), 42) \Rightarrow StillAlive(Elvis)\) is true. If you're
-confused, read again the description of <b>implies</b>.</p>
+confused, read again the description of <b>implies</b>. Here's the truth
+table for the binary connectives:</p>
 
-<h2>Qualifiers</h2>
+<table style='width: 100%; text-align:center;'>
+  <tr>
+    <th>Connective</th>
+    <th>Informal name</th>
+    <th>Symbol</th>
+    <th>T x T</th><th>T x F</th><th>F x T</th><th>F x F</th>
+  </tr>
+  <tr>
+    <td>Conjunction</td>
+    <td>and</td>
+    <td>\(\land\)</td>
+    <td>T</td><td>F</td><td>F</td><td>F</td>
+  </tr>
+  <tr>
+    <td>Disjunction</td>
+    <td>or</td>
+    <td>\(\lor\)</td>
+    <td>T</td><td>T</td><td>T</td><td>F</td>
+  </tr>
+  <tr>
+    <td>Implication</td>
+    <td>implies</td>
+    <td>\(\Rightarrow\)</td>
+    <td>T</td><td>F</td><td>T</td><td>T</td>
+  </tr>
+  <tr>
+    <td>Equivalence</td>
+    <td>iff</td>
+    <td>\(\leftrightarrow\)</td>
+    <td>T</td><td>F</td><td>F</td><td>T</td>
+  </tr>
+  <tr>
+    <td>Exclusive disjunction</td>
+    <td>xor</td>
+    <td>\(\veebar\)</td>
+    <td>F</td><td>T</td><td>T</td><td>F</td>
+  </tr>
+</table>
 
-<p>There are two qualifiers in first-order logic: the universal qualifier "for
-all" denoted \(\forall\), and the existential qualifier "exists" denoted
-\(\exists\). They, well, qualify variables, e.g.:</p>
+<h2>Quantifiers</h2>
+
+<p>There are two quantifiers in first-order logic: the universal quantifier "for
+all" denoted \(\forall\), and the existential quantifier "exists" denoted
+\(\exists\). They, well, quantify variables, e.g.:</p>
 
 \[\forall x: Multiply(x, 0) = 0\]
 
-<p>reads "for all x, multiplying x by 0 yields 0". Normally, all variables
-should be qualified to determine their scope, e.g.:</p> 
+<p>reads "for all x, multiplying x by 0 yields 0". Another example:</p>
 
-\[\forall x \exists y: RealNumber(x) \Rightarrow GreaterThan(y, x)\]
+\[\forall x: Real(x) \Rightarrow (\exists y: y > x)\]
 
 <p>which means, "for all real numbers x, there is a number y that is greater
-than x".</p>
+than x". Note that both \(Real\) and the &gt; sign are predicates.</p>
 
 <p>A last example: we can express "there is a color c brighter than x, unless x
 is white" with:</p>
 
-\[\forall x \exists c: IsWhite(x) \lor BrighterThan(c, x).\]
-
+\[\forall x: IsWhite(x) \lor (\exists c: BrighterThan(c, x)).\]
 
 ]]></summary>
 </entry>
@@ -2054,6 +1865,133 @@ declarations at some point.</a></p>
 
 <p>Sum types and pattern matching are awesome.</p>
 
+
+]]></summary>
+</entry>
+<entry>
+    <title>Knowledge representation and species interactions</title>
+    <link href="http://phdp.github.io//posts/2014-06-11-food-webs.html" />
+    <id>http://phdp.github.io//posts/2014-06-11-food-webs.html</id>
+    <published>2014-06-11T00:00:00Z</published>
+    <updated>2014-06-11T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1>Knowledge representation and species interactions</h1>
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="Knowledge representation and species interactions" data-via="phdpqc">Tweet</a>
+<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  2014.06.11
+</p>
+
+<h2>The food web</h2>
+
+<p>One of the most fascinating aspect of ecology is the complex web of
+interactions between individuals (or populations, or species), and how it
+shapes the structure of communities. But what is the best way to represent
+these interactions?</p>
+
+<p>The classical representation is a
+directed network. <a href='http://mangal.uqar.ca/data/network/17/'>Here's
+one from the mangal database</a> [2]. We can have predator-prey interactions,
+parasitism, mutualism, competition, etc etc...</p>
+
+<p>However, it's a somewhat limited representation. A good way to evaluate a
+knowledge representation is to look at the possible queries. What questions
+can be answered? What questions cannot be answered? How expressive can the
+queries be? How expressive are the answers?</p>
+
+<p>Despite their widespread use, these interactions networks can only answer
+one question: is there a binary interaction between X and Y? The <i>binary
+</i> part is important, because these networks cannot deal with indirect
+relationships such as: X eats Y except when W is there.</p>
+
+<p>It doesn't scale well either: two species might only interact in a given
+region, a problem solved with distinct networks, but we would need distinct
+networks for every region with distinct interactions and a lot of information
+will be repeated.</p>
+
+<h2>Going stochastic</h2>
+
+<p>Instead of saying X eats Y, we could say X eats Y with probability Z.
+Adopting a probabilistic perspective does solve quite a few issues. We can
+now handle uncertainty and to some extent spatio-temporal variations. That
+said, we still cannot handle indirect relationships, and it doesn't scale
+that well.</p>
+
+<p>For example, if species A and B compete on the west coast with probability
+0.9 but only with probability 0.1 on the east coast, we would lose important
+information by having a network say they compete with probability 0.5. Dividing
+the network in two would improve our model's accuracy, but we are again getting
+in the messy network-of-networks business.  </p>
+
+<p>My supervisors, Timothée Poisot and Dominique Gravel, recently proposed a
+metaweb concept that includes, among many other ideas, probabilistic links, but
+in their case it's more than just adding probabilities to links [3].</p>
+
+<h2>A unified path to unification</h2>
+
+<p>To criticize an approach to ecology for missing some features is too easy.
+All representations have limitations, and any approach to science relies on
+some simplification of reality. However, in this case we can have our cake and
+eat it too by looking at what is going on in the field of knowledge
+representation (KR), which has been defined as [0]:</p>
+
+<p><blockquote>[...] the scientific domain concerned with the study of
+computational models able to explicitly represent knowledge by symbols and
+to process these symbols in order to produce new ones representing other
+pieces of knowledge. Systems built upon such computational models are called
+knowledge-based systems. Their main components are a knowledge base and a
+reasoning engine.</blockquote></p>
+
+<p>To illustrate, let's look at two lizards: <i>P. cinereus</i> and <i>P.
+hoffmani</i> [1]. The two species essentially hunt the same preys but, when
+they are found in the same region, character displacement pushes them to
+specialize on different preys. This fact cannot be easily express with
+standard knowledge representations for food webs, but we can with a bit
+of logic:</p>
+
+\[presence(\mbox{cinereus}, r) \land presence(\mbox{hoffmani}, r) \Rightarrow eat(\mbox{cinereus}, A, r).\]
+
+<p>The formula reads: the presence of cinereus in region \(r\) and the presence
+of hoffmani in \(r\) implies that cinereus eats prey A in \(r\). Formulas like
+this be seen as templates: presence(cinereus) will be either true or false at
+any given place, but a probability is assigned to the entire formula so it can
+be revised with new evidence [4]. This is an important point, it means we can
+use the standard food webs as evidence to build these logical formulas, but we
+still get a probabilistic model capable of handling uncertainty.</p>
+
+<p>The formula is readable, can be used with modern inference tools, and is
+very flexible, but there's better. What if the presence of cinereus in \(r\)
+could be predicted with a few conditions, we could have something like
+this:</p>
+
+\[northAmerica(r) \land (presence(A, r) \lor presence(B, r)) \Rightarrow presence(\mbox{cinereus}, r).\]
+
+<p>If the region \(r\) is in north America and if either species A or B are
+present, then cinereus will be present. Again, this equation would be
+assigned a probability. This is a simplistic model of presence/absence, but
+the point is that this knowledge representation allows different formula to
+be combined. Various evidence can be used together instead of having a wall
+between ecological facts, and such database of probabilistic logical formula
+supports sophisticated queries.</p>
+
+<p>There are many discussions about having integrative frameworks and
+theories in ecology. This is especially true for interaction networks, which
+are often present in one form or another in ecology. Ironically, these
+discussions of integration are often ignoring modern research in
+other fields. Knowledge representation offers powerful tools with mature
+software that are worth checking, especially if we want to understand
+how different ideas and evidence can be combined.</p>
+
+<h2>References</h2>
+
+<p>[0] M Chein and M-L Mugnier. <i>Graph-based Knowledge Representation</i>. Springer, 2009.</p>
+
+<p>[1] JB Losos. <a href='http://www.oeb.harvard.edu/faculty/losos/jblosos/pdfs/pnas.pdf'>Ecological character displacement and the study of adaptation</a>. PNAS, 2000.</p>
+
+<p>[2] T Poisot, B Baiser, JA Dunne, S Kéfi, F Massol, N Mouquet, TN Romanuk, DB Stouffer, SA Wood, and D Gravel. <a href='http://dx.doi.org/10.1101/002634'>Mangal - making complex ecological network analysis simpler</a>. <i>bioRxiV</i>, 2014.</p>
+
+<p>[3] T Poisot, DB Stouffer, and D Gravel. <a href='http://dx.doi.org/10.1101/001677'>Beyond species: why ecological interactions vary through space and time</a>. <i>bioRxiV</i>, 2014.</p>
+
+<p>[4] M Richardson and P Domingos. Markov logic networks. <i>Machine Learning</i> <b>62</b> (1-2): 107–136, 2006.</p>
 
 ]]></summary>
 </entry>

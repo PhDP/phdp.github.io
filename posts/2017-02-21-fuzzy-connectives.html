@@ -167,14 +167,14 @@ to the famous De Morgan laws:</p>
 \[\neg(x \land y) = \neg x \lor \neg y\]
 \[\neg(x \lor y) = \neg x \land \neg y\]
 
-<p>We won't talk about qualifiers (forall \(\forall\) and exists \(\exists\)),
-let's just say that, even in this case, for a formula \(x\), the qualified
-formula \(\exists x\) could be written \(\neg \forall \neg x\). I say this
-because, while we explore all the connectives here, formal texts will often
-define the smallest possible set of symbols. The larger set of connectives and
-qualifiers are mostly there for us, to make things easier to read and
-understand. Typical pandering to humans :P. As a quick side note, there's
-intriguing work being done on <a href="http://link.springer.com/chapter/10.1007/978-3-319-40566-7_5">soft
+<p>We won't talk about quantifiers (forall \(\forall\) and exists \(\exists\)),
+let's just say that, even in this case, for a formula \(x\), the formula
+\(\exists x\) could be written \(\neg \forall \neg x\). I say this because,
+while we explore all the connectives here, formal texts will often define the
+smallest possible set of symbols. The larger set of connectives and qualifiers
+are mostly there for us, to make things easier to read and understand. Typical
+pandering to humans :P. As a quick side note, there's intriguing work being
+done on <a href="http://link.springer.com/chapter/10.1007/978-3-319-40566-7_5">soft
 qualifiers</a> for fuzzy logic. But back to the connectives...</p>
 
 <h2>A first bite of fuzzy connectives</h2>
@@ -187,11 +187,11 @@ to behave the same as bivalent connectives, we can have:</p>
 \[x \lor y = max(x, y).\]
 
 <p>So \(\neg 1 = 0\), \(1 \land 0 = 0\), \(0 \land 1 = 1\), you can check,
-these connectives behave like normal bivalent connectives when they need to but
-they're also defined for other values: with \(x = 0.1\) and \(y = 0.7\) we get
-\(x \land y = 0.1\) and \(x \lor y = 0.7\). Negation can (and sometime is)
-defined differently, but we'll stick with \(1 - x\). Let's try to see if our
-definition of disjunction using only conjunction and negation works too:</p>
+these connectives behave like normal bivalent connectives when they need to
+but they're also defined for other values: with \(x = 0.1\) and \(y = 0.7\)
+we get \(x \land y = 0.1\) and \(x \lor y = 0.7\). Let's try to see if
+our definition of disjunction using only conjunction and negation works
+too:</p>
 
 \[x \lor y = \neg(\neg x \land \neg y).\]
 \[x \lor y = \neg min(\neg x, \neg y).\]
@@ -300,36 +300,17 @@ is called Gödel's T-norm (or Gödel-Dummett), \(max(0, x + y - 1)\) which is
 Lukasiewicz' T-norm, and finally we have simple multiplication, often
 called the product T-norm.</p>
 
-<p>In practice I mostly saw the Lukasiewicz connectives, but it's interesting
-to see how many variants are possible while still being consistent with
-standard bivalent logic.</p>
-
-<h2>Appendix: Connectives for the three T-norms</h2>
-
-<p>Equations for all connectives for the three most common T-norms used in
-many-valued logic.</p>
+<h2>Appendix: Connectives all in one place for Łukasiewicz logic</h2>
 
 <table style="width: 80%">
-  <tr><th>Connective</th>             <th>Gödel-Dummett</th></tr>
-  <tr><td>Conjunction</td>            <td>\(min(x, y)\)</td></tr>
-  <tr><td>Disjunction</td>            <td>\(max(x, y)\)</td></tr>
-  <tr><td>Implication</td>            <td>\(max(1 - x, y)\)</td></tr>
-  <tr><td>Equivalence</td>            <td>\(min(max(1 - x, y), max(1 - y, x))\)</td></tr>
-  <tr><td>Exclusive disjunction</td>  <td>\(max(min(1 - x, y), min(1 - y, x))\)</td></tr>
-
-  <tr><th>Connective</th>             <th>Łukasiewicz</th></tr>
+  <tr><th>Connective</th>             <th>Equation</th></tr>
   <tr><td>Conjunction</td>            <td>\(max(0, x + y - 1)\)</td></tr>
+  <tr><td>Weak Conjunction</td>       <td>\(min(x, y)\)</td></tr>
   <tr><td>Disjunction</td>            <td>\(min(1, x + y)\)</td></tr>
+  <tr><td>Weak Disjunction</td>       <td>\(max(x, y)\)</td></tr>
   <tr><td>Implication</td>            <td>\(min(1, 1 - x + y)\)</td></tr>
   <tr><td>Equivalence</td>            <td>\(1 - |x - y|\)</td></tr>
   <tr><td>Exclusive disjunction</td>  <td>\(|x - y|\)</td></tr>
-
-  <tr><th>Connective</th>             <th>Product</th></tr>
-  <tr><td>Conjunction</td>            <td>\(xy\)</td></tr>
-  <tr><td>Disjunction</td>            <td>\(x + y - xy\)</td></tr>
-  <tr><td>Implication</td>            <td>\(1 - x + xy\)</td></tr>
-  <tr><td>Equivalence</td>            <td>\((1 - x + xy)(1 - y + xy)\)</td></tr>
-  <tr><td>Exclusive disjunction</td>  <td>\(1 - (1 - x + xy)(1 - y + xy)\)</td></tr>
 </table>
 
 

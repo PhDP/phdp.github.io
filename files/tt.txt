@@ -1,0 +1,39 @@
+Named connectives
+---------------------------------
+                  TxT TxF FxT FxF
+                   T   T   T   T
+Disjunction        T   T   T   F
+                   T   T   F   T
+                   T   T   F   F
+Implication        T   F   T   T
+                   T   F   T   F
+Equivalence        T   F   F   T
+Conjunction        T   F   F   F
+                   F   T   T   T
+Ex disjunction     F   T   T   F
+                   F   T   F   T
+                   F   T   F   F
+                   F   F   T   T
+                   F   F   T   F
+                   F   F   F   T
+                   F   F   F   F
+
+All connectives (defined with !, &, |)
+---------------------------------
+                  TxT TxF FxT FxF
+x|!x               T   T   T   T      !!!!
+x|y                T   T   T   F
+x|!y               T   T   F   T
+x                  T   T   F   F      !!!!
+!x|y               T   F   T   T
+y                  T   F   T   F      !!!!
+(x&y)|(!x&!y)      T   F   F   T
+x&y                T   F   F   F
+!(x&y)             F   T   T   T
+(x&!y)|(!x&y)      F   T   T   F
+!y                 F   T   F   T      !!!!
+x&!y               F   T   F   F
+!x                 F   F   T   T      !!!!
+!x&y               F   F   T   F
+!(x|y)             F   F   F   T
+x&!x               F   F   F   F      !!!!
