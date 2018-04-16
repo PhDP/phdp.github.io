@@ -168,9 +168,9 @@ table for the binary connectives:</p>
 
 <h2>Quantifiers</h2>
 
-<p>There are two quantifiers in first-order logic: the universal quantifier "for
-all" denoted \(\forall\), and the existential quantifier "exists" denoted
-\(\exists\). They, well, quantify variables, e.g.:</p>
+<p>There are two main quantifiers in first-order logic: the universal
+quantifier "for all" denoted \(\forall\), and the existential quantifier
+"exists" denoted \(\exists\). They, well, quantify variables, e.g.:</p>
 
 \[\forall x: Multiply(x, 0) = 0\]
 
@@ -181,10 +181,17 @@ all" denoted \(\forall\), and the existential quantifier "exists" denoted
 <p>which means, "for all real numbers x, there is a number y that is greater
 than x". Note that both \(Real\) and the &gt; sign are predicates.</p>
 
-<p>A last example: we can express "there is a color c brighter than x, unless x
+<p>Another example: we can express "there is a color c brighter than x, unless x
 is white" with:</p>
 
 \[\forall x: IsWhite(x) \lor (\exists c: BrighterThan(c, x)).\]
+
+<p>Often, it is useful to add a "unique" quantifier denoted \(\exists!\), for
+example to say there is a one and only one successor to any integer:</p>
+
+\[\forall x \in \mathbb(Z): \exists! y \in \mathbb{Z}: y = x + 1.\]
+
+<p>Where (\in) reads "belongs to" and \(\mathbb{Z}\) refers to positive or negative integers.</p>
 
 
 
