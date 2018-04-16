@@ -55,8 +55,8 @@ and zeroth-order logics are.</p>
 
 <p>First-order logic is a powerful symbolic representation for mathematical
 ideas. Take Catalan's conjecture, explained in detail by <a href="https://www.youtube.com/watch?v=Us-__MukH9I">Holly Krieger in this
-numberphile video</a>. In 1842, Eugène Charles Catalan wondered whether \(2^3 =
-8\) and \(3^2 = 9\) was the only pair of consecutive perfect powers, i.e. the
+numberphile video</a>. In 1842, Eugène Charles Catalan wondered whether \((2^3 =
+8, 3^2 = 9)\) was the only pair of consecutive perfect powers, i.e. the
 power of a natural number greater than one such as \(2^3\), \(5^2\),
 \(9^{15}\), ... We can formalize this conjecture in first-order logic:</p>
 
@@ -74,20 +74,29 @@ candidates, species, complex numbers, vectors, etc etc, but they cannot, say,
 range over functions or sets of elements. In a nutshell: second-order logic is
 exactly like first-order logic in every way (same connectives, same predicates,
 same quantifiers), but it allows quantification over sets, predicates, and
-functions. It adds function variables and predicate variables (with sets being
-in essence, predicates). And that's it. An important idea in classical logic is
-that something either is or isn't in a set. It can be written in second-order
-logic as:</p>
+functions. It adds function variables and predicate variables (with sets being,
+in essence, predicates). And that's it. For example, an important idea in
+classical logic is that something either is or isn't in a set. It can be
+written in second-order logic as:</p>
 
 \[\forall x, S: x \in S \veebar x \not \in S\]
 
-<p>with \(\veebar\) <a href="2015-07-13-fol.html">being the <i>exlusive or</i>
+<p>with \(\veebar\) <a href="2015-07-13-fol.html">being the <i>exclusive or</i>
 symbol</a> and \(\in\) being the "belongs to" predicate. Here, \(x\) is an
 individual variable, but \(S\) is a predicate variable, it represents sets, not
-individual elements. Graph theory is famous for second-order logic
-applications, with simple ideas like reachability being difficult to define
-without second-order quantificiation. Another example is a fairly important
-concept in optimization: convexity of functions.</p>
+individual elements. You could definitely write specific versions of this
+idea in first-order logic by replacing the predicate variable \(S\) with
+specific sets:</p>
+
+\[\forall x: x \in \mathbb{N} \veebar x \not \in \mathbb{N}.\]
+\[\forall x: x \in \mathbb{C} \veebar x \not \in \mathbb{C}.\]
+\[\forall x: IsFromVenus(x) \veebar \neg IsFromVenus(x).\]
+
+<p>All these formulas are first-order, since they only quantify over individual
+variables, but they fail to capture the general idea. Graph theory is famous
+for second-order logic applications, with simple ideas like reachability being
+difficult to define without second-order quantification. Another example is a
+fairly important concept in optimization: the convexity of functions.</p>
 
 \[\forall f, x, y, \alpha: Convex(f) \iff f(\alpha \times x + (1 - \alpha) \times y) \leq \alpha \times f(x) + (1 - \alpha) \times f(y)\]
 
@@ -106,14 +115,15 @@ is a propositional formula with symbols \(x, y, z\). Since there are no
 predicates, and thus no variables, constants, or functions, this is not really
 useful to represent maths (although richer logics are often reduced to
 propositional logic for inference). The other interpretation is that
-zeroth-order is first-order logic without variables:</p>
+zeroth-order logic is first-order logic without variables:</p>
 
 \[CapitalOf(France) = Paris.\]
 \[2^{2^2 + 2} = 64.\]
 \[\neg Insect(Centipede).\]
 
-<p>These formulas become first-order the second you quantify over elements, and
-second-order if you quantify over sets, functions, predicates.</p>
+<p>With this interpretation, a formula without variables is zeroth-order, one
+with only individual variables is first-order, and one with function or predicate
+variables is second-order.</p>
 
 
 
