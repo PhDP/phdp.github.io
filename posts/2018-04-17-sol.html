@@ -40,7 +40,7 @@
 
 <a href="https://twitter.com/share" class="twitter-share-button" data-text="A crash course in second-order logic" data-via="phdpqc">Tweet</a>
 <p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-  2018.04.16
+  2018.04.17
 </p>
 
 <p><a href="2015-07-13-fol.html">I previously wrote a very short introduction
@@ -55,7 +55,7 @@ and zeroth-order logics are.</p>
 
 <p>First-order logic is a powerful symbolic representation for mathematical
 ideas. Take Catalan's conjecture, explained in detail by <a href="https://www.youtube.com/watch?v=Us-__MukH9I">Holly Krieger in this
-numberphile video</a>. In 1842, Eugène Charles Catalan wondered whether (2^3 =
+numberphile video</a>. In 1842, Eugène Charles Catalan wondered whether \(2^3 =
 8\) and \(3^2 = 9\) was the only pair of consecutive perfect powers, i.e. the
 power of a natural number greater than one such as \(2^3\), \(5^2\),
 \(9^{15}\), ... We can formalize this conjecture in first-order logic:</p>
@@ -75,25 +75,27 @@ range over functions or sets of elements. In a nutshell: second-order logic is
 exactly like first-order logic in every way (same connectives, same predicates,
 same quantifiers), but it allows quantification over sets, predicates, and
 functions. It adds function variables and predicate variables (with sets being
-in essence, predicates). And that's it. Take the principle of bivalence, that
-something is or isn't in a set. It can be written in second-order logic as:</p>
+in essence, predicates). And that's it. An important idea in classical logic is
+that something either is or isn't in a set. It can be written in second-order
+logic as:</p>
 
-\[\forall x, S: x \in S \veebar x \not \in S.\]
+\[\forall x, S: x \in S \veebar x \not \in S\]
 
-<p>with \(\veebar\) <a href="2015-07-13-fol.html">being the exlusive or
-symbolc</a> and \(\in\) being the "belongs to" predicate. Here, \(x\) is an
+<p>with \(\veebar\) <a href="2015-07-13-fol.html">being the <i>exlusive or</i>
+symbol</a> and \(\in\) being the "belongs to" predicate. Here, \(x\) is an
 individual variable, but \(S\) is a predicate variable, it represents sets, not
 individual elements. Graph theory is famous for second-order logic
 applications, with simple ideas like reachability being difficult to define
 without second-order quantificiation. Another example is a fairly important
 concept in optimization: convexity of functions.</p>
 
-\[\forall f, x, y, \alpha: Convex(f) \iff f(\alpha \times x + (1 - \alpha) \times y) \leq \alpha \times f(x) + (1 - \alpha) \times f(y).\]
+\[\forall f, x, y, \alpha: Convex(f) \iff f(\alpha \times x + (1 - \alpha) \times y) \leq \alpha \times f(x) + (1 - \alpha) \times f(y)\]
 
-<p>With \(\alpha \in \mathbb{R} \mid 0 \leq \alpha \leq 1\). What makes this
-second order is the quantification over \(f\), a function. We don't want
-to define convexity for a specific function, we want to define it for
-all functions, hence the need for quantification over functions.</p>
+<p>with \(\alpha \in \mathbb{R} \mid 0 \leq \alpha \leq 1\), see <a href="http://www.springer.com/gp/book/9780387303031">Nocedal &amp; Wright
+(2006)</a>. What makes this second order is the quantification over \(f\), a
+function. We don't want to define convexity for a specific function, we want to
+define it for all functions, hence the need for quantification over
+functions.</p>
 
 <h2>What about zeroth-order?</h2>
 
