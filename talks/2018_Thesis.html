@@ -71,9 +71,9 @@
           <section>
             <h2>Relations. Uncertainty. Vagueness.</h2>
             \[\forall s_i, s_j \in S: PhyloDistance(s_i, s_j) > 0, \infty.\]
-            \[\forall x, y \in S: \dot{x} = \alpha x - \beta xy \mbox{ and } \dot{y} = \delta xy - \gamma y, 0.01.\]
-            \[\forall x, y: PPreyOn(x, y) = \alpha \times \exp\left[-\left(\frac{N(y) - D(x)}{R(x)/2}\right)^2\right], 1.02.\]
-            \[\forall s \in S, l \in L, t \in \mathbb{N}: R(s, l) \mbox{ and } SmallN(s, l) \Rightarrow N(s,l,t+1) = G(s) \times N(s,l,t), 0.14.\]
+            \[\forall s_i, s_j \in S: \dot{x} = \alpha s_i - \beta s_is_j \mbox{ and } \dot{s_j} = \delta s_is_j - \gamma s_j, 0.01.\]
+            \[\forall s_i, s_j: PPreyOn(s_i, s_j) = \alpha \times \exp\left[-\left(\frac{Ni(s_j) - Di(s_i)}{Range(s_i)/2}\right)^2\right], 1.02.\]
+            \[\forall s \in S, l \in L, t \in \mathbb{N}: SmallN(s, l) \Rightarrow N(s,l,t+1) = G(s) \times N(s,l,t), 0.14.\]
             \[\forall s_i, s_j \in S, l \in L: \left[0.2\sum_{x \in KNN_5(s_i)} I()\right] > 0.5 \Rightarrow PreyOnAt(p, q, l), 2.5.\]
           </section>
           <section>
