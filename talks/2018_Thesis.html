@@ -1,21 +1,21 @@
 <!doctype html>
-<html lang="en">
+<html lang='en'>
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
 
     <title>Automatic Revision of Ecological Theories</title>
 
-    <meta name="description" content="Thesis defense">
-    <meta name="author" content="Philippe Desjardins-Proulx">
+    <meta name='description' content='Thesis defense'>
+    <meta name='author' content='Philippe Desjardins-Proulx'>
 
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name='apple-mobile-web-app-capable' content='yes' />
+    <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
 
-    <link rel="stylesheet" href="css/reveal.min.css">
-    <link rel="stylesheet" href="css/theme/thesis.css" id="theme">
-    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <link rel='stylesheet' href='css/reveal.min.css'>
+    <link rel='stylesheet' href='css/theme/thesis.css' id='theme'>
+    <link rel='stylesheet' href='lib/css/zenburn.css'>
 
     <script>
       if (window.location.search.match(/print-pdf/gi)) {
@@ -28,19 +28,19 @@
     </script>
 
     <!--[if lt IE 9]>
-    <script src="lib/js/html5shiv.js"></script>
+    <script src='lib/js/html5shiv.js'></script>
     <![endif]-->
   </head>
 
   <body>
 
-    <div class="reveal">
+    <div class='reveal'>
       <!-- Any section element inside of this container is displayed as a slide -->
-      <div class="slides">
+      <div class='slides'>
         <section>
           <section>
             <h1>Automatic Revision<br/> of Ecological Theories</h1>
-            <p>by <a href="http://phdp.github.io/">Philippe Desjardins-Proulx</a></small></p>
+            <p>by <a href='http://phdp.github.io/'>Philippe Desjardins-Proulx</a></small></p>
           </section>
         </section>
         <section>
@@ -62,7 +62,7 @@
             <p>Tasks: <i>classification, regression.</i></p>
             <br/>
             <h2>Unsupervised learning</h2>
-            <p>Given data points \(\mathcal{D} = \{(\mathbf{x}_i)\}_{i = 0}^{|\mathcal{D}| - 1}\), learn some "hidden structure".</p>
+            <p>Given data points \(\mathcal{D} = \{(\mathbf{x}_i)\}_{i = 0}^{|\mathcal{D}| - 1}\), learn some 'hidden structure'.</p>
             <p>Tasks: <i>matrix imputation, structure learning, clustering.</i></p>
             <br/>
             <p><i>Reference: Kevin Patrick Murphy. Machine Learning: a Probabilistic Perspective. MIT Press, 2012.</i></p>
@@ -72,11 +72,12 @@
           </section>
           <section>
             <h2>Relations. Uncertainty. Vagueness.</h2>
-            \[\forall s_i, s_j \in S: PhyloDistance(s_i, s_j) > 0, \infty.\]
-            \[\forall s_i, s_j \in S: \dot{x} = \alpha s_i - \beta s_is_j \mbox{ and } \dot{s_j} = \delta s_is_j - \gamma s_j, 0.01.\]
+            <p>Domains: species \(s, s_i, s_j \in S\), locations \(l \in L\), time \(t \in \mathbb{R}\).</p>
+            \[\forall s_i, s_j: PhyloDistance(s_i, s_j) > 0, \infty.\]
+            \[\forall s_i, s_j: \dot{x} = \alpha s_i - \beta s_is_j \mbox{ and } \dot{s_j} = \delta s_is_j - \gamma s_j, 0.01.\]
             \[\forall s_i, s_j: PPreyOn(s_i, s_j) = \alpha \times \exp\left[-\left(\frac{Ni(s_j) - Di(s_i)}{Range(s_i)/2}\right)^2\right], 1.02.\]
-            \[\forall s \in S, l \in L, t \in \mathbb{N}: SmallN(s, l) \Rightarrow N(s,l,t+1) = G(s) \times N(s,l,t), 0.14.\]
-            \[\forall s_i, s_j \in S, l \in L: \left[0.2\sum_{x \in KNN_5(s_i)} I()\right] > 0.5 \Rightarrow PreyOnAt(p, q, l), 2.5.\]
+            \[\forall s, l, t: SmallN(s, l) \Rightarrow N(s,l,t+1) = G(s) \times N(s,l,t), 0.14.\]
+            \[\forall s_i, s_j, l: \left[0.2\sum_{x \in KNN_5(s_i)} I()\right] > 0.5 \Rightarrow PreyOnAt(p, q, l), 2.5.\]
           </section>
         </section>
         <section>
@@ -256,7 +257,7 @@
           </section>
           <section>
             <h2>Results on pollinator-plant data-set</h2>
-            <table style="width:100%; font-size:70%; text-align:center;">
+            <table style='width:100%; font-size:70%; text-align:center;'>
               <tr>
                 <th>Model</th>
                 <th>Accuracy (10% testing data)</th>
@@ -377,14 +378,14 @@
       </div>
     </div>
 
-    <script src="lib/js/head.min.js"></script>
-    <script src="js/reveal.min.js"></script>
+    <script src='lib/js/head.min.js'></script>
+    <script src='js/reveal.min.js'></script>
     <script>
       // Full list of configuration options available here:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
-        width: "70%",
-        height: "100%",
+        width: '70%',
+        height: '100%',
         margin: 0,
         minScale: 1,
         maxScale: 1,
@@ -411,6 +412,6 @@
         ]
       });
     </script>
-    <script type="text/javascript" src="../../js/bower/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type='text/javascript' src='../../js/bower/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
   </body>
 </html>
