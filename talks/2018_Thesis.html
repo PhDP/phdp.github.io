@@ -72,12 +72,13 @@
           </section>
           <section>
             <h2>Relations. Uncertainty. Vagueness.</h2>
-            <p>Domains: species \(s, s_i, s_j \in S\), locations \(l \in L\), time \(t \in \mathbb{R}\).</p>
+            <p><b>Domains</b>: species \(s, s_i, s_j \in S\), locations \(l \in L\), time \(t \in \mathbb{R}\).</p>
+            <br/>
             \[\forall s_i, s_j: PhyloDistance(s_i, s_j) > 0, \infty.\]
             \[\forall s_i, s_j: \dot{x} = \alpha s_i - \beta s_is_j \mbox{ and } \dot{s_j} = \delta s_is_j - \gamma s_j, 0.01.\]
             \[\forall s_i, s_j: PPreyOn(s_i, s_j) = \alpha \times \exp\left[-\left(\frac{Ni(s_j) - Di(s_i)}{Range(s_i)/2}\right)^2\right], 1.02.\]
             \[\forall s, l, t: SmallN(s, l) \Rightarrow N(s,l,t+1) = G(s) \times N(s,l,t), 0.14.\]
-            \[\forall s_i, s_j, l: \left[\frac{1}{5}\sum_{x \in KNN_5(s_i)} \mathbb{I}()\right] > 0.5 \Rightarrow PreyOnAt(p, q, l), 2.5.\]
+            \[\forall s_i, s_j, l: KNN_5(s_i, s_j) > 0.5 \Rightarrow PreyOnAt(p, q, l), 2.5.\]
           </section>
         </section>
         <section>
@@ -186,32 +187,26 @@
             \[\mathbf{If} \mbox{ } A_0 \land A_1 \land A_2 \land ... \mbox{ } \mathbf{then} \mbox { } C_0.\]
           </section>
           <section>
-            <h2>Data</h2>
-          </section>
-          <section>
-            <h2>Initial model</h2>
+            <h2>Initial model for I Bartomeus' dataset</h2>
             <ul style='width: 100%'>
-              <li><b>If</b> KNN is high <b>then</b> interaction.</li>
-              <li><b>If</b> KNN is low <b>then</b> no interaction.</li>
+              <li><b>If</b> KNN is high <b>then</b> \(I^+\).</li>
+              <li><b>If</b> KNN is low <b>then</b> \(I^-\).</li>
             </ul>
+            </br>
+            <p>\(I^+\) denotes an interaction, \(I^+\) a non-interaction.</p>
           </section>
           <section>
-            <h2>Current approach for learning (Python script)</h2>
-            <h3>Evolution</h3>
+            <h2>Learning rules</h2>
             <ol start='0'>
-              <li>Start with the initial knowledge base with the two KNN rules.</li>
+              <li>Start with the two KNN rules.</li>
               <li>Randomly generate a rule, add it to the knowledge base.</li>
-              <li>If the new knowledge base beats the old by 0.004 accuracy, keep the rule.</li>
-              <li>Repeat \(\phi\) times</li>
+              <li>If the new knowledge base beats the old by \(\alpha\) TSS on the training set, keep the rule.</li>
+              <li>Repeat #1-2 \(\phi\) times.</li>
             </ol>
-            <br/><br/>
-            <h3>Pseudo-ensemble approach</h3>
-            <ol start='0'>
-              <li>Make \(n\) evolutions.</li>
-              <li>Count the frequency of the rules in the evolutions</li>
-              <li>Try to add the rule one by one from most frequent to least</li>
-              <li>Keep if accuracy improve by at least 0.004.</li>
-            </ol>
+            <br/>
+            <p>Starts with high acceptance threshold \(\alpha\), lower it with time à la simulated annealing.</p>
+            <br/>
+            <p>C++14 code: <a href='https://github.com/PhDP/Manticore'>https://github.com/PhDP/Manticore</a></p>
           </section>
           <section>
             <ul style='width: 100%; font-size: 80%'>
@@ -246,34 +241,26 @@
           </section>
           <section>
             <h2>Results on pollinator-plant data-set</h2>
-            <table style='width:100%; font-size:70%; text-align:center;'>
+            <table style='width:100%; font-size:80%; text-align:center;'>
               <tr>
                 <th>Model</th>
-                <th>Accuracy (10% testing data)</th>
+                <th>TSS (10% testing data)</th>
+              </tr>
+              <tr>
+                <td>Decision tree</td>
+                <td>0.723</td>
+              </tr>
+              <tr>
+                <td>Random forests</td>
+                <td>0.795</td>
               </tr>
               <tr>
                 <td>Fuzzy (initial model with two KNN rules)</td>
-                <td>0.8105</td>
+                <td>0.564</td>
               </tr>
               <tr>
                 <td>Fuzzy (after evolution)</td>
-                <td>0.9281</td>
-              </tr>
-              <tr>
-                <td>Supervised learning (SVM, traits only)</td>
-                <td>0.8013</td>
-              </tr>
-              <tr>
-                <td>Supervised learning (SVM, with KNN)</td>
-                <td>0.7576 (WTF?)</td>
-              </tr>
-              <tr>
-                <td>Supervised learning (random forest, traits only)</td>
-                <td>0.8074</td>
-              </tr>
-              <tr>
-                <td>Supervised learning (random forest, with KNN)</td>
-                <td>0.9113</td>
+                <td>0.885</td>
               </tr>
             </table>
           </section>
@@ -354,7 +341,7 @@
               <li>Fuzzy knowledge bases are both clear and accurate.</li>
               <li>Even a silly revision algorithm yields very good results for fuzzy logic.</li>
               <li>Knowledge representation in ecology is an interesting topic in itself.</li>
-              <li>Markov logic has issues (computational, binary) but modern variants could be promising.</li>
+              <li>Markov logic has issues (computational) but modern variants could be promising.</li>
             </ul>
           </section>
         </section>
