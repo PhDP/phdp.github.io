@@ -48,51 +48,86 @@
             <h1>Motivation</h1>
           </section>
           <section>
+            <img src='img/gillespie1997.png' alt='gil04'/>
+            <p><i>Reference: JH Gillespie. Population Genetics: A Concise Guide, 1st edition. Johns Hopkins University Press, 1997.</i></p>
+          </section>
+          <section>
+            <h2>Why biodiversity is so complicated?</h2>
+            <p>The effect of mutations vary greatly accross a single gene.</p>
+            <p>Selection accross the genome is influenced by linkage and recombination.</p>
+            <p>Selection varies in time/space as the biotic/abiotic environment changes.</p>
+            <p>Speciation has a complex spatial structure.</p>
+          </section>
+          <section>
             <img src='img/amnat12.png' alt='amnat12'/>
           </section>
           <section>
             <img src='img/eco-evo-paper.png' alt='ecoevo'/>
           </section>
           <section>
+            <img src='img/complex-1.svg' alt='res'/>
+          </section>
+          <section>
             <img src='img/hahn08.png' alt='hahn08'/>
           </section>
           <section>
-            <h2>Supervised learning</h2>
+            <h2>What if there is no<br/>single theory of biodiversity?</h2>
+          </section>
+          <section>
+            <h2>What if the problem is to allow representation of a set of ecological theories, and tools to revise them.</h2>
+          </section>
+          <section>
+            <h2>Machine Learning</h2>
+            <img src='img/xkcd_machine_learning.png' alt='xkcd_ml'/>
+            <p>Two main types: supervised learning, unsupervised learning.</p>
+            <p><i>Reference: KP Murphy. Machine Learning: a Probabilistic Perspective. MIT Press, 2012.</i></p>
+          </section>
+          <section>
+            <h2>Supervised Learning</h2>
+            <img>
             <p>Given data points \(\mathcal{D} = \{(\mathbf{x}_i, y_i)\}_{i = 0}^{|\mathcal{D}| - 1}\), learn to predict \(y\) from \(\mathbf{x}\).</p>
             <p>Tasks: <i>classification, regression.</i></p>
-            <br/>
-            <h2>Unsupervised learning</h2>
+          </section>
+          <section>
+            <h2>Unsupervised Learning</h2>
+            <img>
             <p>Given data points \(\mathcal{D} = \{(\mathbf{x}_i)\}_{i = 0}^{|\mathcal{D}| - 1}\), learn some 'hidden structure'.</p>
             <p>Tasks: <i>matrix imputation, structure learning, clustering.</i></p>
-            <br/>
-            <p><i>Reference: Kevin Patrick Murphy. Machine Learning: a Probabilistic Perspective. MIT Press, 2012.</i></p>
           </section>
           <section>
-            <img src='img/biorxiv-scientifictheories.png' alt='biorxiv'/>
-          </section>
-          <section>
-            <h2>Relations. Uncertainty. Vagueness.</h2>
+            <h2>A knowledge base for ecological knowledge</h2>
             <p><b>Domains</b>: species \(s, s_i, s_j \in S\), locations \(l \in L\), time \(t \in \mathbb{R}\).</p>
+            <p><b>Symbols</b>: universal quantifier (<i>forall</i>) \(\forall\), negation \(\neg\).</p>
             <br/>
             \[\forall s_i, s_j: PhyloDistance(s_i, s_j) > 0, \infty.\]
             \[\forall s_i, s_j: \dot{x} = \alpha s_i - \beta s_is_j \mbox{ and } \dot{s_j} = \delta s_is_j - \gamma s_j, 0.01.\]
-            \[\forall s_i, s_j: PPreyOn(s_i, s_j) = \alpha \times \exp\left[-\left(\frac{Ni(s_j) - Di(s_i)}{Range(s_i)/2}\right)^2\right], 1.02.\]
+            <p>...</p>
             \[\forall s, l, t: SmallN(s, l) \Rightarrow N(s,l,t+1) = G(s) \times N(s,l,t), 0.14.\]
             \[\forall s_i, s_j, l: KNN_5(s_i, s_j) > 0.5 \Rightarrow PreyOnAt(p, q, l), 2.5.\]
           </section>
-        </section>
-        <section>
           <section>
-            <h1>Ecological Interactions</h1>
-          </section>
-          <section>
-            <h2>Why interactions?</h2>
+            <h2>Why ecological interactions?</h2>
             <p>First reason: a key reason why selection is difficult to handle
             with traditional theories is because of the complexity of species
             interactions.</p>
             <br/>
             <p>Second reason: my lab is studying interactions. I had access to
             both good data-sets and people who understood them well.</p>
+          </section>
+          <section>
+            <h2>Ecological interactions as a machine learning problem</h2>
+            <p>Predict whether \(a\) interacts with \(b\) given traits for both species.</p>
+            <p>Fill holes in an interaction matrix (Matrix imputation).</p>
+            <p>Discover or revise logic and mathematical rules given data.</p>
+          </section>
+          <section>
+            <h2>Roadmap</h2>
+            <img src='img/roadmap.svg.png' alt='roadmap'/>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Classical Machine<br/>Learning</h1>
           </section>
           <section>
             <h2>Data</h2>
@@ -134,11 +169,14 @@
 <br/><br/>
 
             <p><i>tp, tn, fp, fn</i> are the true positives, true negatives, false positives,
-            and false negaties, respectively.</p>
+            and false negatives, respectively.</p>
 
             <p>The <i>TSS</i> ranges from -1 to 1.</p>
+
+            <p>CONFUSION MATRIX.</p>
           </section>
           <section>
+            <h2>Results</h2>
             <p>Supervised learning Random forests predict correctly 99.55% of
             the non-interactions and 96.81% of the interactions, for a
             <i>TSS</i> of 0.96.</p>
@@ -151,6 +189,7 @@
           </section>
           <section>
             <img src='img/knn-paper.png' alt='knn'/>
+            <p>Larger!!!!</p>
           </section>
           <section>
             <h2>I Bartomeus' pollinator-plant data-set</h2>
@@ -173,11 +212,77 @@
             <h2>TSS</h2>
             <img src='img/ht_tss.png' width='80%' alt='acc'/>
           </section>
+          <section>
+            <h2>Classical machine learning &amp; Interactions</h2>
+            <ul>
+              <li>We confirm the old result that body mass is key to how interactions are structured (Williams &amp; Martinez 2000).</li>
+              <li>Phylogeny an important feature.</li>
+              <li>Interactions are fairly easy to predict (TSS really close to 1).</li>
+              <li>Binary traits contain little useful information.</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Markov Logic</h1>
+          </section>
+          <section>
+            \[\forall x, y, z: Friends(x, y) \mbox{ and } Friends(y, z) \Rightarrow Friends(x, z), 0.7.\]
+            \[\forall x: Smoking(x) \Rightarrow Cancer(x), 1.5.\]
+            \[\forall x, y: Friends(x, y) \mbox{ and } Smoking(x) \Rightarrow Smoking(y), 1.1.\]
+
+            <br/><br/>
+
+            <p>Can answer queries of the form:</p>
+
+            <br/>
+
+            \[P(Cancer(Bob) | Smoking(Anna) \mbox{ and } Friends(Anna, Bob)).\]
+            \[P(Friends(x, y) \Leftrightarrow Friends(y, x) | ...).\]
+
+          </section>
+          <section>
+            <h2>Salix data-set</h2>
+            <img src='img/salix.png' alt='salix'/>
+            \[Parasites \rightarrow Galler \rightarrow Salix\]
+          </section>
+          <section>
+            <h2>Learning weights (but not really rules)</h2>
+<p>\(\forall x, y: PreyOnAt(x,y,z) \Rightarrow PreyOn(x,y), 5.20.\)</p>
+<p>\(\forall x, y: HighCooccurrence(x,y) \Rightarrow PreyOn(x,y), 4.22.\)</p>
+<p>\(\forall x, y: IsGaller(x) \mbox{ and } PreyOn(x,y) \Rightarrow IsSalix(y), 4.15.\)</p>
+<p>\(\forall x, y: IsParasitoid(y) \mbox{ and } PreyOn(y,x) \Rightarrow IsGaller(x), 3.49.\)</p>
+<p>\(\forall x, y: PreyOn(x,y) \Rightarrow HighCooccurrence(x,y), 1.57.\)</p>
+<p>\(\forall x, y: PreyOn(x,y) \Rightarrow PreyOn(x,x), 1.52.\)</p>
+<p>\(\forall x, y: HigherPhyloValue(x,y) \Rightarrow PreyOn(x,y), 1.13.\)</p>
+<p>\(\forall x, y: HigherPhyloValue(x,y) \Rightarrow HighCooccurrence(x,y), -0.59.\)</p>
+<p style='color:#FF0000'>\(\forall x, y: PreyOn(x,x) \Rightarrow PreyOn(x,y), 0.45.\)</p>
+<p style='color:#FF0000'>\(\neg IsSalix(x) \mbox{ or } \neg PreyOn(x,y), 0.02.\)</p>
+<p>\(CloselyRelated(x,y) \mbox{ and } PreyOn(x,z) \Rightarrow PreyOn(y,z), 0.00.\)</p>
+          </section>
+          <section>
+            <h2>What went wrong?</h2>
+            <p>Lessons from classical methods: real-valued variables are important.</p>
+            <p>Importance of nuances. PreyOn, ... Lessons from last project.</p>
+          </section>
         </section>
         <section>
           <section>
             <h1>Fuzzy Logic</h1>
           </section>
+          <section>
+            <h2>I Bartomeus' pollinator-plant data-set (again)</h2>
+            <ul width='100%'>
+              <li>Plant-pollinator interactions were collected across 16 sites in the southwest of the iberian peninsula (Huelva and Seville).</li>
+              <li>65 pollinators.</li>
+              <li>277 plants.</li>
+              <li>739 pollinator-plant interactions.</li>
+              <li>We randomly pick 739 pollinator-plant pairs that are not
+              interacting to build a data-set of 1478 entries, half of
+              interactions, half of non-interactions.</li>
+            </ul>
+          </section>
+
           <section>
             <h2>Structure</h2>
             \[\mathbf{If} \mbox{ } antecedants \mbox{ } \mathbf{then} \mbox { } consequents.\]
@@ -189,6 +294,11 @@
             <br/>
 
             \[\mathbf{If} \mbox{ } A_0 \mbox{ and } A_1 \mbox{ and } A_2 \mbox{ and } ... \mbox{ } \mathbf{then} \mbox { } C_0.\]
+          </section>
+          <section>
+            <h2>Linguistic variables</h2>
+            <img width='70%' height='60%' src='img/fsets.svg'/>
+            <p>If the flower width is 6.5mm, then <b>"Flower width is High"</b> has a truth value of 0.75, <b>"Flower width is Very High"</b> has a truth alue of 0.25.</p>
           </section>
           <section>
             <h2>Initial model for I Bartomeus' dataset</h2>
@@ -225,26 +335,6 @@
             </ul>
           </section>
           <section>
-            <ul style='width: 100%; font-size: 70%'>
-              <li style='color:#277F2A'>[120] <b>If</b> KNN is high <b>then</b> \(I^+\).</li>
-              <li style='color:#7F2D27'>[100] <b>If</b> KNN is low <b>then</b> this pollinator/plant \(I^-\).</li>
-              <li style='color:#277F2A'>[33] <b>If</b> Pollinator is specialist <b>then</b> \(I^+\).</li>
-              <li style='color:#277F2A'>[25] <b>If</b> PlantFlowerWidth is small <b>then</b> \(I^+\).</li>
-              <li style='color:#277F2A'>[25] <b>If</b> PlantFlowerWidth is average <b>then</b> \(I^+\).</li>
-              <li style='color:#277F2A'>[23] <b>If</b> PlantNectarTubeDepth is average <b>then</b> \(I^+\).</li>
-              <li style='color:#277F2A'>[21] <b>If</b> PollTongueLength is average <b>then</b> \(I^+\).</li>
-              <li style='color:#277F2A'>[19] <b>If</b> PollIT is small <b>then</b> \(I^+\).</li>
-              <li style='color:#277F2A'>[15] <b>If</b> Pollinator is generalist <b>then</b> \(I^+\).</li>
-              <li style='color:#277F2A'>[14] <b>If</b> PlantNectarTubeDim is average <b>then</b> \(I^+\).</li>
-              <li style='color:#277F2A'>[14] <b>If</b> PollIT is large <b>then</b> \(I^+\).</li>
-              <li style='color:#277F2A'>[8] <b>If</b> KNN is low <b>and</b> Pollinator is specialist <b>then</b> \(I^+\).</li>
-              <li style='color:#277F2A'>[7] <b>If</b> PollTongueLength is small <b>and</b> KNN is high <b>then</b> \(I^+\).</li>
-              <li style='color:#277F2A'>[6] <b>If</b> PlantNectarTubeDim is average <b>and</b> PlantFlowerWidth is average <b>then</b> \(I^+\).</li>
-              <li style='color:#277F2A'>[6] <b>If</b> KNN is high <b>and</b> PlantFlowerWidth is average <b>then</b> \(I^+\).</li>
-              <li>...</li>
-            </ul>
-          </section>
-          <section>
             <h2>Results on pollinator-plant data-set</h2>
             <table style='width:100%; font-size:80%; text-align:center;'>
               <tr>
@@ -252,7 +342,7 @@
                 <th>TSS (10% testing data)</th>
               </tr>
               <tr>
-                <td>Decision tree</td>
+                <td>Decision trees</td>
                 <td>0.723</td>
               </tr>
               <tr>
@@ -268,70 +358,7 @@
                 <td>0.885</td>
               </tr>
             </table>
-          </section>
-        </section>
-        <section>
-          <section>
-            <h1>Markov Logic</h1>
-          </section>
-          <section>
-            \[\forall x, y, z: Friends(x, y) \mbox{ and } Friends(y, z) \Rightarrow Friends(x, z), 0.7.\]
-            \[\forall x: Smoking(x) \Rightarrow Cancer(x), 1.5.\]
-            \[\forall x, y: Friends(x, y) \mbox{ and } Smoking(x) \Rightarrow Smoking(y), 1.1.\]
-
-            <br/><br/>
-
-            <p>Can answer queries of the form:</p>
-
-            <br/>
-
-            \[P(Cancer(Bob) | Smoking(Anna) \mbox{ and } Friends(Anna, Bob)).\]
-            \[P(Friends(x, y) \Leftrightarrow Friends(y, x) | ...).\]
-
-          </section>
-          <section>
-            <h2>Salix data-set</h2>
-            <img src='img/salix.png' alt='salix'/>
-            \[Parasites \rightarrow Galler \rightarrow Salix\]
-          </section>
-          <section>
-            <h2>Learning weights (but not really rules)</h2>
-\[HighNumSalix(x), 6.44.\]
-\[\neg ModerateCooccurrence(x,y), 5.60.\]
-\[\neg PreyOnAt(x,y,a3), 4.38.\]
-\[\neg HighCooccurrence(x,y), 4.33.\]
-\[\neg PresenceAt(x,y), 3.08.\]
-\[\neg PreyOn(x,y), 1.68.\]
-\[\neg IsSalix(x), 1.38.\]
-\[\neg IsGaller(x), 0.59.\]
-\[\neg CloselyRelated(x,y), 0.59.\]
-\[\neg HigherPhyloValue(x,y), 0.57.\]
-          </section>
-
-          <section>
-\[ HighNumGaller(x), 0.47\]
-\[ HighNumSpecies(x), 0.24.\]
-\[ HighFoodWebLinkDensity(x), 0.19.\]
-\[ \neg IsParasitoid(x), 0.18.\]
-\[ \neg HighFoodWebConnectance(x), 0.14.\]
-\[ \neg HighTotalPrecipiration(x), 0.01.\]
-\[ \neg HighMeanTemperature(x), 0.01.\]
-\[ \neg PreyOn(x,x), 0.01.\]
-\[ HighNumParasites(x), 0.00.\]
-          </section>
-
-          <section>
-\[ PreyOnAt(x,y,z) \Rightarrow PreyOn(x,y), 5.20.\]
-\[ HighCooccurrence(x,y) \Rightarrow PreyOn(x,y), 4.22.\]
-\[ IsGaller(x) \mbox{ and } PreyOn(x,y) \Rightarrow IsSalix(y), 4.15.\]
-\[ IsParasitoid(y) \mbox{ and } PreyOn(y,x) \Rightarrow IsGaller(x), 3.49.\]
-\[ PreyOn(x,y) \Rightarrow HighCooccurrence(x,y), 1.57.\]
-\[ PreyOn(x,y) \Rightarrow PreyOn(x,x), 1.52.\]
-\[ HigherPhyloValue(x,y) \Rightarrow PreyOn(x,y), 1.13.\]
-\[ HigherPhyloValue(x,y) \Rightarrow HighCooccurrence(x,y), -0.59.\]
-\[ PreyOn(x,x) \Rightarrow PreyOn(x,y), 0.45.\]
-\[ \neg IsSalix(x) \mbox{ or } \neg PreyOn(x,y), 0.02.\]
-\[ CloselyRelated(x,y) \mbox{ and } PreyOn(x,z) \Rightarrow PreyOn(y,z), 0.00.\]
+            <p>The <a href='http://scikit-learn.org/stable/index.html'>scikit-learn</a> Python package was used for decision trees and random forests.</p>
           </section>
         </section>
         <section>
