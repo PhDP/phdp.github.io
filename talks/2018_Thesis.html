@@ -96,7 +96,7 @@
             <p>Tasks: <i>matrix imputation, structure learning, clustering.</i></p>
           </section>
           <section>
-            <h2>A knowledge base for ecological knowledge</h2>
+            <h2>A knowledge base<br/>for ecological knowledge</h2>
             <p><b>Domains</b>: species \(s, s_i, s_j \in S\), locations \(l \in L\), time \(t \in \mathbb{R}\).</p>
             <p><b>Symbols</b>: universal quantifier (<i>forall</i>) \(\forall\), negation \(\neg\).</p>
             <br/>
@@ -343,6 +343,10 @@
                 <th>TSS (10% testing data)</th>
               </tr>
               <tr>
+                <td>Fuzzy (initial model with two KNN rules)</td>
+                <td>0.564</td>
+              </tr>
+              <tr>
                 <td>Decision trees</td>
                 <td>0.723</td>
               </tr>
@@ -351,14 +355,11 @@
                 <td>0.795</td>
               </tr>
               <tr>
-                <td>Fuzzy (initial model with two KNN rules)</td>
-                <td>0.564</td>
-              </tr>
-              <tr>
                 <td>Fuzzy (after evolution)</td>
                 <td>0.885</td>
               </tr>
             </table>
+            <br/>
             <p>The <a href='http://scikit-learn.org/stable/index.html'>scikit-learn</a> Python package was used for decision trees and random forests.</p>
           </section>
         </section>
