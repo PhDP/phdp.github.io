@@ -48,27 +48,28 @@
             <h1>Motivation</h1>
           </section>
           <section>
-            <img src='img/gillespie1997.png' alt='gil04'/>
-            <p><i>Reference: JH Gillespie. Population Genetics: A Concise Guide, 1st edition. Johns Hopkins University Press, 1997.</i></p>
-          </section>
-          <section>
-            <h2>Why biodiversity is so complicated?</h2>
-            <p>The effect of mutations vary greatly accross a single gene.</p>
-            <p>Selection accross the genome is influenced by linkage and recombination.</p>
-            <p>Selection varies in time/space as the biotic/abiotic environment changes.</p>
-            <p>Speciation has a complex spatial structure.</p>
-          </section>
-          <section>
             <img src='img/amnat12.png' alt='amnat12'/>
           </section>
           <section>
             <img src='img/eco-evo-paper.png' alt='ecoevo'/>
           </section>
           <section>
-            <img src='img/complex-1.svg' alt='res'/>
+            <h2>Species Richness/Speciation Relationship</h2>
+            <img width='60%' height='60%' src='img/complex-1.svg' alt='res'/>
           </section>
           <section>
             <img src='img/hahn08.png' alt='hahn08'/>
+          </section>
+          <section>
+            <img src='img/gillespie1997.png' alt='gil04'/>
+            <p><i>Reference: JH Gillespie. Population Genetics: A Concise Guide, 1st edition. Johns Hopkins University Press, 1997.</i></p>
+          </section>
+          <section>
+            <h2>Why Biodiversity is so Complicated?</h2>
+            <p>The effect of mutations vary greatly accross a single gene.</p>
+            <p>Selection accross the genome is influenced by linkage and recombination.</p>
+            <p>Selection varies in time/space as the biotic/abiotic environment changes.</p>
+            <p>Speciation has a complex spatial structure.</p>
           </section>
           <section>
             <h2>What if there is no<br/>single theory of biodiversity?</h2>
@@ -248,7 +249,7 @@
           </section>
           <section>
             <h2>Learning weights (but not really rules)</h2>
-<p>\(\forall x, y: PreyOnAt(x,y,z) \Rightarrow PreyOn(x,y), 5.20.\)</p>
+<p>\(\forall x, y, z: PreyOnAt(x,y,z) \Rightarrow PreyOn(x,y), 5.20.\)</p>
 <p>\(\forall x, y: HighCooccurrence(x,y) \Rightarrow PreyOn(x,y), 4.22.\)</p>
 <p>\(\forall x, y: IsGaller(x) \mbox{ and } PreyOn(x,y) \Rightarrow IsSalix(y), 4.15.\)</p>
 <p>\(\forall x, y: IsParasitoid(y) \mbox{ and } PreyOn(y,x) \Rightarrow IsGaller(x), 3.49.\)</p>
@@ -256,9 +257,9 @@
 <p>\(\forall x, y: PreyOn(x,y) \Rightarrow PreyOn(x,x), 1.52.\)</p>
 <p>\(\forall x, y: HigherPhyloValue(x,y) \Rightarrow PreyOn(x,y), 1.13.\)</p>
 <p>\(\forall x, y: HigherPhyloValue(x,y) \Rightarrow HighCooccurrence(x,y), -0.59.\)</p>
-<p style='color:#FF0000'>\(\forall x, y: PreyOn(x,x) \Rightarrow PreyOn(x,y), 0.45.\)</p>
-<p style='color:#FF0000'>\(\neg IsSalix(x) \mbox{ or } \neg PreyOn(x,y), 0.02.\)</p>
-<p>\(CloselyRelated(x,y) \mbox{ and } PreyOn(x,z) \Rightarrow PreyOn(y,z), 0.00.\)</p>
+<p style='color:#BE1F1F'>\(\forall x, y: PreyOn(x,x) \Rightarrow PreyOn(x,y), 0.45.\)</p>
+<p style='color:#BE1F1F'>\(\forall x, y: \neg IsSalix(x) \mbox{ or } \neg PreyOn(x,y), 0.02.\)</p>
+<p>\(\forall x, y, z: CloselyRelated(x,y) \mbox{ and } PreyOn(x,z) \Rightarrow PreyOn(y,z), 0.00.\)</p>
           </section>
           <section>
             <h2>What went wrong?</h2>
