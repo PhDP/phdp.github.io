@@ -85,15 +85,16 @@
           </section>
           <section>
             <h2>Supervised Learning</h2>
-            <img>
+            <img src='img/supervised.png' alt='supervised'/>
             <p>Given data points \(\mathcal{D} = \{(\mathbf{x}_i, y_i)\}_{i = 0}^{|\mathcal{D}| - 1}\), learn to predict \(y\) from \(\mathbf{x}\).</p>
             <p>Tasks: <i>classification, regression.</i></p>
           </section>
           <section>
             <h2>Unsupervised Learning</h2>
-            <img>
+            <img src='img/matrix-completion.png' alt='matrix ompletion'/>
+            <img src='img/KMeans-Gaussian-data.svg' alt='kmeans'/>
             <p>Given data points \(\mathcal{D} = \{(\mathbf{x}_i)\}_{i = 0}^{|\mathcal{D}| - 1}\), learn some 'hidden structure'.</p>
-            <p>Tasks: <i>matrix imputation, structure learning, clustering.</i></p>
+            <p>Tasks: <i>matrix completion, clustering, structure learning.</i></p>
           </section>
           <section>
             <h2>A knowledge base<br/>for ecological knowledge</h2>
@@ -122,7 +123,7 @@
           <section>
             <h2>Ecological Interactions as a<br/>Machine Learning Problem</h2>
             <p>Predict whether \(a\) interacts with \(b\) given traits for both species.</p>
-            <p>Fill holes in an interaction matrix (Matrix imputation).</p>
+            <p>Fill holes in an interaction matrix (matrix completion).</p>
             <p>Discover or revise logic and mathematical rules given data.</p>
           </section>
           <section>
@@ -150,7 +151,7 @@
             <img src='img/ecological-netflix-paper.png' alt='paper'/>
           </section>
           <section>
-            <h2>Matrix Imputation with KNN</h2>
+            <h2>Matrix Completion with KNN</h2>
             <img width='100%' src='img/pearson.svg' alt='pearson'/>
           </section>
           <section>
@@ -171,14 +172,15 @@
           <section>
             <h2>True Skill Statistic</h2>
             \[TSS = \frac{(tp \times tn) - (fp \times fn)}{(tp + fn)(fp + tn)}.\]
-
-<br/><br/>
-
-            <p><i>tp, tn, fp, fn</i> are the true positives, true negatives, false positives,
-            and false negatives, respectively.</p>
-
-            <p>The <i>TSS</i> ranges from -1 to 1.</p>
-
+            With
+            <ul>
+              <li><i>tp</i>: true positives</li>
+              <li><i>tn</i>: true negatives</li>
+              <li><i>fp</i>: false positives</li>
+              <li><i>fn</i>: false negatives</li>
+            </ul>
+            <br/>
+            <p>The <i>TSS</i> ranges from -1 to 1. For example:</p>
             <img src='img/confusion.png' alt='confusion'/>
             <p>...has an accuracy of 0.98 and a TSS of 0.71.</p>
           </section>
