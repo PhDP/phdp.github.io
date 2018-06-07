@@ -155,7 +155,7 @@
             <img width='100%' src='img/pearson.svg' alt='pearson'/>
           </section>
           <section>
-            <h2>Similarity measure</h2>
+            <h2>Similarity Measure</h2>
             \[tanimoto(\mathbf{x}, \mathbf{y}) = \frac{\left\vert\mathbf{x} \cap \mathbf{y}\right\vert}{\left\vert\mathbf{x} \cup \mathbf{y}\right\vert}.\]
 
             <br/>
@@ -166,21 +166,23 @@
   tanimoto(\mathbf{x}, \mathbf{y}) &= \frac{\left\vert\{A, B, C\} \cap \{A, C, D, E, F\}\right\vert}{\left\vert\{A, B, C\} \cup \{A, C, D, E, F\}\right\vert}\\
                                    &= \frac{\left\vert\{A, C\}\right\vert}{\left\vert\{A, B, C, D, E, F\}\right\vert} = \frac{2}{6}.
 \end{align}
-
-
           </section>
           <section>
             <h2>True Skill Statistic</h2>
             \[TSS = \frac{(tp \times tn) - (fp \times fn)}{(tp + fn)(fp + tn)}.\]
-            With
+            <br/><br/>
+            <p>With:</p>
             <ul>
               <li><i>tp</i>: true positives</li>
               <li><i>tn</i>: true negatives</li>
               <li><i>fp</i>: false positives</li>
               <li><i>fn</i>: false negatives</li>
             </ul>
-            <br/>
-            <p>The <i>TSS</i> ranges from -1 to 1. For example:</p>
+            <br/><br/>
+            <p>The <i>TSS</i> ranges from -1 to 1.</p>
+          </section>
+          <section>
+            <h2>True Skill Statistic</h2>
             <img src='img/confusion.png' alt='confusion'/>
             <p>...has an accuracy of 0.98 and a TSS of 0.71.</p>
           </section>
