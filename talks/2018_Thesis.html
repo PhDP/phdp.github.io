@@ -58,24 +58,38 @@
             <img width='60%' height='60%' src='img/complex-1.svg' alt='res'/>
           </section>
           <section>
-            <img src='img/hahn08.png' alt='hahn08'/>
-          </section>
-          <section>
+            <h2>The Big Picture</h2>
             <img src='img/gillespie1997.png' alt='gil04'/>
             <p><i>Reference: JH Gillespie. Population Genetics: A Concise Guide, 1st edition. Johns Hopkins University Press, 1997.</i></p>
           </section>
           <section>
+            <img src='img/hahn08.png' alt='hahn08'/>
+          </section>
+          <section>
             <h2>Why Biodiversity is so Complicated?</h2>
-            <p>The effect of mutations vary greatly accross a single gene.</p>
-            <p>Selection accross the genome is influenced by linkage and recombination.</p>
+            <p>The effect of mutations vary greatly accross the genome.</p>
+            <p>The influence of linkage and recombination.</p>
             <p>Selection varies in time/space as the biotic/abiotic environment changes.</p>
             <p>Speciation has a complex spatial structure.</p>
           </section>
           <section>
-            <h2>What if there is no<br/>single theory of biodiversity?</h2>
+            <h3>What if there is no<br/>single theory of biodiversity?</h3>
           </section>
           <section>
-            <h2>What if the problem is to allow representation of a set of ecological theories, and tools to revise them.</h2>
+            <h3>What if the problem is to reason<br/>about a <i>set</i> of ecological theories</h3>
+          </section>
+          <section>
+            <h2>Two Key Questions</h2>
+            <br/>
+            <h3>How can we formally represent ecological theories<br/>(a different question that how to think about data).</h3>
+            <br/>
+            <h3>How can we exploit this formal representation<br/>(inference, discovery and revision of new theories).</h3>
+            <br/>
+            <p>In practice, these questions lead to knowledge representation and machine learning.</p>
+          </section>
+          <section>
+            <h2>Knowledge Representations</h2>
+            <img src='img/reasoning_systems.svg' alt='reasoning'/>
           </section>
           <section>
             <h2>Machine Learning</h2>
@@ -117,14 +131,10 @@
             both good data-sets and people who understood them well.</p>
           </section>
           <section>
-            <h2>Interaction</h2>
-            Hypergraph...
-          </section>
-          <section>
             <h2>Ecological Interactions as a<br/>Machine Learning Problem</h2>
             <p>Predict whether \(a\) interacts with \(b\) given traits for both species.</p>
             <p>Fill holes in an interaction matrix (matrix completion).</p>
-            <p>Discover or revise logic and mathematical rules given data.</p>
+            <p>Discover or revise logic and mathematical rules about interactions given data.</p>
           </section>
           <section>
             <h2>Machine Learning and Interactions Roadmap</h2>
@@ -143,29 +153,9 @@
               <li>881 species.</li>
               <li>34 193 unique interactions.</li>
               <li>215 418 absence of interactions.</li>
-              <li>3 real valued-traits: \(body mass\), \(Ph0\), \(Ph1\).</li>
+              <li>3 real valued-traits: \(body mass\), we also performed principal coordinates analysis on taxonomic distances, and use the scores of each species on the first two axes \(Ph_0\), \(Ph_1\).</li>
               <li>25 binary traits (e.g. AboveGround, Detritivore, Bacteria, Jumps, LongLegs, UsePoison).</li>
             </ul>
-          </section>
-          <section>
-            <img src='img/ecological-netflix-paper.png' alt='paper'/>
-          </section>
-          <section>
-            <h2>Matrix Completion with KNN</h2>
-            <img width='100%' src='img/pearson.svg' alt='pearson'/>
-          </section>
-          <section>
-            <h2>Similarity Measure</h2>
-            \[tanimoto(\mathbf{x}, \mathbf{y}) = \frac{\left\vert\mathbf{x} \cap \mathbf{y}\right\vert}{\left\vert\mathbf{x} \cup \mathbf{y}\right\vert}.\]
-
-            <br/>
-            <p>For \(\mathbf{x} = \{A, B, C\}\) and \(\mathbf{y} = \{A, C, D, E, F\}\):</p>
-            <br/>
-
-\begin{align}
-  tanimoto(\mathbf{x}, \mathbf{y}) &= \frac{\left\vert\{A, B, C\} \cap \{A, C, D, E, F\}\right\vert}{\left\vert\{A, B, C\} \cup \{A, C, D, E, F\}\right\vert}\\
-                                   &= \frac{\left\vert\{A, C\}\right\vert}{\left\vert\{A, B, C, D, E, F\}\right\vert} = \frac{2}{6}.
-\end{align}
           </section>
           <section>
             <h2>True Skill Statistic</h2>
@@ -187,7 +177,34 @@
             <p>...has an accuracy of 0.98 and a TSS of 0.71.</p>
           </section>
           <section>
-            <h2>Results</h2>
+            <h2>Supervised Learning</h2>
+            <img src='img/ecological-netflix-paper.png' alt='paper'/>
+          </section>
+          <section>
+            <h2>Supervised Learning</h2>
+            <img src='img/rf.png' alt='rf'/>
+            <p>Using the binary and real-valued traits of both species as features.</p>
+            <p>Tested several methods: random forests, support vector machines, decision trees.</p>
+          </section>
+<!--          <section>
+            <h2>Similarity Measure</h2>
+            \[tanimoto(\mathbf{x}, \mathbf{y}) = \frac{\left\vert\mathbf{x} \cap \mathbf{y}\right\vert}{\left\vert\mathbf{x} \cup \mathbf{y}\right\vert}.\]
+
+            <br/>
+            <p>For \(\mathbf{x} = \{A, B, C\}\) and \(\mathbf{y} = \{A, C, D, E, F\}\):</p>
+            <br/>
+
+\begin{align}
+  tanimoto(\mathbf{x}, \mathbf{y}) &= \frac{\left\vert\{A, B, C\} \cap \{A, C, D, E, F\}\right\vert}{\left\vert\{A, B, C\} \cup \{A, C, D, E, F\}\right\vert}\\
+                                   &= \frac{\left\vert\{A, C\}\right\vert}{\left\vert\{A, B, C, D, E, F\}\right\vert} = \frac{2}{6}.
+\end{align}
+          </section> -->
+          <section>
+            <h2>Recommendation</h2>
+            <img src='img/recommendation-table.png' alt='rectable'/>
+          </section>
+          <section>
+            <h2>Results: Supervised Learning</h2>
             <p>Supervised learning Random forests predict correctly 99.55% of
             the non-interactions and 96.81% of the interactions, for a
             <i>TSS</i> of 0.96.</p>
@@ -195,11 +212,16 @@
             <br/>
 
             <p>Removing the binary traits has little effect on the model. With
-            only \(body mass\), \(Ph0\), \(Ph1\), the <i>TSS</i> of the random
+            only \(body mass\), \(Ph_0\), \(Ph_1\), the <i>TSS</i> of the random
             forest is 0.94.</p>
           </section>
           <section>
-            <img src='img/knn-paper.png' alt='knn'/>
+            <h2>Results: Recommendation</h2>
+            <img width='80%' src='img/recommendation.svg' alt='rec'/>
+          </section>
+          <section>
+            <h2>Matrix Completion<br/>with the k-nearest neighbors (KNN)</h2>
+            <img width='100%' src='img/pearson.svg' alt='pearson'/>
           </section>
           <section>
             <h2>I Bartomeus' pollinator-plant data-set</h2>
@@ -219,10 +241,6 @@
             <img src='img/full-confusion.png' alt='confusion'/>
           </section>
           <section>
-            <h2>Accuracy</h2>
-            <img src='img/ht_acc.svg' width='80%' alt='acc'/>
-          </section>
-          <section>
             <h2>TSS</h2>
             <img src='img/ht_tss.png' width='80%' alt='acc'/>
           </section>
@@ -231,6 +249,7 @@
             <ul>
               <li>We confirm the old result that body mass is key to how interactions are structured (Williams &amp; Martinez 2000).</li>
               <li>Phylogeny an important feature.</li>
+              <li>KNN-based algorithms exploit nestedness: how much species cluster around the same set of preys in a food web.</li>
               <li>Interactions are fairly easy to predict (TSS really close to 1).</li>
               <li>Binary traits contain little useful information.</li>
             </ul>
@@ -257,7 +276,11 @@
           </section>
           <section>
             <h2>Logic and Food Web Representation</h2>
-            <p>Metaweb...</p>
+            \[PreyOn(s_i, s_j).\]
+            \[PreyOnInAbsence(s_i, s_j, s_k).\]
+            \[PreyOnAt(s_i, s_j, l).\]
+            <br/>
+            \[\forall s_i, s_j: PreyOn(s_i, s_j) \mbox{ and } \neg Parasite(s_i) \Rightarrow M(s_i) > M(s_j).\]
           </section>
           <section>
             <h2>Salix data-set</h2>
@@ -265,23 +288,28 @@
             \[Parasites \rightarrow Galler \rightarrow Salix\]
           </section>
           <section>
-            <h2>Learning weights (but not really rules)</h2>
-<p>\(\forall x, y, z: PreyOnAt(x,y,z) \Rightarrow PreyOn(x,y), 5.20.\)</p>
-<p>\(\forall x, y: HighCooccurrence(x,y) \Rightarrow PreyOn(x,y), 4.22.\)</p>
-<p>\(\forall x, y: IsGaller(x) \mbox{ and } PreyOn(x,y) \Rightarrow IsSalix(y), 4.15.\)</p>
-<p>\(\forall x, y: IsParasitoid(y) \mbox{ and } PreyOn(y,x) \Rightarrow IsGaller(x), 3.49.\)</p>
-<p>\(\forall x, y: PreyOn(x,y) \Rightarrow HighCooccurrence(x,y), 1.57.\)</p>
-<p>\(\forall x, y: PreyOn(x,y) \Rightarrow PreyOn(x,x), 1.52.\)</p>
-<p>\(\forall x, y: HigherPhyloValue(x,y) \Rightarrow PreyOn(x,y), 1.13.\)</p>
-<p>\(\forall x, y: HigherPhyloValue(x,y) \Rightarrow HighCooccurrence(x,y), -0.59.\)</p>
-<p style='color:#BE1F1F'>\(\forall x, y: PreyOn(x,x) \Rightarrow PreyOn(x,y), 0.45.\)</p>
-<p style='color:#BE1F1F'>\(\forall x, y: \neg IsSalix(x) \mbox{ or } \neg PreyOn(x,y), 0.02.\)</p>
-<p>\(\forall x, y, z: CloselyRelated(x,y) \mbox{ and } PreyOn(x,z) \Rightarrow PreyOn(y,z), 0.00.\)</p>
+            <h2>Learning Weights and Rules with Alchemy2</h2>
+<p style='color:#4A9E4E'>0: \(\forall x, y, z: PreyOnAt(x,y,z) \Rightarrow PreyOn(x,y), 5.20.\)</p>
+<p style='color:#4A9E4E'>1: \(\forall x, y: HighCooccurrence(x,y) \Rightarrow PreyOn(x,y), 4.22.\)</p>
+<p style='color:#4A9E4E'>2: \(\forall x, y: IsGaller(x) \mbox{ and } PreyOn(x,y) \Rightarrow IsSalix(y), 4.15.\)</p>
+<p style='color:#4A9E4E'>3: \(\forall x, y: IsParasitoid(y) \mbox{ and } PreyOn(y,x) \Rightarrow IsGaller(x), 3.49.\)</p>
+<p style='color:#4A9E4E'>4: \(\forall x, y: PreyOn(x,y) \Rightarrow HighCooccurrence(x,y), 1.57.\)</p>
+<p style='color:#BE1F1F'>5: \(\forall x, y: PreyOn(x,y) \Rightarrow PreyOn(x,x), 1.52.\)</p>
+<p style='color:#4A9E4E'>6: \(\forall x, y: HigherPhyloValue(x,y) \Rightarrow PreyOn(x,y), 1.13.\)</p>
+<p style='color:#4A9E4E'>7: \(\forall x, y: HigherPhyloValue(x,y) \Rightarrow HighCooccurrence(x,y), -0.59.\)</p>
+<p style='color:#BE1F1F'>8: \(\forall x, y: PreyOn(x,x) \Rightarrow PreyOn(x,y), 0.45.\)</p>
+<p style='color:#BE1F1F'>9: \(\forall x, y: \neg IsSalix(x) \mbox{ or } \neg PreyOn(x,y), 0.02.\)</p>
+<p style='color:#979797'>10: \(\forall x, y, z: CloselyRelated(x,y) \mbox{ and } PreyOn(x,z) \Rightarrow PreyOn(y,z), 0.00.\)</p>
           </section>
           <section>
             <h2>What went wrong?</h2>
+            <p>Alchemy-2 has a slow (maybe innacurate) L-BFGS implementation (i.e.: learning weights is slow).</p>
             <p>Lessons from classical methods: real-valued variables are important.</p>
-            <p>Importance of nuances. PreyOn, ... Lessons from last project.</p>
+          </section>
+          <section>
+            <h2>What went wrong?</h2>
+            <img src='img/salix-b.png' alt='salix'/>
+            <p>Allow fuzzy (many-valued) predicates (probabilistic soft logic).</p>
           </section>
         </section>
         <section>
@@ -298,9 +326,9 @@
               <li>We randomly pick 739 pollinator-plant pairs that are not
               interacting to build a data-set of 1478 entries, half of
               interactions, half of non-interactions.</li>
+              <li>Seven real-valued traits: Plant's nectar tube dimension, Plant's nectar tube depth, Plant's flower width, Pollinator's body size, Pollinator's tongue length, Pollinator generalism, \(K\)-nearest neighbour ratio.</li>
             </ul>
           </section>
-
           <section>
             <h2>Structure</h2>
             \[\mathbf{If} \mbox{ } antecedants \mbox{ } \mathbf{then} \mbox { } consequents.\]
@@ -381,7 +409,9 @@
           </section>
           <section>
             <h2>What we learned</h2>
-            <p>...</p>
+            <p>A few traits determine whether a pollinator will interact with a plant: nectar tube dimension, nectar tube depth, flower width, pollinator's body size, pollinator's tongue length.</p>
+            <p>Possible to learn and revise easy-to-read ecological theories of interactions.</p>
+            <p>The importance of real-valued variables for species interaction (again!).</p>
           </section>
         </section>
         <section>
@@ -389,20 +419,23 @@
             <h1>Conclusions</h1>
           </section>
           <section>
+            <h2>Two Key Questions</h2>
+            <br/>
+            <p>How can we formally represent ecological theories<br/>(a different question that how to think about data).</p>
+            <br/>
+            <p>How can we exploit this formal representation<br/>(inference, discovery and revision of new theories).</p>
+          </section>
+          <section>
+            <h2>A few other points</h2>
             <ul width='100%'>
               <li>KNN is an effective, widely applicable, and simple approach.</li>
               <li>KNN with threshold works well with TSS scores.</li>
-              <li>Supervised learning algorithms (esp. random forests) can predict interactions with few real-valued traits.</li>
+              <li>Supervised learning algorithms (esp. random forests) can predict interactions with few <b>real-valued</b> traits.</li>
               <li>Fuzzy knowledge bases are both clear and accurate.</li>
               <li>Even a silly revision algorithm yields very good results for fuzzy logic.</li>
               <li>Knowledge representation in ecology is an interesting topic in itself.</li>
               <li>Markov logic has issues (computational) but modern variants could be promising.</li>
             </ul>
-          </section>
-        </section>
-        <section>
-          <section>
-            <h1>Thanks?</h1>
           </section>
         </section>
         <section>
