@@ -111,7 +111,7 @@
             <p>Tasks: <i>matrix completion, clustering, structure learning.</i></p>
           </section>
           <section>
-            <h2>A knowledge base<br/>for ecological knowledge</h2>
+            <h2>A Knowledge Base<br/>for Ecological Knowledge</h2>
             <p><b>Domains</b>: species \(s, s_i, s_j \in S\), locations \(l \in L\), time \(t \in \mathbb{R}\).</p>
             <p><b>Symbols</b>: universal quantifier (<i>forall</i>) \(\forall\), negation \(\neg\).</p>
             <br/>
@@ -122,12 +122,12 @@
             \[\forall s_i, s_j, l: KNN_5(s_i, s_j) > 0.5 \Rightarrow PreyOnAt(p, q, l), 2.5.\]
           </section>
           <section>
-            <h2>Why ecological interactions?</h2>
-            <p>First reason: a key reason why selection is difficult to handle
+            <h2>Why Ecological Interactions?</h2>
+            <p>A key reason why selection is difficult to handle
             with traditional theories is because of the complexity of species
             interactions.</p>
             <br/>
-            <p>Second reason: my lab is studying interactions. I had access to
+            <p>My lab is studying interactions. I had access to
             both good data-sets and people who understood them well.</p>
           </section>
           <section>
@@ -220,7 +220,7 @@
             <img width='80%' src='img/recommendation.svg' alt='rec'/>
           </section>
           <section>
-            <h2>Matrix Completion<br/>with the k-nearest neighbors (KNN)</h2>
+            <h2>Matrix Completion<br/>with the K-Nearest Neighbors (KNN)</h2>
             <img width='100%' src='img/pearson.svg' alt='pearson'/>
           </section>
           <section>
@@ -237,7 +237,7 @@
             </ul>
           </section>
           <section>
-            <h2>KNN with threshold</h2>
+            <h2>KNN with Threshold</h2>
             <img src='img/full-confusion.png' alt='confusion'/>
           </section>
           <section>
@@ -245,7 +245,7 @@
             <img src='img/ht_tss.png' width='80%' alt='acc'/>
           </section>
           <section>
-            <h2>Classical machine learning &amp; Interactions</h2>
+            <h2>Classical Machine Learning &amp; Interactions</h2>
             <ul>
               <li>We confirm the old result that body mass is key to how interactions are structured (Williams &amp; Martinez 2000).</li>
               <li>Phylogeny an important feature.</li>
@@ -283,7 +283,7 @@
             \[\forall x, y: PreyOn(x, y) \mbox{ and } \neg Parasite(x) \Rightarrow M(x) > M(y).\]
           </section>
           <section>
-            <h2>Salix data-set</h2>
+            <h2>Salix Dataset</h2>
             <img src='img/salix.png' alt='salix'/>
             \[Parasites \rightarrow Galler \rightarrow Salix\]
           </section>
@@ -301,12 +301,12 @@
 <p style='color:#4A9E4E'>9: \(CloselyRelated(x,y) \mbox{ and } PreyOn(x,z) \Rightarrow PreyOn(y,z), 0.00.\)</p>
           </section>
           <section>
-            <h2>What went wrong?</h2>
+            <h2>What Went Wrong?</h2>
             <p>Alchemy-2 has a slow (maybe inaccurate) L-BFGS implementation (i.e.: learning weights is slow).</p>
             <p>Lessons from classical methods: real-valued variables are important.</p>
           </section>
           <section>
-            <h2>What went wrong?</h2>
+            <h2>What Went Wrong?</h2>
             <img src='img/salix-b.png' alt='salix'/>
             <p>Allow fuzzy (many-valued) predicates (probabilistic soft logic).</p>
           </section>
@@ -341,12 +341,12 @@
             \[\mathbf{If} \mbox{ } A_0 \mbox{ and } A_1 \mbox{ and } A_2 \mbox{ and } ... \mbox{ } \mathbf{then} \mbox { } C_0.\]
           </section>
           <section>
-            <h2>Linguistic variables</h2>
+            <h2>Linguistic Variables</h2>
             <img width='70%' height='60%' src='img/fsets.svg'/>
             <p>If the flower width is 6.5mm, then <b>"Flower width is High"</b> has a truth value of 0.75, <b>"Flower width is Very High"</b> has a truth alue of 0.25.</p>
           </section>
           <section>
-            <h2>Initial model for I Bartomeus' dataset</h2>
+            <h2>Initial Model for I Bartomeus' Dataset</h2>
             <ul style='width: 100%'>
               <li style='color:#277F2A'><b>If</b> KNN is high <b>then</b> \(I^+\).</li>
               <li style='color:#7F2D27'><b>If</b> KNN is low <b>then</b> \(I^-\).</li>
@@ -355,7 +355,7 @@
             <p>\(I^+\) denotes an interaction, \(I^-\) a non-interaction.</p>
           </section>
           <section>
-            <h2>Learning rules</h2>
+            <h2>Learning Rules</h2>
             <ol start='0'>
               <li>Start with the two KNN rules.</li>
               <li>Randomly generate a rule, add it to the knowledge base.</li>
@@ -380,7 +380,7 @@
             </ul>
           </section>
           <section>
-            <h2>Results on pollinator-plant data-set</h2>
+            <h2>Results</h2>
             <table style='width:100%; font-size:80%; text-align:center;'>
               <tr>
                 <th>Model</th>
@@ -407,7 +407,7 @@
             <p>The <a href='http://scikit-learn.org/stable/index.html'>scikit-learn</a> Python package was used for decision trees and random forests.</p>
           </section>
           <section>
-            <h2>What we learned</h2>
+            <h2>Lessons</h2>
             <p>A few traits determine whether a pollinator will interact with a plant: nectar tube dimension, nectar tube depth, flower width, pollinator's body size, pollinator's tongue length.</p>
             <p>Possible to learn and revise easy-to-read ecological theories of interactions.</p>
             <p>The importance of real-valued variables for species interaction (again!).</p>
@@ -420,18 +420,18 @@
           <section>
             <h2>Two Key Questions</h2>
             <br/>
-            <h3>How can we formally represent ecological theories<br/>(a different question that how to think about data).</h3>
+            <h3>How can we formally represent ecological theories.</h3>
             <br/>
-            <h3>How can we exploit this formal representation<br/>(inference, discovery and revision of new theories).</h3>
+            <h3>How can we exploit this formal representation.</h3>
           </section>
           <section>
-            <h2>A few other points</h2>
+            <h2>In Brief</h2>
             <ul width='100%'>
               <li>KNN is an effective, widely applicable, and simple approach.</li>
               <li>KNN with threshold works well with TSS scores.</li>
               <li>Supervised learning algorithms (esp. random forests) can predict interactions with few <b>real-valued</b> traits.</li>
               <li>Fuzzy knowledge bases are both clear and accurate.</li>
-              <li>Even a silly revision algorithm yields very good results for fuzzy logic.</li>
+              <li>A simple revision algorithm yields very good results for fuzzy logic.</li>
               <li>Knowledge representation in ecology is an interesting topic in itself.</li>
               <li>Markov logic has issues (computational) but modern variants could be promising.</li>
             </ul>
