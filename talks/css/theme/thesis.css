@@ -59,6 +59,11 @@ div.terminal {
   font-size: 1.5em;
 }
 
+.reveal h3 {
+  color: #124F39;
+  font-size: 1.2em;
+}
+
 .reveal a:not(.image) {
   color: #147552;
   text-decoration: none;
