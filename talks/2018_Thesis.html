@@ -177,7 +177,7 @@
             <p>...has an accuracy of 0.98 and a TSS of 0.71.</p>
           </section>
           <section>
-            <h2>Supervised Learning</h2>
+            <h2>Supervised Learning &amp; Recommender</h2>
             <img src='img/ecological-netflix-paper.png' alt='paper'/>
           </section>
           <section>
@@ -289,21 +289,21 @@
           </section>
           <section>
             <h2>Learning Weights and Rules with Alchemy2</h2>
-<p style='color:#4A9E4E'>0: \(\forall x, y, z: PreyOnAt(x,y,z) \Rightarrow PreyOn(x,y), 5.20.\)</p>
-<p style='color:#4A9E4E'>1: \(\forall x, y: HighCooccurrence(x,y) \Rightarrow PreyOn(x,y), 4.22.\)</p>
-<p style='color:#4A9E4E'>2: \(\forall x, y: IsGaller(x) \mbox{ and } PreyOn(x,y) \Rightarrow IsSalix(y), 4.15.\)</p>
-<p style='color:#4A9E4E'>3: \(\forall x, y: IsParasitoid(y) \mbox{ and } PreyOn(y,x) \Rightarrow IsGaller(x), 3.49.\)</p>
-<p style='color:#4A9E4E'>4: \(\forall x, y: PreyOn(x,y) \Rightarrow HighCooccurrence(x,y), 1.57.\)</p>
-<p style='color:#BE1F1F'>5: \(\forall x, y: PreyOn(x,y) \Rightarrow PreyOn(x,x), 1.52.\)</p>
-<p style='color:#4A9E4E'>6: \(\forall x, y: HigherPhyloValue(x,y) \Rightarrow PreyOn(x,y), 1.13.\)</p>
-<p style='color:#4A9E4E'>7: \(\forall x, y: HigherPhyloValue(x,y) \Rightarrow HighCooccurrence(x,y), -0.59.\)</p>
-<p style='color:#BE1F1F'>8: \(\forall x, y: PreyOn(x,x) \Rightarrow PreyOn(x,y), 0.45.\)</p>
-<p style='color:#BE1F1F'>9: \(\forall x, y: \neg IsSalix(x) \mbox{ or } \neg PreyOn(x,y), 0.02.\)</p>
-<p style='color:#979797'>10: \(\forall x, y, z: CloselyRelated(x,y) \mbox{ and } PreyOn(x,z) \Rightarrow PreyOn(y,z), 0.00.\)</p>
+<p style='color:#4A9E4E'>0: \(PreyOnAt(x,y,z) \Rightarrow PreyOn(x,y), 5.20.\)</p>
+<p style='color:#4A9E4E'>1: \(HighCooccurrence(x,y) \Rightarrow PreyOn(x,y), 4.22.\)</p>
+<p style='color:#4A9E4E'>2: \(IsGaller(x) \mbox{ and } PreyOn(x,y) \Rightarrow IsSalix(y), 4.15.\)</p>
+<p style='color:#4A9E4E'>3: \(IsParasitoid(y) \mbox{ and } PreyOn(y,x) \Rightarrow IsGaller(x), 3.49.\)</p>
+<p style='color:#4A9E4E'>4: \(PreyOn(x,y) \Rightarrow HighCooccurrence(x,y), 1.57.\)</p>
+<p style='color:#BE1F1F'>5: \(PreyOn(x,y) \Rightarrow PreyOn(x,x), 1.52.\)</p>
+<p style='color:#4A9E4E'>6: \(HigherPhyloValue(x,y) \Rightarrow PreyOn(x,y), 1.13.\)</p>
+<p style='color:#4A9E4E'>7: \(HigherPhyloValue(x,y) \Rightarrow HighCooccurrence(x,y), -0.59.\)</p>
+<p style='color:#BE1F1F'>8: \(PreyOn(x,x) \Rightarrow PreyOn(x,y), 0.45.\)</p>
+<p style='color:#BE1F1F'>9: \(\neg IsSalix(x) \mbox{ or } \neg PreyOn(x,y), 0.02.\)</p>
+<p style='color:#979797'>10: \(CloselyRelated(x,y) \mbox{ and } PreyOn(x,z) \Rightarrow PreyOn(y,z), 0.00.\)</p>
           </section>
           <section>
             <h2>What went wrong?</h2>
-            <p>Alchemy-2 has a slow (maybe innacurate) L-BFGS implementation (i.e.: learning weights is slow).</p>
+            <p>Alchemy-2 has a slow (maybe inaccurate) L-BFGS implementation (i.e.: learning weights is slow).</p>
             <p>Lessons from classical methods: real-valued variables are important.</p>
           </section>
           <section>
@@ -353,7 +353,7 @@
               <li style='color:#7F2D27'><b>If</b> KNN is low <b>then</b> \(I^-\).</li>
             </ul>
             </br>
-            <p>\(I^+\) denotes an interaction, \(I^+\) a non-interaction.</p>
+            <p>\(I^+\) denotes an interaction, \(I^-\) a non-interaction.</p>
           </section>
           <section>
             <h2>Learning rules</h2>
