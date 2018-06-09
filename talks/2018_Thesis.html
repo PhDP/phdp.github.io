@@ -276,15 +276,15 @@
             \[P(Cancer(Bob) | Smoking(Anna) \mbox{ and } Friends(Anna, Bob), \mathcal{M}, \mathcal{D}).\]
             \[P(Friends(x, y) \Leftrightarrow Friends(y, x) | \mathcal{M}, \mathcal{D}).\]
 
-            <br/>
-            <p>The <b>cost</b> is the sum of the rules violated by a given truth assignment (world).</p>
+            <br/> <p>The <b>cost</b> is the sum of the weights of the rules
+            violated by a given truth assignment (world).</p>
 
           </section>
           <section>
-            <h2>Logic and Food Web Representation</h2>
-            \[PreyOn(x, y).\]
-            \[PreyOnInAbsence(x, y, z).\]
-            \[PreyOnAt(x, y, l).\]
+            <h2>Predicate Logic and Food Web Representation</h2>
+            <img src='img/metaweb.png' alt='metaweb'/>
+            <br/>
+            \[PreyOn(x, y), PreyOnInAbsence(x, y, z), PreyOnAt(x, y, l).\]
             <br/>
             \[\forall x, y: PreyOn(x, y) \mbox{ and } \neg Parasite(x) \Rightarrow M(x) > M(y).\]
           </section>
