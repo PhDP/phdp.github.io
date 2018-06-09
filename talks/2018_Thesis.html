@@ -179,11 +179,6 @@
             <p>The <i>TSS</i> ranges from -1 to 1.</p>
           </section>
           <section>
-            <h2>True Skill Statistic</h2>
-            <img src='img/confusion.png' alt='confusion'/>
-            <p>...has an accuracy of 0.98 and a TSS of 0.71.</p>
-          </section>
-          <section>
             <h2>Supervised Learning &amp; Recommender</h2>
             <img src='img/ecological-netflix-paper.png' alt='paper'/>
           </section>
@@ -267,7 +262,7 @@
             <h1>Markov Logic</h1>
           </section>
           <section>
-            \[\mathcal{M}:\]
+            <p>Knowledge base \(\mathcal{M}:\)</p>
             \[\forall x, y, z: Friends(x, y) \mbox{ and } Friends(y, z) \Rightarrow Friends(x, z), 0.7.\]
             \[\forall x: Smoking(x) \Rightarrow Cancer(x), 1.5.\]
             \[\forall x, y: Friends(x, y) \mbox{ and } Smoking(x) \Rightarrow Smoking(y), 1.1.\]
@@ -282,7 +277,7 @@
             \[P(Friends(x, y) \Leftrightarrow Friends(y, x) | \mathcal{M}, \mathcal{D}).\]
 
             <br/>
-            <p>Cost is the sum of the rules violated by a given truth assignment (world).</p>
+            <p>The <b>cost</b> is the sum of the rules violated by a given truth assignment (world).</p>
 
           </section>
           <section>
