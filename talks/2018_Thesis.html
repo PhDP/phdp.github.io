@@ -58,6 +58,10 @@
             <img width='60%' height='60%' src='img/complex-1.svg' alt='res'/>
           </section>
           <section>
+            <h2>Species Richness/Speciation Relationship</h2>
+            <img width='80%' height='80%' src='img/richness-speciation.svg' alt='res'/>
+          </section>
+          <section>
             <h2>The Big Picture</h2>
             <img src='img/gillespie1997.png' alt='gil04'/>
             <p><i>Reference: JH Gillespie. Population Genetics: A Concise Guide, 1st edition. Johns Hopkins University Press, 1997.</i></p>
@@ -122,6 +126,15 @@
             \[\forall s_i, s_j, l: KNN_5(s_i, s_j) > 0.5 \Rightarrow PreyOnAt(p, q, l), 2.5.\]
           </section>
           <section>
+            <h2>Ecological Interactions as a<br/>Machine Learning Problem</h2>
+            <p>Predict whether \(a\) interacts with \(b\) given traits for both species.</p>
+            <p>Fill holes in an interaction matrix (matrix completion).</p>
+            <p>Discover or revise logic and mathematical rules about interactions given data.</p>
+
+            <br/>
+            <p><i>Interactions assumed to involve only two species. A non-interaction is often implied by lack of observed interaction.</i></p>
+          </section>
+          <section>
             <h2>Why Ecological Interactions?</h2>
             <p>A key reason why selection is difficult to handle
             with traditional theories is because of the complexity of species
@@ -129,12 +142,6 @@
             <br/>
             <p>My lab is studying interactions. I had access to
             both good data-sets and people who understood them well.</p>
-          </section>
-          <section>
-            <h2>Ecological Interactions as a<br/>Machine Learning Problem</h2>
-            <p>Predict whether \(a\) interacts with \(b\) given traits for both species.</p>
-            <p>Fill holes in an interaction matrix (matrix completion).</p>
-            <p>Discover or revise logic and mathematical rules about interactions given data.</p>
           </section>
           <section>
             <h2>Machine Learning and Interactions Roadmap</h2>
@@ -239,10 +246,10 @@
           <section>
             <h2>KNN with Threshold</h2>
             <img src='img/full-confusion.png' alt='confusion'/>
-          </section>
-          <section>
-            <h2>TSS</h2>
-            <img src='img/ht_tss.png' width='80%' alt='acc'/>
+
+            <p>Full confusion matrix for K = 3 and threshold of 0.0 and 0.5
+            (majority vote). The accuracies are of 0.929 and 0.975. TSS scores
+            are 0.827 vs 0.710.</p>
           </section>
           <section>
             <h2>Classical Machine Learning &amp; Interactions</h2>
@@ -260,6 +267,7 @@
             <h1>Markov Logic</h1>
           </section>
           <section>
+            \[\mathcal{M}:\]
             \[\forall x, y, z: Friends(x, y) \mbox{ and } Friends(y, z) \Rightarrow Friends(x, z), 0.7.\]
             \[\forall x: Smoking(x) \Rightarrow Cancer(x), 1.5.\]
             \[\forall x, y: Friends(x, y) \mbox{ and } Smoking(x) \Rightarrow Smoking(y), 1.1.\]
@@ -270,8 +278,11 @@
 
             <br/>
 
-            \[P(Cancer(Bob) | Smoking(Anna) \mbox{ and } Friends(Anna, Bob)).\]
-            \[P(Friends(x, y) \Leftrightarrow Friends(y, x) | ...).\]
+            \[P(Cancer(Bob) | Smoking(Anna) \mbox{ and } Friends(Anna, Bob), \mathcal{M}, \mathcal{D}).\]
+            \[P(Friends(x, y) \Leftrightarrow Friends(y, x) | \mathcal{M}, \mathcal{D}).\]
+
+            <br/>
+            <p>Cost is the sum of the rules violated by a given truth assignment (world).</p>
 
           </section>
           <section>
