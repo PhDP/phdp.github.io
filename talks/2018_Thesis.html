@@ -83,7 +83,7 @@
             <br/>
             <h3>How can we formally represent ecological theories<br/>(a different question that how to think about data).</h3>
             <br/>
-            <h3>How can we exploit this formal representation<br/>(inference, discovery and revision of new theories).</h3>
+            <h3>How can we exploit this formal representation<br/>(inference, discovery and revision of theories).</h3>
             <br/>
             <p>In practice, these questions lead to knowledge representation and machine learning.</p>
           </section>
@@ -154,7 +154,6 @@
               <li>Assembled by Isabelle Daigle, mostly from Digel et al. (2014).</li>
               <li>881 species.</li>
               <li>34 193 unique interactions.</li>
-              <li>215 418 absence of interactions.</li>
               <li>3 real valued-traits: \(body mass\), we also performed principal coordinates analysis on taxonomic distances, and use the scores of each species on the first two axes \(Ph_0\), \(Ph_1\).</li>
               <li>25 binary traits (e.g. AboveGround, Detritivore, Bacteria, Jumps, LongLegs, UsePoison).</li>
             </ul>
@@ -231,7 +230,7 @@
           </section>
           <section>
             <h2>Matrix Completion<br/>with the K-Nearest Neighbors (KNN)</h2>
-            <img width='100%' src='img/pearson.svg' alt='pearson'/>
+            <img width='100%' src='img/knn-poll.svg' alt='knn-poll'/>
           </section>
           <section>
             <h2>KNN with Threshold</h2>
@@ -271,16 +270,18 @@
             \[P(Cancer(Bob) | Smoking(Anna) \mbox{ and } Friends(Anna, Bob), \mathcal{M}, \mathcal{D}).\]
             \[P(Friends(x, y) \Leftrightarrow Friends(y, x) | \mathcal{M}, \mathcal{D}).\]
 
-            <br/> <p>The <b>cost</b> is the sum of the weights of the rules
+            <br/> <p>Predicates are bivalent (true or false) but formulas are
+            weighted. The <b>cost</b> is the sum of the weights of the rules
             violated by a given truth assignment (world).</p>
 
+            <!-- Weights as log odds between world probabilities. -->
           </section>
           <section>
             <h2>Predicate Logic and Food Webs</h2>
             <img src='img/metaweb.png' alt='metaweb'/>
             <p>Poisot et al. <i>The dissimilarity of species interaction networks</i>. Ecol Lett, 2012.</p>
             <br/>
-            \[PreyOn(x, y), PreyOnInAbsence(x, y, z), PreyOnAt(x, y, l).\]
+            \[PreyOn(x, y), PreyOnAt(x, y, l), PreyOnInAbsence(x, y, z).\]
             <br/>
             \[\forall x, y: PreyOn(x, y) \mbox{ and } \neg Parasite(x) \Rightarrow M(x) > M(y).\]
           </section>
