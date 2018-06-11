@@ -56,6 +56,7 @@
           <section>
             <h2>Species Richness/Speciation Relationship</h2>
             <img width='60%' height='60%' src='img/complex-1.svg' alt='res'/>
+            <p>Species richness (green) and speciation events (blue) on simulations with 5 (top) and 25 (bottom) communities.</p>
           </section>
           <section>
             <h2>The Big Picture</h2>
@@ -67,7 +68,7 @@
           </section>
           <section>
             <h2>Why Biodiversity is so Complicated?</h2>
-            <p>The effect of mutations vary greatly accross the genome.</p>
+            <p>The effect of mutations vary greatly across the genome.</p>
             <p>Selection varies in time/space as the biotic/abiotic environment changes.</p>
             <p>The influence of linkage and recombination.</p>
             <p>Speciation has a complex spatial structure.</p>
@@ -81,9 +82,9 @@
           <section>
             <h2>Two Key Questions</h2>
             <br/>
-            <h3>How can we formally represent ecological theories<br/>(a different question that how to think about data).</h3>
+            <h3>How can we formally represent ecological theories<br/>(a different question that how to think about data)?</h3>
             <br/>
-            <h3>How can we exploit this formal representation<br/>(inference, discovery and revision of theories).</h3>
+            <h3>How can we exploit this formal representation<br/>(inference, discovery and revision of theories)?</h3>
             <br/>
             <p>In practice, these questions lead to knowledge representation and machine learning.</p>
           </section>
@@ -123,7 +124,7 @@
           </section>
           <section>
             <h2>Ecological Interactions as a<br/>Machine Learning Problem</h2>
-            <p>Predict whether \(a\) interacts with \(b\) given traits for both species.</p>
+            <p>Predict whether \(x\) interacts with \(y\) given traits for both species.</p>
             <p>Fill holes in an interaction matrix (matrix completion).</p>
             <p>Discover or revise logic and mathematical rules about interactions given data.</p>
 
@@ -159,6 +160,10 @@
             </ul>
           </section>
           <section>
+            <h2>Supervised Learning &amp; Recommender</h2>
+            <img src='img/ecological-netflix-paper.png' alt='paper'/>
+          </section>
+          <section>
             <h2>True Skill Statistic</h2>
             \[TSS = \frac{(tp \times tn) - (fp \times fn)}{(tp + fn)(fp + tn)}.\]
             <br/><br/>
@@ -171,10 +176,6 @@
             </ul>
             <br/><br/>
             <p>The <i>TSS</i> ranges from -1 to 1.</p>
-          </section>
-          <section>
-            <h2>Supervised Learning &amp; Recommender</h2>
-            <img src='img/ecological-netflix-paper.png' alt='paper'/>
           </section>
           <section>
             <h2>Supervised Learning</h2>
@@ -208,15 +209,16 @@
             <br/>
 
             <p>Removing the binary traits has little effect on the model. With
-            only \(body mass\), \(Ph_0\), \(Ph_1\), the <i>TSS</i> of the random
-            forest is 0.94.</p>
+            only \(body mass\), \(Ph_0\), \(Ph_1\) (the first two axes from a
+            principal coordinates analysis on taxonomic distances), the
+            <i>TSS</i> of the random forest is 0.94.</p>
           </section>
           <section>
             <h2>Results: Recommendation</h2>
             <img width='80%' src='img/recommendation.svg' alt='rec'/>
           </section>
           <section>
-            <h2>I Bartomeus' Pollinator-Plant Data-Set</h2>
+            <h2>Bartomeus' Pollinator-Plant Data-Set</h2>
             <ul width='100%'>
               <li>Plant-pollinator interactions were collected across 16 sites in
               the southwest of the iberian peninsula (Huelva and Seville).</li>
@@ -244,7 +246,7 @@
             <h2>Classical Machine Learning &amp; Interactions</h2>
             <ul>
               <li>We confirm the old result that body mass is key to how interactions are structured (Williams &amp; Martinez 2000).</li>
-              <li>Phylogeny an important feature.</li>
+              <li>Phylogeny, combined with body mass, is an important feature.</li>
               <li>KNN-based algorithms exploit nestedness: how much species cluster around the same set of preys in a food web.</li>
               <li>Interactions are fairly easy to predict (TSS really close to 1).</li>
               <li>Binary traits contain little useful information.</li>
@@ -253,20 +255,18 @@
         </section>
         <section>
           <section>
-            <h1>Markov Logic</h1>
+            <h1>Probabilistic Logic</h1>
           </section>
           <section>
+            <h1>Markov Logic</h1>
             <p>Knowledge base \(\mathcal{M}:\)</p>
             \[\forall x, y, z: Friends(x, y) \mbox{ and } Friends(y, z) \Rightarrow Friends(x, z), 0.7.\]
             \[\forall x: Smoking(x) \Rightarrow Cancer(x), 1.5.\]
             \[\forall x, y: Friends(x, y) \mbox{ and } Smoking(x) \Rightarrow Smoking(y), 1.1.\]
 
-            <br/><br/>
-
-            <p>Can answer queries of the form:</p>
-
             <br/>
 
+            <p>Can answer queries of the form:</p>
             \[P(Cancer(Bob) | Smoking(Anna) \mbox{ and } Friends(Anna, Bob), \mathcal{M}, \mathcal{D}).\]
             \[P(Friends(x, y) \Leftrightarrow Friends(y, x) | \mathcal{M}, \mathcal{D}).\]
 
@@ -310,7 +310,9 @@
           <section>
             <h2>What Went Wrong?</h2>
             <img src='img/salix-b.png' alt='salix'/>
-            <p>Allow fuzzy (many-valued) predicates (probabilistic soft logic).</p>
+            <p style='color:#FF0000'>In red: predicates that would benefit from being many-valued.</p>
+            <p style='color:#FFA700'>In orange: could be bivalent or many-valued.</p>
+            <p style='color:#65D63E'>In green: bivalent predicates.</p>
           </section>
         </section>
         <section>
@@ -318,7 +320,7 @@
             <h1>Fuzzy Logic</h1>
           </section>
           <section>
-            <h2>I Bartomeus' Pollinator-Plant Data-Set (Again)</h2>
+            <h2>Bartomeus' Pollinator-Plant Data-Set (Again)</h2>
             <ul width='100%'>
               <li>Plant-pollinator interactions were collected across 16 sites in the southwest of the iberian peninsula (Huelva and Seville).</li>
               <li>65 pollinators.</li>
@@ -327,7 +329,7 @@
               <li>We randomly pick 739 pollinator-plant pairs that are not
               interacting to build a data-set of 1478 entries, half of
               interactions, half of non-interactions.</li>
-              <li>Seven real-valued traits: Plant's nectar tube dimension, Plant's nectar tube depth, Plant's flower width, Pollinator's body size, Pollinator's tongue length, Pollinator generalism, \(K\)-nearest neighbour ratio.</li>
+              <li style='color:#0034E6'>Seven real-valued traits: Plant's nectar tube dimension, Plant's nectar tube depth, Plant's flower width, Pollinator's body size, Pollinator's tongue length, Pollinator generalism, \(K\)-nearest neighbour ratio.</li>
             </ul>
           </section>
           <section>
@@ -338,9 +340,13 @@
             \[...\]
 
             <br/>
-            <br/>
 
             \[\mathbf{If} \mbox{ } A_0 \mbox{ and } A_1 \mbox{ and } A_2 \mbox{ and } ... \mbox{ } \mathbf{then} \mbox { } C_0.\]
+
+            <br/>
+
+            <p><b>If</b> Pollinator is specialist <b>and</b> Plant nectar tube dim is small <b>then</b> Interaction.</p>
+
           </section>
           <section>
             <h2>Linguistic Variables</h2>
@@ -353,7 +359,7 @@
               <li style='color:#277F2A'><b>If</b> KNN is high <b>then</b> \(I^+\).</li>
               <li style='color:#7F2D27'><b>If</b> KNN is low <b>then</b> \(I^-\).</li>
             </ul>
-            </br>
+            <br/>
             <p>\(I^+\) denotes an interaction, \(I^-\) a non-interaction.</p>
           </section>
           <section>
@@ -371,6 +377,7 @@
             <p>C++14 code: <a href='https://github.com/PhDP/Manticore'>https://github.com/PhDP/Manticore</a></p>
           </section>
           <section>
+            <h2>Results</h2>
             <ul style='width: 100%; font-size: 80%'>
               <li style='color:#277F2A'><b>If</b> Plant nectar tube depth is average <b>then</b> \(I^+\).</li>
               <li style='color:#277F2A'><b>If</b> Pollinator body size is small <b>then</b> \(I^+\).</li>
@@ -380,6 +387,8 @@
               <li style='color:#277F2A'><b>If</b> Plant flower width is small <b>and</b> Pollinator tongue length is small <b>then</b> \(I^+\).</li>
               <li style='color:#7F2D27'><b>If</b> KNN is low <b>then</b> \(I^-\).</li>
             </ul>
+            <br/><br/>
+            <p>\(I^+\) denotes an interaction, \(I^-\) a non-interaction.</p>
           </section>
           <section>
             <h2>Results</h2>
@@ -418,14 +427,10 @@
         </section>
         <section>
           <section>
-            <h1>Conclusions</h1>
-          </section>
-          <section>
             <h2>Two Key Questions</h2>
-            <br/>
-            <h3>How can we formally represent ecological theories.</h3>
-            <br/>
-            <h3>How can we exploit this formal representation.</h3>
+            <h3>How can we formally represent ecological theories?</h3>
+            <h3>How can we exploit this formal representation?</h3>
+            <img src='img/reasoning_systems.svg' alt='reasoning'/>
           </section>
           <section>
             <h2>In Brief</h2>
@@ -440,7 +445,9 @@
         </section>
         <section>
           <section>
-            <h1>Questions?</h1>
+            <h1>Thanks!</h1>
+            <h3>Dominique Gravel, Timothée Poisot, Alireza Tamaddoni Nezhad, Shengrui Wang.</h3>
+            <h3>Hedvig Nenzén, Guillaume Blanchette, Steve Vissault, Idaline Laigle, Ignasi Bartomeus.</h3>
           </section>
         </section>
 
@@ -462,6 +469,7 @@
         progress: true,
         history: true,
         center: true,
+        slideNumber: 'c/t',
 
         theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
         transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
