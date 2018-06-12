@@ -24,6 +24,11 @@ blockquote {
   color: #000000;
 }
 
+.reveal .slide-number {
+  font-size: 16pt;
+  color: #ffffff;
+}
+
 div.terminal {
   font-family: "Ubuntu Mono";
   font-size: 120%;
