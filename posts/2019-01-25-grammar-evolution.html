@@ -56,20 +56,21 @@ formulas (and programs, and lots of things). Grammatical evolution strikes me as
 handle the evolution of complex formulas juggling inputs of various types. It also has a nontrivial flaw that will be
 described at the end of the post. Take it as a fun little idea to keep in your A.I. toolbox.</p>
 
-<p>To evolve mathematical formulas, we need a way to represent the formulas (our solutions) in such a way that variants
-would be simple to generate. In particular, a key idea in genetic algorithms is that we generate new solutions by
+<p>To evolve mathematical formulas, we need a way to represent the formulas (our solutions) in such a way that valid
+variants are simple to generate. In particular, a key idea in genetic algorithms is that we generate new solutions by
 "mixing the genomes", so to speak, of fit parents from the previous generation. But how? A mathematical expression is a
-tree, how do you mix trees? One approach involves putting the mathematical formula on a grid (<a href="https://link.springer.com/book/10.1007/978-3-642-17310-3">i.e. Cartesian genetic programming</a>), which is
-arguably more effective than the method described here, but for now we'll explore how to generate expressions from
-grammars. Here's a simple grammar for digits:</p>
+tree, how do you mix trees? How do we ensure the expressions don't grow too big? One approach involves putting the
+mathematical formula on a grid (<a href="https://link.springer.com/book/10.1007/978-3-642-17310-3">i.e. Cartesian
+genetic programming</a>), which is arguably more effective than the method described here, but for now we'll explore
+how to generate expressions from grammars. Here's a simple grammar for digits:</p>
 
 <pre id="plain">&lt;digit&gt; ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9</pre>
 
-<p>"&lt;digit&gt;" is a production rule, they'll always be enclosed within angle brackets. After ::=, we get the
-definition of the production rule as a set of alternatives separated by the disjunction operator "|". Thus, a digit is
-0, or 1, or 2, or 3, etc. By the by, this format for grammars is called the Backus–Naur form (BNF). It gets interesting
-when production rules refer to other production rules, so here's a more interesting grammar describing a mathematical
-formula with inputs x and y inside a C function:</p>
+<p>&lt;digit&gt; is a production rule, they'll always be enclosed within angle brackets. After ::= ("is defined as"),
+we get the definition of the production rule as a set of alternatives separated by disjunctions "|". Thus, a digit is
+defined as 0, or 1, or 2, or 3, etc. By the by, this format for grammars is called the Backus–Naur form (BNF). It gets
+interesting when production rules refer to other production rules, so here's a more interesting grammar describing a
+mathematical formula with inputs x and y inside a C function:</p>
 
 <pre id="plain">&lt;cfun&gt; ::= double please_work(double x, double y) { return &lt;expr&gt;; }
 &lt;expr&gt; ::= &lt;expr&gt; &lt;op&gt; &lt;expr&gt;
@@ -92,24 +93,24 @@ formula with inputs x and y inside a C function:</p>
 series of choices among alternatives. Let's say I were to give you the following sequence of integers: [10, 1, 2, 6, 9,
 4, 0, 4, 7] and tell you to start at the first production rule &lt;cfun&gt; and use this sequence of integers to select
 alternatives. The alternatives use zero-based indexing and if the integer is bigger than the number of alternatives for
-a production rule, just apply a modulo (made simpler by the zero-based index, take that Matlab). For example, with
-&lt;fun1&gt;; and the number 2, we'd get "tan", with &lt;var&gt; and 7 we get "y", with &lt;expr&gt; and 2 we get
-&lt;pre-op&gt;&lt;expr&gt;. If there's only one alternative, we'll will not consume an integer in the sequence, since
-there's no choice to make. Let's see where [10, 1, 2, 6, 9, 4, 0, 4, 7] leads us. We begin with</p>
+a production rule, just apply a modulo (made simpler by zero-based indexing). For example, with &lt;fun1&gt; and the
+number 2, we'd get "tan", with &lt;var&gt; and 7 we get "y", with &lt;expr&gt; and 2 we get &lt;pre-op&gt;&lt;expr&gt;.
+If there's only one alternative, we do not need to consume an integer from the sequence. Let's see where [10, 1, 2, 6,
+9, 4, 0, 4, 7] leads us. We begin with</p>
 
 <pre id="plain">double please_work(double x, double y) { return &lt;expr&gt;; }</pre>
 
-<p>and the number 10 to select among &lt;expr&gt;. There are five alternatives, 10 mod 5 = 0, thus:</p>
+<p>and use the number 10 to select among &lt;expr&gt;. There are five alternatives, 10 mod 5 = 0, thus:</p>
 
 <pre id="plain">double please_work(double x, double y) { return &lt;expr&gt; &lt;op&gt; &lt;expr&gt;; }</pre>
 
-<p>We have to select among &lt;expr&gt; again and our next integer is 1:</p>
+<p>We then have to select among &lt;expr&gt; again and our next integer is 1:</p>
 
 <pre id="plain">double please_work(double x, double y) { return &lt;pre&gt;&lt;expr&gt &lt;op&gt; &lt;expr&gt;; }</pre>
 
-<p>There's only one &lt;pre&gt;, thus our next integer, 2, generates &lt;fun1&gt;(&lt;expr&gt;) from &lt;expr&gt. 6 is
-used to select "sin" from &lt;fun1&gt;, and so on and so forth. From the beginning, our sequence [10, 1, 2, 6, 9, 4, 0,
-4, 7] will generate:
+<p>There's only one &lt;pre&gt;, thus our next integer, 2, is used to generates &lt;fun1&gt;(&lt;expr&gt;) from
+&lt;expr&gt. 6 is used to select "sin" from &lt;fun1&gt;, and so on and so forth. From the beginning, the sequence [10,
+1, 2, 6, 9, 4, 0, 4, 7] applied to our little grammar generates:
 
 <pre id="plain">double please_work(double x, double y) { return &lt;expr&gt;; }
 double please_work(double x, double y) { return &lt;expr&gt; &lt;op&gt; &lt;expr&gt;; }
@@ -124,16 +125,16 @@ double please_work(double x, double y) { return -sin(x) + y; }
 </pre>
 
 <p>Depending on the grammar, it may be common to run out of integers. A partial solution is to allow the sequence to
-wrap, so when you reach the end you go back to the beginning. When wrapping is allowed, it can only be done a
-(generally small) number of times. The other solution is to simply not return anything, essentially killing sequences
-that fails to finish an expression. The finite length of the sequence gives some control over how complex the resulting
-expression can be. The grammar used as an example here is a bit extreme, it would often run out of integers because of
-the way &lt;expr&gt; just creates more &lt;expr&gt; for all but one alternatives, and wrapping won't save us from this
-fundamental issue.</p>
+wrap, so when the end of the sequence is reached we go back to the beginning. When wrapping is allowed, it can only be
+done a (generally small) number of times. The other solution is to simply not return anything, essentially killing
+sequences that fail to finish an expression. The finite length of the sequence gives some control over how complex the
+resulting expression can be. The grammar used as an example here is a bit extreme, it would often run out of integers
+because of the way &lt;expr&gt; just creates more &lt;expr&gt; for all but one alternatives, and wrapping won't save us
+from this fundamental issue.</p>
 
 <p>The advantage of generating strings from a grammar and a sequence of integers is twofold. Primo, it's easy to ensure
-the validity of expressions, even in the presence of different types of input. Secondo, we can mutate the expressions
-simply by changing an integer, and generating children from parents by mixing their sequence of integers. So I guess
+the validity of expressions even in the presence of different types of input. Secondo, we can mutate the expressions
+simply by changing an integer, and generate children from parents by mixing their sequence of integers. So I guess
 it's Mission Accomplished! We have a flexible method to generate C functions, assembly code, sentences in Cebuano,
 mathematical formulas... Well, not quite. The non-probabilistic nature of the grammar can be an issue, we may want some
 alternatives to be more common than others, although it is something better learned at runtime than hardwired in the
@@ -151,7 +152,7 @@ this is an issue, just imagine a representation with no locality at all, such th
 formula is the same regardless of your starting point. In this world, selecting better and better formulas and applying
 mutations to them would be useless, there would be no advantage to mutating a fit formula over an unfit formula if
 mutations send it all over the place. Different approaches like Cartesian genetic programming are less affected by this
-issue. Nevertheless, grammatical evolution is a simple and powerful idea.</p>
+issue. Nevertheless, grammatical evolution is a fun little idea that may come in handy.</p>
 
 <!-- Geometric Semantic Genetic Programming, in Parallel Problem Solving from Nature, 2012. -->
 
