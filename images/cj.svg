@@ -16,7 +16,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="logo.svg">
+   sodipodi:docname="cj.svg">
   <defs
      id="defs2">
     <linearGradient
@@ -52,8 +52,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8284271"
-     inkscape:cx="71.933676"
-     inkscape:cy="96.459428"
+     inkscape:cx="126.99595"
+     inkscape:cy="110.60156"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -83,7 +83,7 @@
      transform="translate(0,-235)">
     <path
        inkscape:connector-curvature="0"
-       style="fill:#007054;fill-opacity:1;stroke:none;stroke-width:0.52999997;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#00505f;fill-opacity:1;stroke:none;stroke-width:0.52999997;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 31.000236,236.0006 1,296 h 47.472038 c -7.4168,0 -12.293824,-5.84172 -12.293824,-13.10612 0,-7.07592 4.627856,-12.80038 11.722282,-13.09276 z m 16.90026,33.80052 1.736328,3.47266 c 5.22159,0.33348 8.130764,4.59672 8.130764,9.6201 0,1.69286 -0.33451,3.2968 -0.971508,4.69736 l 4.000788,8.00264 h 0.57774 v -25.4 h -3.80959 v 4.11442 c -1.879596,-2.7432 -4.87658,-4.52062 -9.09298,-4.52062 -0.19244,0 -0.382556,0.006 -0.571542,0.014 z m 12.896372,25.79276 h -3.23185 v -4.06384 C 55.685422,294.27324 52.688438,296 48.472038,296 h 12.52843 z m -4.000788,-8.00264 -7.159256,-14.31746 c -0.217276,-0.014 -0.43206,-0.0322 -0.657324,-0.0322 -5.6388,0 -8.9917,4.41976 -8.9917,9.65216 0,5.2324 3.3529,9.6521 8.9917,9.6521 3.814452,0 6.484698,-2.02638 7.81658,-4.95474 z M 67.862068,260.9479 v 4.9785 h 4.11448 v -4.9785 z m 0.15296,9.24598 v 25.4 h 3.80959 v -25.4 z"
        id="path6071-1" />
   </g>
