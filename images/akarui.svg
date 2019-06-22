@@ -29,7 +29,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="81.56399"
+     inkscape:cx="256.56399"
      inkscape:cy="110.24233"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -48,7 +48,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -64,15 +64,14 @@
        y="277.185"
        id="text12"><tspan
          sodipodi:role="line"
-         x="59.646034"
+         x="59.64603"
          y="277.185"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.57777786px;font-family:'AR PL UKai HK';-inkscape-font-specification:'AR PL UKai HK';text-align:center;text-anchor:middle;stroke-width:0.26458332"
          id="tspan19"><tspan
-           style="font-size:42.33333206px;text-align:center;text-anchor:middle;fill:#3d85c6;fill-opacity:1"
+           style="font-size:42.33333206px;text-align:center;text-anchor:middle;fill:#b30000;fill-opacity:1"
            id="tspan14">明</tspan><tspan
            style="font-size:33.86666489px"
-           id="tspan817"
-           dx="-4 -4">るい</tspan></tspan></text>
+           id="tspan817">るい</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.58337688px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458442"

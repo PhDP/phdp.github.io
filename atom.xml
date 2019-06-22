@@ -64,7 +64,7 @@ mathematical formula with inputs x and y inside a C function:</p>
 &lt;var&gt;  ::= x | y
 </pre>
 
-<p>This grammar has seven production rule and can generate strings such as:</p>
+<p>This grammar has seven production rules and can generate strings such as:</p>
 
 <pre id='plain'>double please_work(double x, double y) { return -sin(x) + y; }</pre>
 
@@ -422,7 +422,7 @@ distance. Back to our definition of disjunction:</p>
 \[max(x, y) = 1 - 0.5(1 - x + 1 - y - |1 - x - 1 + y|),\]
 \[max(x, y) = 0.5(x + y + |y - x|).\]
 
-<p>...and that's our definition of maximum (remember that \(|a| = |-a|\).</p>
+<p>...and that's our definition of maximum (remember that \(|a| = |-a|\)).</p>
 
 <p>Alright! We have our simple, happy definitions for conjunction and
 disjunction with continuous values. These definition are awesome: they are both
