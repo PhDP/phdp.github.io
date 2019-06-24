@@ -3,7 +3,7 @@
   <head>
     <meta charset='utf-8'>
 
-    <title>Akarui</title>
+    <title>Logics</title>
 
     <meta name='description' content='Thesis defense'>
     <meta name='author' content='Philippe Desjardins-Proulx'>
@@ -39,55 +39,92 @@
       <div class='slides'>
         <section>
           <section>
-            <p align='center'><img src='http://phdp.github.io/images/akarui-large.svg.png' alt='Akarui logo'/></p>
+            <h2>A Software Library for Reasoning at the Intersection of Logic, Probability, Fuzziness</h2>
           </section>
         </section>
         <section>
           <section>
-            <h1>Data Analysis:<br/>Context &amp; Clarity Wanted</h1>
+            <p align='center'><img src='http://phdp.github.io/images/akarui.svg' width='700px' alt='Akarui logo'/></p>
+            <p align='center'><img src='http://phdp.github.io/images/akarui.svg' width='700px' alt='Akarui logo'/></p>
+          </section>
+          <section>
+            <h1>The case for (and against) logic</h1>
+          </section>
+          <section>
+            <h2>Propositional logic (Zeroth-order logic)</h2>
+            <p>Given a set of propositional symbols \(a, b, c \in \mathcal{P}\):</p>
+            <ol start='0'>
+              <li>If \(a \in \mathcal{P}\), then \(a\) is a WFF.</li>
+              <li>If \(f\) is a WFF, then \(\neg f\) is a WFF.</li>
+              <li>If \(f_0, f_1\) are WFFs, then \(f_0 \ast f_1\) is a WFF.</li>
+            </ol>
+            <p>Where \(\ast\) stands for a valid binary connectives (\(\land\), \(\lor\), \(\Rightarrow\), \(\Leftrightarrow\)).</p>
+          </section>
+          <section>
+            <h2>Propositional logic (Zeroth-order logic)</h2>
+            \[\neg TheWorldIsSquare\]
+            \[ClimateChange \land  \Rightarrow c\]
+            \[a \lor b \Leftrightarrow \neg c\]
+          </section>
+          <section>
+            <h2>First-order logic</h2>
+            <p>Given a set of predicates \(P_0, P_1, P_2 \in \mathcal{P}\):</p>
+            <ol start='0'>
+              <li>If \(P \in \mathcal{P}\), then \(P\) is a WFF.</li>
+              <li>If \(f\) is a WFF, then \(\neg f\) is a WFF.</li>
+              <li>If \(f_0, f_1\) are WFFs, then \(f_0 \ast f_1\) is a WFF.</li>
+              <li>If \(f\) is a WFF and \(v\) a variable, then \(\forall v: f\) and \(\exists v: f\) are a WFFs.</li>
+            </ol>
+            <p>A predicate is a function from 0+ terms to a truth value</p>
+            <p>Given a set of constants and variables, terms are:</p>
+            <ol start='0'>
+              <li>If \(v \in \mathcal{V}\), then \(v\) is a term.</li>
+              <li>If \(c \in \mathcal{C}\), then \(c\) is a term.</li>
+              <li>If \(f \in \mathcal{F}\) and \(t_0, t_1, t_2, t_2\) are terms.</li>
+            </ol>
+          </section>
+          <section>
+            <h2>First-order logic</h2>
+            \[\forall p: Smoking(p) \Rightarrow Cancer(p).\]
+            \[\forall p_0, p_1, p_2: Friends(p_0, p_1) \land Friends(p_1, p_2) \Rightarrow Friends(p_0, p_2).\]
+            \[\forall s, t \exists r: N(s, t + 1) = r \times N(s, t).\]
+            \[\forall s: second law.\]
+            \[0 \in \mathbb{N}.\]
+            \[\forall n \in \mathbb{N}: n + 1 \in \mathbb{N}.\]
+            \[\forall n \in \mathbb{N}: n > 1 \land n = \sum_{i \in [0, n)}i\times I(mod(n, i) = 0) \Rightarrow mod(n, 2) = 0.\]
+          </section>
+          <section>
+            <h2>So, first-order logic is awesome!</h2>
+          </section>
+          <section>
+            <h2>Fuzzy logic</h2>
+            <p>Not fuzzy-rule based system!</p>
+            \[Truth \in \{\bot, \btop\}.\]
+            \[Truth \in \{\tau \in \mathbb{R}: 0 \leq \tau \leq 1\}.\]
+            \[Truth \in \{\mathbb{\tau} \in \mathbb{R}^2: 0 \leq \tau_0 \leq \tau_1 \leq 1\}.\]
           </section>
         </section>
         <section>
           <section>
-            <h2>Data Deluge</h2>
-            <p>A rapid increase in the volume of data is creating a huge market for data analytics</p>
-            <br/>
-            <p>E.g. Uber's value is mostly derived from its data and how it could exploit it to develop autonomous driving.</p>
-            <br/>
-            <p><b>Data has little intrinsic value, its valuable as the key ingredient to train models</b></p>
+            <h1>Library</h1>
           </section>
-        </section>
-        <section>
           <section>
-            <p>Data analytics face many challenges, but in particular:</p>
-            <br/>
-            <p><b>Context</b>: Learning algorithms have little context to understand data.</p>
-            <br/>
-            <p><b>Clarity</b>: The output of learning algorithms is often difficult to interpret. Governments are moving to force companies to explain their decisions (e.g. Europe's GDPR).</p>
+            <h2>Goals</h2>
+            <ol start='0'>
+              <li></li>
+              <li></li>
+            </ol>
           </section>
-        </section>
-        <section>
           <section>
-            <h1>Opportunity</h1>
+            <h2>Why C++?</h2>
+            <ol start='0'>
+              <li>Highly optimized compilers (gcc, clang, intel)</li>
+              <li>Modern C++ is actually nice (I swear)</li>
+              <li>Flexible thanks to template metaprogramming</li>
+              <li>Eigen, Ceres, Tensorflow, Apache Arrow, CUDA.</li>
+              <li>Can easily write packages for Python (pybind11) and R (rcpp).</li>
+            </ol>
           </section>
-        </section>
-        <section>
-          <section>
-            <p align='center'><img src='img/logic-prob.svg' width='1200px' alt='Logic & Prob'/></p>
-          </section>
-        </section>
-        <section>
-          <section>
-            <p>Very long goal of A.I.: Nilsson's <i>Probabilistic Logic</i> (1986), <i>Markov logic networks</i> (Richardson and Domingos, 2006).</p>
-            <br/>
-            <p>Recent theoretical and practical developments in Bayesian higher-order probabilistic programming (BHOPP):</p>
-            <br/>
-            <p><b>Practical</b>: Uber's Pyro exploits deep learning architecture for fast inference.</p>
-            <br/>
-            <p><b>Theoretical</b>: Bayesian inference with recursion (Staton, 2016).</p>
-          </section>
-        </section>
-        <section>
           <section>
             <h2>Concrete Advantages</h2>
             <ul>
@@ -98,10 +135,8 @@
               <li>Redefines <i>data</i>: programs, complex logical relationships, formulas <i>are</i> data.</li>
             </ul>
           </section>
-        </section>
-        <section>
           <section>
-            <p align='center'><img src='http://phdp.github.io/images/akarui-large.svg.png' alt='Akarui logo'/></p>
+            <p align='center'><img src='http://phdp.github.io/images/akarui.svg' width='500px' alt='Akarui logo'/></p>
             <p>Open-source library for stricter Bayesian higher-order probabilistic programming.</p>
           </section>
         </section>
