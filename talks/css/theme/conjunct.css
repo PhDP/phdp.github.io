@@ -24,7 +24,7 @@ div.terminal {
 
 ::selection {
   color: white;
-  background: #00905D; /* #006699 */
+  background: #0090E2; /* #006699 */
   text-shadow: none; }
 
 .reveal h1,
@@ -58,7 +58,7 @@ div.terminal {
 }
 
 .reveal a:not(.image) {
-  color: #00905D;
+  color: #0090E2;
   text-decoration: none;
   -webkit-transition: color .15s ease;
   -moz-transition: color .15s ease;

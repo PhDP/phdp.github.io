@@ -1,6 +1,6 @@
-@import url(https://fonts.googleapis.com/css?family=Montserrat:700);
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic);
-@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic,700italic);
+@import url('https://fonts.googleapis.com/css?family=Questrial');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic,700italic');
 
 body {
   background: #FFFFFF;
@@ -42,7 +42,7 @@ div.terminal {
 .reveal h6 {
   margin: 0 0 20px 0;
   color: #000;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Questrial", sans-serif;
   line-height: 0.9em;
   letter-spacing: -0.03em;
   text-transform: none;

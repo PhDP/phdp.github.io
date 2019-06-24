@@ -7,6 +7,15 @@ body {
   background-color: #FFFFFF;
 }
 
+blockquote {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 0;
+  padding-left: 0.5em;
+  border-left: 5em solid #000;
+  color: #000;
+}
+
 .reveal {
   font-family: "Open Sans", sans-serif;
   font-size: 40px;

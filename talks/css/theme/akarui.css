@@ -18,7 +18,7 @@ blockquote {
 
 .reveal {
   font-family: "Open Sans", sans-serif;
-  font-size: 50px;
+  font-size: 36px;
   font-weight: normal;
   letter-spacing: -0.02em;
   color: #3d85c6;
@@ -50,11 +50,11 @@ div.terminal {
 }
 
 .reveal h1 {
-  font-size: 2.5em;
+  font-size: 2.0em;
 }
 
 .reveal h2 {
-  font-size: 2.0em;
+  font-size: 1.5em;
 }
 
 .reveal h3 {
