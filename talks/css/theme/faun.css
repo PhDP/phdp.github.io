@@ -18,10 +18,10 @@ blockquote {
 
 .reveal {
   font-family: "Ubuntu", sans-serif;
-  font-size: 36px;
+  font-size: 40px;
   font-weight: normal;
   letter-spacing: -0.02em;
-  color: #729840;
+  color: #457CD8;
 }
 
 div.terminal {
@@ -110,16 +110,16 @@ div.terminal {
   border-top-color: #838996; }
 
 .reveal .controls div.navigate-left.enabled:hover {
-  border-right-color: #729840; }
+  border-right-color: #457CD8; }
 
 .reveal .controls div.navigate-right.enabled:hover {
-  border-left-color: #729840; }
+  border-left-color: #457CD8; }
 
 .reveal .controls div.navigate-up.enabled:hover {
-  border-bottom-color: #729840; }
+  border-bottom-color: #457CD8; }
 
 .reveal .controls div.navigate-down.enabled:hover {
-  border-top-color: #729840; }
+  border-top-color: #457CD8; }
 
 .reveal .progress {
   background: rgba(0, 0, 0, 0.2); }
