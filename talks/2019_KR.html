@@ -50,14 +50,14 @@
 
         <section>
           <section>
-            <h2>Three Dimensions</h2>
+            <h2>The Context of Ecological Theories</h2>
           </section>
         </section>
 
         <section>
           <section>
             <h2>Dimension:</h2>
-            <h2>Truth</h2>
+            <h2>Epistemology</h2>
           </section>
           <section>
             <h2>Bivalent (0th order fuzziness?)</h2>
@@ -66,16 +66,8 @@
             \[Truth \in \{F, T\}.\]
             <br/>
             \[Truth \in \{\bot, \top\}.\]
-          </section>
-          <section>
-            <h2>Bivalence and Probability Theory</h2>
-            \[P(x) = 0 \equiv x \mbox { is } False.\]
-            \[P(x) = 1 \equiv x \mbox { is } True.\]
-            </br>
-            <p>Probability theory assigns probabilities to bivalent statements.</p>
-            \[P(\mbox{rolls a 6}) = 1/6.\]
-            \[P(\mbox{Elvis is alive}) = 0.0012.\]
-            \[P(\mbox{Pop size } < 100 | ...) = 0.32.\]
+            <br/>
+            \[\{Theory\ x: True\}.\]
           </section>
           <section>
             <table style='width:100%; text-align:center;'>
@@ -110,6 +102,7 @@
                 <td>T</td><td>F</td><td>F</td><td>T</td>
               </tr>
             </table>
+            <br/>
             <p>\(\neg x\) is the only common unary connective with \(\neg T \equiv F\) and \(\neg F \equiv T\).</p>
           </section>
           <section>
@@ -127,6 +120,8 @@
           <section>
             <h2>1st order fuzziness</h2>
             \[\{x \in \mathbb{R}: 0 \leq x \leq 1\}.\]
+            <br/>
+            \[\{Theory\ x: 0.7129\}.\]
           </section>
           <section>
             <h2>Many-valued logic &amp; connectives</h2>
@@ -170,7 +165,37 @@
           <section>
             <h2>2nd order fuzziness</h2>
             \[\{\mathbb{x} \in \mathbb{R}^2: 0 \leq x_0 \leq x_1 \leq 1\}.\]
+            <br/>
+            \[\{Theory\ x: 0.7129\}.\]
+          </section>
+          <section>
             <img src='img/book cover-mendel17.png' alt='mendel17'/>
+          </section>
+          <section>
+            <h2>Probability theory</h2>
+            <p>A probability measure \(\Omega, \mathcal{E}, \mathcal{P}\) follows:</p>
+            \[P(\Omega) = 1.\]
+            \[\forall e \in \mathcal{E}: P(e) > 0.\]
+            \[\forall e_0, e_1 \in \mathcal{E}: e_0 \cap e_1 = \emptyset \Rightarrow P(e_0 \cup e_1) = P(e_0) + P(e_1).\]
+          </section>
+          <section>
+            <h2>Borel spaces</h2>
+          </section>
+          <section>
+            <h2>Bivalence and Probability Theory</h2>
+            \[P(x) = 0 \equiv x \mbox { is } False.\]
+            \[P(x) = 1 \equiv x \mbox { is } True.\]
+            </br>
+            <p>Probability theory assigns probabilities to bivalent statements.</p>
+            \[P(\mbox{rolls a 6}) = 1/6.\]
+            \[P(\mbox{Elvis is alive}) = 0.0012.\]
+            \[P(\mbox{Pop size } < 100 | ...) = 0.32.\]
+          </section>
+          <section>
+            <h2>Probability vs Fuzziness</h2>
+            <p>Will Trump be president in 2021?</p>
+            <p>Are viruses alive?</p>
+            <p>\(x\) interacts with \(y\)?</p>
           </section>
         </section>
 
@@ -256,21 +281,13 @@
 
         <section>
           <section>
-            <h2>Dimension:</h2>
-            <h2>[Non-]Probabilistic</h2>
-          </section>
-        </section>
-
-        <section>
-          <section>
             <h2>Representation #0</h2>
             <h2>Bayesian Networks</h2>
           </section>
           <section>
             <h2>TL;DR;</h2>
-            <p><b>Logic:</b> 0th order :(</p>
-            <p><b>Fuzziness:</b> No</p>
-            <p><b>Probabilistic:</b> Yes!</p>
+            <p><b>Ontology:</b> Generally 0th order logic :(</p>
+            <p><b>Espistemology:</b> Bivalent, Probabilistic</p>
             <br/>
             <h3>Ecoding ecological principles? No.</h3>
           </section>
@@ -283,9 +300,8 @@
           </section>
           <section>
             <h2>TL;DR;</h2>
-            <p><b>Logic:</b> Higher-order (one of the richest)</p>
-            <p><b>Fuzziness:</b> No</p>
-            <p><b>Probabilistic:</b> No</p>
+            <p><b>Ontology:</b> Higher-order (one of the richest)</p>
+            <p><b>Espistemology:</b> Bivalent</p>
           </section>
           <section>
             <p>Rich logic with rich types</p>
@@ -304,9 +320,8 @@
           </section>
           <section>
             <h2>TL;DR;</h2>
-            <p><b>Logic:</b> 1st order (with a caveat)</p>
-            <p><b>Fuzziness:</b> No</p>
-            <p><b>Probabilistic:</b> Yes</p>
+            <p><b>Ontology:</b> Limited 1st order logic</p>
+            <p><b>Espistemology:</b> Bivalent, Probabilistic</p>
           </section>
         </section>
 
@@ -317,9 +332,8 @@
           </section>
           <section>
             <h2>TL;DR;</h2>
-            <p><b>Logic:</b> Higher-order</p>
-            <p><b>Fuzziness:</b> Yes</p>
-            <p><b>Probabilistic:</b> No</p>
+            <p><b>Ontology:</b> Higher-order</p>
+            <p><b>Espistemology:</b> Fuzzy (type 1, 2, ...)</p>
           </section>
         </section>
 
@@ -330,9 +344,8 @@
           </section>
           <section>
             <h2>TL;DR;</h2>
-            <p><b>Logic:</b> You'd think "higher-order", but it's complicated.</p>
-            <p><b>Fuzziness:</b> Maybe?</p>
-            <p><b>Probabilistic:</b> Yep!</p>
+            <p><b>Ontology:</b> You'd think "higher-order logic", but it's complicated.</p>
+            <p><b>Espistemology:</b> Bivalent (or maybe not?), Probabilistic</p>
           </section>
         </section>
 
