@@ -50,65 +50,108 @@
 
         <section>
           <section>
-            <h2>Three Degrees of Freedom</h2>
+            <h2>Three Dimensions</h2>
           </section>
         </section>
 
         <section>
           <section>
+            <h2>Dimension:</h2>
             <h2>Truth</h2>
           </section>
           <section>
             <h2>Bivalent (0th order fuzziness?)</h2>
+            \[Truth \in \{False, True\}.\]
+            <br/>
+            \[Truth \in \{F, T\}.\]
+            <br/>
             \[Truth \in \{\bot, \top\}.\]
           </section>
+            <h2>Bivalence and Probability Theory</h2>
+            \[P(x) = 0 \equiv x \mbox { is } False.\]
+            \[P(x) = 1 \equiv x \mbox { is } True.\]
+            </br>
+            <p>Probability theory assigns probabilities to bivalent statements.</p>
+            \[P(\mbox{rolls a 6}) = 1/6.\]
+            \[P(\mbox{Elvis is alive}) = 0.0012.\]
+            \[P(\mbox{Pop size } < 100 | ...) = 0.32.\]
           <section>
             <table style='width:100%; text-align:center;'>
               <tr>
                 <th>Connective</th>
                 <th>Informal</th>
                 <th>Symbol</th>
-                <th>\(\bot \ast \bot\)</th><th>\(\bot \ast \top\)</th><th>\(\top \ast \bot\)</th><th>\(\top \ast \top\)</th>
+                <th>F x F</th><th>F x T</th><th>T x F</th><th>T x T</th>
               </tr>
               <tr>
                 <td>Conjunction</td>
                 <td>and</td>
                 <td>\(\land\)</td>
-                <td>\(\bot\)</td><td>\(\bot\)</td><td>\(\bot\)</td><td>\(\top\)</td>
+                <td>F</td><td>F</td><td>F</td><td>T</td>
               </tr>
               <tr>
                 <td>Disjunction</td>
                 <td>or</td>
                 <td>\(\lor\)</td>
-                <td>\(\bot\)</td><td>\(\top\)</td><td>\(\top\)</td><td>\(\top\)</td>
+                <td>F</td><td>T</td><td>T</td><td>T</td>
               </tr>
               <tr>
                 <td>Implication</td>
                 <td>implies</td>
                 <td>\(\Rightarrow\)</td>
-                <td>\(\top\)</td><td>\(\top\)</td><td>\(\bot\)</td><td>\(\top\)</td>
+                <td>T</td><td>T</td><td>F</td><td>T</td>
               </tr>
               <tr>
                 <td>Equivalence</td>
                 <td>iff</td>
                 <td>\(\leftrightarrow\)</td>
-                <td>\(\top\)</td><td>\(\bot\)</td><td>\(\bot\)</td><td>\(\top\)</td>
+                <td>T</td><td>F</td><td>F</td><td>T</td>
               </tr>
             </table>
+            <p>\(\neg x\) is the only common unary connective with \(\neg T \equiv F\) and \(\neg F \equiv T\).</p>
+          </section>
+          <section>
+            <h2>A few properties</h2>
+            <p>Conjunction and disjunction are commutative, idempotent:</p>
+            \[a \land b \equiv b \land a, a \lor b \equiv b \lor a.\]
+            \[a \land a \equiv a, b \lor b \equiv b.\]
+            <br/>
+            <p>De Morgan laws:</p>
+            \[a \land b \equiv \neg (\neg a \lor \neg b)\]
+            \[a \lor b \equiv \neg (\neg a \land \neg b)\]
+            <br/>
+            <p>Negation is involutive: \(\neg \neg x \equiv x\).</p>
           </section>
           <section>
             <h2>1st order fuzziness</h2>
-            \[Truth \in \{x \in \mathbb{R}: 0 \leq x \leq 1\}.\]
+            \[\{x \in \mathbb{R}: 0 \leq x \leq 1\}.\]
+          </section>
+          <section>
+            <h2>Many-valued logic &amp; connectives</h2>
+
+            Connective              & Łukasiewicz         & Gödel-Dummett                    & Product \\
+            \(x \land y$             & $max(0, x + y - 1)$ & $min(x, y)$                      & $x \times y$ \\
+            \(x \lor y$              & $min(1, x + y)$     & $max(x, y)$                      & $x + y - x\times y$ \\
+            \(x \Rightarrow y\)       & $min(1, 1 - x + y)$ & 1 if $x \leq y$, $y$ otherwise   & 1 if $x \leq y$, $y/x$ otherwise \\
+            \(\neg x\)                & $1 - x$             & 0 if $x > 0$, 1 otherwise        & 0 if $x > 0$, 1 otherwise \\
+
+          </section>
+          <section>
+            <h2>1st order fuzziness</h2>
+            \[\{x \in \mathbb{R}: 0 \leq x \leq 1\}.\]
           </section>
           <section>
             <h2>2nd order fuzziness</h2>
-            \[Truth \in \{\mathbb{x} \in \mathbb{R}^2: 0 \leq x_0 \leq x_1 \leq 1\}.\]
+            \[\{\mathbb{x} \in \mathbb{R}^2: 0 \leq x_0 \leq x_1 \leq 1\}.\]
+
+            <img src='img/book cover-mendel17.png' alt='mendel17'/>
           </section>
         </section>
 
         <section>
           <section>
-            <h2>Logics</h2>
+            <h2>Dimension:</h2>
+            <h2>Ontology</h2>
           </section>
           <section>
             <h2>0th order logic</h2>
@@ -187,6 +230,7 @@
 
         <section>
           <section>
+            <h2>Dimension:</h2>
             <h2>[Non-]Probabilistic</h2>
           </section>
         </section>
