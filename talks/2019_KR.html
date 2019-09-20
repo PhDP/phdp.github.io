@@ -44,13 +44,28 @@
       <div class='slides'>
         <section>
           <section>
-            <h1>The Representation of Ecological theories</h1>
+            <h1>The Representation of Ecological Theories</h1>
           </section>
         </section>
 
         <section>
           <section>
             <h2>The Context of Ecological Theories</h2>
+          </section>
+          <section>
+            <a src='img/article-fluctuating.png' alt='fluctuating'/>
+          </section>
+          <section>
+            <a src='img/article-purves.png' alt='purves'/>
+          </section>
+          <section>
+            <a src='img/article-queller.png' alt='queller'/>
+          </section>
+          <section>
+            <a src='img/article-queller2.png' alt='queller part 2'/>
+          </section>
+          <section>
+            <a src='img/article-rice.png' alt='rice'/>
           </section>
         </section>
 
@@ -60,7 +75,7 @@
             <h2>Epistemology</h2>
           </section>
           <section>
-            <h2>Bivalent (0th order fuzziness?)</h2>
+            <h2>Bivalence (0th order fuzziness?)</h2>
             \[Truth \in \{False, True\}.\]
             <br/>
             \[Truth \in \{F, T\}.\]
@@ -122,6 +137,13 @@
             \[\{x \in \mathbb{R}: 0 \leq x \leq 1\}.\]
             <br/>
             \[\{Theory\ x: 0.72918\}.\]
+            <br/>
+            <p>Dogs > Cats</p>
+            <p>Viruses are alive</p>
+            <p>Wolves prey on rabbits</p>
+            <p>1. Nf3 is a good chess opening</p>
+            <p>X speaks Korean</p>
+            <p>Quebec French = French</p>
           </section>
           <section>
             <h2>Many-valued logic &amp; connectives</h2>
@@ -204,19 +226,34 @@
           </section>
           <section>
             <h2>2nd order fuzziness</h2>
+            <p>Interval:</p>
             \[\{\mathbb{x} \in \mathbb{R}^2: 0 \leq x_0 \leq x_1 \leq 1\}.\]
             <br/>
-            \[\{Theory\ x: 0.7129\}.\]
+            \[\{Theory\ x: [0.6981, 0.73019]\}.\]
+            <br/>
+            <p>Generalized:</p>
+            \[f: A \mapsto \{x \in \mathbb{R}: 0 \leq x \leq 1\} \mapsto \{y \in \mathbb{R}: 0 \leq y \leq 1\}.\]
+            <br/>
+            \[\{\{Theory\ x: 0.25\}: 0.0\}.\]
+            \[\{\{Theory\ x: 0.7\}: 0.65\}.\]
+            \[\{\{Theory\ x: 0.71\}: 0.86\}.\]
           </section>
           <section>
             <img src='img/book cover-mendel17.png' alt='mendel17'/>
           </section>
           <section>
             <h2>Probability theory</h2>
-            <p>A probability measure \(\Omega, \mathcal{E}, \mathcal{P}\) follows:</p>
+            <p>A probability measure \((\Omega, \mathcal{F}, \mathcal{P})\) where</p>
+            \[P: \mathcal{F} \mapsto \{x \in \mathbb{R}: 0 \leq x \leq 1\}\]
+            <p>follows the axioms</p>
             \[P(\Omega) = 1.\]
-            \[\forall e \in \mathcal{E}: P(e) > 0.\]
-            \[\forall e_0, e_1 \in \mathcal{E}: e_0 \cap e_1 = \emptyset \Rightarrow P(e_0 \cup e_1) = P(e_0) + P(e_1).\]
+            \[\forall e \in \mathcal{F}: P(e) \geq 0.\]
+            \[\forall e_0, e_1 \in \mathcal{F}: e_0 \cap e_1 = \emptyset \Rightarrow P(e_0 \cup e_1) = P(e_0) + P(e_1).\]
+            <br/>
+            \[P(\emptyset) = 0?\]
+            \[\forall e \in mathcal{F}: P(e) \leq 1?\]
+            \[\forall e_0, e_1 \in mathcal{F}: e_0 \subseteq e_1 \Rightarrow P(e_0) \leq P(e_1)?\]
+            \[\forall e_0, e_1 \in \mathcal{F}: P(e_0 \cup e_1) = P(e_0) + P(e_1) - P(e_0 \cap e_1)?\]
           </section>
           <section>
             <h2>Borel spaces</h2>
