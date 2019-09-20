@@ -67,6 +67,7 @@
             <br/>
             \[Truth \in \{\bot, \top\}.\]
           </section>
+          <section>
             <h2>Bivalence and Probability Theory</h2>
             \[P(x) = 0 \equiv x \mbox { is } False.\]
             \[P(x) = 1 \equiv x \mbox { is } True.\]
@@ -75,6 +76,7 @@
             \[P(\mbox{rolls a 6}) = 1/6.\]
             \[P(\mbox{Elvis is alive}) = 0.0012.\]
             \[P(\mbox{Pop size } < 100 | ...) = 0.32.\]
+          </section>
           <section>
             <table style='width:100%; text-align:center;'>
               <tr>
@@ -128,13 +130,38 @@
           </section>
           <section>
             <h2>Many-valued logic &amp; connectives</h2>
-
-            Connective              & Łukasiewicz         & Gödel-Dummett                    & Product \\
-            \(x \land y$             & $max(0, x + y - 1)$ & $min(x, y)$                      & $x \times y$ \\
-            \(x \lor y$              & $min(1, x + y)$     & $max(x, y)$                      & $x + y - x\times y$ \\
-            \(x \Rightarrow y\)       & $min(1, 1 - x + y)$ & 1 if $x \leq y$, $y$ otherwise   & 1 if $x \leq y$, $y/x$ otherwise \\
-            \(\neg x\)                & $1 - x$             & 0 if $x > 0$, 1 otherwise        & 0 if $x > 0$, 1 otherwise \\
-
+            <table style='width:100%; text-align:center;'>
+              <tr>
+                <th>Connective</th>
+                <th>Łukasiewicz</th>
+                <th>Gödel-Dummett</th>
+                <th>Product</th>
+              </tr>
+              <tr>
+                <td>\(x \land y\)</td>
+                <td>\(max(0, x + y - 1)\)</td>
+                <td>\(min(x, y)\)</td>
+                <td>\(x \times y\)</td>
+              </tr>
+              <tr>
+                <td>\(x \lor y\)</td>
+                <td>\(min(1, x + y)\)</td>
+                <td>\(max(x, y)\)</td>
+                <td>\(x + y - x\times y\)</td>
+              </tr>
+              <tr>
+                <td>\(x \Rightarrow y\)</td>
+                <td>\(min(1, 1 - x + y)\)</td>
+                <td>1 if \(x \leq y\) else \(y\)</td>
+                <td>1 if \(x \leq y\) else \(y/x\)</td>
+              </tr>
+              <tr>
+                <td>\(\neg x\)</td>
+                <td>\(1 - x\)</td>
+                <td>0 if \(x > 0\) else 1</td>
+                <td>0 if \(x > 0\) else 1</td>
+              </tr>
+            </table>
           </section>
           <section>
             <h2>1st order fuzziness</h2>
@@ -143,7 +170,6 @@
           <section>
             <h2>2nd order fuzziness</h2>
             \[\{\mathbb{x} \in \mathbb{R}^2: 0 \leq x_0 \leq x_1 \leq 1\}.\]
-
             <img src='img/book cover-mendel17.png' alt='mendel17'/>
           </section>
         </section>
