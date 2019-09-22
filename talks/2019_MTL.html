@@ -65,18 +65,23 @@
         </section>
 
         <section>
-          \[\mbox{With:}\]
-          \[Ca(x): x \mbox{ has cancer.}\]
-          \[Sm(x): x \mbox{ is a smoker.}\]
-          \[Fr(x, y): x \mbox{ is friend with } y.\]
-          <br/>
-          \[\mbox{Knowledge base } \mathcal{M}\]
-          \[\forall x: Sm(x) \Rightarrow Ca(x); 1.5.\]
-          \[\forall x, y: Fr(x, y) \mbox{ and } Sm(x) \Rightarrow Sm(y), 1.1.\]
-          <br/>
-          <h2>Possible queries:</h2>
-          \[P(Sm(A) | Fr(A, B), Ca(B), \mathcal{M})?\]
-          \[P(Ca(B) | Ca(A), Fr(A, B), \forall x, y: Fr(x, y) \equiv Fr(y, z): 0.7, \mathcal{M})?\]
+          <section>
+            <h2>Markov logic networks</h2>
+            \[\mbox{With:}\]
+            \[Ca(x): x \mbox{ has cancer.}\]
+            \[Sm(x): x \mbox{ is a smoker.}\]
+            \[Fr(x, y): x \mbox{ is friend with } y.\]
+            <br/>
+            \[\mbox{Knowledge base } \mathcal{M}\]
+            \[\forall x: Sm(x) \Rightarrow Ca(x); 1.5.\]
+            \[\forall x, y: Fr(x, y) \mbox{ and } Sm(x) \Rightarrow Sm(y), 1.1.\]
+          </section>
+          <section>
+            <p>Possible Queries:</p>
+            \[\mbox{Given a set of constants }\{A, B, ...\}:\]
+            \[P(Sm(A) | Fr(A, B), Ca(B), \mathcal{M})?\]
+            \[P(Ca(B) | Ca(A), Fr(A, B), \forall x, y: Fr(x, y) \equiv Fr(y, z): 0.7, \mathcal{M})?\]
+          </section>
         </section>
 
         <section>
