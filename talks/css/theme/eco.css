@@ -49,11 +49,13 @@ div.terminal {
 }
 
 .reveal h1 {
-  font-size: 2.4em;
+  font-size: 2.2em;
+  font-weight: bold;
 }
 
 .reveal h2 {
   font-size: 2.0em;
+  font-weight: bold;
 }
 
 .reveal h3 {
@@ -61,7 +63,7 @@ div.terminal {
 }
 
 .reveal a:not(.image) {
-  color: #344ccc;
+  color: #559A43;
   text-decoration: none;
   -webkit-transition: color .15s ease;
   -moz-transition: color .15s ease;
@@ -70,7 +72,7 @@ div.terminal {
   transition: color .15s ease; }
 
 .reveal a:not(.image):hover {
-  color: #000000;
+  color: #434E9A;
   text-shadow: none;
   border: none; }
 
