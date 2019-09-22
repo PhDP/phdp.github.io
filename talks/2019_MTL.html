@@ -73,12 +73,13 @@
             \[Fr(x, y): x \mbox{ is friend with } y.\]
             <br/>
             \[\mbox{Knowledge base } \mathcal{M}\]
-            \[\forall x: Sm(x) \Rightarrow Ca(x); 1.5.\]
-            \[\forall x, y: Fr(x, y) \mbox{ and } Sm(x) \Rightarrow Sm(y), 1.1.\]
+            \[\forall x: Sm(x) \Rightarrow Ca(x): 1.5.\]
+            \[\forall x, y: Fr(x, y) \mbox{ and } Sm(x) \Rightarrow Sm(y): 1.1.\]
           </section>
           <section>
-            <p>Possible Queries:</p>
+            <h2>Possible Queries</h2>
             \[\mbox{Given a set of constants }\{A, B, ...\}:\]
+            <br/>
             \[P(Sm(A) | Fr(A, B), Ca(B), \mathcal{M})?\]
             \[P(Ca(B) | Ca(A), Fr(A, B), \forall x, y: Fr(x, y) \equiv Fr(y, z): 0.7, \mathcal{M})?\]
           </section>
