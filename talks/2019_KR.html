@@ -232,11 +232,11 @@
             \[\{Theory\ x: [0.6981, 0.73019]\}.\]
             <br/>
             <p>Generalized:</p>
-            \[f: A \mapsto \{x \in \mathbb{R}: 0 \leq x \leq 1\} \mapsto \{y \in \mathbb{R}: 0 \leq y \leq 1\}.\]
+            \[\{x \in \mathbb{R}: 0 \leq x \leq 1\} \mapsto \{y \in \mathbb{R}: 0 \leq y \leq 1\}.\]
             <br/>
             \[\{\{Theory\ x: 0.25\}: 0.0\}.\]
-            \[\{\{Theory\ x: 0.7\}: 0.65\}.\]
-            \[\{\{Theory\ x: 0.71\}: 0.86\}.\]
+            \[\{\{Theory\ x: 0.7071\}: 0.65\}.\]
+            \[\{\{Theory\ x: 0.73\}: 0.86\}.\]
           </section>
           <section>
             <img src='img/book cover-mendel17.png' alt='mendel17'/>
@@ -245,11 +245,14 @@
             <h2>Probability theory</h2>
             <p>A probability measure \((\Omega, \mathcal{F}, \mathcal{P})\) where</p>
             \[P: \mathcal{F} \mapsto \{x \in \mathbb{R}: 0 \leq x \leq 1\}\]
+            <br/>
             <p>follows the axioms</p>
+            <br/>
             \[P(\Omega) = 1.\]
             \[\forall e \in \mathcal{F}: P(e) \geq 0.\]
             \[\forall e_0, e_1 \in \mathcal{F}: e_0 \cap e_1 = \emptyset \Rightarrow P(e_0 \cup e_1) = P(e_0) + P(e_1).\]
-            <br/>
+          </section>
+          <section>
             \[P(\emptyset) = 0?\]
             \[\forall e \in mathcal{F}: P(e) \leq 1?\]
             \[\forall e_0, e_1 \in mathcal{F}: e_0 \subseteq e_1 \Rightarrow P(e_0) \leq P(e_1)?\]
@@ -340,6 +343,11 @@
             \[\forall n \in \mathbb{N}: n > 1 \land n = \sum_{i \in [0, n)}i\times I(mod(n, i) = 0) \Rightarrow mod(n, 2) = 0.\]
           </section>
           <section>
+            <h2>Pitfall: Theory X is probabilistic?</h2>
+            <img src='img/stochastic-price.png' alt='rice'/>
+            <p>From Rice and Papadopoulos' <a href='https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0007130'>Evolution with Stochastic Fitness and Stochastic Migration</a>.</p>
+          </section>
+          <section>
             <p>Warning: First-order logic in A.I. mostly refer to a watered-down version
             without functions.</p>
           </section>
@@ -423,6 +431,22 @@
             <h2>TL;DR;</h2>
             <p><b>Ontology:</b> You'd think "higher-order logic", but it's complicated.</p>
             <p><b>Espistemology:</b> Bivalent (or maybe not?), Probabilistic</p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Plan</h2>
+          </section>
+          <section>
+            <h2>TL;DR;</h2>
+            <p><b>Ontology:</b> Higher-order logic (Calculus of Construction).</p>
+            <p><b>Espistemology:</b> Bivalent/Fuzzy, Probabilistic</p>
+          </section>
+          <section>
+            \[truth := \{False, True\} | \{x \in \mathbb{R}: 0 \leq x \leq 1\} | \{x \in \mathbb{R}: 0 \leq x \leq 1\} \mapsto \{y \in \mathbb{R}: 0 \leq y \leq 1\}.\]
+            <br/>
+            <p>Type convertion toward fuzzier truths.</p>
           </section>
         </section>
 

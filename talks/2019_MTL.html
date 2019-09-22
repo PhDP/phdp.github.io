@@ -57,7 +57,7 @@
         </section>
 
         <section>
-          <h2>Probabilistic Graphical Models</h2>
+          <img src='img/pgm-bn.svg' alt='pgm'/>
         </section>
 
         <section>
@@ -66,11 +66,11 @@
 
         <section>
           <p>Knowledge base \(\mathcal{M}\):</p>
-          \[\forall x: Smoking(x) \Rightarrow Cancer(x); 1.5.\]
-          \[\forall x, y: Friends(x, y) \mbox{ and } Smoking(x) \Rightarrow Smoking(y), 1.1.\]
+          \[\forall x: Sm(x) \Rightarrow Ca(x); 1.5.\]
+          \[\forall x, y: Fr(x, y) \mbox{ and } Sm(x) \Rightarrow Sm(y), 1.1.\]
           <br/>
-          \[P(Smoking(Anna) | Friends(Anna, Bob), Cancer(Bob), \mathcal{M})?\]
-          \[P(Cancer(Bob) | Cancer(Anna), Friends(Anna, Bob), \forall x, y: Friends(x, y) \equiv Friends(y, z): 0.7, \mathcal{M})?\]
+          \[P(Sm(Anna) | Fr(Anna, Bob), Ca(Bob), \mathcal{M})?\]
+          \[P(Ca(Bob) | Ca(Anna), Fr(Anna, Bob), \forall x, y: Fr(x, y) \equiv Fr(y, z): 0.7, \mathcal{M})?\]
         </section>
 
         <section>
