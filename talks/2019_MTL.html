@@ -65,19 +65,24 @@
         </section>
 
         <section>
-          \[\mbox{Knowledge base } \mathcal{M}\]:</h2>
+          \[\mbox{With:}\]
+          \[Ca(x): x \mbox{ has cancer.}\]
+          \[Sm(x): x \mbox{ is a smoker.}\]
+          \[Fr(x, y): x \mbox{ is friend with } y.\]
+          <br/>
+          \[\mbox{Knowledge base } \mathcal{M}\]
           \[\forall x: Sm(x) \Rightarrow Ca(x); 1.5.\]
           \[\forall x, y: Fr(x, y) \mbox{ and } Sm(x) \Rightarrow Sm(y), 1.1.\]
           <br/>
+          <h2>Possible queries:</h2>
           \[P(Sm(A) | Fr(A, B), Ca(B), \mathcal{M})?\]
           \[P(Ca(B) | Ca(A), Fr(A, B), \forall x, y: Fr(x, y) \equiv Fr(y, z): 0.7, \mathcal{M})?\]
         </section>
 
         <section>
           <h2>Higher-Order Probabilistic Programming Languages</h2>
-          <p><a href='https://github.com/probprog/anglican'>Anglican</a></p>
-          <p><a href='https://github.com/TuringLang/Turing.jl'>Turing.jl</a></p>
-          <p><a href='https://pyro.ai/'>Uber's Pyro</a></p>
+          <p>Languages: <a href='https://github.com/probprog/anglican'>Anglican</a>, <a href='https://github.com/TuringLang/Turing.jl'>Turing.jl</a>, <a href='https://pyro.ai/'>Uber's Pyro</a></p>
+          <br/>
           <img src='img/paper-staton16.png' alt='staton16'/>
         </section>
 
