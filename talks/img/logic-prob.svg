@@ -10,14 +10,44 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="232mm"
-   height="73mm"
-   viewBox="0 0 232 73"
+   height="105mm"
+   viewBox="0 0 232 105"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
    sodipodi:docname="logic-prob.svg">
   <defs
      id="defs2">
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker6250"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path6248"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path3563"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
     <marker
        inkscape:stockid="Arrow1Lstart"
        orient="auto"
@@ -48,6 +78,36 @@
          transform="matrix(0.8,0,0,0.8,10,0)"
          inkscape:connector-curvature="0" />
     </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker1187-3"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path1185-5"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker1187-2"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path1185-9"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -58,7 +118,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
      inkscape:cx="469.62088"
-     inkscape:cy="150.61064"
+     inkscape:cy="236.32493"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -75,7 +135,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -83,72 +143,102 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-224)">
-    <ellipse
-       style="opacity:0.5;fill:#3d85c6;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.57653975;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="path884"
-       cx="65.956841"
-       cy="269.02975"
-       rx="65.956841"
-       ry="27.97024" />
-    <ellipse
-       style="opacity:0.5;fill:#3d8545;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.57653975;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="path884-9"
-       cx="165.93156"
-       cy="269.02975"
-       rx="65.956841"
-       ry="27.970238" />
+     transform="translate(0,-192)">
+    <rect
+       style="opacity:1;fill:#008000;fill-opacity:0.47058824;fill-rule:nonzero;stroke:none;stroke-width:0.10199025;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect25"
+       width="117.3616"
+       height="43.845234"
+       x="111.08714"
+       y="218.45607" />
+    <rect
+       style="opacity:1;fill:#aa0000;fill-opacity:0.47058824;fill-rule:nonzero;stroke:none;stroke-width:0.1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect23"
+       width="119.62946"
+       height="53.294643"
+       x="4.3467264"
+       y="213.35338" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;line-height:1.25;font-family:'Noto Mono';-inkscape-font-specification:'Noto Mono';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="94.078285"
-       y="231.59554"
+       x="103.07411"
+       y="200.90428"
        id="text817"><tspan
          sodipodi:role="line"
          id="tspan815"
-         x="94.078285"
-         y="231.59554"
+         x="103.07411"
+         y="200.90428"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.28888893px;font-family:'EB Garamond 12 All SC';-inkscape-font-specification:'EB Garamond 12 All SC';stroke-width:0.26458332">Here be dragons!</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;line-height:1.25;font-family:'Noto Mono';-inkscape-font-specification:'Noto Mono';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="50.113377"
-       y="261.79587"
+       x="60.69672"
+       y="229.51698"
        id="text840"><tspan
          sodipodi:role="line"
          id="tspan838"
-         x="50.113377"
-         y="261.79587"
+         x="60.69672"
+         y="229.51698"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46666622px;font-family:'Ubuntu Condensed';-inkscape-font-specification:'Ubuntu Condensed, ';text-align:center;text-anchor:middle;stroke-width:0.26458332">Prog. lang. foundations</tspan><tspan
          sodipodi:role="line"
-         x="50.113377"
-         y="272.37921"
+         x="60.69672"
+         y="240.10031"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46666622px;font-family:'Ubuntu Condensed';-inkscape-font-specification:'Ubuntu Condensed, ';text-align:center;text-anchor:middle;stroke-width:0.26458332"
          id="tspan842">Mathematics (theorem proving)</tspan><tspan
          sodipodi:role="line"
-         x="50.113377"
-         y="282.96252"
+         x="60.69672"
+         y="250.68365"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46666622px;font-family:'Ubuntu Condensed';-inkscape-font-specification:'Ubuntu Condensed, ';text-align:center;text-anchor:middle;stroke-width:0.26458332"
-         id="tspan844">Scientific Theories</tspan></text>
+         id="tspan844">Type theory</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;line-height:1.25;font-family:'Noto Mono';-inkscape-font-specification:'Noto Mono';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="180.37317"
-       y="265.10541"
+       x="175.08157"
+       y="235.47221"
        id="text840-4"><tspan
          sodipodi:role="line"
-         x="180.37317"
-         y="265.10541"
+         x="175.08157"
+         y="235.47221"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46666622px;font-family:'Ubuntu Condensed';-inkscape-font-specification:'Ubuntu Condensed, ';text-align:center;text-anchor:middle;stroke-width:0.26458332"
          id="tspan844-3">Bayesian reasoning</tspan><tspan
          sodipodi:role="line"
-         x="180.37317"
-         y="275.68875"
+         x="175.08157"
+         y="246.05554"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46666622px;font-family:'Ubuntu Condensed';-inkscape-font-specification:'Ubuntu Condensed, ';text-align:center;text-anchor:middle;stroke-width:0.26458332"
          id="tspan882">Probabilistic Machine Learning</tspan></text>
+    <rect
+       style="opacity:1;fill:#007bd0;fill-opacity:0.47058824;fill-rule:nonzero;stroke:none;stroke-width:0.1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect27"
+       width="107.15625"
+       height="42.711311"
+       x="78.430069"
+       y="252.36082" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;line-height:1.25;font-family:'Noto Mono';-inkscape-font-specification:'Noto Mono';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="130.81001"
+       y="276.78729"
+       id="text840-3"><tspan
+         sodipodi:role="line"
+         x="130.81001"
+         y="276.78729"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46666622px;font-family:'Ubuntu Condensed';-inkscape-font-specification:'Ubuntu Condensed, ';text-align:center;text-anchor:middle;stroke-width:0.26458332"
+         id="tspan844-5">Many-Valued Logics</tspan></text>
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1187)"
-       d="m 135.00336,232.71696 c -9.26041,4.91369 5.85864,11.71727 -5.85863,23.62352 -13.08604,13.2971 -11.90625,11.90625 -11.90625,11.90625"
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker6250)"
+       d="m 135.15461,201.98729 c -9.26041,4.91369 9.63842,14.17412 -2.07886,26.08037 -13.08604,13.2971 -15.11906,28.5372 -15.11906,28.5372"
+       id="path901-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="csc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1187-2)"
+       d="m 135.15462,201.98729 c -9.26042,4.91369 5.85864,11.71727 -5.85864,23.62352 -13.08604,13.2971 -11.90625,11.90625 -11.90625,11.90625"
+       id="path901-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="csc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
+       d="m 135.15462,201.98729 c -9.26041,4.91369 7.50507,13.17763 -3.40178,24.75745 -10.77647,11.44139 -32.883993,32.69494 -32.883993,32.69494"
        id="path901"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="csc" />
