@@ -89,6 +89,10 @@
           </section>
           <!-- I say "compactly" because you can approximate everything with a deep neural net, I want the system to represent directly the formula. -->
           <section>
+            <h2>A Problem of Knowledge Representation</h2>
+            <p>How to encode ecological knowledge? How to reason about a complex web of theories?</p>
+          </section>
+          <section>
             <h2>Interpretability is not enough!</h2>
             <p>We need a system capable of:</p>
             <ul>
@@ -172,7 +176,7 @@
             <br/>
             \[\mbox{Knowledge base } \mathcal{M}\]
             \[\forall x: Sm(x) \Rightarrow Ca(x): 1.5.\]
-            \[\forall x, y: Fr(x, y) \mbox{ and } Sm(x) \Rightarrow Sm(y): 1.1.\]
+            \[\forall x, y: Fr(x, y) \land Sm(x) \Rightarrow Sm(y): 1.1.\]
           </section>
           <section>
             <h2>Possible Queries</h2>
@@ -298,3 +302,10 @@
     <script type='text/javascript' src='../../js/bower/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
   </body>
 </html>
+
+<!--
+  SuitabilityAsPet(Dog) > SuitabilityAsPet(Cat)
+  SuitabilityAsPet(Hamster) > SuitabilityAsPet(Cat)
+  SuitabilityAsPet(Sydney funnel-web spider) > SuitabilityAsPet(Cat)
+  SuitabilityAsPet(Used toothbrush) > SuitabilityAsPet(Cat)
+-->
