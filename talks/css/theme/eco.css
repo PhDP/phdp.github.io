@@ -20,7 +20,7 @@ blockquote {
   font-size: 36px;
   font-weight: normal;
   letter-spacing: -0.02em;
-  color: #559A43;
+  color: #467439;
 }
 
 div.terminal {
@@ -63,7 +63,7 @@ div.terminal {
 }
 
 .reveal a:not(.image) {
-  color: #559A43;
+  color: #467439;
   text-decoration: none;
   -webkit-transition: color .15s ease;
   -moz-transition: color .15s ease;
@@ -111,16 +111,16 @@ div.terminal {
   border-top-color: #57C033; }
 
 .reveal .controls div.navigate-left.enabled:hover {
-  border-right-color: #559A43; }
+  border-right-color: #467439; }
 
 .reveal .controls div.navigate-right.enabled:hover {
-  border-left-color: #559A43; }
+  border-left-color: #467439; }
 
 .reveal .controls div.navigate-up.enabled:hover {
-  border-bottom-color: #559A43; }
+  border-bottom-color: #467439; }
 
 .reveal .controls div.navigate-down.enabled:hover {
-  border-top-color: #559A43; }
+  border-top-color: #467439; }
 
 .reveal .progress {
   background: rgba(0, 0, 0, 0.2); }
