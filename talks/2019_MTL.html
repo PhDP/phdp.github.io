@@ -169,48 +169,6 @@
           <section>
             <img src='img/logic-prob.svg' width='100%' alt='hybrid'/>
           </section>
-        </section>
-
-        <section>
-          <section>
-            <h2>Markov Logic Networks</h2>
-          </section>
-          <section>
-            \[\mbox{With:}\]
-            \[Ca(x): x \mbox{ has cancer.}\]
-            \[Sm(x): x \mbox{ is a smoker.}\]
-            \[Fr(x, y): x \mbox{ is friend with } y.\]
-            <br/>
-            \[\mbox{Knowledge base } \mathcal{M}\]
-            \[\forall x: Sm(x) \Rightarrow Ca(x): 1.5.\]
-            \[\forall x, y: Fr(x, y) \land Sm(x) \Rightarrow Sm(y): 1.1.\]
-          </section>
-          <section>
-            <h2>Possible Queries</h2>
-            \[\mbox{Given a set of constants }\{A, B, ...\}:\]
-            <br/>
-            \[P(Sm(A) | Fr(A, B), Ca(B), \mathcal{M})?\]
-            \[P(Ca(B) | Ca(A), Fr(A, B), \forall x, y: Fr(x, y) \equiv Fr(y, z): 0.7, \mathcal{M})?\]
-          </section>
-          <section>
-            <ul>
-              <li>😐 Compactly encoding mathematical theories of biodiversity</li>
-              <li>😐 Understanding enough maths to see how the theories are related</li>
-              <li>😎 Handling the inherent uncertainty associated with biodiversity data</li>
-            </ul>
-            <br/>
-            <br/>
-            <p>Based on a restricted form of first-order logic.</p>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h2>Fuzzy Type Theory</h2>
-          </section>
-          <section>
-            <img src='img/paper-fuzzy-tt.png' alt='fuzzy tt'/>
-          </section>
           <section>
             <h2>Truth!</h2>
             \[Fuzzy_0\ (Bivalence): \{F, T\}.\]
@@ -241,6 +199,41 @@
           </section>
           <section>
             <img src='img/preyon-fuzzy2.png' alt='f2'/>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Markov Logic Networks</h2>
+          </section>
+          <section>
+            \[\mbox{With:}\]
+            \[Ca(x): x \mbox{ has cancer.}\]
+            \[Sm(x): x \mbox{ is a smoker.}\]
+            \[Fr(x, y): x \mbox{ is friend with } y.\]
+            <br/>
+            \[\mbox{Knowledge base } \mathcal{M}\]
+            \[\forall x: Sm(x) \Rightarrow Ca(x): 1.5.\]
+            \[\forall x, y: Fr(x, y) \land Sm(x) \Rightarrow Sm(y): 1.1.\]
+          </section>
+          <section>
+            <ul>
+              <li>😐 Compactly encoding mathematical theories of biodiversity</li>
+              <li>😐 Understanding enough maths to see how the theories are related</li>
+              <li>😎 Handling the inherent uncertainty associated with biodiversity data</li>
+            </ul>
+            <br/>
+            <br/>
+            <p>Based on a restricted form of first-order logic.</p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Fuzzy Type Theory</h2>
+          </section>
+          <section>
+            <img src='img/paper-fuzzy-tt.png' alt='fuzzy tt'/>
           </section>
           <section>
             <ul>
