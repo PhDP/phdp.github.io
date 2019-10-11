@@ -3,9 +3,9 @@
   <head>
     <meta charset='utf-8'>
 
-    <title></title>
+    <title>Theoretical Ecology and the Foundations of Mathematics</title>
 
-    <meta name='description' content='Thesis defense'>
+    <meta name='description' content='Theoretical Ecology and the Foundations of Mathematics'>
     <meta name='author' content='Philippe Desjardins-Proulx'>
 
     <meta name='apple-mobile-web-app-capable' content='yes' />
@@ -14,7 +14,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
 
     <link rel='stylesheet' href='css/reveal.min.css'>
-    <link rel='stylesheet' href='css/theme/faun.css' id='theme'>
+    <link rel='stylesheet' href='css/theme/eco.css' id='theme'>
     <link rel='stylesheet' href='lib/css/zenburn.css'>
 
     <script>
@@ -34,29 +34,20 @@
 
   <body>
 
-  <!-- Haskell's function divides -->
-  <!-- Aristotle and Plato -->
-  <!-- Representation Ceci n'est pas une pire. P(xxx | xxx) -->
-  <!-- Church -->
-
     <div class='reveal'>
       <!-- Any section element inside of this container is displayed as a slide -->
       <div class='slides'>
         <section>
-          <section>
-            <h1>The Representation of Ecological Theories</h1>
-          </section>
+          <h1 style='line-height: 1.2em;'>Theoretical Ecology and the<br/>Foundations of Mathematics</h1>
+          <br/>
+          <br/>
+          <p>Philippe Desjardins-Proulx, Ph.D.</p>
+          <p>Postdoctoral researcher, <a href='https://poisotlab.io/'>Poisot Lab</a>, <a href='https://www.umontreal.ca/'>Université de Montréal</a></p>
         </section>
 
         <section>
           <section>
-            <h2>The Context of Ecological Theories</h2>
-          </section>
-          <section>
-            <img src='img/article-fluctuating.png' alt='fluctuating'/>
-          </section>
-          <section>
-            <img src='img/article-purves.png' alt='purves'/>
+            <h2>Theories for Ecology</h2>
           </section>
           <section>
             <img src='img/article-queller.png' alt='queller'/>
@@ -71,8 +62,117 @@
 
         <section>
           <section>
-            <h2>Dimension:</h2>
-            <h2>Epistemology</h2>
+            <h2>0th and 1st Order Logics</h2>
+          </section>
+          <section>
+            \[\exists! x, y, a, b \in \mathbb{N}: x > 0 \land y > 0 \land a > 1 \land b > 1 \land y^b = x^a + 1.\]
+            \[\forall x, S: x \in S \veebar x \not \in S.\]
+            \[\forall f, x, y, \alpha: Convex(f) \iff f(\alpha x + (1 - \alpha) y) \leq \alpha f(x) + (1 - \alpha) f(y).\]
+          </section>
+          <section>
+            <p>Given a set of propositional symbols \(a, b, c \in \mathcal{P}\):</p>
+            <ol start='0'>
+              <li>If \(a \in \mathcal{P}\), then \(a\) is a WFF.</li>
+              <li>If \(f\) is a WFF, then \(\neg f\) is a WFF.</li>
+              <li>If \(f_0, f_1\) are WFFs, then \(f_0 \ast f_1\) is a WFF.</li>
+            </ol>
+            <p>Where \(\ast\) stands for a valid binary connectives (\(\land\), \(\lor\), \(\Rightarrow\), \(\Leftrightarrow\)).</p>
+            <br/>
+            <p>E.g.: \(a \land (b \lor \neg \neg c)\) is a WFF.</p>
+          </section>
+          <section>
+            \[BurningCoal \Rightarrow EarthsGettingHot.\]
+            \[OnePlusTwoIsThree.\]
+            \[\neg CatsAreBetterThanDogs.\]
+            \[DoingFrontSquats \land BeingOutOfTheShape \Rightarrow Pain.\]
+          </section>
+          <section>
+            <h3>Probability theory is a zeroth-order logic</h3>
+            \[P(a) = 0 \equiv a \mbox { is false}.\]
+            \[P(a) = 1 \equiv a \mbox { is true}.\]
+          </section>
+          <section>
+            <h2>1st order logic</h2>
+          </section>
+          <section>
+            <p>Given a set of constants \(\mathcal{C}\), variables \(\mathcal{V}\) and functions \(\mathcal{F}\):</p>
+            <ol start='0'>
+              <li>If \(v \in \mathcal{V}\), then \(v\) is a term.</li>
+              <li>If \(c \in \mathcal{C}\), then \(c\) is a term.</li>
+              <li>If \(f \in \mathcal{F}\) and \(t_0, ...\) are terms, then \(f(t_0, ...)\) is a term.</li>
+            </ol>
+            <p>Given a set of predicates \(P_0, P_1, P_2 \in \mathcal{P}\):</p>
+            <ol start='0'>
+              <li>If \(P \in \mathcal{P}\), then \(P\) is a WFF.</li>
+              <li>If \(f\) is a WFF, then \(\neg f\) is a WFF.</li>
+              <li>If \(f_0, f_1\) are WFFs, then \(f_0 \ast f_1\) is a WFF.</li>
+              <li>If \(f\) is a WFF and \(v\) a variable, then \(\forall v: f\) and \(\exists v: f\) are a WFFs.</li>
+            </ol>
+            <p>A predicate is a function from 0+ terms to a truth value</p>
+          </section>
+          <section>
+            \[Awesome(Dog) > Awesome(Cat).\]
+            \[\forall x \in \mathbb{N} \exists y \in \mathbb{N}: y = x + 1.\]
+            \[\forall p, t: BackSquats(p, t) \land TotalBackSquats(p) = 0 \Rightarrow Pain(p, Thigh, t + 1).\]
+          </section>
+          <section>
+            \[\forall p: Smoking(p) \Rightarrow Cancer(p).\]
+            \[\forall p_0, p_1, p_2: Friends(p_0, p_1) \land Friends(p_1, p_2) \Rightarrow Friends(p_0, p_2).\]
+            \[\forall s, t \exists r: N(s, t + 1) = r \times N(s, t).\]
+            \[\forall s: second law.\]
+            \[0 \in \mathbb{N}.\]
+            \[\forall n \in \mathbb{N}: n + 1 \in \mathbb{N}.\]
+            \[\forall n \in \mathbb{N}: n > 1 \land n = \sum_{i \in [0, n)}i\times I(mod(n, i) = 0) \Rightarrow mod(n, 2) = 0.\]
+          </section>
+          <section>
+            <h2>Pitfall: Theory X is probabilistic?</h2>
+            <img src='img/stochastic-price.png' alt='rice'/>
+            <p>From Rice and Papadopoulos' <a href='https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0007130'>Evolution with Stochastic Fitness and Stochastic Migration</a>.</p>
+          </section>
+          <section>
+            <p>Warning: First-order logic in A.I. mostly refer to a watered-down version
+            without functions.</p>
+          </section>
+          <section>
+            <h2>Higher-order logic</h2>
+          </section>
+          <section>
+            <h3>Advantages over first-order logic</h3>
+            <p><b>More expressive:</b> can quantify over higher-order structures.</p>
+            <p><b>Ubiquitus:</b> almost all languages for mathematics are now based on type theory. It
+            is used a foundation for both mathematics and programming languages.</p>
+            <p><b>Types!</b> Their more sophisticated view of types make it easier to represent
+            complex objects (vectors, matrices, networks, sum types).</p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Haskell</h2>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Simply Typed λ-Calculus</h2>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>λP: Calculus of Construction</h2>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Category Theory</h2>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Many-Valued λ-Calculus</h2>
           </section>
           <section>
             <h2>Bivalence (0th order fuzziness?)</h2>
@@ -281,172 +381,7 @@
 
         <section>
           <section>
-            <h2>Dimension:</h2>
-            <h2>Ontology</h2>
-          </section>
-          <section>
-            <h2>0th order logic</h2>
-          </section>
-          <section>
-            <p>Given a set of propositional symbols \(a, b, c \in \mathcal{P}\):</p>
-            <ol start='0'>
-              <li>If \(a \in \mathcal{P}\), then \(a\) is a WFF.</li>
-              <li>If \(f\) is a WFF, then \(\neg f\) is a WFF.</li>
-              <li>If \(f_0, f_1\) are WFFs, then \(f_0 \ast f_1\) is a WFF.</li>
-            </ol>
-            <p>Where \(\ast\) stands for a valid binary connectives (\(\land\), \(\lor\), \(\Rightarrow\), \(\Leftrightarrow\)).</p>
-            <br/>
-            <p>E.g.: \(a \land (b \lor \neg \neg c)\) is a WFF.</p>
-          </section>
-          <section>
-            \[BurningCoal \Rightarrow EarthsGettingHot.\]
-            \[OnePlusTwoIsThree.\]
-            \[\neg CatsAreBetterThanDogs.\]
-            \[DoingFrontSquats \land BeingOutOfTheShape \Rightarrow Pain.\]
-          </section>
-          <section>
-            <h3>Probability theory is a zeroth-order logic</h3>
-            \[P(a) = 0 \equiv a \mbox { is false}.\]
-            \[P(a) = 1 \equiv a \mbox { is true}.\]
-          </section>
-          <section>
-            <h2>1st order logic</h2>
-          </section>
-          <section>
-            <p>Given a set of constants \(\mathcal{C}\), variables \(\mathcal{V}\) and functions \(\mathcal{F}\):</p>
-            <ol start='0'>
-              <li>If \(v \in \mathcal{V}\), then \(v\) is a term.</li>
-              <li>If \(c \in \mathcal{C}\), then \(c\) is a term.</li>
-              <li>If \(f \in \mathcal{F}\) and \(t_0, ...\) are terms, then \(f(t_0, ...)\) is a term.</li>
-            </ol>
-            <p>Given a set of predicates \(P_0, P_1, P_2 \in \mathcal{P}\):</p>
-            <ol start='0'>
-              <li>If \(P \in \mathcal{P}\), then \(P\) is a WFF.</li>
-              <li>If \(f\) is a WFF, then \(\neg f\) is a WFF.</li>
-              <li>If \(f_0, f_1\) are WFFs, then \(f_0 \ast f_1\) is a WFF.</li>
-              <li>If \(f\) is a WFF and \(v\) a variable, then \(\forall v: f\) and \(\exists v: f\) are a WFFs.</li>
-            </ol>
-            <p>A predicate is a function from 0+ terms to a truth value</p>
-          </section>
-          <section>
-            \[Awesome(Dog) > Awesome(Cat).\]
-            \[\forall x \in \mathbb{N} \exists y \in \mathbb{N}: y = x + 1.\]
-            \[\forall p, t: BackSquats(p, t) \land TotalBackSquats(p) = 0 \Rightarrow Pain(p, Thigh, t + 1).\]
-          </section>
-          <section>
-            \[\forall p: Smoking(p) \Rightarrow Cancer(p).\]
-            \[\forall p_0, p_1, p_2: Friends(p_0, p_1) \land Friends(p_1, p_2) \Rightarrow Friends(p_0, p_2).\]
-            \[\forall s, t \exists r: N(s, t + 1) = r \times N(s, t).\]
-            \[\forall s: second law.\]
-            \[0 \in \mathbb{N}.\]
-            \[\forall n \in \mathbb{N}: n + 1 \in \mathbb{N}.\]
-            \[\forall n \in \mathbb{N}: n > 1 \land n = \sum_{i \in [0, n)}i\times I(mod(n, i) = 0) \Rightarrow mod(n, 2) = 0.\]
-          </section>
-          <section>
-            <h2>Pitfall: Theory X is probabilistic?</h2>
-            <img src='img/stochastic-price.png' alt='rice'/>
-            <p>From Rice and Papadopoulos' <a href='https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0007130'>Evolution with Stochastic Fitness and Stochastic Migration</a>.</p>
-          </section>
-          <section>
-            <p>Warning: First-order logic in A.I. mostly refer to a watered-down version
-            without functions.</p>
-          </section>
-          <section>
-            <h2>Higher-order logic</h2>
-          </section>
-          <section>
-            <h3>Advantages over first-order logic</h3>
-            <p><b>More expressive:</b> can quantify over higher-order structures.</p>
-            <p><b>Ubiquitus:</b> almost all languages for mathematics are now based on type theory. It
-            is used a foundation for both mathematics and programming languages.</p>
-            <p><b>Types!</b> Their more sophisticated view of types make it easier to represent
-            complex objects (vectors, matrices, networks, sum types).</p>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h2>Representation #0</h2>
-            <h2>Bayesian Networks</h2>
-          </section>
-          <section>
-            <h2>TL;DR;</h2>
-            <p><b>Ontology:</b> Generally 0th order logic :(</p>
-            <p><b>Espistemology:</b> Bivalent, Probabilistic</p>
-            <br/>
-            <h3>Ecoding ecological principles? No.</h3>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h2>Representation #1</h2>
-            <h2>Calculus of Construction</h2>
-          </section>
-          <section>
-            <h2>TL;DR;</h2>
-            <p><b>Ontology:</b> Higher-order (one of the richest)</p>
-            <p><b>Espistemology:</b> Bivalent</p>
-          </section>
-          <section>
-            <p>Rich logic with rich types</p>
-            <p>A popular foundation for theorem proving (Coq, Lean)</p>
-            <p>Formalized real analysis, topology, probability theory, machine learning algorithms et al.</p>
-            <p>Pure logic: bivalent, non-probabilistic, but many-valued version may be fairly straightforward to design.</p>
-            <p>The lack of a clear boundary between types and values make it particularly good for linear algebra.</p>
-            <p>If I wanted to formalize Rice's axioms, this would be my choice.</p>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h2>Representation #2</h2>
-            <h2>Markov Logic Networks</h2>
-          </section>
-          <section>
-            <h2>TL;DR;</h2>
-            <p><b>Ontology:</b> Limited 1st order logic</p>
-            <p><b>Espistemology:</b> Bivalent, Probabilistic</p>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h2>Representation #3</h2>
-            <h2>Fuzzy Type Theory</h2>
-          </section>
-          <section>
-            <h2>TL;DR;</h2>
-            <p><b>Ontology:</b> Higher-order</p>
-            <p><b>Espistemology:</b> Fuzzy (type 1, 2, ...)</p>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h2>Representation #4</h2>
-            <h2>Bayesian Higher-Order Probabilistic Programming</h2>
-          </section>
-          <section>
-            <h2>TL;DR;</h2>
-            <p><b>Ontology:</b> You'd think "higher-order logic", but it's complicated.</p>
-            <p><b>Espistemology:</b> Bivalent (or maybe not?), Probabilistic</p>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h2>Plan</h2>
-          </section>
-          <section>
-            <h2>TL;DR;</h2>
-            <p><b>Ontology:</b> Higher-order logic (Calculus of Construction).</p>
-            <p><b>Espistemology:</b> Bivalent/Fuzzy, Probabilistic</p>
-          </section>
-          <section>
-            \[truth := \{False, True\} | \{x \in \mathbb{R}: 0 \leq x \leq 1\} | \{x \in \mathbb{R}: 0 \leq x \leq 1\} \mapsto \{y \in \mathbb{R}: 0 \leq y \leq 1\}.\]
-            <br/>
-            <p>Type convertion toward fuzzier truths.</p>
+            <h2>Higher-Order Probabilistic Programming</h2>
           </section>
         </section>
 
