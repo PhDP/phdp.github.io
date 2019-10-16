@@ -71,13 +71,51 @@
             <h2>Haskell</h2>
           </section>
           <section>
-<pre ><code class='haskell'>data Truth = False | True</code></pre>
+<pre style='font-size:2em;'><code class='haskell'>data Truth = False | True</code></pre>
+          </section>
+          <section>
+<pre style='font-size:2em;'><code class='haskell'>data Maybe a = Nothing | Just a
+
+realSqrt r = if r < 0 then Nothing else Just (sqrt r)
+</code></pre>
+          </section>
+          <section>
+<pre style='font-size:2em;'><code class='haskell'>data Maybe a = Nothing | Just a
+
+realSqrt r :: Double -> Maybe Double
+realSqrt r = if r < 0 then Nothing else Just (sqrt r)
+</code></pre>
+          </section>
+          <section>
+<pre style='font-size:2em;'><code class='python'>data = dict()
+
+def realSqrt(r):
+  txt = ''
+  for filename in os.listdir(os.getcwd()):
+    if len(filename) > 3 and filename[-3:] == 'mp3':
+      os.rename(filename, filename[4:] + 'py')
+    else:
+      data.add(filanem)
+      f = open(filename, "w+")
+      f.write('Hello file!')
+      f.close()
+  return txt
+</code></pre>
           </section>
           <section>
             <h1>ΣΠ</h1>
           </section>
           <section>
             <h2>Lambda</h2>
+          </section>
+          <section>
+            <h2>Functions</h2>
+<pre style='font-size:2em;'>foo :: Double -> Double -> Double
+foo a b = sqrt (a * b)</code></pre>
+          </section>
+          <section>
+            <img src='img/lyah.png' alt='lyah'/>
+            <p><a href='http://learnyouahaskell.com'>http://learnyouahaskell.com</a></p>
           </section>
         </section>
 
