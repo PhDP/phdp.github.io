@@ -50,10 +50,16 @@
             <h2>Theories for Ecology</h2>
           </section>
           <section>
+            <img src='img/article-lewis80.png' alt='lew80'/>
+            <blockquote style='padding-left: 0.5em; border-left: 0.3em solid #5DD836'>
+              <p>when theories are partially formalized [...]  the intra- and interworkings of theories become more clearly visible, and the total structure of the discipline becomes more evident</p>
+            </blockquote>
+          </section>
+          <section>
             <img src='img/article-queller.png' alt='queller'/>
           </section>
           <section>
-            <img src='img/article-queller2.png' alt='queller part 2'/>
+            <img src='img/article-queller2-big.png' alt='queller'/>
           </section>
           <section>
             <img src='img/article-rice.png' alt='rice'/>
@@ -151,7 +157,7 @@
             <h2>Haskell</h2>
           </section>
           <section>
-<pre><code class="haskell">data Truth = False | True</code></pre>
+<pre ><code class='haskell'>data Truth = False | True</code></pre>
           </section>
         </section>
 
@@ -241,12 +247,12 @@
             <br/>
             \[\{Theory\ x: 0.72918\}.\]
             <br/>
-            <p>Dogs > Cats</p>
-            <p>Viruses are alive</p>
-            <p>Wolves prey on rabbits</p>
-            <p>1. Nf3 is a good chess opening</p>
-            <p>X speaks Korean</p>
-            <p>Quebec French = French</p>
+            <p>SuitabilityAsPet(Dog) > SuitabilityAsPet(Cat): 1.</p>
+            <p>Viruses are alive: 0.8.</p>
+            <p>Wolves prey on rabbits: 0.06.</p>
+            <p>1. Nf3 is a good chess opening: 0.94.</p>
+            <p>X speaks Korean: 0.86.</p>
+            <p>Quebec French = French: 0.95.</p>
           </section>
           <section>
             <h2>Many-valued logic &amp; connectives</h2>
@@ -284,6 +290,19 @@
             </table>
           </section>
           <section>
+            <h2>Three fuzzy logics?</h2>
+            <blockquote style='padding-left: 0.5em; border-left: 0.3em solid #5DD836'>
+              <p>Mostert–Shields’ theorem [22] shows that a t-norm is continuous if and only if it
+              can be built from the previous three ones by the construction of ordinal sum. In
+              other words, a t-norm is continuous if and only if it is an ordinal sum of
+              Łukasiewicz, Gödel and product t-norms. These three operations determine three
+              different algebraizable propositional logics (bringing the same names as their
+              associated t-norms), whose equivalent algebraic semantics are the varieties of MV,
+              Gödel and product algebras respectively.</p>
+            </blockquote>
+            <p>Flaminio et al. <i>Towards a probability theory for product logic: States, integral representation and reasoning</i>. doi: 10.1016/j.ijar.2017.11.003.</p>
+          </section>
+          <section>
             <h2>Properties</h2>
             <table style='width:100%; text-align:center;'>
               <tr>
@@ -319,9 +338,6 @@
             </table>
           </section>
           <section>
-            <h2>Three fuzzy logics?</h2>
-          </section>
-          <section>
             <img src='img/book-mathfuzzy1.jpg' alt='mathfuzzy1'/>
           </section>
           <section>
@@ -343,6 +359,38 @@
           </section>
           <section>
             <img src='img/book cover-mendel17.png' alt='mendel17'/>
+          </section>
+          <section>
+            <h2>Pure logic</h2>
+            <img src='img/preyon-log.png' alt='log'/>
+          </section>
+          <section>
+            <h2>Probabilistic logic<br/>(à la Markov Logic Networks)</h2>
+            <img src='img/preyon-prob.png' alt='prob'/>
+          </section>
+          <section>
+            <h2>Fuzzy Logic</h2>
+            <img src='img/preyon-fuzzy1.png' alt='f1'/>
+          </section>
+          <section>
+            <h2>Fuzzy Logic</h2>
+            <img src='img/preyon-fuzzy2.png' alt='f2'/>
+          </section>
+          <section>
+            <img src='img/paper-fuzzy-tt.png' alt='fuzzy tt'/>
+          </section>
+          <section>
+            <h2>What to do?</h2>
+            <p>Implement fuzzy type theory, more specifically, a fuzzy CoC.</p>
+            <p>Model truth as either bivalent OR fuzzy (OR fuzzy2?) to ensure 100% compatibility with existing systems.</p>
+            <p>"Core" knowledge would remain bivalent (mostly maths, but also some scientific principles).</p>
+            <p>Fuzzy fact could bring data into the mix.</p>
+            <p>Would need to reevalute some sections of the knowledge base with new facts.</p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Bayesian Inference and Higher-Order Logic</h2>
           </section>
           <section>
             <h2>Probability theory</h2>
@@ -379,12 +427,6 @@
             <p>Will Trump be president in 2021?</p>
             <p>Are viruses alive?</p>
             <p>\(x\) interacts with \(y\)?</p>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h2>Higher-Order Probabilistic Programming</h2>
           </section>
         </section>
 
