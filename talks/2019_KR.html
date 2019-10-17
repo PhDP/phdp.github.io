@@ -71,6 +71,24 @@
             <h2>Haskell</h2>
           </section>
           <section>
+<pre style='font-size:0.8em;'><code class='python'>data = dict()
+
+def realSqrt(r):
+  """Returns square root of a positive real number."""
+  mp3s = []
+  for filename in os.listdir("."):
+    if len(filename) > 3 and filename[-3:] == 'mp3':
+      os.rename(filename, filename[:-3] + 'py')
+      mp3s.append(filename[:-4])
+    else:
+      data.add(filename)
+      f = open(filename, "w+")
+      f.write('Hello file!')
+      f.close()
+  return ', '.join(mp3s)
+</code></pre>
+          </section>
+          <section>
 <pre style='font-size:1em;'><code class='haskell'>data Truth = False | True</code></pre>
           </section>
           <section>
@@ -87,20 +105,7 @@ realSqrt r = if r < 0 then Nothing else Just (sqrt r)
 </code></pre>
           </section>
           <section>
-<pre style='font-size:1em;'><code class='python'>data = dict()
-
-def realSqrt(r):
-  txt = ''
-  for filename in os.listdir(os.getcwd()):
-    if len(filename) > 3 and filename[-3:] == 'mp3':
-      os.rename(filename, filename[4:] + 'py')
-    else:
-      data.add(filanem)
-      f = open(filename, "w+")
-      f.write('Hello file!')
-      f.close()
-  return txt
-</code></pre>
+(+) :: Num a => a -> a -> a
           </section>
           <section>
             <h1>ΣΠ</h1>
