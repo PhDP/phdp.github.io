@@ -14,7 +14,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
 
     <link rel='stylesheet' href='reveal.js-3.8.0/css/reveal.css'>
-    <link rel='stylesheet' href='reveal.js-3.8.0/css/theme/white.css' id='theme'>
+    <link rel='stylesheet' href='reveal.js-3.8.0/css/theme/moon.css' id='theme'>
     <link rel='stylesheet' href='reveal.js-3.8.0/lib/css/zenburn.css'>
   </head>
 
@@ -112,26 +112,37 @@ foo a b = sqrt (a * b)</code></pre>
             <h2>0th and 1st Order Logics</h2>
           </section>
           <section>
-            \[\exists! x, y, a, b \in \mathbb{N}: x > 0 \land y > 0 \land a > 1 \land b > 1 \land y^b = x^a + 1.\]
-            \[\forall x, S: x \in S \veebar x \not \in S.\]
-            \[\forall f, x, y, \alpha: Convex(f) \iff f(\alpha x + (1 - \alpha) y) \leq \alpha f(x) + (1 - \alpha) f(y).\]
+<pre style='font-size:0.8em;'><code class='haskell'>data PropFormula =
+    PropSymbol Text
+  | Negation PropFormula
+  | BinaryConnective BinT PropFormula PropFormula
+
+data BinT = Conjunction | Disjunction | Implication | Equivalence
+</code></pre>
           </section>
           <section>
-            <p>Given a set of propositional symbols \(a, b, c \in \mathcal{P}\):</p>
-            <ol start='0'>
-              <li>If \(a \in \mathcal{P}\), then \(a\) is a WFF.</li>
-              <li>If \(f\) is a WFF, then \(\neg f\) is a WFF.</li>
-              <li>If \(f_0, f_1\) are WFFs, then \(f_0 \ast f_1\) is a WFF.</li>
-            </ol>
-            <p>Where \(\ast\) stands for a valid binary connectives (\(\land\), \(\lor\), \(\Rightarrow\), \(\Leftrightarrow\)).</p>
-            <br/>
-            <p>E.g.: \(a \land (b \lor \neg \neg c)\) is a WFF.</p>
+<pre style='font-size:1em;'><code class='haskell'>"BurningCoal => EarthsGettingHot"
+"OnePlusTwoIsThree"
+"¬CatsAreBetterThanDogs"
+</code></pre>
           </section>
           <section>
-            \[BurningCoal \Rightarrow EarthsGettingHot.\]
-            \[OnePlusTwoIsThree.\]
-            \[\neg CatsAreBetterThanDogs.\]
-            \[DoingFrontSquats \land BeingOutOfTheShape \Rightarrow Pain.\]
+            <p>All natural numbers (\(\mathbb{N} = \{0, 1, 2, 3...\}\)) have a successor.</p>
+          </section>
+          <section>
+<pre style='font-size:1em;'><code class='haskell'>
+"ZeroPlusZeroIsZero"
+"ZeroPlusOneIsOne"
+"OnePlusZeroIsOne"
+"ZeroPlusTwoIsTwo"
+"TwoPlusZeroIsTwo"
+"OnePlusOneIsTwo"
+"ZeroPlusThreeIsThree"
+"ThreePlusZeroIsThree"
+"OnePlusTwoIsThree"
+"TwoPlusOneIsThree"
+...
+</code></pre>
           </section>
           <section>
             <h3>Probability theory is a zeroth-order logic</h3>
@@ -139,23 +150,24 @@ foo a b = sqrt (a * b)</code></pre>
             \[P(a) = 1 \equiv a \mbox { is true}.\]
           </section>
           <section>
-            <h2>1st order logic</h2>
+            \[\forall x \in \mathbb{N}, \exists y \in \mathbb{N}: y = x + 1.\]
+            <p>\(y\) is the successor of \(x\).</p>
           </section>
           <section>
-            <p>Given a set of constants \(\mathcal{C}\), variables \(\mathcal{V}\) and functions \(\mathcal{F}\):</p>
-            <ol start='0'>
-              <li>If \(v \in \mathcal{V}\), then \(v\) is a term.</li>
-              <li>If \(c \in \mathcal{C}\), then \(c\) is a term.</li>
-              <li>If \(f \in \mathcal{F}\) and \(t_0, ...\) are terms, then \(f(t_0, ...)\) is a term.</li>
-            </ol>
-            <p>Given a set of predicates \(P_0, P_1, P_2 \in \mathcal{P}\):</p>
-            <ol start='0'>
-              <li>If \(P \in \mathcal{P}\), then \(P\) is a WFF.</li>
-              <li>If \(f\) is a WFF, then \(\neg f\) is a WFF.</li>
-              <li>If \(f_0, f_1\) are WFFs, then \(f_0 \ast f_1\) is a WFF.</li>
-              <li>If \(f\) is a WFF and \(v\) a variable, then \(\forall v: f\) and \(\exists v: f\) are a WFFs.</li>
-            </ol>
-            <p>A predicate is a function from 0+ terms to a truth value</p>
+<pre style='font-size:0.8em;'><code class='haskell'>data Term =
+    Variable Text
+  | Constant Text
+  | Function (Vec Term, Term)
+
+data FOL =
+    Predicate ([Term], Term)
+  | Negation FOL
+  | BinaryConnective BinT FOL FOL
+  | Quantifier QuanT Text FOL
+
+data BinT = Conjunction | Disjunction | Implication | Equivalence
+data QuanT = Exists | Forall | Unique
+</code></pre>
           </section>
           <section>
             \[Awesome(Dog) > Awesome(Cat).\]
