@@ -71,20 +71,15 @@
             <h2>Haskell</h2>
           </section>
           <section>
-<pre style='font-size:0.8em;'><code class='python'>data = dict()
-
-def realSqrt(r):
-  """Returns square root of a positive real number."""
+<pre style='font-size:0.8em;'><code class='python'>def realSqrt(r):
   mp3s = []
   for filename in os.listdir("."):
     if len(filename) > 3 and filename[-3:] == 'mp3':
       os.rename(filename, filename[:-3] + 'py')
       mp3s.append(filename[:-4])
     else:
-      data.add(filename)
-      f = open(filename, "w+")
-      f.write('Hello file!')
-      f.close()
+      with open(filename, 'w+') as f:
+        f.write('Hello file!')
   return ', '.join(mp3s)
 </code></pre>
           </section>
