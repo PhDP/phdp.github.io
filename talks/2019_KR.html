@@ -115,6 +115,16 @@ foo a b = sqrt (a * b)</code></pre>
 <pre style='font-size:0.8em;'><code class='haskell'>data PropFormula =
     PropSymbol Text
   | Negation PropFormula
+  | Conjunction PropFormula PropFormula
+  | Disjunction PropFormula PropFormula
+  | Implication PropFormula PropFormula
+  | Equivalence PropFormula PropFormula
+</code></pre>
+          </section>
+          <section>
+<pre style='font-size:0.8em;'><code class='haskell'>data PropFormula =
+    PropSymbol Text
+  | Negation PropFormula
   | BinaryConnective BinT PropFormula PropFormula
 
 data BinT = Conjunction | Disjunction | Implication | Equivalence
@@ -130,8 +140,7 @@ data BinT = Conjunction | Disjunction | Implication | Equivalence
             <p>All natural numbers (\(\mathbb{N} = \{0, 1, 2, 3...\}\)) have a successor.</p>
           </section>
           <section>
-<pre style='font-size:1em;'><code class='haskell'>
-"ZeroPlusZeroIsZero"
+<pre class='stretch' style='font-size:1em;'><code class='haskell'>"ZeroPlusZeroIsZero"
 "ZeroPlusOneIsOne"
 "OnePlusZeroIsOne"
 "ZeroPlusTwoIsTwo"
@@ -160,7 +169,7 @@ data BinT = Conjunction | Disjunction | Implication | Equivalence
   | Function (Vec Term, Term)
 
 data FOL =
-    Predicate ([Term], Term)
+    Predicate (Vec Term, Term)
   | Negation FOL
   | BinaryConnective BinT FOL FOL
   | Quantifier QuanT Text FOL
