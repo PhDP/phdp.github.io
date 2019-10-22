@@ -80,13 +80,53 @@
             <p>Languages to formalize mathematics are also functional</p>
           </section>
           <section>
-<pre style='font-size:1em;'><code class='haskell'>data Truth = False | True</code></pre>
+            <h2>Haskell</h2>
+            <p>Created in 1990 by a group of mathematicians and CS theorists</p>
+            <p>Pure functional language</p>
+            <p>Statically typed (à la C, C++) but with type inference</p>
+            <p>Immutable data structures</p>
+            <p>Based on System F (2nd-order typed λ-calculus)</p>
+            <p>Relies heavily on category theory</p>
           </section>
+          <section>
+<pre style='font-size:1em;'><code class='haskell'>data Bool = False | True</code></pre>
+
+<div class='terminal'><pre>
+λ> :t False
+False :: Bool
+</pre></div>
+          </section>
+
+          <section>
+<pre style='font-size:1em;'><code class='haskell'>data Name = Name String
+data Kind = Undergrad | MScStudent | PhDStudent
+          | Visiting | PI | PostDoc
+data LabMember = LabMember Name Kind</code></pre>
+
+<div class='terminal'><pre>
+λ> :t Name
+Name :: String -> Name
+
+λ> :t PhDStudent
+PhDStudent :: Kind
+
+λ> :t LabMember
+LabMember :: Name -> Kind -> LabMember
+</pre></div>
+          </section>
+
           <section>
 <pre style='font-size:1em;'><code class='haskell'>data Maybe a = Nothing | Just a
 
 safeSqrt r = if r < 0 then Nothing else Just (sqrt r)
 </code></pre>
+
+<div class='terminal'><pre>
+λ> :t safeSqrt
+safeSqrt :: (Ord a, Floating a) => a -> Maybe a
+λ> :t safeSqrt 0.5
+safeSqrt 0.5 :: (Ord a, Floating a) => Maybe a
+</pre></div>
           </section>
           <section>
 <pre style='font-size:1em;'><code class='haskell'>data Maybe a = Nothing | Just a
@@ -114,19 +154,103 @@ answer = foldr sumLogs 0 values
 </code></pre>
           </section>
           <section>
-<pre style='font-size:1em;'><code class='haskell'>bisec f a b e
-  | diff < e || f m == 0 = Just m
-  | f a * f m < 0        = bisec f a m e
-  | f m * f b < 0        = bisec f m b e
-  | otherwise            = Nothing
-  where diff = abs (b - a) / 2.0
-        m = (a + b) / 2
+<pre style='font-size:1em;'><code class='haskell'>-- Checks whether 'by' divides 'n' with a remainder of 0.
+divides by n = n `mod` by == 0
+
+-- Checks if a number is even
+isEven = divides 2 -- Currying
 </code></pre>
           </section>
           <section>
-<pre style='font-size:1em;'>foo :: Double -> Double -> Double
-foo a b = sqrt (a * b)</code></pre>
+<pre style='font-size:1em;'><code class='stretch haskell'>-- Checks whether 'by' divides 'n' with a remainder of 0.
+divides :: Integral a => a -> a -> Bool
+divides by n = n `mod` by == 0
+
+-- Checks if a number is even.
+isEven :: Integral a => a -> Bool
+isEven = divides 2
+
+addOne = (+) 1
+</code></pre>
           </section>
+          <section>
+            <h2>Type Theory: Abstraction and Application</h2>
+<div class='terminal'><pre>
+λ> values = [0.1, 0.4, 0.9, 0.03, 0.0001, 0.8]
+
+λ> map sqrt values
+[0.32,0.63,0.95,0.17,0.89]
+
+λ> map (+ 1) values
+[1.1,1.4,1.9,1.03,1.0001,1.8]
+
+λ> map (log . sqrt) values
+[-1.15,-0.46,-0.0052,-1.75,-4.61,-0.11]
+
+λ> map (\x -> if x < 0.5 then 'a' else 'z') values
+"aazaaz"
+</pre></div>
+          </section>
+          <section>
+            <h2>Type Theory: Abstraction and Application</h2>
+<div class='terminal'><pre>
+λ> :t (\x -> if x < 0.5 then 'a' else 'z')
+(\x -> if x < 0.5 then 'a' else 'z') :: (Ord a, Fractional a) => a -> Char
+
+λ> (\x -> if x < 0.5 then 'a' else 'z') 0.2
+'a'
+
+λ> (\x -> if x < 0.5 then 'a' else 'z') 0.5
+'z'
+</pre></div>
+          </section>
+
+          <section>
+<div class='terminal'><pre>
+λ> capitalOf = Map.fromList [("Arrakeen", "Arrakis")]
+λ> Map.lookup "France" capitals
+Nothing
+
+λ> Map.lookup "Arrakis" capitals
+Just "Arrakeen"
+</pre></div>
+          </section>
+
+          <section>
+<pre style='font-size:0.95em;'><code class='stretch haskell'>type Graph k e = Map k (Map k e)
+
+getEdge :: (Ord k) => k -> k -> Graph k e -> Maybe e
+getEdge head tail g =
+  case Map.lookup head g of
+    Maybe g' => case Map.lookup tail g' of
+                  Maybe edge => edge
+                  Nothing    => Nothing
+    Nothing => Nothing
+</code></pre>
+          </section>
+
+          <section>
+<pre style='font-size:0.95em;'><code class='stretch haskell'>type Graph k e = Map k (Map k e)
+
+getEdge :: (Ord k) => k -> k -> Graph k e -> Maybe e
+getEdge head tail g = Map.lookup head g >>= Map.lookup tail
+</code></pre>
+          </section>
+
+          <section>
+<pre style='font-size:1em;'><code class='stretch haskell'>class Monad m where
+  (>>=)  :: m a -> (a -> m b) -> m b
+  (>>)   :: m a -> m b        -> m b
+  return :: a                 -> m a
+  fail   :: String -> m a
+</code></pre>
+          </section>
+
+          <section>
+            <img width='900px' src='img/category-in-context.jpg' alt='context'/>
+            <p>Emily Riehl (<a href='https://twitter.com/emilyriehl'>@emilyriehl</a>)</p>
+          </section>
+
           <section>
             <img src='img/lyah.png' alt='lyah'/>
             <p><a href='http://learnyouahaskell.com'>http://learnyouahaskell.com</a></p>
