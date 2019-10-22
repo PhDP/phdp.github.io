@@ -56,8 +56,8 @@
             <h2>Haskell</h2>
           </section>
           <section>
-<pre style='font-size:0.8em;'><code class='python'>def safeSqrt(r):
-  """Returns the square root of 'r'. Does NOTHING else, muhahahahaHAHHAHAHAA!!!."""
+<pre style='font-size:0.8em;'><code class='stretch python'>def safeSqrt(r):
+  """Returns the square root of 'r' muhahaHAHAHA!!!"""
   mp3s = []
   for filename in os.listdir("."):
     if len(filename) > 3 and filename[-3:] == 'mp3':
@@ -68,6 +68,16 @@
         f.write('Hello file!')
   return ', '.join(mp3s)
 </code></pre>
+          </section>
+          <section>
+            <h2>Functional Programming Languages</h2>
+            <p>Programming with functions</p>
+            <p>Focus on immutability</p>
+            <p>Recursion instead of loops</p>
+            <br/>
+            <p>Typed ML: Haskell, Standard ML, OCaml, F#</p>
+            <p>Untyped Lisps: Common Lisp, Scheme, Clojure</p>
+            <p>Languages to formalize mathematics are also functional</p>
           </section>
           <section>
 <pre style='font-size:1em;'><code class='haskell'>data Truth = False | True</code></pre>
@@ -86,19 +96,34 @@ realSqrt r = if r < 0 then Nothing else Just (sqrt r)
 </code></pre>
           </section>
           <section>
-(+) :: Num a => a -> a -> a
+<pre style='font-size:1em;'><code class='haskell'>values = [0.05, 0.01, 0.07, 0.0032, 0.00014]
+
+sumLogs = (+) . log
+
+foldr sumLogs 0 values
+</code></pre>
           </section>
           <section>
-            <h1>ΣΠ</h1>
-            <p>Abstraction</p>
-            (\x -> x) 5
-            <p>Application</p>
+<pre style='font-size:1em;'><code class='haskell'>values = [0.05, 0.01, 0.07, 0.0032, 0.00014]
+
+sumLogs :: (Floating a) => a -> a -> a
+sumLogs = (+) . log
+
+answer :: Double
+answer = foldr sumLogs 0 values
+</code></pre>
           </section>
           <section>
-            <h2>Lambda</h2>
+<pre style='font-size:1em;'><code class='haskell'>bisec f a b e
+  | diff < e || f m == 0 = Just m
+  | f a * f m < 0        = bisec f a m e
+  | f m * f b < 0        = bisec f m b e
+  | otherwise            = Nothing
+  where diff = abs (b - a) / 2.0
+        m = (a + b) / 2
+</code></pre>
           </section>
           <section>
-            <h2>Functions</h2>
 <pre style='font-size:1em;'>foo :: Double -> Double -> Double
 foo a b = sqrt (a * b)</code></pre>
           </section>
@@ -238,6 +263,31 @@ data QuanT = Exists | Forall | Unique
             <p>All implementations are different</p>
             <p>Richer than 0th/1st order logics, and thus inference is harder</p>
           </section>
+        </section>
+
+
+        <section>
+          <section>
+            <h2>Type Theories, λ-Calculi, HOL</h2>
+          </section>
+          <section>
+
+            <p>Various type theories: Whitehead and Russell's ramified theory of types, typed
+            lambda calculi, Martin-Löf Type Theory, Homotopy Type Theory.</p>
+
+            <p>Some lambda calculi are not type theories (e.g. Untyped Lambda Calculus, the
+            foundation for Lisps).</p>
+
+            <p>"Higher-order logic" isn't always used consistenty, but here it will mean: any logic
+            capable of higher-order quantification.</p>
+
+          </section>
+
+          <section>
+            <h2>Lambda Cube</h2>
+            <img src='img/lambda cube.png' alt='lambda cube'/>
+          </section>
+
           <section>
             <table style="width:100%; text-align:center;">
               <tr>
@@ -252,14 +302,14 @@ data QuanT = Exists | Forall | Unique
                 <td>Haskell/C</td>
                 <td>No</td>
                 <td>Yes</td>
-                <td>System F (2nd-order typed λ-calculus)</td>
+                <td>System F (λ2)</td>
               </tr>
               <tr>
                 <td>OCaml</td>
                 <td>OCaml</td>
                 <td>No</td>
                 <td>Yes</td>
-                <td>System F (2nd-order typed λ-calculus)</td>
+                <td>System F (λ2)</td>
               </tr>
               <tr>
                 <td>Clojure</td>
@@ -280,23 +330,26 @@ data QuanT = Exists | Forall | Unique
                 <td>OCaml</td>
                 <td>Yes</td>
                 <td>No</td>
-                <td>Simply typed λ-calculus</td>
+                <td>λ→</td>
               </tr>
               <tr>
                 <td>Coq</td>
                 <td>OCaml</td>
                 <td>Yes</td>
                 <td>No</td>
-                <td>Calculus of Construction</td>
+                <td>CoC (λC)</td>
               </tr>
               <tr>
                 <td>Lean</td>
                 <td>C++</td>
                 <td>Yes</td>
                 <td>No</td>
-                <td>Homotopy Type Theory</td>
+                <td>CoC (λC)</td>
               </tr>
             </table>
+          </section>
+          <section>
+            <h2>Curry-Howard correspondence</h2>
           </section>
         </section>
 
