@@ -57,6 +57,7 @@
           </section>
           <section>
 <pre style='font-size:0.8em;'><code class='python'>def safeSqrt(r):
+  """Returns the square root of 'r'. Does NOTHING else, muhahahahaHAHHAHAHAA!!!."""
   mp3s = []
   for filename in os.listdir("."):
     if len(filename) > 3 and filename[-3:] == 'mp3':
@@ -109,7 +110,7 @@ foo a b = sqrt (a * b)</code></pre>
 
         <section>
           <section>
-            <h2>0th and 1st Order Logics</h2>
+            <h2>Zeroth-Order (or Propositional) Logic</h2>
           </section>
           <section>
 <pre style='font-size:0.8em;'><code class='haskell'>data PropFormula =
@@ -159,8 +160,17 @@ data BinT = Conjunction | Disjunction | Implication | Equivalence
             \[P(a) = 1 \equiv a \mbox { is true}.\]
           </section>
           <section>
+            <img src='img/pgm-bn.svg' width='90%' alt='pgm'/>
+            \[\begin{align}P(l, \neg c, m, \neg g) & = P(l)P(\neg c)P(m|\neg c)P(\neg g | l, \neg c, m)\\ & = 0.81 \times (1 - 0.65) \times 0.27 \times (1 - 0.42)\\ & = 0.044.\end{align}\]
+          </section>
+          <section>
             \[\forall x \in \mathbb{N}, \exists y \in \mathbb{N}: y = x + 1.\]
             <p>\(y\) is the successor of \(x\).</p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>First-Order Logic</h2>
           </section>
           <section>
 <pre style='font-size:0.8em;'><code class='stretch haskell'>data Term = Variable Text | Constant Text | Function (Vec Term)
@@ -190,24 +200,103 @@ data QuanT = Exists | Forall | Unique
             \[\forall n \in \mathbb{N}: n > 1 \land n = \sum_{i \in [0, n)}i\times I(mod(n, i) = 0) \Rightarrow mod(n, 2) = 0.\]
           </section>
           <section>
+            <h2>0th, 1st?</h2>
+          </section>
+          <section>
             <h2>Pitfall: Theory X is probabilistic?</h2>
             <img src='img/stochastic-price.png' alt='rice'/>
             <p>From Rice and Papadopoulos' <a href='https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0007130'>Evolution with Stochastic Fitness and Stochastic Migration</a>.</p>
           </section>
           <section>
-            <p>Warning: First-order logic in A.I. mostly refer to a watered-down version
-            without functions.</p>
-          </section>
-          <section>
             <h2>Higher-order logic</h2>
           </section>
           <section>
-            <h3>Advantages over first-order logic</h3>
-            <p><b>More expressive:</b> can quantify over higher-order structures.</p>
-            <p><b>Ubiquitus:</b> almost all languages for mathematics are now based on type theory. It
-            is used a foundation for both mathematics and programming languages.</p>
-            <p><b>Types!</b> Their more sophisticated view of types make it easier to represent
-            complex objects (vectors, matrices, networks, sum types).</p>
+            <h2>The case for 1st-order logic</h2>
+            <p>Can encode not all, but a lot of mathematics</p>
+            <p>Simple to implement</p>
+            <p>Simple to understand</p>
+            <p>Uniform</p>
+            <p>Widely used (caveat: often watered down in A.I.)</p>
+          </section>
+          <section>
+            <h2>The case against 1st-order logic</h2>
+            <p>Many ideas are difficult to represent</p>
+            <p>Efforts to formalize mathematics done in HOL</p>
+            <p>Lack of a sophisticated theory of types complicates the modelling of complex objects</p>
+          </section>
+          <section>
+            <h2>The case for type theories (HOL)</h2>
+            <p>Can quantify over anything (\(\infty\)-order logic)</p>
+            <p>Used for decades to formalize mathematics</p>
+            <p>It's a rich logic</p>
+            <p>It's a rich foundation for mathematics</p>
+            <p>It's a rich foundation for programming languages</p>
+          </section>
+          <section>
+            <h2>The case against type theories (HOL)</h2>
+            <p>Arguably easier to use in many cases, but the foundations are conceptually harder to understand</p>
+            <p>All implementations are different</p>
+            <p>Richer than 0th/1st order logics, and thus inference is harder</p>
+          </section>
+          <section>
+            <table style="width:100%; text-align:center;">
+              <tr>
+                <th>Programming Language</th>
+                <th>Implemented in</th>
+                <th>Theorem proving?</th>
+                <th>Turing complete?</th>
+                <th>Foundation</th>
+              </tr>
+              <tr>
+                <td>Haskell</td>
+                <td>Haskell/C</td>
+                <td>No</td>
+                <td>Yes</td>
+                <td>System F (2nd-order typed λ-calculus)</td>
+              </tr>
+              <tr>
+                <td>OCaml</td>
+                <td>OCaml</td>
+                <td>No</td>
+                <td>Yes</td>
+                <td>System F (2nd-order typed λ-calculus)</td>
+              </tr>
+              <tr>
+                <td>Clojure</td>
+                <td>Clojure/Java</td>
+                <td>No</td>
+                <td>Yes</td>
+                <td>Untyped λ-calculus</td>
+              </tr>
+              <tr>
+                <td>Agda</td>
+                <td>Haskell</td>
+                <td>Yes</td>
+                <td>No</td>
+                <td>Unified theory of dependent types</td>
+              </tr>
+              <tr>
+                <td>HOL Light</td>
+                <td>OCaml</td>
+                <td>Yes</td>
+                <td>No</td>
+                <td>Simply typed λ-calculus</td>
+              </tr>
+              <tr>
+                <td>Coq</td>
+                <td>OCaml</td>
+                <td>Yes</td>
+                <td>No</td>
+                <td>Calculus of Construction</td>
+              </tr>
+              <tr>
+                <td>Lean</td>
+                <td>C++</td>
+                <td>Yes</td>
+                <td>No</td>
+                <td>Homotopy Type Theory</td>
+              </tr>
+            </table>
           </section>
         </section>
 
