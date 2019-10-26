@@ -37,7 +37,7 @@
           <section>
             <img width='900px' src='img/article-lewis80.png' alt='lew80'/>
             <blockquote style='padding-left: 0.5em; border-left: 0.3em solid #5DD836'>
-              <p>when theories are partially formalized [...]  the intra- and interworkings of theories become more clearly visible, and the total structure of the discipline becomes more evident</p>
+              <p>when theories are partially formalized [...] the intra- and interworkings of theories become more clearly visible, and the total structure of the discipline becomes more evident</p>
             </blockquote>
           </section>
           <section>
@@ -51,24 +51,17 @@
           </section>
           <section>
             <h2>Goals</h2>
-
             <p><b>0. Implement a language powerful enough to represent mathematical ideas and
             complex relationships between objects (λC)</b></p>
-
             <p><b>1. Study {many-valued, probabilistic} extensions to λC and how they can be used
             to encode ecological knowledge.</b></p>
-
             <p><b>2. Develop and encode ecological theories in our extended λC.</b></p>
-
             <p><b>3. Symbolic regression for machine learning within our extended λC.</b></p>
-
           </section>
-
           <section>
-            <h2>Project</h2>
-            <p></p>
-            <p>Faun: Haskell</p>
-            <p>(Low-Priority) Akarui: Rust</p>
+            <h2>Projects</h2>
+            <p><a href='https://github.com/PhDP/Faun'>Faun</a>: written in Haskell. Serves as a sandbox for various ideas. Has already quite a bit of code (mostly first-order logic).</p>
+            <p><a href='https://github.com/PhDP/Akarui'>Akarui</a>: written in Rust. More focused, will only implement λC and its extensions.</p>
           </section>
         </section>
 
@@ -299,9 +292,7 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <img width='900px' src='img/category-in-context.jpg' alt='context'/>
             <p>Emily Riehl (<a href='https://twitter.com/emilyriehl'>@emilyriehl</a>)</p>
           </section>
-
         </section>
-
 -->
 
         <section>
@@ -309,14 +300,72 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <h2>Zeroth-Order (or Propositional) Logic</h2>
           </section>
           <section>
-<pre style='font-size:0.8em;'><code class='haskell'>data PropFormula =
-    PropSymbol Text
-  | Negation PropFormula
-  | Conjunction PropFormula PropFormula
-  | Disjunction PropFormula PropFormula
-  | Implication PropFormula PropFormula
-  | Equivalence PropFormula PropFormula
-</code></pre>
+            <p>Is the most primitive logic.</p>
+            <p>Bivalent, so truth: \(\{False, True\} \equiv \{F, T\} \equiv {\bot, \top\}\).</p>
+          </section>
+          <section>
+            <p>Given a set of propositional symbols \(\mathcal{S}\):</p>
+            <ol start='0'>
+              <li>If \(s \in \mathcal{S}\), then \(s\) is a WFF.</li>
+              <li>If \(f\) is a WFF, then \(\neg f\) is a WFF.</li>
+              <li>If \(f_0, f_1\) are WFFs, then \(f_0 \star f_1\) is a WFF.</li>
+            </ol>
+            <p>With \(\star = \{\land, \lor, \Rightarrow, \leftrightarrow, \veebar\}.\)</p>
+          </section>
+          <section>
+            <table style='width: 60%; text-align:center;'>
+              <tr>
+                <th>Connective</th>
+                <th>Informal</th>
+                <th>Symbol</th>
+                <th>F x F</th><th>F x T</th><th>T x F</th><th>T x T</th>
+              </tr>
+              <tr>
+                <td>Conjunction</td>
+                <td>and</td>
+                <td>\(\land\)</td>
+                <td>F</td><td>F</td><td>F</td><td>T</td>
+              </tr>
+              <tr>
+                <td>Disjunction</td>
+                <td>or</td>
+                <td>\(\lor\)</td>
+                <td>F</td><td>T</td><td>T</td><td>T</td>
+              </tr>
+              <tr>
+                <td>Implication</td>
+                <td>implies</td>
+                <td>\(\Rightarrow\)</td>
+                <td>T</td><td>T</td><td>F</td><td>T</td>
+              </tr>
+              <tr>
+                <td>Equivalence</td>
+                <td>iff</td>
+                <td>\(\leftrightarrow\)</td>
+                <td>T</td><td>F</td><td>F</td><td>T</td>
+              </tr>
+              <tr>
+                <td>Exclusive disjunction</td>
+                <td>xor</td>
+                <td>\(\veebar\)</td>
+                <td>F</td><td>T</td><td>T</td><td>F</td>
+              </tr>
+            </table>
+          </section>
+          <section>
+            \(CatsCanBePets \Rightarrow TrumpIsAStableGenius.\)
+          </section>
+          <section>
+            <h2>Who cares about \(\mathbb{N}\)?</h2>
+
+            <p>With \(x, y \in \mathbb{N}: x - y \in \mathbb{Z}\).</p>
+
+            <p>With \(x \in \mathbb{Z}, y \in \mathbb{N}: (x / y) \in \mathbb{Q}\).</p>
+
+            <p>\(\mathbb{R}\) is a lot more work, but the idea is roughly to define \(x \in
+            mathbb{R}\) as a sequence of rationals converging to \(x\).</p>
+
+            <p>Probability theory requires \(\mathbb{R}\) (among other things).</p>
           </section>
           <section>
 <pre style='font-size:1em;'><code class='haskell'>"BurningCoal => EarthsGettingHot"
@@ -406,10 +455,24 @@ data QuanT = Exists | Forall | Unique
             \[\forall P: P(0) \land [\forall x \in \mathbb{N}: P(x) \Rightarrow P(S(x))] \Rightarrow [\forall x \in \mathbb{N}: P(x)].\]
           </section>
           <section>
+            <img src='img/article-logic-theorist.png' alt='logic theorist'/>
+          </section>
+          <section>
+            <!-- If s = t in Delta, s = t is provable from Delta -->
+            <img src='img/har09-inference-rules.png' alt='inference rules'/>
+            <p>From J Harrison's <i>Handbook Of Practical Logic And Automated Reasoning</i>, Cambridge University Press, 2009.</p>
+          </section>
+          <section>
+            <img src='img/article-lean.png' alt='lean'/>
+          </section>
+          <section>
+            <img src='img/articles-safeml.png' alt='safeml'/>
+          </section>
+          <section>
             <h2>0th, 1st?</h2>
           </section>
           <section>
-            <h2>Pitfall: Theory X is probabilistic?</h2>
+            <h2>Pitfall 1 of 8128: _ is probabilistic</h2>
             <img src='img/stochastic-price.png' alt='rice'/>
             <p>From Rice and Papadopoulos' <a href='https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0007130'>Evolution with Stochastic Fitness and Stochastic Migration</a>.</p>
           </section>
