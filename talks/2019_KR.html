@@ -439,11 +439,9 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
           </section>
           <section>
             <h2>Names DO matter</h2>
-            \[\forall x: Smoking(x) \Rightarrow Cancer(x).\]
             \[\forall x, y: Friends(x, y) \land Smoking(x) \Rightarrow Smoking(y).\]
             \[\forall x, y: PreyOn(x, y) \land \neg Parasite(x) \Rightarrow M(x) > M(y).\]
             \[\begin{align}\forall x, y: BirthParentOf(x, y) \Rightarrow & Age(x) \geq Age(y) \\ & + Maturity(SpeciesOf(x))\end{align}.\]
-            <br/>
             <br/>
             \[\forall x, y: P(x, y) \equiv P(y, x).\]
           </section>
@@ -511,12 +509,20 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <p>\(Sm(Person):\) Whether the person smokes.</p>
             <p>\(Ca(Person):\) Whether the person has or had cancer.</p>
 
+            <br/>
+            <br/>
+            <p>And a set of persons \(\{A, B\}\).</p>
+          </section>
+          <section>
+            <h2>Markov Logic</h2>
+
             \[\forall x: Sm(x) \Rightarrow Ca(x); 1.5.\]
-            \[\forall x: \neg[\exists y: Fr(x, y)] \Rigtharrow Sm(x); 2.3.\]
+            \[\forall x: \neg[\exists y: Fr(x, y)] \Rightarrow Sm(x); 2.3.\]
             \[\forall x, y, z: Fr(x, y) \land Fr(y, z) \Rightarrow Fr(x, z); 0.7.\]
             \[\forall x, y: Fr(x, y) \Rightarrow [Sm(x) \equiv Sm(y)]; 1.1\]
 
-            <p>Given \(\{A, B\}\):</p>
+            <br/>
+            <br/>
 
             \[P(Ca(A) | Fr(B, A), Ca(B)).\]
             \[P(Ca(A) | Fr(B, A), Ca(B), \forall x, y: Fr(x, y) \equiv Fr(y, x); 4.5).\]
