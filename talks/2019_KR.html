@@ -490,17 +490,17 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
           <section>
             <h2>Can we reach \(h\) from \(t\) in a graph?</h2>
 
-            \[Reachability(t, h) \Leftrightarrow t = h.\]
+            \[Reach(t, h) \Leftrightarrow t = h.\]
           </section>
           <section>
             <h2>Can we reach \(h\) from \(t\) in a graph?</h2>
 
-            \[Reachability(t, h) \Leftrightarrow t = h \lor Edge(t, h).\]
+            \[Reach(t, h) \Leftrightarrow t = h \lor Edge(t, h).\]
           </section>
           <section>
             <h2>Can we reach \(h\) from \(t\) in a graph?</h2>
 
-            \[\begin{align}Reachability(t, h) & \Leftrightarrow t = h \\ & \lor Edge(t, h) \\ & \lor [\exist x: Edge(t, x) \land Edge(x, h)] \\ & \lor [\exist x, y: Edge(t, x) \land Edge(x, y) \land Edge(y, h)]\end{align}.\]
+            \[\begin{align}Reach(t, h) & \Leftrightarrow t = h \\ & \lor Edge(t, h) \\ & \lor [\exists x: Edge(t, x) \land Edge(x, h)] \\ & \lor [\exists x, y: Edge(t, x) \land Edge(x, y) \land Edge(y, h)] \\ & [\exists x, y, z: Edge(t, x) \land Edge(x, y) \land Edge(y, z) \land Edge(z, h)]\end{align}.\]
           </section>
           <section>
             <h2>Probabilistic First-Order Logics</h2>
