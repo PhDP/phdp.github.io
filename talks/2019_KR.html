@@ -341,7 +341,7 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
               <tr>
                 <td>Equivalence</td>
                 <td>iff</td>
-                <td>\(\leftrightarrow\)</td>
+                <td>\(\equiv, \iff, \Leftrightarrow\)</td>
                 <td>T</td><td>F</td><td>F</td><td>T</td>
               </tr>
               <tr>
@@ -420,6 +420,7 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
           </section>
           <section>
             \[b + 2^8.\]
+            \[Addition(b, Exponentiation(2, 8)).\]
             \[CapitalOf(Finland).\]
             \[NativeLanguage(Marie\ Curie).\]
           </section>
@@ -499,7 +500,7 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
           <section>
             <h2>Can we reach \(h\) from \(t\) in a graph?</h2>
 
-            \[\begin{align}Reachability(t, h) & \Leftrightarrow t = h \\ & \lor Edge(t, h) \\ & \lor [\exist x: Edge(t, x) \land Edge(x, h)] \\ & \lor [\exist x, y: Edge(t, x) \land Edge(x, y) \land Edge(y, h)].\]
+            \[\begin{align}Reachability(t, h) & \Leftrightarrow t = h \\ & \lor Edge(t, h) \\ & \lor [\exist x: Edge(t, x) \land Edge(x, h)] \\ & \lor [\exist x, y: Edge(t, x) \land Edge(x, y) \land Edge(y, h)]\end{align}.\]
           </section>
           <section>
             <h2>Probabilistic First-Order Logics</h2>
@@ -921,7 +922,7 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
         progress: true,
         history: true,
         center: true,
-        slideNumber: 'c/t',
+        slideNumber: '',
 
         theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
         transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
