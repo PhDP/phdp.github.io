@@ -50,6 +50,9 @@
             <img src='img/article-rice.png' alt='rice'/>
           </section>
           <section>
+            <img src='img/article-logic-theorist.png' alt='logic theorist'/>
+          </section>
+          <section>
             <h2>Goals</h2>
             <p><b>0. Implement a language powerful enough to represent mathematical ideas and
             complex relationships between objects (λC)</b></p>
@@ -353,15 +356,14 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             </table>
           </section>
           <section>
-            \(CatsCanBePets \Rightarrow TrumpIsAStableGenius.\)
+            \[CatsCanBePets \Rightarrow TrumpIsAStableGenius.\]
+            \[OnePlusTwoIsThree.\]
+            \[¬CatsAreBetterThanDogs.\]
           </section>
           <section>
-            <p>Generally associated with set theory.</p>
-          </section>
-          <section>
-            <h2>Cheating is OK!</h2>
-            <p>You can have built-in types for, well, anything: integer, natural numbers, etc.</p>
-            <p>You can also often cheat to get around the limitations of first-order logic, e.g. \(CanReach(x, y)\).</p>
+            <h2>Names don't really matter</h2>
+            \[a \land (b \lor c) \Rightarrow d.\]
+            \[Fever \land (Cough \lor AchingMuscles) \Rightarrow Flu.\]
           </section>
           <section>
             <h2>Who cares about \(\mathbb{N}\)?</h2>
@@ -371,27 +373,14 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <p>Probability theory requires \(\mathbb{R}\) (among other things).</p>
           </section>
           <section>
-<pre style='font-size:1em;'><code class='haskell'>"BurningCoal => EarthsGettingHot"
-"OnePlusTwoIsThree"
-"¬CatsAreBetterThanDogs"
-</code></pre>
-          </section>
-          <section>
-            <p>All natural numbers (\(\mathbb{N} = \{0, 1, 2, 3...\}\)) have a successor.</p>
-          </section>
-          <section>
-<pre style='font-size:1em;'><code class='stretch haskell'>"ZeroPlusZeroIsZero"
-"ZeroPlusOneIsOne"
-"OnePlusZeroIsOne"
-"ZeroPlusTwoIsTwo"
-"TwoPlusZeroIsTwo"
-"OnePlusOneIsTwo"
-"ZeroPlusThreeIsThree"
-"ThreePlusZeroIsThree"
-"OnePlusTwoIsThree"
-"TwoPlusOneIsThree"
-...
-</code></pre>
+            \[OneIsInN\]
+            \[TwoIsInN\]
+            \[ThreeIsInN\]
+            \[FourIsInN\]
+            \[FiveIsInN\]
+            \[SixIsInN\]
+            \[SevenIsInN\]
+            \[...\]
           </section>
           <section>
             <h3>Probability theory is a zeroth-order logic</h3>
@@ -437,6 +426,11 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <p>\(\diamondsuit = \{\forall, \exists, \exists!\}\).</p>
           </section>
           <section>
+            \[Awesome(Dog) > Awesome(Cat).\]
+            \[\forall x \in \mathbb{N} \exists y \in \mathbb{N}: y = x + 1.\]
+            \[\forall p, t: BackSquats(p, t) \land TotalBackSquats(p) = 0 \Rightarrow Pain(p, Thigh, t + 1).\]
+          </section>
+          <section>
             <p>An <b>interpretation</b> tells us whether a symbol refers to a constant, function, or
             predicate, and what is its domain.</p>
 
@@ -444,18 +438,14 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             \[z = s \times h^2.\]
           </section>
           <section>
-            \[Awesome(Dog) > Awesome(Cat).\]
-            \[\forall x \in \mathbb{N} \exists y \in \mathbb{N}: y = x + 1.\]
-            \[\forall p, t: BackSquats(p, t) \land TotalBackSquats(p) = 0 \Rightarrow Pain(p, Thigh, t + 1).\]
-          </section>
-          <section>
-            \[\forall p: Smoking(p) \Rightarrow Cancer(p).\]
-            \[\forall p_0, p_1, p_2: Friends(p_0, p_1) \land Friends(p_1, p_2) \Rightarrow Friends(p_0, p_2).\]
-            \[\forall s, t \exists r: N(s, t + 1) = r \times N(s, t).\]
-            \[\forall s: second law.\]
-            \[0 \in \mathbb{N}.\]
-            \[\forall n \in \mathbb{N}: n + 1 \in \mathbb{N}.\]
-            \[\forall n \in \mathbb{N}: n > 1 \land n = \sum_{i \in [0, n)}i\times I(mod(n, i) = 0) \Rightarrow mod(n, 2) = 0.\]
+            <h2>Names DO matter</h2>
+            \[\forall x: Smoking(x) \Rightarrow Cancer(x).\]
+            \[\forall x, y: Friends(x, y) \land Smoking(x) \Rightarrow Smoking(y).\]
+            \[\forall x, y: PreyOn(x, y) \land \not Parasite(x) \Rightarrow M(x) > M(y).\]
+            \[\forall x, y: BirthParentOf(x, y) \Rightarrow Age(x) \geq Age(y) + Maturity(SpeciesOf(x)).\]
+            <br/>
+            <br/>
+            \[\forall x, y: P(x, y) \equiv P(y, x).\]
           </section>
           <section>
             <h2>Paper-Tiger Logic</h2>
@@ -468,6 +458,12 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
           <section>
             <img src='img/book-fol.png' alt='fol'/>
             <p>From J Harrison's <i>Handbook Of Practical Logic And Automated Reasoning</i>, Cambridge University Press, 2009.</p>
+          </section>
+          <section>
+            \[\forall n, by: Divisor(n, by) \equiv mod(n, by) = 0.\]
+            \[\forall n: Even(n) \equiv Divisor(n, 2).\]
+            \[\forall n: Perfect(n) \equiv n > 1 \land n = \sum_{i \in [0, n)}i\times I(Divisor(n, i)).\]
+            \[\forall n: Perfect(n) \Rightarrow Even(n)?\]
           </section>
           <section>
             <h2>Peano axioms (1/3)</h2>
@@ -500,22 +496,10 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
           <section>
             <h2>Can we reach \(h\) from \(t\) in a graph?</h2>
 
-            \[\begin{align}Reach(t, h) & \Leftrightarrow t = h \\ & \lor Edge(t, h) \\ & \lor [\exists x: Edge(t, x) \land Edge(x, h)] \\ & \lor [\exists x, y: Edge(t, x) \land Edge(x, y) \land Edge(y, h)] \\ & [\exists x, y, z: Edge(t, x) \land Edge(x, y) \land Edge(y, z) \land Edge(z, h)]\end{align}.\]
+            \[\begin{align}Reach(t, h) & \Leftrightarrow t = h \\ & \lor Edge(t, h) \\ & \lor [\exists x: Edge(t, x) \land Edge(x, h)] \\ & \lor [\exists x, y: Edge(t, x) \land Edge(x, y) \land Edge(y, h)] \\ & \lor [\exists x, y, z: Edge(t, x) \land Edge(x, y) \land Edge(y, z) \land Edge(z, h)].\end{align}\]
           </section>
           <section>
             <h2>Probabilistic First-Order Logics</h2>
-          </section>
-          <section>
-            <img src='img/article-logic-theorist.png' alt='logic theorist'/>
-          </section>
-          <section>
-            <img src='img/article-lean.png' alt='lean'/>
-          </section>
-          <section>
-            <img src='img/articles-safeml.png' alt='safeml'/>
-          </section>
-          <section>
-            <h2>0th, 1st?</h2>
           </section>
           <section>
             <h2>Pitfall 1 of 8128: _ is probabilistic</h2>
@@ -523,38 +507,36 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <p>From Rice and Papadopoulos' <a href='https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0007130'>Evolution with Stochastic Fitness and Stochastic Migration</a>.</p>
           </section>
           <section>
-            <h2>The case for 1st-order logic</h2>
-            <p>Can encode not all, but a lot of mathematics</p>
-            <p>Simple to implement</p>
-            <p>Simple to understand</p>
-            <p>Uniform</p>
-            <p>Widely used (caveat: often watered down in A.I.)</p>
+            <h2>The Case <b>for</b> First-Order Logic</h2>
+            <p>Can encode not all, but a lot of mathematics.</p>
+            <p>Simple to implement.</p>
+            <p>Simple to understand.</p>
+            <p>Well-understood.</p>
+            <p>Uniform.</p>
+            <p>Widely used (caveat: often watered down in A.I.).</p>
           </section>
           <section>
-            <h2>The case against 1st-order logic</h2>
-            <p>Many ideas are difficult to represent</p>
-            <p>Efforts to formalize mathematics done in HOL</p>
-            <p>Lack of a sophisticated theory of types complicates the modelling of complex objects</p>
+            <h2>The Case <b>for</b> First-Order Logic</h2>
+            <p>You can have built-in types for, well, anything: integer, natural numbers, etc.</p>
+            <p>You can also often get around the limitations of first-order logic, e.g. \(CanReach(x, y)\).</p>
           </section>
           <section>
-            <h2>The case for type theories (HOL)</h2>
-            <p>Can quantify over anything (\(\infty\)-order logic)</p>
-            <p>Used for decades to formalize mathematics</p>
-            <p>It's a rich logic</p>
-            <p>It's a rich foundation for mathematics</p>
-            <p>It's a rich foundation for programming languages</p>
-          </section>
-          <section>
-            <h2>The case against type theories (HOL)</h2>
-            <p>Arguably easier to use in many cases, but the foundations are conceptually harder to understand</p>
-            <p>All implementations are different</p>
-            <p>Richer than 0th/1st order logics, and thus inference is harder</p>
+            <h2>The Case <b>Against</b> First-Order Logic</h2>
+            <p>Many ideas are difficult to represent.</p>
+            <p>Essentially based on set theory, which is awkward to handle complex objects.</p>
+            <p>Efforts to formalize mathematics done with type theories.</p>
           </section>
         </section>
 
         <section>
           <section>
             <h2>Type Theories, λ-Calculi, HOL</h2>
+          </section>
+          <section>
+            <img src='img/article-lean.png' alt='lean'/>
+          </section>
+          <section>
+            <img src='img/articles-safeml.png' alt='safeml'/>
           </section>
           <section>
 
@@ -651,14 +633,30 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <p>λC is capable of formalizing mathematics (Coq, Lean).</p>
             <p>λC is computationally powerful, it's a rich language for expressing programs.</p>
           </section>
+
+          <section>
+            <h2>The case for type theories (HOL)</h2>
+            <p>Can quantify over anything (\(\infty\)-order logic)</p>
+            <p>Used for decades to formalize mathematics</p>
+            <p>It's a rich logic</p>
+            <p>It's a rich foundation for mathematics</p>
+            <p>It's a rich foundation for programming languages</p>
+          </section>
+          <section>
+            <h2>The case against type theories (HOL)</h2>
+            <p>Arguably easier to use in many cases, but the foundations are conceptually harder to understand</p>
+            <p>All implementations are different</p>
+            <p>Richer than 0th/1st order logics, and thus inference is harder</p>
+          </section>
+
         </section>
 
         <section>
           <section>
-            <h2>Many-Valued λ-Calculus</h2>
+            <h2>Many-Valued Logics</h2>
           </section>
           <section>
-            <h2>Bivalence (0th order fuzziness?)</h2>
+            <h2>Bivalence (0th order fuzziness)</h2>
             \[Truth \in \{False, True\}.\]
             <br/>
             \[Truth \in \{F, T\}.\]
@@ -668,50 +666,14 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             \[\{Theory\ x: True\}.\]
           </section>
           <section>
-            <table style='width:100%; text-align:center;'>
-              <tr>
-                <th>Connective</th>
-                <th>Informal</th>
-                <th>Symbol</th>
-                <th>F x F</th><th>F x T</th><th>T x F</th><th>T x T</th>
-              </tr>
-              <tr>
-                <td>Conjunction</td>
-                <td>and</td>
-                <td>\(\land\)</td>
-                <td>F</td><td>F</td><td>F</td><td>T</td>
-              </tr>
-              <tr>
-                <td>Disjunction</td>
-                <td>or</td>
-                <td>\(\lor\)</td>
-                <td>F</td><td>T</td><td>T</td><td>T</td>
-              </tr>
-              <tr>
-                <td>Implication</td>
-                <td>implies</td>
-                <td>\(\Rightarrow\)</td>
-                <td>T</td><td>T</td><td>F</td><td>T</td>
-              </tr>
-              <tr>
-                <td>Equivalence</td>
-                <td>iff</td>
-                <td>\(\leftrightarrow\)</td>
-                <td>T</td><td>F</td><td>F</td><td>T</td>
-              </tr>
-            </table>
-            <br/>
-            <p>\(\neg x\) is the only common unary connective with \(\neg T \equiv F\) and \(\neg F \equiv T\).</p>
-          </section>
-          <section>
             <h2>A few properties</h2>
             <p>Conjunction and disjunction are commutative, idempotent:</p>
             \[a \land b \equiv b \land a, a \lor b \equiv b \lor a.\]
             \[a \land a \equiv a, b \lor b \equiv b.\]
             <br/>
             <p>De Morgan laws:</p>
-            \[a \land b \equiv \neg (\neg a \lor \neg b)\]
-            \[a \lor b \equiv \neg (\neg a \land \neg b)\]
+            \[a \land b \equiv \neg (\neg a \lor \neg b).\]
+            \[a \lor b \equiv \neg (\neg a \land \neg b).\]
             <br/>
             <p>Negation is involutive: \(\neg \neg x \equiv x\).</p>
           </section>
@@ -721,7 +683,6 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <br/>
             \[\{Theory\ x: 0.72918\}.\]
             <br/>
-            <p>SuitabilityAsPet(Dog) > SuitabilityAsPet(Cat): 1.</p>
             <p>Viruses are alive: 0.8.</p>
             <p>Wolves prey on rabbits: 0.06.</p>
             <p>1. Nf3 is a good chess opening: 0.94.</p>
