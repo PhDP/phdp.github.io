@@ -441,8 +441,8 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <h2>Names DO matter</h2>
             \[\forall x: Smoking(x) \Rightarrow Cancer(x).\]
             \[\forall x, y: Friends(x, y) \land Smoking(x) \Rightarrow Smoking(y).\]
-            \[\forall x, y: PreyOn(x, y) \land \not Parasite(x) \Rightarrow M(x) > M(y).\]
-            \[\forall x, y: BirthParentOf(x, y) \Rightarrow Age(x) \geq Age(y) + Maturity(SpeciesOf(x)).\]
+            \[\forall x, y: PreyOn(x, y) \land \neg Parasite(x) \Rightarrow M(x) > M(y).\]
+            \[\begin{align}\forall x, y: BirthParentOf(x, y) \Rightarrow & Age(x) \geq Age(y) \\ & + Maturity(SpeciesOf(x))\end{align}.\]
             <br/>
             <br/>
             \[\forall x, y: P(x, y) \equiv P(y, x).\]
@@ -451,6 +451,7 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <h2>Paper-Tiger Logic</h2>
             <p>In A.I.: first-order logic often refer to watered down version of the language (e.g. SQL).</p>
             <p>In particular, functions are often not allowed.</p>
+            <p>Without functions, first-order logic is just a logic. With functions, it can represent a large class of mathematical ideas.</p>
           </section>
           <section>
             <img src='img/har09-inference-rules.png' alt='inference rules'/>
@@ -496,10 +497,29 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
           <section>
             <h2>Can we reach \(h\) from \(t\) in a graph?</h2>
 
+            \[\begin{align}Reach(t, h) & \Leftrightarrow t = h \\ & \lor Edge(t, h) \\ & \lor [\exists x: Edge(t, x) \land Edge(x, h)].\end{align}\]
+          </section>
+          <section>
+            <h2>Can we reach \(h\) from \(t\) in a graph?</h2>
+
             \[\begin{align}Reach(t, h) & \Leftrightarrow t = h \\ & \lor Edge(t, h) \\ & \lor [\exists x: Edge(t, x) \land Edge(x, h)] \\ & \lor [\exists x, y: Edge(t, x) \land Edge(x, y) \land Edge(y, h)] \\ & \lor [\exists x, y, z: Edge(t, x) \land Edge(x, y) \land Edge(y, z) \land Edge(z, h)].\end{align}\]
           </section>
           <section>
-            <h2>Probabilistic First-Order Logics</h2>
+            <h2>Markov Logic</h2>
+
+            <p>\(Fr(Person, Person):\) Whether the first person is friend with the second person.</p>
+            <p>\(Sm(Person):\) Whether the person smokes.</p>
+            <p>\(Ca(Person):\) Whether the person has or had cancer.</p>
+
+            \[\forall x: Sm(x) \Rightarrow Ca(x); 1.5.\]
+            \[\forall x: \neg[\exists y: Fr(x, y)] \Rigtharrow Sm(x); 2.3.\]
+            \[\forall x, y, z: Fr(x, y) \land Fr(y, z) \Rightarrow Fr(x, z); 0.7.\]
+            \[\forall x, y: Fr(x, y) \Rightarrow [Sm(x) \equiv Sm(y)]; 1.1\]
+
+            <p>Given \(\{A, B\}\):</p>
+
+            \[P(Ca(A) | Fr(B, A), Ca(B)).\]
+            \[P(Ca(A) | Fr(B, A), Ca(B), \forall x, y: Fr(x, y) \equiv Fr(y, x); 4.5).\]
           </section>
           <section>
             <h2>Pitfall 1 of 8128: _ is probabilistic</h2>
