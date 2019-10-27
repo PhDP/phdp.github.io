@@ -409,19 +409,22 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <h2>First-Order Logic</h2>
           </section>
           <section>
+            <h2>Term</h2>
             <p>Given a set of variables \(\mathcal{V}\), a set of constants \(\mathcal{C}\), and
-            a set of functions \(\mathcal{F}\).</p>
+            a set of functions \(\mathcal{F}\):</p>
             <ol start='0'>
               <li>If \(v \in \mathcal{V}\), then \(v\) is a term.</li>
               <li>If \(c \in \mathcal{C}\), then \(c\) is a term.</li>
               <li>If \(f \in \mathcal{F}\) and \(\mathbf{t}\) is a vector of terms, then \(f(\mathbf{t})\) is a term.</li>
             </ol>
-            <br/>
+          </section>
+          <section>
             \[b + 2^8.\]
             \[CapitalOf(Finland).\]
             \[NativeLanguage(Marie\ Curie).\]
           </section>
           <section>
+            <h2>Formula</h2>
             <p>Given a set of predicates \(\mathcal{P}\):</p>
             <ol start='0'>
               <li>If \(p \in \mathcal{P}\) and \(\mathbf{t}\) is a vector of terms, then \(p\) is a WFF.</li>
@@ -436,12 +439,8 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <p>An <b>interpretation</b> tells us whether a symbol refers to a constant, function, or
             predicate, and what is its domain.</p>
 
-            \[e = m \times C^2\].
-            \[z = s \times h^2\].
-          </section>
-          <section>
-            \[\forall x \in \mathbb{N}, \exists y \in \mathbb{N}: y = x + 1.\]
-            <p>\(y\) is the successor of \(x\).</p>
+            \[e = m \times C^2.\]
+            \[z = s \times h^2.\]
           </section>
           <section>
             \[Awesome(Dog) > Awesome(Cat).\]
@@ -456,6 +455,18 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             \[0 \in \mathbb{N}.\]
             \[\forall n \in \mathbb{N}: n + 1 \in \mathbb{N}.\]
             \[\forall n \in \mathbb{N}: n > 1 \land n = \sum_{i \in [0, n)}i\times I(mod(n, i) = 0) \Rightarrow mod(n, 2) = 0.\]
+          </section>
+          <section>
+            <h2>Paper-Tiger Logic</h2>
+            <p>In A.I.: first-order logic often refer to watered down version of the language (e.g. SQL).</p>
+            <p>In particular, functions are often not allowed.</p>
+          </section>
+          <section>
+            <img src='img/har09-inference-rules.png' alt='inference rules'/>
+          </section>
+          <section>
+            <img src='img/book-fol.png' alt='fol'/>
+            <p>From J Harrison's <i>Handbook Of Practical Logic And Automated Reasoning</i>, Cambridge University Press, 2009.</p>
           </section>
           <section>
             <h2>Peano axioms (1/3)</h2>
@@ -476,12 +487,25 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             \[\forall P: P(0) \land [\forall x \in \mathbb{N}: P(x) \Rightarrow P(S(x))] \Rightarrow [\forall x \in \mathbb{N}: P(x)].\]
           </section>
           <section>
-            <img src='img/article-logic-theorist.png' alt='logic theorist'/>
+            <h2>Can we reach \(h\) from \(t\) in a graph?</h2>
+
+            \[Reachability(t, h) \Leftrightarrow t = h.\]
           </section>
           <section>
-            <!-- If s = t in Delta, s = t is provable from Delta -->
-            <img src='img/har09-inference-rules.png' alt='inference rules'/>
-            <p>From J Harrison's <i>Handbook Of Practical Logic And Automated Reasoning</i>, Cambridge University Press, 2009.</p>
+            <h2>Can we reach \(h\) from \(t\) in a graph?</h2>
+
+            \[Reachability(t, h) \Leftrightarrow t = h \lor Edge(t, h).\]
+          </section>
+          <section>
+            <h2>Can we reach \(h\) from \(t\) in a graph?</h2>
+
+            \[\begin{align}Reachability(t, h) & \Leftrightarrow t = h \\ & \lor Edge(t, h) \\ & \lor [\exist x: Edge(t, x) \land Edge(x, h)] \\ & \lor [\exist x, y: Edge(t, x) \land Edge(x, y) \land Edge(y, h)].\]
+          </section>
+          <section>
+            <h2>Probabilistic First-Order Logics</h2>
+          </section>
+          <section>
+            <img src='img/article-logic-theorist.png' alt='logic theorist'/>
           </section>
           <section>
             <img src='img/article-lean.png' alt='lean'/>
@@ -496,9 +520,6 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <h2>Pitfall 1 of 8128: _ is probabilistic</h2>
             <img src='img/stochastic-price.png' alt='rice'/>
             <p>From Rice and Papadopoulos' <a href='https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0007130'>Evolution with Stochastic Fitness and Stochastic Migration</a>.</p>
-          </section>
-          <section>
-            <h2>Higher-order logic</h2>
           </section>
           <section>
             <h2>The case for 1st-order logic</h2>
