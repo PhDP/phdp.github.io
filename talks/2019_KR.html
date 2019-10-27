@@ -301,7 +301,7 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
           </section>
           <section>
             <p>Is the most primitive logic.</p>
-            <p>Bivalent, so truth: \(\{False, True\} \equiv \{F, T\} \equiv {\bot, \top\}\).</p>
+            <p>Bivalent, so truth: \(\{False, True\} \equiv \{F, T\} \equiv \{\bot, \top\}\).</p>
           </section>
           <section>
             <p>Given a set of propositional symbols \(\mathcal{S}\):</p>
@@ -356,15 +356,18 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             \(CatsCanBePets \Rightarrow TrumpIsAStableGenius.\)
           </section>
           <section>
+            <p>Generally associated with set theory.</p>
+          </section>
+          <section>
+            <h2>Cheating is OK!</h2>
+            <p>You can have built-in types for, well, anything: integer, natural numbers, etc.</p>
+            <p>You can also often cheat to get around the limitations of first-order logic, e.g. \(CanReach(x, y)\).</p>
+          </section>
+          <section>
             <h2>Who cares about \(\mathbb{N}\)?</h2>
-
             <p>With \(x, y \in \mathbb{N}: x - y \in \mathbb{Z}\).</p>
-
             <p>With \(x \in \mathbb{Z}, y \in \mathbb{N}: (x / y) \in \mathbb{Q}\).</p>
-
-            <p>\(\mathbb{R}\) is a lot more work, but the idea is roughly to define \(x \in
-            mathbb{R}\) as a sequence of rationals converging to \(x\).</p>
-
+            <p>\(\mathbb{R}\) is a lot more work, but the idea is roughly to define \(x \in \mathbb{R}\) as a sequence of rationals converging to \(x\).</p>
             <p>Probability theory requires \(\mathbb{R}\) (among other things).</p>
           </section>
           <section>
@@ -396,7 +399,7 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             \[P(a) = 1 \equiv a \mbox { is true}.\]
           </section>
           <section>
-            <img src='img/pgm-bn.svg' width='90%' alt='pgm'/>
+            <img src='img/pgm-bn.svg' width='80%' alt='pgm'/>
             \[\begin{align}P(l, \neg c, m, \neg g) & = P(l)P(\neg c)P(m|\neg c)P(\neg g | l, \neg c, m)\\ & = 0.81 \times (1 - 0.65) \times 0.27 \times (1 - 0.42)\\ & = 0.044.\end{align}\]
           </section>
         </section>
@@ -406,17 +409,35 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <h2>First-Order Logic</h2>
           </section>
           <section>
-<pre style='font-size:0.8em;'><code class='stretch haskell'>data Term = Variable Text | Constant Text | Function (Vec Term)
+            <p>Given a set of variables \(\mathcal{V}\), a set of constants \(\mathcal{C}\), and
+            a set of functions \(\mathcal{F}\).</p>
+            <ol start='0'>
+              <li>If \(v \in \mathcal{V}\), then \(v\) is a term.</li>
+              <li>If \(c \in \mathcal{C}\), then \(c\) is a term.</li>
+              <li>If \(f \in \mathcal{F}\) and \(\mathbf{t}\) is a vector of terms, then \(f(\mathbf{t})\) is a term.</li>
+            </ol>
+            <br/>
+            \[b + 2^8.\]
+            \[CapitalOf(Finland).\]
+            \[NativeLanguage(Marie\ Curie).\]
+          </section>
+          <section>
+            <p>Given a set of predicates \(\mathcal{P}\):</p>
+            <ol start='0'>
+              <li>If \(p \in \mathcal{P}\) and \(\mathbf{t}\) is a vector of terms, then \(p\) is a WFF.</li>
+              <li>If \(f\) is a WFF, then \(\neg f\) is a WFF.</li>
+              <li>If \(f_0, f_1\) are WFFs, then \(f_0 \star f_1\) is a WFF.</li>
+              <li>If \(v \in \mathcal{V}\) and \(f\) is a WFF, then \(\diamondsuit v: f\) is a WFF.</li>
+            </ol>
+            <p>\(\star = \{\land, \lor, \Rightarrow, \leftrightarrow, \veebar\}.\)</p>
+            <p>\(\diamondsuit = \{\forall, \exists, \exists!\}\).</p>
+          </section>
+          <section>
+            <p>An <b>interpretation</b> tells us whether a symbol refers to a constant, function, or
+            predicate, and what is its domain.</p>
 
-data FOL =
-    Predicate (Vec Term)
-  | Negation FOL
-  | BinaryConnective BinT FOL FOL
-  | Quantifier QuanT Text FOL
-
-data BinT = Conjunction | Disjunction | Implication | Equivalence
-data QuanT = Exists | Forall | Unique
-</code></pre>
+            \[e = m \times C^2\].
+            \[z = s \times h^2\].
           </section>
           <section>
             \[\forall x \in \mathbb{N}, \exists y \in \mathbb{N}: y = x + 1.\]
@@ -591,24 +612,11 @@ data QuanT = Exists | Forall | Unique
               </tr>
             </table>
           </section>
+
           <section>
             <h2>Curry-Howard correspondence</h2>
           </section>
-        </section>
 
-        <section>
-          <section>
-            <h2>Simply Typed λ-Calculus</h2>
-          </section>
-          <section>
-            Church
-          </section>
-          <section>
-            Church2
-          </section>
-        </section>
-
-        <section>
           <section>
             <h2>λC: Calculus of Construction</h2>
           </section>
@@ -832,6 +840,7 @@ data QuanT = Exists | Forall | Unique
             <p>Would need to reevalute some sections of the knowledge base with new facts.</p>
           </section>
         </section>
+
         <section>
           <section>
             <h2>Bayesian Inference and Higher-Order Logic</h2>
