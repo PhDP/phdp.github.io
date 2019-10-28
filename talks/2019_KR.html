@@ -344,7 +344,7 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
               <tr>
                 <td>Equivalence</td>
                 <td>iff</td>
-                <td>\(\equiv, \iff, \Leftrightarrow\)</td>
+                <td>\(\equiv, \Leftrightarrow\)</td>
                 <td>T</td><td>F</td><td>F</td><td>T</td>
               </tr>
               <tr>
@@ -356,11 +356,11 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             </table>
           </section>
           <section>
-            \[... \land \Rightarrow TrumpIsAStableGenius.\]
-            \[OnePlusTwoIsThree.\]
-            \[\neg CatsAreBetterThanDogs.\]
             \[a \land (b \lor c) \Rightarrow d.\]
             \[Fever \land (Cough \lor AchingMuscles) \Rightarrow Flu.\]
+            \[CrustaceaIsMonophyletic \Rightarrow TrumpIsAStableGenius.\]
+            \[OnePlusTwoIsThree.\]
+            \[\neg CatsAreBetterThanDogs.\]
           </section>
           <section>
             <h2>Modus Ponens</h2>
@@ -461,9 +461,11 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             \[z = s \times h^2.\]
             \[\forall s: Autotroph(s) \lor [\exists p: PreyOn(s, p)].\]
             \[\forall x, y: \dot(x) = \alpha x - \beta xy \land \dot(y) = \delta xy - \gamma y.\]
+            \[Monophyletic(Crustacea) \Rightarrow Stable(Trump) \land Genius(Trump).\]
+            \[\forall x \in \mathbb{R}: x \geq 0 \Rightarrow \sqrt{x^2} = x.\]
           </section>
           <section>
-            <h2>Names DO matter</h2>
+            <h2>Context</h2>
             \[\forall x, y: Friends(x, y) \land Smoking(x) \Rightarrow Smoking(y).\]
             \[\forall x, y: PreyOn(x, y) \land \neg Parasite(x) \Rightarrow M(x) > M(y).\]
             \[\begin{align}\forall x, y: BirthParentOf(x, y) \Rightarrow & Age(x) \geq Age(y) \\ & + Maturity(SpeciesOf(x))\end{align}.\]
