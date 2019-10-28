@@ -5,17 +5,17 @@
 
     <title>Theoretical Ecology and the Foundations of Mathematics</title>
 
-    <meta name='description' content='Theoretical Ecology and the Foundations of Mathematics'>
-    <meta name='author' content='Philippe Desjardins-Proulx'>
+    <meta name='description' content='Theoretical Ecology and the Foundations of Mathematics'/>
+    <meta name='author' content='Philippe Desjardins-Proulx'/>
 
     <meta name='apple-mobile-web-app-capable' content='yes' />
     <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
 
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'/>
 
-    <link rel='stylesheet' href='reveal.js-3.8.0/css/reveal.css'>
-    <link rel='stylesheet' href='reveal.js-3.8.0/css/theme/ecomaths.css' id='theme'>
-    <link rel='stylesheet' href='reveal.js-3.8.0/lib/css/hemisu.css' id='highlight-theme'>
+    <link rel='stylesheet' href='reveal.js-3.8.0/css/reveal.css'/>
+    <link rel='stylesheet' href='reveal.js-3.8.0/css/theme/ecomaths.css' id='theme'/>
+    <link rel='stylesheet' href='reveal.js-3.8.0/lib/css/hemisu.css' id='highlight-theme'/>
   </head>
 
   <body>
@@ -356,14 +356,15 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             </table>
           </section>
           <section>
-            \[CatsCanBePets \Rightarrow TrumpIsAStableGenius.\]
+            \[... \land \Rightarrow TrumpIsAStableGenius.\]
             \[OnePlusTwoIsThree.\]
-            \[¬CatsAreBetterThanDogs.\]
-          </section>
-          <section>
-            <h2>Names don't really matter</h2>
+            \[\neg CatsAreBetterThanDogs.\]
             \[a \land (b \lor c) \Rightarrow d.\]
             \[Fever \land (Cough \lor AchingMuscles) \Rightarrow Flu.\]
+          </section>
+          <section>
+            <h2>Modus Ponens</h2>
+            \[\frac{\alpha \Rightarrow \beta \: \alpha}{\beta}.\]
           </section>
           <section>
             <h2>Who cares about \(\mathbb{N}\)?</h2>
@@ -426,16 +427,13 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <p>\(\diamondsuit = \{\forall, \exists, \exists!\}\).</p>
           </section>
           <section>
-            \[Awesome(Dog) > Awesome(Cat).\]
-            \[\forall x \in \mathbb{N} \exists y \in \mathbb{N}: y = x + 1.\]
-            \[\forall p, t: BackSquats(p, t) \land TotalBackSquats(p) = 0 \Rightarrow Pain(p, Thigh, t + 1).\]
-          </section>
-          <section>
             <p>An <b>interpretation</b> tells us whether a symbol refers to a constant, function, or
             predicate, and what is its domain.</p>
 
             \[e = m \times C^2.\]
             \[z = s \times h^2.\]
+            \[\forall s: Autotroph(s) \lor [\exists p: PreyOn(s, p)].\]
+            \[\forall x, y: \dot(x) = \alpha x - \beta xy \land \dot(y) = \delta xy - \gamma y.\]
           </section>
           <section>
             <h2>Names DO matter</h2>
@@ -508,10 +506,6 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <p>\(Fr(Person, Person):\) Whether the first person is friend with the second person.</p>
             <p>\(Sm(Person):\) Whether the person smokes.</p>
             <p>\(Ca(Person):\) Whether the person has or had cancer.</p>
-
-            <br/>
-            <br/>
-            <p>And a set of persons \(\{A, B\}\).</p>
           </section>
           <section>
             <h2>Markov Logic</h2>
@@ -521,11 +515,23 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             \[\forall x, y, z: Fr(x, y) \land Fr(y, z) \Rightarrow Fr(x, z); 0.7.\]
             \[\forall x, y: Fr(x, y) \Rightarrow [Sm(x) \equiv Sm(y)]; 1.1\]
 
-            <br/>
+            <p>Weights \(\in \mathbb{R}\).</p>
+          </section>
+          <section>
+            <h2>Markov Logic</h2>
+            <p>With a set of persons \(\{A, B\}\):</p>
             <br/>
 
             \[P(Ca(A) | Fr(B, A), Ca(B)).\]
             \[P(Ca(A) | Fr(B, A), Ca(B), \forall x, y: Fr(x, y) \equiv Fr(y, x); 4.5).\]
+          </section>
+          <section>
+            <h2>Issues with Markov Logic</h2>
+
+            <p>Has an old, unmaintained C++ implementation that runs on a single thread.</p>
+            <p>A good logic, but doesn't handle functions well.</p>
+
+            \[\forall x, y: \dot(x) = \alpha x - \beta xy \land \dot(y) = \delta xy - \gamma y; 0.0.\]
           </section>
           <section>
             <h2>Pitfall 1 of 8128: _ is probabilistic</h2>
@@ -583,7 +589,7 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
           </section>
 
           <section>
-            <table style="width:100%; text-align:center;">
+            <table style='width:100%; text-align:center;'>
               <tr>
                 <th>Programming Language</th>
                 <th>Implemented in</th>
@@ -751,15 +757,12 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             </table>
           </section>
           <section>
-            <h2>Three fuzzy logics?</h2>
+            <h2>Three core fuzzy logics?</h2>
             <blockquote style='padding-left: 0.5em; border-left: 0.3em solid #5DD836'>
-              <p>Mostert–Shields’ theorem [22] shows that a t-norm is continuous if and only if it
+              <p>Mostert–Shields’ theorem shows that a t-norm is continuous if and only if it
               can be built from the previous three ones by the construction of ordinal sum. In
               other words, a t-norm is continuous if and only if it is an ordinal sum of
-              Łukasiewicz, Gödel and product t-norms. These three operations determine three
-              different algebraizable propositional logics (bringing the same names as their
-              associated t-norms), whose equivalent algebraic semantics are the varieties of MV,
-              Gödel and product algebras respectively.</p>
+              Łukasiewicz, Gödel and product t-norms.</p>
             </blockquote>
             <p>Flaminio et al. <i>Towards a probability theory for product logic: States, integral representation and reasoning</i>. doi: 10.1016/j.ijar.2017.11.003.</p>
           </section>
@@ -780,21 +783,21 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
               </tr>
               <tr>
                 <td>Idempotent \(\land, \lor\)</td>
-                <td>Nay!</td>
+                <td><font color='#CE0909'>Nay!</font></td>
                 <td>Yes!</td>
-                <td>Nay!</td>
+                <td><font color='#CE0909'>Nay!</font></td>
               </tr>
               <tr>
                 <td>Involutive \(\neg\)</td>
                 <td>Yes!</td>
-                <td>Nay!</td>
-                <td>Nay!</td>
+                <td><font color='#CE0909'>Nay!</font></td>
+                <td><font color='#CE0909'>Nay!</font></td>
               </tr>
               <tr>
                 <td>De Morgan laws</td>
                 <td>Yes!</td>
-                <td>Nay!</td>
-                <td>Nay!</td>
+                <td><font color='#CE0909'>Nay!</font></td>
+                <td><font color='#CE0909'>Nay!</font></td>
               </tr>
             </table>
           </section>
