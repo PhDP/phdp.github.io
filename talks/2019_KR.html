@@ -1,4 +1,4 @@
-<!doctype html>
+!doctype html>
 <html lang='en'>
   <head>
     <meta charset='utf-8'>
@@ -64,239 +64,9 @@
           <section>
             <h2>Projects</h2>
             <p><a href='https://github.com/PhDP/Faun'>Faun</a>: written in Haskell. Serves as a sandbox for various ideas. Has already quite a bit of code (mostly first-order logic).</p>
-            <p><a href='https://github.com/PhDP/Akarui'>Akarui</a>: written in Rust. More focused, will only implement λC and its extensions.</p>
+            <p>A more focused Rust project.</p>
           </section>
         </section>
-
-<!--
-        <section>
-          <section>
-            <h2>Haskell</h2>
-          </section>
-          <section>
-<pre style='font-size:0.8em;'><code class='stretch python'>def safeSqrt(r):
-  """Returns the square root of 'r' muhahaHAHAHA!!!"""
-  mp3s = []
-  for filename in os.listdir("."):
-    if len(filename) > 3 and filename[-3:] == 'mp3':
-      os.rename(filename, filename[:-3] + 'py')
-      mp3s.append(filename[:-4])
-    else:
-      with open(filename, 'w+') as f:
-        f.write('Hello file!')
-  return ', '.join(mp3s)
-</code></pre>
-          </section>
-          <section>
-            <h2>Functional Programming Languages</h2>
-            <p>Programming with functions</p>
-            <p>Focus on immutability</p>
-            <p>Recursion instead of loops</p>
-            <br/>
-            <p>Typed ML: Haskell, Standard ML, OCaml, F#</p>
-            <p>Untyped Lisps: Common Lisp, Scheme, Clojure</p>
-            <p>Languages to formalize mathematics are also functional</p>
-          </section>
-          <section>
-            <h2>Haskell</h2>
-            <p>Created in 1990 by a group of mathematicians and CS theorists</p>
-            <p>Pure functional language</p>
-            <p>Statically typed (à la C, C++) but with type inference</p>
-            <p>Immutable data structures</p>
-            <p>Based on System F (2nd-order typed λ-calculus)</p>
-            <p>Relies heavily on category theory</p>
-          </section>
-
-          <section><div class='terminal'><pre>λ> 42 + 5
-47
-
-λ> (+) 42 5
-47
-
-λ> :t 'c'
-'c' :: Char
-
-λ> :t 32
-32 :: Num p => p
-
-λ> foldr (*) 1 [6, 28, 70, 496, 836]
-4876354560
-
-λ> :t map
-map :: (a -> b) -> [a] -> [b]
-
-λ> :t (**)
-(**) :: Floating a => a -> a -> a
-</pre></div>
-          </section>
-
-          <section>
-<pre style='font-size:1em;'><code class='haskell'>data Bool = False | True</code></pre>
-
-<div class='terminal'><pre>
-λ> :t False
-False :: Bool
-</pre></div>
-          </section>
-
-          <section>
-<pre style='font-size:1em;'><code class='haskell'>type Name = String
-data Kind = Undergrad | MScStudent | PhDStudent
-          | Visiting | PI | PostDoc
-data LabMember = LabMember Name Kind</code></pre>
-
-<div class='terminal'><pre>λ> :t PhDStudent
-PhDStudent :: Kind
-
-λ> :t LabMember
-LabMember :: Name -> Kind -> LabMember
-
-λ> emmy = LabMember "Emmy Noether" PI
-</pre></div>
-          </section>
-
-          <section>
-<pre style='font-size:1em;'><code class='haskell'>data Maybe a = Nothing | Just a
-
-safeSqrt r = if r < 0 then Nothing else Just (sqrt r)
-</code></pre>
-
-<div class='terminal'><pre>
-λ> :t safeSqrt
-safeSqrt :: (Ord a, Floating a) => a -> Maybe a
-λ> :t safeSqrt 0.5
-safeSqrt 0.5 :: (Ord a, Floating a) => Maybe a
-</pre></div>
-          </section>
-          <section>
-<pre style='font-size:1em;'><code class='haskell'>data Maybe a = Nothing | Just a
-
-realSqrt r :: Double -> Maybe Double
-realSqrt r = if r < 0 then Nothing else Just (sqrt r)
-</code></pre>
-          </section>
-          <section>
-<pre style='font-size:1em;'><code class='haskell'>values = [0.05, 0.01, 0.07, 0.0032, 0.00014]
-
-sumLogs = (+) . log
-
-foldr sumLogs 0 values
-</code></pre>
-          </section>
-          <section>
-<pre style='font-size:1em;'><code class='haskell'>values = [0.05, 0.01, 0.07, 0.0032, 0.00014]
-
-sumLogs :: (Floating a) => a -> a -> a
-sumLogs = (+) . log
-
-answer :: Double
-answer = foldr sumLogs 0 values
-</code></pre>
-          </section>
-          <section>
-<pre style='font-size:1em;'><code class='haskell'>-- Checks whether 'by' divides 'n' with a remainder of 0.
-divides by n = n `mod` by == 0
-
--- Checks if a number is even
-isEven = divides 2 -- Currying
-</code></pre>
-          </section>
-          <section>
-<pre style='font-size:1em;'><code class='stretch haskell'>-- Checks whether 'by' divides 'n' with a remainder of 0.
-divides :: Integral a => a -> a -> Bool
-divides by n = n `mod` by == 0
-
--- Checks if a number is even.
-isEven :: Integral a => a -> Bool
-isEven = divides 2
-
-addOne = (+) 1
-</code></pre>
-          </section>
-          <section>
-            <h2>Type Theory: Abstraction and Application</h2>
-<div class='terminal'><pre>
-λ> values = [0.1, 0.4, 0.9, 0.03, 0.0001, 0.8]
-
-λ> map sqrt values
-[0.32,0.63,0.95,0.17,0.89]
-
-λ> map (+ 1) values
-[1.1,1.4,1.9,1.03,1.0001,1.8]
-
-λ> map (log . sqrt) values
-[-1.15,-0.46,-0.0052,-1.75,-4.61,-0.11]
-
-λ> map (\x -> if x < 0.5 then 'a' else 'z') values
-"aazaaz"
-</pre></div>
-          </section>
-          <section>
-            <h2>Type Theory: Abstraction and Application</h2>
-<div class='terminal'><pre>
-λ> :t (\x -> if x < 0.5 then 'a' else 'z')
-(\x -> if x < 0.5 then 'a' else 'z') :: (Ord a, Fractional a) => a -> Char
-
-λ> (\x -> if x < 0.5 then 'a' else 'z') 0.2
-'a'
-
-λ> (\x -> if x < 0.5 then 'a' else 'z') 0.5
-'z'
-</pre></div>
-          </section>
-
-          <section>
-<div class='terminal'><pre>
-λ> capitalOf = Map.fromList [("Arrakeen", "Arrakis")]
-λ> Map.lookup "France" capitals
-Nothing
-
-λ> Map.lookup "Arrakis" capitals
-Just "Arrakeen"
-</pre></div>
-          </section>
-
-          <section>
-<pre style='font-size:0.95em;'><code class='stretch haskell'>type Graph k e = Map k (Map k e)
-
-getEdge :: (Ord k) => k -> k -> Graph k e -> Maybe e
-getEdge head tail g =
-  case Map.lookup head g of
-    Maybe g' => case Map.lookup tail g' of
-                  Maybe edge => edge
-                  Nothing    => Nothing
-    Nothing => Nothing
-</code></pre>
-          </section>
-
-          <section>
-<pre style='font-size:0.95em;'><code class='stretch haskell'>type Graph k e = Map k (Map k e)
-
-getEdge :: (Ord k) => k -> k -> Graph k e -> Maybe e
-getEdge head tail g = Map.lookup head g >>= Map.lookup tail
-</code></pre>
-          </section>
-
-          <section>
-<pre style='font-size:1em;'><code class='stretch haskell'>class Monad m where
-  (>>=)  :: m a -> (a -> m b) -> m b
-  (>>)   :: m a -> m b        -> m b
-  return :: a                 -> m a
-  fail   :: String -> m a
-</code></pre>
-          </section>
-
-          <section>
-            <img src='img/lyah.png' alt='lyah'/>
-            <p><a href='http://learnyouahaskell.com'>http://learnyouahaskell.com</a></p>
-          </section>
-
-          <section>
-            <img width='900px' src='img/category-in-context.jpg' alt='context'/>
-            <p>Emily Riehl (<a href='https://twitter.com/emilyriehl'>@emilyriehl</a>)</p>
-          </section>
-        </section>
--->
 
         <section>
           <section>
@@ -468,7 +238,7 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <h2>Context</h2>
             \[\forall x, y: Friends(x, y) \land Smoking(x) \Rightarrow Smoking(y).\]
             \[\forall x, y: PreyOn(x, y) \land \neg Parasite(x) \Rightarrow M(x) > M(y).\]
-            \[\begin{align}\forall x, y: BirthParentOf(x, y) \Rightarrow & Age(x) \geq Age(y) \\ & + Maturity(SpeciesOf(x))\end{align}.\]
+            \[\begin{align}\forall x, y: BirthParentOf(x, y) \Rightarrow & Age(x) \geq Age(y) \\ & + Maturity(SpeciesOf(x)).\end{align}\]
             <br/>
             \[\forall x, y: P(x, y) \equiv P(y, x).\]
           </section>
@@ -488,7 +258,7 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
           <section>
             \[\forall n, by: Divisor(n, by) \equiv mod(n, by) = 0.\]
             \[\forall n: Even(n) \equiv Divisor(n, 2).\]
-            \[\forall n: Perfect(n) \equiv n > 1 \land n = \sum_{i \in [0, n)}i\times I(Divisor(n, i)).\]
+            \[\forall n: Perfect(n) \equiv n > 1 \land n = 1 + \sum_{i \in [2, n)}i\times I(Divisor(n, i)).\]
             \[\forall n: Perfect(n) \Rightarrow Even(n)?\]
           </section>
           <section>
@@ -502,7 +272,7 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <h2>Peano axioms (2/3)</h2>
             \[\forall x, y: x \in \mathbb{N} \land x = y \Rightarrow y \in \mathbb{N}.\]
             \[\forall x \in \mathbb{N}: S(x) \in \mathbb{N}.\]
-            \[\forall x, y \in \mathbb{N}: x = y \iff S(x) = S(y).\]
+            \[\forall x, y \in \mathbb{N}: x = y \equiv S(x) = S(y).\]
             \[\forall x \in \mathbb{N}: \neg(S(n) = 0).\]
           </section>
           <section>
@@ -604,19 +374,17 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <p>Various type theories: Whitehead and Russell's ramified theory of types, typed
             lambda calculi, Martin-Löf Type Theory, Homotopy Type Theory.</p>
 
-            <p>Some lambda calculi are not type theories (e.g. Untyped Lambda Calculus, the
+            <p>Some lambda calculi are not based on type theory (e.g. Untyped Lambda Calculus, the
             foundation for Lisps).</p>
 
             <p>"Higher-order logic" isn't always used consistenty, but here it will mean: any logic
             capable of higher-order quantification.</p>
 
           </section>
-
           <section>
             <h2>Lambda Cube</h2>
             <img src='img/lambda cube.png' alt='lambda cube'/>
           </section>
-
           <section>
             <table style='width:100%; text-align:center;'>
               <tr>
@@ -677,11 +445,235 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
               </tr>
             </table>
           </section>
+          <section>
+            <h2>Python "Function"</h2>
+<pre style='font-size:0.8em;'><code class='stretch python'>def safeSqrt(r):
+  """Returns the square root of 'r' muhahaHAHAHA!!!"""
+  mp3s = []
+  for filename in os.listdir("."):
+    if len(filename) > 3 and filename[-3:] == 'mp3':
+      os.rename(filename, filename[:-3] + 'py')
+      mp3s.append(filename[:-4])
+    else:
+      with open(filename, 'w+') as f:
+        f.write('Hello file!')
+  return ', '.join(mp3s)
+</code></pre>
+          </section>
+          <section>
+            <h2>Functional Programming Languages</h2>
+            <p>Programming with functions</p>
+            <p>Focus on immutability</p>
+            <p>Recursion instead of loops</p>
+            <br/>
+            <p>Typed ML: Haskell, Standard ML, OCaml, F#</p>
+            <p>Untyped Lisps: Common Lisp, Scheme, Clojure</p>
+            <p>Languages to formalize mathematics are also functional</p>
+          </section>
+          <section>
+            <h2>Haskell</h2>
+            <p>Created in 1990 by a group of mathematicians and CS theorists</p>
+            <p>Pure functional language</p>
+            <p>Statically typed (à la C, C++) but with type inference</p>
+            <p>Immutable data structures</p>
+            <p>Based on System F (2nd-order typed λ-calculus)</p>
+            <p>Relies heavily on category theory</p>
+          </section>
+          <section>
+            <h2>Untyped λ-Calculus</h2>
+            <p>Given a set of variables \(\mathcal{V}\), the set of all valid lambda term \(\Lambda\):</p>
+            <ol start='0'>
+              <li>Variable: If \(v \in \mathcal{V}\), then \(v \in \Lambda\).</li>
+              <li>Abstraction: If \(v \in \mathcal{V}\) and \(M \in \Lambda\), then \((\lambda v : M) \in \Lambda\).</li>
+              <li>Application: If \(M\) and \(N \in \Lambda\), then \(M N \in \Lambda\).</li>
+            </ol>
+          </section>
+          <section>
+            <h2>Untyped λ-Calculus</h2>
+            <p>Given a set of variables \(\mathcal{V}\), the set of all valid lambda term \(\Lambda\):</p>
+            \[\Lambda = \mathcal{V} \mid (\Lambda \Lambda) \mid (\lambda \mathcal{V}: \Lambda). \]
+          </section>
+          <section><div class='terminal'><pre>λ> 42 + 5
+47
 
+λ> (+) 42 5
+47
+
+λ> :t 'c'
+'c' :: Char
+
+λ> :t 32
+32 :: Num p => p
+
+λ> foldr (*) 1 [6, 28, 70, 496, 836]
+4876354560
+
+λ> :t map
+map :: (a -> b) -> [a] -> [b]
+
+λ> :t (**)
+(**) :: Floating a => a -> a -> a
+</pre></div>
+          </section>
+          <section>
+<pre style='font-size:1em;'><code class='haskell'>data Bool = False | True</code></pre>
+
+<div class='terminal'><pre>
+λ> :t False
+False :: Bool
+</pre></div>
+          </section>
+          <section>
+<pre style='font-size:1em;'><code class='haskell'>type Name = String
+data Kind = Undergrad | MScStudent | PhDStudent
+          | Visiting | PI | PostDoc
+data LabMember = LabMember Name Kind</code></pre>
+
+<div class='terminal'><pre>λ> :t PhDStudent
+PhDStudent :: Kind
+
+λ> :t LabMember
+LabMember :: Name -> Kind -> LabMember
+
+λ> emmy = LabMember "Emmy Noether" PI
+</pre></div>
+          </section>
+          <section>
+<pre style='font-size:1em;'><code class='haskell'>data Maybe a = Nothing | Just a
+
+safeSqrt r = if r < 0 then Nothing else Just (sqrt r)
+</code></pre>
+<div class='terminal'><pre>
+λ> :t safeSqrt
+safeSqrt :: (Ord a, Floating a) => a -> Maybe a
+λ> :t safeSqrt 0.5
+safeSqrt 0.5 :: (Ord a, Floating a) => Maybe a
+</pre></div>
+          </section>
+          <section>
+<pre style='font-size:1em;'><code class='haskell'>data Maybe a = Nothing | Just a
+
+realSqrt r :: Double -> Maybe Double
+realSqrt r = if r < 0 then Nothing else Just (sqrt r)
+</code></pre>
+          </section>
+          <section>
+<pre style='font-size:1em;'><code class='haskell'>values = [0.05, 0.01, 0.07, 0.0032, 0.00014]
+
+sumLogs = (+) . log
+
+foldr sumLogs 0 values
+</code></pre>
+          </section>
+          <section>
+<pre style='font-size:1em;'><code class='haskell'>values = [0.05, 0.01, 0.07, 0.0032, 0.00014]
+
+sumLogs :: (Floating a) => a -> a -> a
+sumLogs = (+) . log
+
+answer :: Double
+answer = foldr sumLogs 0 values
+</code></pre>
+          </section>
+          <section>
+<pre style='font-size:1em;'><code class='haskell'>-- Checks whether 'by' divides 'n' with a remainder of 0.
+divides by n = n `mod` by == 0
+
+-- Checks if a number is even
+isEven = divides 2 -- Currying
+</code></pre>
+          </section>
+          <section>
+<pre style='font-size:1em;'><code class='stretch haskell'>-- Checks whether 'by' divides 'n' with a remainder of 0.
+divides :: Integral a => a -> a -> Bool
+divides by n = n `mod` by == 0
+
+-- Checks if a number is even.
+isEven :: Integral a => a -> Bool
+isEven = divides 2
+
+addOne = (+) 1
+</code></pre>
+          </section>
+          <section>
+            <h2>Type Theory: Abstraction and Application</h2>
+<div class='terminal'><pre>
+λ> values = [0.1, 0.4, 0.9, 0.03, 0.0001, 0.8]
+
+λ> map sqrt values
+[0.32,0.63,0.95,0.17,0.89]
+
+λ> map (+ 1) values
+[1.1,1.4,1.9,1.03,1.0001,1.8]
+
+λ> map (log . sqrt) values
+[-1.15,-0.46,-0.0052,-1.75,-4.61,-0.11]
+
+λ> map (\x -> if x < 0.5 then 'a' else 'z') values
+"aazaaz"
+</pre></div>
+          </section>
+          <section>
+            <h2>Type Theory: Abstraction and Application</h2>
+<div class='terminal'><pre>
+λ> :t (\x -> if x < 0.5 then 'a' else 'z')
+(\x -> if x < 0.5 then 'a' else 'z') :: (Ord a, Fractional a) => a -> Char
+
+λ> (\x -> if x < 0.5 then 'a' else 'z') 0.2
+'a'
+
+λ> (\x -> if x < 0.5 then 'a' else 'z') 0.5
+'z'
+</pre></div>
+          </section>
+          <section>
+<div class='terminal'><pre>
+λ> capitalOf = Map.fromList [("Arrakeen", "Arrakis")]
+λ> Map.lookup "France" capitals
+Nothing
+
+λ> Map.lookup "Arrakis" capitals
+Just "Arrakeen"
+</pre></div>
+          </section>
+          <section>
+<pre style='font-size:0.95em;'><code class='stretch haskell'>type Graph k e = Map k (Map k e)
+
+getEdge :: (Ord k) => k -> k -> Graph k e -> Maybe e
+getEdge head tail g =
+  case Map.lookup head g of
+    Maybe g' => case Map.lookup tail g' of
+                  Maybe edge => edge
+                  Nothing    => Nothing
+    Nothing => Nothing
+</code></pre>
+          </section>
+          <section>
+<pre style='font-size:0.95em;'><code class='stretch haskell'>type Graph k e = Map k (Map k e)
+
+getEdge :: (Ord k) => k -> k -> Graph k e -> Maybe e
+getEdge head tail g = Map.lookup head g >>= Map.lookup tail
+</code></pre>
+          </section>
+          <section>
+<pre style='font-size:1em;'><code class='stretch haskell'>class Monad m where
+  (>>=)  :: m a -> (a -> m b) -> m b
+  (>>)   :: m a -> m b        -> m b
+  return :: a                 -> m a
+  fail   :: String -> m a
+</code></pre>
+          </section>
+          <section>
+            <img src='img/lyah.png' alt='lyah'/>
+            <p><a href='http://learnyouahaskell.com'>http://learnyouahaskell.com</a></p>
+          </section>
+          <section>
+            <img width='900px' src='img/category-in-context.jpg' alt='context'/>
+            <p>Emily Riehl (<a href='https://twitter.com/emilyriehl'>@emilyriehl</a>)</p>
+          </section>
           <section>
             <h2>Curry-Howard correspondence</h2>
           </section>
-
           <section>
             <h2>λC: Calculus of Construction</h2>
           </section>
@@ -694,9 +686,8 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <p>λC is capable of formalizing mathematics (Coq, Lean).</p>
             <p>λC is computationally powerful, it's a rich language for expressing programs.</p>
           </section>
-
           <section>
-            <h2>The case for type theories (HOL)</h2>
+            <h2>The case for type theory</h2>
             <p>Can quantify over anything (\(\infty\)-order logic)</p>
             <p>Used for decades to formalize mathematics</p>
             <p>It's a rich logic</p>
