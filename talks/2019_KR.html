@@ -386,7 +386,7 @@
 
         <section>
           <section>
-            <h2>Type Theories</h2>
+            <h2>Type Theory</h2>
           </section>
           <section>
             <img src='img/article-lean.png' alt='lean'/>
@@ -398,16 +398,9 @@
             <img src='img/article-farmer2006.png' alt='stt'/>
           </section>
           <section>
-
-            <p>Various type theories: Whitehead and Russell's ramified theory of types, typed
-            lambda calculi, Simple Type Theory, Martin-Löf Type Theory, Homotopy Type Theory.</p>
-
-            <p>Some lambda calculi are not based on type theory (e.g. Untyped Lambda Calculus, the
-            foundation for Lisps).</p>
-
-            <p>"Higher-order logic" isn't always used consistenty, but here it will mean: any logic
-            capable of higher-order quantification.</p>
-
+            <p><b>Whitehead and Russell's ramified theory of types, typed lambda calculi, Simple Type Theory, Martin-Löf Type Theory, Homotopy Type Theory.</b></p>
+            <p><b>Some lambda calculi are not based on type theory (e.g. Untyped Lambda Calculus, the foundation for Lisps).</b></p>
+            <p><b>"Higher-order logic" isn't always used consistenty, but here it will mean: any logic capable of higher-order quantification.</b></p>
           </section>
           <section>
             <table style='width:100%; text-align:center;'>
@@ -486,9 +479,9 @@
             <h2>Untyped λ-Calculus</h2>
             <p>Given a set of variables \(\mathcal{V}\), the set of all valid lambda terms \(\Lambda\):</p>
             <ol start='0'>
-              <li>Variable: If \(v \in \mathcal{V}\), then \(v \in \Lambda\).</li>
-              <li>Abstraction: If \(v \in \mathcal{V}\) and \(M \in \Lambda\), then \((\lambda v . M) \in \Lambda\).</li>
-              <li>Application: If \(M\) and \(N \in \Lambda\), then \(M\ N \in \Lambda\).</li>
+              <li><b>Variable</b>: If \(v \in \mathcal{V}\), then \(v \in \Lambda\).</li>
+              <li><b>Abstraction</b>: If \(v \in \mathcal{V}\) and \(M \in \Lambda\), then \((\lambda v . M) \in \Lambda\).</li>
+              <li><b>Application</b>: If \(M\) and \(N \in \Lambda\), then \(M\ N \in \Lambda\).</li>
             </ol>
           </section>
           <section>
@@ -526,11 +519,11 @@
             <p>Note that we write divides 2 instead of divides(2).</p>
           </section>
           <section>
-            <p>Untyped λ-Calculus is a universal model of computation.</p>
+            <p><b>Untyped λ-Calculus is a universal model of computation.</b></p>
             <br/>
-            <p>Can encode lots of stuff (Church encoding, Church numerals).</p>
+            <p><b>Can encode lots of stuff (Church encoding, Church numerals).</b></p>
             <br/>
-            <p>But not that useful for our purpose.</p>
+            <p><b>But not that useful for our purpose.</b></p>
           </section>
           <section>
             <h2>Simply Typed λ-Calculus (λ→)</h2>
@@ -552,7 +545,7 @@
           </section>
           <section>
             <h2>Curry-Howard(–Lambek) correspondence</h2>
-            <p>TL;DR: A program is a proof.</p>
+            <p><b>TL;DR: A program is a proof.</b></p>
             <br/>
             \[\frac{\Gamma \vdash \alpha \Rightarrow \beta, \Gamma \vdash \alpha}{\Gamma \vdash \beta}.\]
             <br/>
