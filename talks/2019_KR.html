@@ -61,9 +61,9 @@
           <section>
             <h2>Probability theory</h2>
             <p>A probability measure \((\Omega, \mathcal{F}, \mathcal{P})\) where</p>
-            \[P: \mathcal{F} \mapsto \{x \in \mathbb{R}: 0 \leq x \leq 1\}\]
+            \[P: \mathcal{F} \mapsto \{x \in \mathbb{R}: 0 \leq x \leq 1\}.\]
             <br/>
-            <p>follows the axioms</p>
+            <p>Follows the axioms:</p>
             <br/>
             \[P(\Omega) = 1.\]
             \[\forall e \in \mathcal{F}: P(e) \geq 0.\]
@@ -77,17 +77,15 @@
           </section>
           <section>
             <h2>Goals</h2>
-            <p><b>0. Implement a language powerful enough to represent mathematical ideas and
-            complex relationships between objects (λC &amp; full FOL)</b></p>
-            <p><b>1. Study {many-valued, probabilistic} extensions and study how they can be used
-            to encode ecological knowledge.</b></p>
+            <p><b>0. Implement a language powerful enough to represent mathematical ideas and complex relationships between objects (λC &amp; full FOL)</b></p>
+            <p><b>1. Study {many-valued, probabilistic} extensions and how they can be used to encode ecological knowledge.</b></p>
             <p><b>2. Develop and encode ecological theories in our extended languages.</b></p>
             <p><b>3. Symbolic regression for machine learning within our extended languages.</b></p>
           </section>
           <section>
             <h2>Projects</h2>
-            <p><a href='https://github.com/PhDP/Faun'>Faun</a>: written in Haskell. Serves as a sandbox for various ideas. Has already quite a bit of code (mostly first-order logic).</p>
-            <p>A more focused Rust project.</p>
+            <p><b>Sandbox: </b><a href='https://github.com/PhDP/Faun'>Faun</a> (Haskell). To play and test with various ideas. Has already quite a bit of code (mostly first-order logic).</p>
+            <p><b>Main project</b>: A more focused Rust project.</p>
           </section>
         </section>
 
@@ -152,8 +150,9 @@
             \[a \land (b \lor c) \Rightarrow d.\]
             \[Fever \land (Cough \lor AchingMuscles) \Rightarrow Flu.\]
             \[CrustaceaIsMonophyletic \Rightarrow TrumpIsAStableGenius.\]
+            \[CrustaceaIsMonophyletic \veebar (CrustaceaIsParaphyletic \lor CrustaceaIsPolyphyletic).\]
             \[OnePlusTwoIsThree.\]
-            \[\neg CatsAreBetterThanDogs.\]
+            \[\neg PlutoIsAPlanet\]
           </section>
           <section>
             <h2>Modus Ponens</h2>
@@ -164,9 +163,9 @@
 \end{equation}</pre>
           </section>
           <section>
-            <p>\(\alpha \Rightarrow \beta:\) If Kathryn likes Star Trek, then she likes Dune.</p>
+            <p>\(\alpha \Rightarrow \beta:\) If Kathryn likes Star Trek, then she likes Star Wars.</p>
             <p>\(\alpha:\) Kathryn likes Star Trek.</p>
-            <p>\(\therefore \beta:\) Therefore, Kathryn likes Dune.</p>
+            <p>\(\therefore \beta:\) Therefore, Kathryn likes Star Wars.</p>
             <br/>
             <br/>
             <p><i>May not reflect reality!</i></p>
@@ -176,9 +175,9 @@
             \[\frac{\alpha \Rightarrow \beta, \neg \beta}{\neg \alpha}.\]
           </section>
           <section>
-            <p>\(\alpha \Rightarrow \beta:\) If Emily is a serial killer, then she has a cat.</p>
-            <p>\(\neg \beta:\) Emily doesn't have a cat.</p>
-            <p>\(\therefore \neg \alpha:\) Therefore, Emily is not a serial killer.</p>
+            <p>\(\alpha \Rightarrow \beta:\) If Cosmo is a serial killer, then he has a cat.</p>
+            <p>\(\neg \beta:\) Cosmo doesn't have a cat.</p>
+            <p>\(\therefore \neg \alpha:\) Therefore, Cosmo is not a serial killer.</p>
             <br/>
             <br/>
             <p><i>Absolutely reflect reality (p-value < 0.001).</i></p>
@@ -191,30 +190,21 @@
             \[...\]
           </section>
           <section>
-            <h2>Who cares about \(\mathbb{N}\)?</h2>
-            <p>With \(x, y \in \mathbb{N}: x - y \in \mathbb{Z}\).</p>
-            <p>With \(x \in \mathbb{Z}, y \in \mathbb{N}: (x / y) \in \mathbb{Q}\).</p>
-            <p>\(\mathbb{R}\) is a lot more work, but the idea is roughly to define \(x \in \mathbb{R}\) as a sequence of rationals converging to \(x\).</p>
-            <p>Probability theory requires \(\mathbb{R}\) (among other things).</p>
-          </section>
-          <section>
-            \[OneIsInN\]
-            \[TwoIsInN\]
-            \[ThreeIsInN\]
-            \[FourIsInN\]
-            \[FiveIsInN\]
-            \[SixIsInN\]
-            \[SevenIsInN\]
-            \[...\]
-          </section>
-          <section>
             <h3>Probability theory is a zeroth-order logic</h3>
+            \[P(a | b).\]
+            <br/>
+            <br/>
             \[P(a) = 0 \equiv a \mbox { is false}.\]
             \[P(a) = 1 \equiv a \mbox { is true}.\]
           </section>
           <section>
             <img src='img/pgm-bn.svg' width='80%' alt='pgm'/>
             \[\begin{align}P(l, \neg c, m, \neg g) & = P(l)P(\neg c)P(m|\neg c)P(\neg g | l, \neg c, m)\\ & = 0.81 \times (1 - 0.65) \times 0.27 \times (1 - 0.42)\\ & = 0.044.\end{align}\]
+          </section>
+          <section>
+            <h2>Pros and Cons of Propositional Logic</h2>
+            <p>It's couldn't be simpler.</p>
+            <p>Cannot represent complex relationships or mathematical ideas.</p>
           </section>
         </section>
 
@@ -287,6 +277,13 @@
             \[\forall n: Even(n) \equiv Divisor(n, 2).\]
             \[\forall n: Perfect(n) \equiv n > 1 \land n = 1 + \sum_{i \in [2, n)}i\times I(Divisor(n, i)).\]
             \[\forall n: Perfect(n) \Rightarrow Even(n)?\]
+          </section>
+          <section>
+            <h2>Who cares about \(\mathbb{N}\)?</h2>
+            <p>With \(x, y \in \mathbb{N}: x - y \in \mathbb{Z}\).</p>
+            <p>With \(x \in \mathbb{Z}, y \in \mathbb{N}: (x / y) \in \mathbb{Q}\).</p>
+            <p>\(\mathbb{R}\) is a lot more work, but the idea is roughly to define \(x \in \mathbb{R}\) as a sequence of rationals converging to \(x\).</p>
+            <p>Probability theory requires \(\mathbb{R}\) (among other things).</p>
           </section>
           <section>
             <h2>Peano axioms (1/3)</h2>
@@ -489,6 +486,34 @@
 </code></pre>
           </section>
           <section>
+            <h2>Untyped λ-Calculus</h2>
+            <p>Given a set of variables \(\mathcal{V}\), the set of all valid lambda term \(\Lambda\):</p>
+            <ol start='0'>
+              <li>Variable: If \(v \in \mathcal{V}\), then \(v \in \Lambda\).</li>
+              <li>Abstraction: If \(v \in \mathcal{V}\) and \(M \in \Lambda\), then \((\lambda v : M) \in \Lambda\).</li>
+              <li>Application: If \(M\) and \(N \in \Lambda\), then \(M N \in \Lambda\).</li>
+            </ol>
+          </section>
+          <section>
+            <h2>Untyped λ-Calculus</h2>
+            <p>Given a set of variables \(\mathcal{V}\), the set of all valid lambda term \(\Lambda\):</p>
+            \[\Lambda = \mathcal{V} \mid (\Lambda \Lambda) \mid (\lambda \mathcal{V}: \Lambda). \]
+          </section>
+          <section>
+            <h2>Functions have only one argument</h2>
+            \[divides := \lambda by . (\lambda n . \dots).\]
+            \[isEven := divides 2.\]
+          </section>
+          <section>
+            <h2>Simply Typed λ-Calculus</h2>
+            <p></p>
+            \[\mathbb{T} = \mathbb{A} \mid \mathbb{T} \to \mathbb{T}.\]
+            \[\Lambda_\mathbb{T} = \mathcal{V} \mid (\Lambda_\mathbb{T} \Lambda_\mathbb{T}) \mid (\lambda \mathcal{V}: \mathbb{T}: \Lambda_\mathbb{T}).\]
+          </section>
+          <section>
+            <h2>Curry-Howard correspondence</h2>
+          </section>
+          <section>
             <p>Complexity of proofs: \(\mathcal{O}\)(¯\_(ツ)_/¯).</p>
           </section>
           <section>
@@ -541,18 +566,19 @@ False :: Bool
 </pre></div>
           </section>
           <section>
-<pre style='font-size:1em;'><code class='haskell'>type Name = String
-data Kind = Undergrad | MScStudent | PhDStudent
-          | Visiting | PI | PostDoc
-data LabMember = LabMember Name Kind</code></pre>
+<pre style='font-size:1em;'><code class='haskell'>type Language = String
+data NativeLanguage = None | Unilingual Language | Multilingual (Set Language)
+</code></pre>
 
-<div class='terminal'><pre>λ> :t PhDStudent
-PhDStudent :: Kind
+<div class='terminal'><pre>λ> :t None
+None :: NativeLanguage
 
-λ> :t LabMember
-LabMember :: Name -> Kind -> LabMember
+λ> :t Multilingual
+Multilingual :: Set Language -> NativeLanguage
 
-λ> emmy = LabMember "Emmy Noether" PI
+λ> marieCurie = Multilingual (Set.fromList ["Polish", "Russian"])
+λ> :t marieCurie
+marieCurie :: NativeLanguage
 </pre></div>
           </section>
           <section>
@@ -691,35 +717,6 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <p>Emily Riehl (<a href='https://twitter.com/emilyriehl'>@emilyriehl</a>)</p>
           </section>
           <section>
-            <h2>Untyped λ-Calculus</h2>
-            <p>Given a set of variables \(\mathcal{V}\), the set of all valid lambda term \(\Lambda\):</p>
-            <ol start='0'>
-              <li>Variable: If \(v \in \mathcal{V}\), then \(v \in \Lambda\).</li>
-              <li>Abstraction: If \(v \in \mathcal{V}\) and \(M \in \Lambda\), then \((\lambda v : M) \in \Lambda\).</li>
-              <li>Application: If \(M\) and \(N \in \Lambda\), then \(M N \in \Lambda\).</li>
-            </ol>
-          </section>
-          <section>
-            <h2>Untyped λ-Calculus</h2>
-            <p>Given a set of variables \(\mathcal{V}\), the set of all valid lambda term \(\Lambda\):</p>
-            \[\Lambda = \mathcal{V} \mid (\Lambda \Lambda) \mid (\lambda \mathcal{V}: \Lambda). \]
-          </section>
-          <section>
-            <h2>Functions have only one argument</h2>
-            \[divides := \lambda by . (\lambda n . \dots).\]
-            \[isEven := divides 2.\]
-          </section>
-          <section>
-            <h2>Curry-Howard correspondence</h2>
-          </section>
-          <section>
-            <h2>λC: Calculus of Construction</h2>
-          </section>
-          <section>
-            <h2>Are we Turing-complete Yet?</h2>
-            <p>No!</p>
-          </section>
-          <section>
             <p>λC is a powerful logic (higher-order logic)</p>
             <p>λC is capable of formalizing mathematics (Coq, Lean).</p>
             <p>λC is computationally powerful, it's a rich language for expressing programs.</p>
@@ -738,7 +735,6 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <p>All implementations are different</p>
             <p>Richer than 0th/1st order logics, and thus inference is harder</p>
           </section>
-
         </section>
 
         <section>
