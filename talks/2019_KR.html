@@ -456,13 +456,13 @@
                 <td>Coq</td>
                 <td>OCaml</td>
                 <td>Yes</td>
-                <td>CoC (λC)</td>
+                <td>Calculus of Constructions (λC)</td>
               </tr>
               <tr>
                 <td>Lean</td>
                 <td>C++</td>
                 <td>Yes</td>
-                <td>CoC (λC)</td>
+                <td>Calculus of Constructions (λC)</td>
               </tr>
             </table>
           </section>
@@ -487,18 +487,46 @@
             <ol start='0'>
               <li>Variable: If \(v \in \mathcal{V}\), then \(v \in \Lambda\).</li>
               <li>Abstraction: If \(v \in \mathcal{V}\) and \(M \in \Lambda\), then \((\lambda v . M) \in \Lambda\).</li>
-              <li>Application: If \(M\) and \(N \in \Lambda\), then \(M N \in \Lambda\).</li>
+              <li>Application: If \(M\) and \(N \in \Lambda\), then \(M\ N \in \Lambda\).</li>
             </ol>
           </section>
           <section>
             <h2>Untyped λ-Calculus</h2>
             <p>Given a set of variables \(\mathcal{V}\), the set of all valid lambda terms \(\Lambda\):</p>
-            \[\Lambda = \mathcal{V} \mid (\Lambda \Lambda) \mid (\lambda \mathcal{V} . \Lambda). \]
+            \[\Lambda = \mathcal{V} \mid (\Lambda \Lambda) \mid (\lambda \mathcal{V} . \Lambda).\]
+          </section>
+          <section>
+            <h2>Precedence and Associativity</h2>
+            <p>Abstraction is right-associative: \(\lambda x\ y\ .\ M \equiv \lambda x\ .\ (\lambda y\ .\ M)\).</p>
+            <p>Application is left-associative: \(M\ N\ O\ P \equiv ((M\ N)\ O)\ P\).</p>
+            <p>Application has precedence over abstraction: \(\lambda x\ .\ M\ N \equiv \lambda x\ .\ (M\ N)\).</p>
+          </section>
+          <section>
+            \[(\lambda x\ .\ x^2)\ 2,\]
+            \[(\lambda x\ .\ x^2)[x := 2],\]
+            \[2^2.\]
+          </section>
+          <section>
+            \[(\lambda y\ .\ (\lambda x\ .\ x + y))\ 47,\]
+            \[(\lambda y\ .\ (\lambda x\ .\ x + y))[y := 47],\]
+            \[(\lambda x\ .\ x + 47).\]
+          </section>
+          <section>
+            \[(\lambda x\ .\ x x)\ (\lambda x\ .\ x x),\]
+            \[(\lambda x\ .\ x x)[x := (\lambda x\ .\ x x)],\]
+            \[\lambda x\ .\ x x)\ (\lambda x\ .\ x x).\]
           </section>
           <section>
             <h2>Functions have only one argument</h2>
-            \[divides := \lambda\ b . (\lambda n . \dots).\]
+            \[divides := \lambda\ b\ . (\lambda n\ .\ \dots).\]
             \[isEven := divides\ 2.\]
+          </section>
+          <section>
+            <p>Untyped λ-Calculus is a universal model of computation.</p>
+            <br/>
+            <p>Can encode lots of stuff (Church encoding, Church numerals).</p>
+            <br/>
+            <p>But not that useful for our purpuse.</p>
           </section>
           <section>
             <h2>Simply Typed λ-Calculus</h2>
@@ -516,10 +544,13 @@
             <br/>
             \[\frac{\Gamma \vdash \alpha \Rightarrow \beta, \Gamma \vdash \alpha}{\Gamma \vdash \beta}.\]
             <br/>
-            \[\frac{\Gamma \vdash E_0 : \alpha \to \beta, \Gamma \vdash E_1: \alpha}{\Gamma E_0 E_1 : \beta}.\]
+            \[\frac{\Gamma \vdash E_0 : \alpha \to \beta, \Gamma \vdash E_1: \alpha}{\Gamma \vdash E_0\ E_1 : \beta}.\]
           </section>
           <section>
             <p>Complexity of proofs: \(\mathcal{O}\)(¯\_(ツ)_/¯).</p>
+          </section>
+          <section>
+            <img src='img/book-hol.png' alt='hol book'/>
           </section>
           <section>
             <h2>Functional Programming Languages</h2>
@@ -572,7 +603,10 @@ False :: Bool
           </section>
           <section>
 <pre style='font-size:1em;'><code class='haskell'>type Language = String
-data NativeLanguage = None | Unilingual Language | Multilingual (Set Language)
+data NativeLanguage =
+    None
+  | Unilingual Language
+  | Multilingual (Set Language)
 </code></pre>
 
 <div class='terminal'><pre>λ> :t None
