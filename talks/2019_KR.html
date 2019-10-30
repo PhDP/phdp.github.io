@@ -50,22 +50,39 @@
             <img src='img/article-rice.png' alt='rice'/>
           </section>
           <section>
-            <img src='img/article-logic-theorist.png' alt='logic theorist'/>
-          </section>
-          <section>
             <img src='img/article-xiao2015.png' alt='MaxEnt'/>
           </section>
           <section>
             <img src='img/article-mcgill.png' alt='McGill'/>
           </section>
           <section>
+            <img src='img/article-logic-theorist.png' alt='logic theorist'/>
+          </section>
+          <section>
+            <h2>Probability theory</h2>
+            <p>A probability measure \((\Omega, \mathcal{F}, \mathcal{P})\) where</p>
+            \[P: \mathcal{F} \mapsto \{x \in \mathbb{R}: 0 \leq x \leq 1\}\]
+            <br/>
+            <p>follows the axioms</p>
+            <br/>
+            \[P(\Omega) = 1.\]
+            \[\forall e \in \mathcal{F}: P(e) \geq 0.\]
+            \[\forall e_0, e_1 \in \mathcal{F}: e_0 \cap e_1 = \emptyset \Rightarrow P(e_0 \cup e_1) = P(e_0) + P(e_1).\]
+          </section>
+          <section>
+            \[P(\emptyset) = 0?\]
+            \[\forall e \in mathcal{F}: P(e) \leq 1?\]
+            \[\forall e_0, e_1 \in mathcal{F}: e_0 \subseteq e_1 \Rightarrow P(e_0) \leq P(e_1)?\]
+            \[\forall e_0, e_1 \in \mathcal{F}: P(e_0 \cup e_1) = P(e_0) + P(e_1) - P(e_0 \cap e_1)?\]
+          </section>
+          <section>
             <h2>Goals</h2>
             <p><b>0. Implement a language powerful enough to represent mathematical ideas and
-            complex relationships between objects (λC)</b></p>
-            <p><b>1. Study {many-valued, probabilistic} extensions to λC and how they can be used
+            complex relationships between objects (λC &amp; full FOL)</b></p>
+            <p><b>1. Study {many-valued, probabilistic} extensions and study how they can be used
             to encode ecological knowledge.</b></p>
-            <p><b>2. Develop and encode ecological theories in our extended λC.</b></p>
-            <p><b>3. Symbolic regression for machine learning within our extended λC.</b></p>
+            <p><b>2. Develop and encode ecological theories in our extended languages.</b></p>
+            <p><b>3. Symbolic regression for machine learning within our extended languages.</b></p>
           </section>
           <section>
             <h2>Projects</h2>
@@ -140,7 +157,7 @@
           </section>
           <section>
             <h2>Modus Ponens</h2>
-            \[\frac{\alpha \Rightarrow \beta, \alpha}{\therefore \beta}.\]
+            \[\frac{\alpha \Rightarrow \beta \mbox{   } \alpha}{\beta} \mbox{ or } \frac{\alpha \Rightarrow \beta, \alpha}{\therefore \beta}.\]
           </section>
           <section>
             <p>\(\alpha \Rightarrow \beta:\) If Alexander likes Star Trek, then he likes Star Wars.</p>
@@ -152,15 +169,15 @@
           </section>
           <section>
             <h2>Modus Tollens</h2>
-            \[\frac{\alpha \Rightarrow \beta, \neg \beta}{\therefore \neg \alpha}.\]
+            \[\frac{\alpha \Rightarrow \beta \mbox{   } \neg \beta}{\therefore \neg \alpha}.\]
           </section>
           <section>
-            <p>\(\alpha \Rightarrow \beta:\) If Julia is a serial killer, then she has a cat.</p>
-            <p>\(\neg \beta:\) Julia doesn't have a cat.</p>
-            <p>\(\therefore \neg \alpha:\) Therefore, Julia is not a serial killer.</p>
+            <p>\(\alpha \Rightarrow \beta:\) If Emily is a serial killer, then she has a cat.</p>
+            <p>\(\neg \beta:\) Emily doesn't have a cat.</p>
+            <p>\(\therefore \neg \alpha:\) Therefore, Emily is not a serial killer.</p>
             <br/>
             <br/>
-            <p><i>Absolutely reflect reality (p-value < 0.05).</i></p>
+            <p><i>Absolutely reflect reality (p-value < 0.001).</i></p>
           </section>
           <section>
             <h2>A Party of Rules!</h2>
@@ -890,23 +907,6 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
         <section>
           <section>
             <h2>Bayesian Inference and Higher-Order Logic</h2>
-          </section>
-          <section>
-            <h2>Probability theory</h2>
-            <p>A probability measure \((\Omega, \mathcal{F}, \mathcal{P})\) where</p>
-            \[P: \mathcal{F} \mapsto \{x \in \mathbb{R}: 0 \leq x \leq 1\}\]
-            <br/>
-            <p>follows the axioms</p>
-            <br/>
-            \[P(\Omega) = 1.\]
-            \[\forall e \in \mathcal{F}: P(e) \geq 0.\]
-            \[\forall e_0, e_1 \in \mathcal{F}: e_0 \cap e_1 = \emptyset \Rightarrow P(e_0 \cup e_1) = P(e_0) + P(e_1).\]
-          </section>
-          <section>
-            \[P(\emptyset) = 0?\]
-            \[\forall e \in mathcal{F}: P(e) \leq 1?\]
-            \[\forall e_0, e_1 \in mathcal{F}: e_0 \subseteq e_1 \Rightarrow P(e_0) \leq P(e_1)?\]
-            \[\forall e_0, e_1 \in \mathcal{F}: P(e_0 \cup e_1) = P(e_0) + P(e_1) - P(e_0 \cap e_1)?\]
           </section>
           <section>
             <h2>Borel spaces</h2>
