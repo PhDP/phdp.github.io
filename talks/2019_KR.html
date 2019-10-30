@@ -156,7 +156,7 @@
           </section>
           <section>
             <h2>Modus Ponens</h2>
-            \[\frac{\alpha \Rightarrow \beta, \alpha}{\beta} \mbox{ or } \frac{\alpha \Rightarrow \beta, \alpha}{\therefore \beta}.\]
+            \[\frac{\alpha \Rightarrow \beta, \alpha}{\beta} \mbox{ or } \frac{\alpha \Rightarrow \beta, \alpha}{\therefore \beta}  \mbox{ or } \frac{\Gamma \vdash \alpha \Rightarrow \beta, \Gamma \vdash \alpha}{\Gamma \vdash \beta}.\]
             <br/>
 <pre style='font-size:1em;color:#000'>\begin{equation}
   \infer{\beta}{\alpha \Rightarrow \beta & \alpha}.
@@ -409,10 +409,6 @@
 
           </section>
           <section>
-            <h2>Lambda Cube</h2>
-            <img src='img/lambda cube.png' alt='lambda cube'/>
-          </section>
-          <section>
             <table style='width:100%; text-align:center;'>
               <tr>
                 <th>Language</th>
@@ -487,31 +483,40 @@
           </section>
           <section>
             <h2>Untyped λ-Calculus</h2>
-            <p>Given a set of variables \(\mathcal{V}\), the set of all valid lambda term \(\Lambda\):</p>
+            <p>Given a set of variables \(\mathcal{V}\), the set of all valid lambda terms \(\Lambda\):</p>
             <ol start='0'>
               <li>Variable: If \(v \in \mathcal{V}\), then \(v \in \Lambda\).</li>
-              <li>Abstraction: If \(v \in \mathcal{V}\) and \(M \in \Lambda\), then \((\lambda v : M) \in \Lambda\).</li>
+              <li>Abstraction: If \(v \in \mathcal{V}\) and \(M \in \Lambda\), then \((\lambda v . M) \in \Lambda\).</li>
               <li>Application: If \(M\) and \(N \in \Lambda\), then \(M N \in \Lambda\).</li>
             </ol>
           </section>
           <section>
             <h2>Untyped λ-Calculus</h2>
-            <p>Given a set of variables \(\mathcal{V}\), the set of all valid lambda term \(\Lambda\):</p>
-            \[\Lambda = \mathcal{V} \mid (\Lambda \Lambda) \mid (\lambda \mathcal{V}: \Lambda). \]
+            <p>Given a set of variables \(\mathcal{V}\), the set of all valid lambda terms \(\Lambda\):</p>
+            \[\Lambda = \mathcal{V} \mid (\Lambda \Lambda) \mid (\lambda \mathcal{V} . \Lambda). \]
           </section>
           <section>
             <h2>Functions have only one argument</h2>
-            \[divides := \lambda by . (\lambda n . \dots).\]
-            \[isEven := divides 2.\]
+            \[divides := \lambda\ b . (\lambda n . \dots).\]
+            \[isEven := divides\ 2.\]
           </section>
           <section>
             <h2>Simply Typed λ-Calculus</h2>
             <p></p>
             \[\mathbb{T} = \mathbb{A} \mid \mathbb{T} \to \mathbb{T}.\]
-            \[\Lambda_\mathbb{T} = \mathcal{V} \mid (\Lambda_\mathbb{T} \Lambda_\mathbb{T}) \mid (\lambda \mathcal{V}: \mathbb{T}: \Lambda_\mathbb{T}).\]
+            \[\Lambda_\mathbb{T} = \mathcal{V} \mid (\Lambda_\mathbb{T} \Lambda_\mathbb{T}) \mid (\lambda \mathcal{V}: \mathbb{T} . \Lambda_\mathbb{T}).\]
           </section>
           <section>
-            <h2>Curry-Howard correspondence</h2>
+            <h2>Lambda Cube</h2>
+            <img src='img/lambda cube.png' alt='lambda cube'/>
+          </section>
+          <section>
+            <h2>Curry-Howard(–Lambek) correspondence</h2>
+            <p>TL;DR: A program is a proof.</p>
+            <br/>
+            \[\frac{\Gamma \vdash \alpha \Rightarrow \beta, \Gamma \vdash \alpha}{\Gamma \vdash \beta}.\]
+            <br/>
+            \[\frac{\Gamma \vdash E_0 : \alpha \to \beta, \Gamma \vdash E_1: \alpha}{\Gamma E_0 E_1 : \beta}.\]
           </section>
           <section>
             <p>Complexity of proofs: \(\mathcal{O}\)(¯\_(ツ)_/¯).</p>
@@ -909,26 +914,25 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
 
         <section>
           <section>
-            <h2>Bayesian Inference and Higher-Order Logic</h2>
+            <h2>Higher-Order Probabilistic Programming Languages</h2>
           </section>
           <section>
-            <h2>Borel spaces</h2>
+            <blockquote style='padding-left: 0.5em; border-left: 0.3em solid #5DD836'>
+              <p>[...] ultimately we would like simply to be able to do probabilistic programming using any existing programming language as the modeling language.</p>
+            </blockquote>
+            <p>From J-W van de Meent et al. <i>An Introduction to Probabilistic Programming</i>, arxiv:1809.10756, 2018.</p>
           </section>
           <section>
-            <h2>Bivalence and Probability Theory</h2>
-            \[P(x) = 0 \equiv x \mbox { is } False.\]
-            \[P(x) = 1 \equiv x \mbox { is } True.\]
-            </br>
-            <p>Probability theory assigns probabilities to bivalent statements.</p>
-            \[P(\mbox{rolls a 6}) = 1/6.\]
-            \[P(\mbox{Elvis is alive}) = 0.0012.\]
-            \[P(\mbox{Pop size } < 100 | ...) = 0.32.\]
+            <img src='img/article-lambda-prob.png' alt='lambda prob'/>
           </section>
           <section>
-            <h2>Probability vs Fuzziness</h2>
-            <p>Will Trump be president in 2021?</p>
-            <p>Are viruses alive?</p>
-            <p>\(x\) interacts with \(y\)?</p>
+            <img src='img/paper-staton16.png' alt='staton16'/>
+          </section>
+          <section>
+            <h2>Solid Implementations!</h2>
+            <p><a href='https://github.com/probprog/anglican'>Anglican</a></p>
+            <p><a href='https://github.com/TuringLang/Turing.jl'>Turing.jl</a></p>
+            <p><a href='https://pyro.ai/'>Uber's Pyro</a></p>
           </section>
         </section>
 
