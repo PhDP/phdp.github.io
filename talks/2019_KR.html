@@ -71,8 +71,8 @@
           </section>
           <section>
             \[P(\emptyset) = 0?\]
-            \[\forall e \in mathcal{F}: P(e) \leq 1?\]
-            \[\forall e_0, e_1 \in mathcal{F}: e_0 \subseteq e_1 \Rightarrow P(e_0) \leq P(e_1)?\]
+            \[\forall e \in \mathcal{F}: P(e) \leq 1?\]
+            \[\forall e_0, e_1 \in \mathcal{F}: e_0 \subseteq e_1 \Rightarrow P(e_0) \leq P(e_1)?\]
             \[\forall e_0, e_1 \in \mathcal{F}: P(e_0 \cup e_1) = P(e_0) + P(e_1) - P(e_0 \cap e_1)?\]
           </section>
           <section>
@@ -150,7 +150,7 @@
             \[a \land (b \lor c) \Rightarrow d.\]
             \[Fever \land (Cough \lor AchingMuscles) \Rightarrow Flu.\]
             \[CrustaceaIsMonophyletic \Rightarrow TrumpIsAStableGenius.\]
-            \[CrustaceaIsMonophyletic \veebar (CrustaceaIsParaphyletic \lor CrustaceaIsPolyphyletic).\]
+            \[\begin{align}CrustaceaIsMonophyletic \veebar & (CrustaceaIsParaphyletic \\ & \lor CrustaceaIsPolyphyletic).\end{align}\]
             \[OnePlusTwoIsThree.\]
             \[\neg PlutoIsAPlanet\]
           </section>
@@ -191,7 +191,7 @@
           </section>
           <section>
             <h3>Probability theory is a zeroth-order logic</h3>
-            \[P(a | b).\]
+            <p>In \(P(a | b)\), both \(a\) and \(b\) are propositional symbols.</p>
             <br/>
             <br/>
             \[P(a) = 0 \equiv a \mbox { is false}.\]
@@ -336,8 +336,9 @@
             \[\forall x: Sm(x) \Rightarrow Ca(x); 1.5.\]
             \[\forall x: \neg[\exists y: Fr(x, y)] \Rightarrow Sm(x); 2.3.\]
             \[\forall x, y, z: Fr(x, y) \land Fr(y, z) \Rightarrow Fr(x, z); 0.7.\]
-            \[\forall x, y: Fr(x, y) \Rightarrow [Sm(x) \equiv Sm(y)]; 1.1\]
+            \[\forall x, y: Fr(x, y) \Rightarrow [Sm(x) \equiv Sm(y)]; 1.1.\]
 
+            <br/>
             <p>Weights \(\in \mathbb{R}\).</p>
           </section>
           <section>
@@ -354,7 +355,7 @@
             <p>Has an old, unmaintained C++ implementation that runs on a single thread.</p>
             <p>A good logic, but doesn't handle functions well.</p>
 
-            \[\forall x, y: \dot(x) = \alpha x - \beta xy \land \dot(y) = \delta xy - \gamma y; 0.0.\]
+            \[\forall x, y: \dot{x} = \alpha x - \beta xy \land \dot{y} = \delta xy - \gamma y; 0.0.\]
           </section>
           <section>
             <h2>Pitfall 1 of 8128: _ is probabilistic</h2>
@@ -378,7 +379,7 @@
           <section>
             <h2>The Case <b>Against</b> First-Order Logic</h2>
             <p>Many ideas are difficult to represent.</p>
-            <p>Essentially based on set theory, which is awkward to handle complex objects.</p>
+            <p>Generally based on set theory, which is awkward to handle complex objects.</p>
             <p>Efforts to formalize mathematics done with type theories.</p>
           </section>
         </section>
@@ -558,7 +559,7 @@
             \[\frac{\Gamma \vdash M : \alpha \to \beta, \Gamma \vdash N: \alpha}{\Gamma \vdash M\ N : \beta}.\]
           </section>
           <section>
-            <p>Complexity of proofs: \(\mathcal{O}\)(¯\_(ツ)_/¯).</p>
+            <p>Complexity of proofs: \(\mathcal{O}\)(¯\_(ツ)_/¯), pronounced "Oh dear".</p>
           </section>
           <section>
             <h2>Lambda Cube</h2>
@@ -684,7 +685,7 @@ isEven = divides 2 -- Currying
           <section>
             <h2>Functions have only one argument</h2>
 <pre style='font-size:1em;'><code class='stretch haskell'>-- Checks whether 'by' divides 'n' with a remainder of 0.
-divides :: Integral a => a -> a -> Bool
+divides :: Integral a => a -> a -> Bool -- a -> (a -> Bool)
 divides by n = n `mod` by == 0
 
 -- Checks if a number is even.
@@ -771,23 +772,18 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <p>Emily Riehl (<a href='https://twitter.com/emilyriehl'>@emilyriehl</a>)</p>
           </section>
           <section>
-            <p>λC is a powerful logic (higher-order logic)</p>
-            <p>λC is capable of formalizing mathematics (Coq, Lean).</p>
-            <p>λC is computationally powerful, it's a rich language for expressing programs.</p>
+            <h2>The case for type theory (especially λC)</h2>
+            <p>Can quantify over anything (\(\infty\)-order logic).</p>
+            <p>Used for decades to formalize mathematics.</p>
+            <p>They form rich logics.</p>
+            <p>They formalize mathematics.</p>
+            <p>They are expressive functional programming languages.</p>
           </section>
           <section>
-            <h2>The case for type theory</h2>
-            <p>Can quantify over anything (\(\infty\)-order logic)</p>
-            <p>Used for decades to formalize mathematics</p>
-            <p>It's a rich logic</p>
-            <p>It's a rich foundation for mathematics</p>
-            <p>It's a rich foundation for programming languages</p>
-          </section>
-          <section>
-            <h2>The case against type theories (HOL)</h2>
-            <p>Arguably easier to use in many cases, but the foundations are conceptually harder to understand</p>
-            <p>All implementations are different</p>
-            <p>Richer than 0th/1st order logics, and thus inference is harder</p>
+            <h2>The case against type theory (especially λC)</h2>
+            <p>Arguably easier to use in many cases, but the foundations are conceptually harder to understand.</p>
+            <p>All implementations are different.</p>
+            <p>Richer than 0th/1st order logics, and thus inference is harder.</p>
           </section>
         </section>
 
@@ -913,7 +909,7 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <img src='img/book-mathfuzzy1.jpg' alt='mathfuzzy1'/>
           </section>
           <section>
-            <img src='img/book-fuzzymath.jpg' alt='mathfuzzy1'/>
+            <img src='img/book-fuzzymath.png' alt='mathfuzzy1'/>
           </section>
           <section>
             <h2>2nd order fuzziness</h2>
@@ -924,7 +920,9 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <br/>
             <p>Generalized:</p>
             \[\{x \in \mathbb{R}: 0 \leq x \leq 1\} \mapsto \{y \in \mathbb{R}: 0 \leq y \leq 1\}.\]
-            <br/>
+          </section>
+          <section>
+            <h2>2nd order fuzziness</h2>
             \[\{\{Theory\ x: 0.25\}: 0.0\}.\]
             \[\{\{Theory\ x: 0.7071\}: 0.65\}.\]
             \[\{\{Theory\ x: 0.73\}: 0.86\}.\]
