@@ -157,19 +157,24 @@
           </section>
           <section>
             <h2>Modus Ponens</h2>
-            \[\frac{\alpha \Rightarrow \beta \mbox{   } \alpha}{\beta} \mbox{ or } \frac{\alpha \Rightarrow \beta, \alpha}{\therefore \beta}.\]
+            \[\frac{\alpha \Rightarrow \beta, \alpha}{\beta} \mbox{ or } \frac{\alpha \Rightarrow \beta, \alpha}{\therefore \beta}.\]
+            <br/>
+            <br/>
+<pre style='font-size:1em;'><code class='latex'>\begin{equation}
+  \infer{\beta}{\alpha \Rightarrow \beta & \alpha}.
+\end{equation}</code></pre>
           </section>
           <section>
-            <p>\(\alpha \Rightarrow \beta:\) If Alexander likes Star Trek, then he likes Star Wars.</p>
-            <p>\(\alpha:\) Alexander likes Star Trek.</p>
-            <p>\(\therefore \beta:\) Therefore, Alexander likes Star Wars.</p>
+            <p>\(\alpha \Rightarrow \beta:\) If Kathryn likes Star Trek, then she likes Dune.</p>
+            <p>\(\alpha:\) Kathryn likes Star Trek.</p>
+            <p>\(\therefore \beta:\) Therefore, Kathryn likes Dune.</p>
             <br/>
             <br/>
             <p><i>May not reflect reality!</i></p>
           </section>
           <section>
             <h2>Modus Tollens</h2>
-            \[\frac{\alpha \Rightarrow \beta \mbox{   } \neg \beta}{\therefore \neg \alpha}.\]
+            \[\frac{\alpha \Rightarrow \beta, \neg \beta}{\therefore \neg \alpha}.\]
           </section>
           <section>
             <p>\(\alpha \Rightarrow \beta:\) If Emily is a serial killer, then she has a cat.</p>
@@ -483,6 +488,9 @@
         f.write('Hello file!')
   return ', '.join(mp3s) if len(mp3) > 10 else 0
 </code></pre>
+          </section>
+          <section>
+            <p>Complexity of proofs: \(\mathcal{O}\)(¯\_(ツ)_/¯).</p>
           </section>
           <section>
             <h2>Functional Programming Languages</h2>
