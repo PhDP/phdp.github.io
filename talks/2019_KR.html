@@ -493,18 +493,18 @@
           <section>
             <h2>Untyped λ-Calculus</h2>
             <p>Given a set of variables \(\mathcal{V}\), the set of all valid lambda terms \(\Lambda\):</p>
-            \[\Lambda = \mathcal{V} \mid (\Lambda \Lambda) \mid (\lambda \mathcal{V} . \Lambda).\]
+            \[\Lambda = \mathcal{V} \mid (\Lambda\ \Lambda) \mid (\lambda \mathcal{V} . \Lambda).\]
           </section>
           <section>
-            <h2>Precedence and Associativity</h2>
+            <h2>Precedence &amp; Associativity</h2>
             <p>Abstraction is right-associative: \(\lambda x\ y\ .\ M \equiv \lambda x\ .\ (\lambda y\ .\ M)\).</p>
             <p>Application is left-associative: \(M\ N\ O\ P \equiv ((M\ N)\ O)\ P\).</p>
             <p>Application has precedence over abstraction: \(\lambda x\ .\ M\ N \equiv \lambda x\ .\ (M\ N)\).</p>
           </section>
           <section>
-            \[(\lambda x\ .\ x^2)\ 2,\]
-            \[(\lambda x\ .\ x^2)[x := 2],\]
-            \[2^2.\]
+            \[(\lambda x\ .\ x^2)\ 6,\]
+            \[(\lambda x\ .\ x^2)[x := 6],\]
+            \[6^2.\]
           </section>
           <section>
             \[(\lambda y\ .\ (\lambda x\ .\ x + y))\ 47,\]
@@ -512,14 +512,17 @@
             \[(\lambda x\ .\ x + 47).\]
           </section>
           <section>
-            \[(\lambda x\ .\ x x)\ (\lambda x\ .\ x x),\]
-            \[(\lambda x\ .\ x x)[x := (\lambda x\ .\ x x)],\]
-            \[\lambda x\ .\ x x)\ (\lambda x\ .\ x x).\]
+            \[(\lambda x\ .\ x\ x)\ (\lambda x\ .\ x\ x),\]
+            \[(\lambda x\ .\ x\ x)[x := (\lambda x\ .\ x\ x)],\]
+            \[(\lambda x\ .\ x\ x)\ (\lambda x\ .\ x\ x).\]
           </section>
           <section>
             <h2>Functions have only one argument</h2>
             \[divides := \lambda\ b\ . (\lambda n\ .\ \dots).\]
             \[isEven := divides\ 2.\]
+            <br/>
+            <br/>
+            <p>Note that we write divides 2 instead of divides(2).</p>
           </section>
           <section>
             <p>Untyped λ-Calculus is a universal model of computation.</p>
@@ -529,14 +532,22 @@
             <p>But not that useful for our purpuse.</p>
           </section>
           <section>
-            <h2>Simply Typed λ-Calculus</h2>
+            <h2>Simply Typed λ-Calculus (λ→)</h2>
             <p></p>
             \[\mathbb{T} = \mathbb{A} \mid \mathbb{T} \to \mathbb{T}.\]
-            \[\Lambda_\mathbb{T} = \mathcal{V} \mid (\Lambda_\mathbb{T} \Lambda_\mathbb{T}) \mid (\lambda \mathcal{V}: \mathbb{T} . \Lambda_\mathbb{T}).\]
+            \[\Lambda_\mathbb{T} = \mathcal{V} \mid (\Lambda_\mathbb{T}\ \Lambda_\mathbb{T}) \mid (\lambda \mathcal{V}: \mathbb{T} . \Lambda_\mathbb{T}).\]
           </section>
           <section>
-            <h2>Lambda Cube</h2>
-            <img src='img/lambda cube.png' alt='lambda cube'/>
+            <h2>Abstaction in λ→</h2>
+            <p>If \(M: \beta\), then \((\lambda x: \alpha\ .\ M): \alpha \to \beta\).</p>
+            <br/>
+            \[(\lambda\ x: \mathbb{R}\ .\ isPositive\ x)\]
+          </section>
+          <section>
+            <h2>Application in λ→</h2>
+            <p>If \(M: \alpha \to \beta\) and \(N: \alpha\), then \(M\ N : \beta).</p>
+            <br/>
+            \[(\lambda\ x: \mathbb{R}\ .\ isPositive\ x) 0.14159\]
           </section>
           <section>
             <h2>Curry-Howard(–Lambek) correspondence</h2>
@@ -544,10 +555,14 @@
             <br/>
             \[\frac{\Gamma \vdash \alpha \Rightarrow \beta, \Gamma \vdash \alpha}{\Gamma \vdash \beta}.\]
             <br/>
-            \[\frac{\Gamma \vdash E_0 : \alpha \to \beta, \Gamma \vdash E_1: \alpha}{\Gamma \vdash E_0\ E_1 : \beta}.\]
+            \[\frac{\Gamma \vdash M : \alpha \to \beta, \Gamma \vdash N: \alpha}{\Gamma \vdash M\ N : \beta}.\]
           </section>
           <section>
             <p>Complexity of proofs: \(\mathcal{O}\)(¯\_(ツ)_/¯).</p>
+          </section>
+          <section>
+            <h2>Lambda Cube</h2>
+            <img src='img/lambda cube.png' alt='lambda cube'/>
           </section>
           <section>
             <img src='img/book-hol.png' alt='hol book'/>
