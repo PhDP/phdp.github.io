@@ -1,4 +1,4 @@
-!doctype html>
+<!doctype html>
 <html lang='en'>
   <head>
     <meta charset='utf-8'>
@@ -51,6 +51,12 @@
           </section>
           <section>
             <img src='img/article-logic-theorist.png' alt='logic theorist'/>
+          </section>
+          <section>
+            <img src='img/article-xiao2015.png' alt='MaxEnt'/>
+          </section>
+          <section>
+            <img src='img/article-mcgill.png' alt='McGill'/>
           </section>
           <section>
             <h2>Goals</h2>
@@ -361,7 +367,7 @@
 
         <section>
           <section>
-            <h2>Type Theories, λ-Calculi, HOL</h2>
+            <h2>Type Theories</h2>
           </section>
           <section>
             <img src='img/article-lean.png' alt='lean'/>
@@ -370,9 +376,12 @@
             <img src='img/articles-safeml.png' alt='safeml'/>
           </section>
           <section>
+            <img src='img/article-farmer2006.png' alt='stt'/>
+          </section>
+          <section>
 
             <p>Various type theories: Whitehead and Russell's ramified theory of types, typed
-            lambda calculi, Martin-Löf Type Theory, Homotopy Type Theory.</p>
+            lambda calculi, Simple Type Theory, Martin-Löf Type Theory, Homotopy Type Theory.</p>
 
             <p>Some lambda calculi are not based on type theory (e.g. Untyped Lambda Calculus, the
             foundation for Lisps).</p>
@@ -388,59 +397,57 @@
           <section>
             <table style='width:100%; text-align:center;'>
               <tr>
-                <th>Programming Language</th>
+                <th>Language</th>
                 <th>Implemented in</th>
-                <th>Theorem proving?</th>
-                <th>Turing complete?</th>
+                <th>TP?</th>
                 <th>Foundation</th>
               </tr>
               <tr>
                 <td>Haskell</td>
                 <td>Haskell/C</td>
                 <td>No</td>
-                <td>Yes</td>
                 <td>System F (λ2)</td>
               </tr>
               <tr>
                 <td>OCaml</td>
                 <td>OCaml</td>
                 <td>No</td>
-                <td>Yes</td>
                 <td>System F (λ2)</td>
               </tr>
               <tr>
                 <td>Clojure</td>
                 <td>Clojure/Java</td>
                 <td>No</td>
-                <td>Yes</td>
                 <td>Untyped λ-calculus</td>
+              </tr>
+              <tr>
+                <td>Isabelle</td>
+                <td>ML</td>
+                <td>Yes</td>
+                <td>Weak type theory</td>
               </tr>
               <tr>
                 <td>Agda</td>
                 <td>Haskell</td>
                 <td>Yes</td>
-                <td>No</td>
-                <td>Unified theory of dependent types</td>
+                <td>Unified Theory of Dependent Types</td>
               </tr>
               <tr>
                 <td>HOL Light</td>
                 <td>OCaml</td>
                 <td>Yes</td>
-                <td>No</td>
-                <td>λ→</td>
+                <td>Simple Type Theory</td>
               </tr>
               <tr>
                 <td>Coq</td>
                 <td>OCaml</td>
                 <td>Yes</td>
-                <td>No</td>
                 <td>CoC (λC)</td>
               </tr>
               <tr>
                 <td>Lean</td>
                 <td>C++</td>
                 <td>Yes</td>
-                <td>No</td>
                 <td>CoC (λC)</td>
               </tr>
             </table>
@@ -457,7 +464,7 @@
     else:
       with open(filename, 'w+') as f:
         f.write('Hello file!')
-  return ', '.join(mp3s)
+  return ', '.join(mp3s) if len(mp3) > 10 else 0
 </code></pre>
           </section>
           <section>
@@ -478,20 +485,6 @@
             <p>Immutable data structures</p>
             <p>Based on System F (2nd-order typed λ-calculus)</p>
             <p>Relies heavily on category theory</p>
-          </section>
-          <section>
-            <h2>Untyped λ-Calculus</h2>
-            <p>Given a set of variables \(\mathcal{V}\), the set of all valid lambda term \(\Lambda\):</p>
-            <ol start='0'>
-              <li>Variable: If \(v \in \mathcal{V}\), then \(v \in \Lambda\).</li>
-              <li>Abstraction: If \(v \in \mathcal{V}\) and \(M \in \Lambda\), then \((\lambda v : M) \in \Lambda\).</li>
-              <li>Application: If \(M\) and \(N \in \Lambda\), then \(M N \in \Lambda\).</li>
-            </ol>
-          </section>
-          <section>
-            <h2>Untyped λ-Calculus</h2>
-            <p>Given a set of variables \(\mathcal{V}\), the set of all valid lambda term \(\Lambda\):</p>
-            \[\Lambda = \mathcal{V} \mid (\Lambda \Lambda) \mid (\lambda \mathcal{V}: \Lambda). \]
           </section>
           <section><div class='terminal'><pre>λ> 42 + 5
 47
@@ -576,6 +569,7 @@ answer = foldr sumLogs 0 values
 </code></pre>
           </section>
           <section>
+            <h2>Functions have only one argument</h2>
 <pre style='font-size:1em;'><code class='haskell'>-- Checks whether 'by' divides 'n' with a remainder of 0.
 divides by n = n `mod` by == 0
 
@@ -584,6 +578,7 @@ isEven = divides 2 -- Currying
 </code></pre>
           </section>
           <section>
+            <h2>Functions have only one argument</h2>
 <pre style='font-size:1em;'><code class='stretch haskell'>-- Checks whether 'by' divides 'n' with a remainder of 0.
 divides :: Integral a => a -> a -> Bool
 divides by n = n `mod` by == 0
@@ -670,6 +665,25 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
           <section>
             <img width='900px' src='img/category-in-context.jpg' alt='context'/>
             <p>Emily Riehl (<a href='https://twitter.com/emilyriehl'>@emilyriehl</a>)</p>
+          </section>
+          <section>
+            <h2>Untyped λ-Calculus</h2>
+            <p>Given a set of variables \(\mathcal{V}\), the set of all valid lambda term \(\Lambda\):</p>
+            <ol start='0'>
+              <li>Variable: If \(v \in \mathcal{V}\), then \(v \in \Lambda\).</li>
+              <li>Abstraction: If \(v \in \mathcal{V}\) and \(M \in \Lambda\), then \((\lambda v : M) \in \Lambda\).</li>
+              <li>Application: If \(M\) and \(N \in \Lambda\), then \(M N \in \Lambda\).</li>
+            </ol>
+          </section>
+          <section>
+            <h2>Untyped λ-Calculus</h2>
+            <p>Given a set of variables \(\mathcal{V}\), the set of all valid lambda term \(\Lambda\):</p>
+            \[\Lambda = \mathcal{V} \mid (\Lambda \Lambda) \mid (\lambda \mathcal{V}: \Lambda). \]
+          </section>
+          <section>
+            <h2>Functions have only one argument</h2>
+            \[divides := \lambda by . (\lambda n . \dots).\]
+            \[isEven := divides 2.\]
           </section>
           <section>
             <h2>Curry-Howard correspondence</h2>
