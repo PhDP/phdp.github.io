@@ -150,7 +150,7 @@
             \[a \land (b \lor c) \Rightarrow d.\]
             \[Fever \land (Cough \lor AchingMuscles) \Rightarrow Flu.\]
             \[CrustaceaIsMonophyletic \Rightarrow TrumpIsAStableGenius.\]
-            \[\begin{align}CrustaceaIsMonophyletic \veebar & (CrustaceaIsParaphyletic \\ & \lor CrustaceaIsPolyphyletic).\end{align}\]
+            \[\begin{align}CrustaceaIsMonophyletic & \veebar (CrustaceaIsParaphyletic \\ & \lor CrustaceaIsPolyphyletic).\end{align}\]
             \[OnePlusTwoIsThree.\]
             \[\neg PlutoIsAPlanet\]
           </section>
@@ -685,7 +685,8 @@ isEven = divides 2 -- Currying
           <section>
             <h2>Functions have only one argument</h2>
 <pre style='font-size:1em;'><code class='stretch haskell'>-- Checks whether 'by' divides 'n' with a remainder of 0.
-divides :: Integral a => a -> a -> Bool -- a -> (a -> Bool)
+divides :: Integral a => a -> a -> Bool
+                      -- a -> (a -> Bool)
 divides by n = n `mod` by == 0
 
 -- Checks if a number is even.
