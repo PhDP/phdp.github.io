@@ -15,7 +15,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="logo.svg"
+   sodipodi:docname="faun.svg"
    inkscape:export-filename="/home/phdp/Dropbox/Photos/Logos/faun/logo.svg.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96">
@@ -29,7 +29,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8284271"
-     inkscape:cx="228.04018"
+     inkscape:cx="166.16834"
      inkscape:cy="108.90718"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -47,7 +47,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -71,7 +71,7 @@
            id="tspan16">F</tspan><tspan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:31.75px;font-family:'EB Garamond 12 All SC';-inkscape-font-specification:'EB Garamond 12 All SC';letter-spacing:0px;word-spacing:0px"
            id="tspan827"
-           dx="0.5 -0.55000001"
+           dx="0.5 -0.89999998"
            dy="5.6999998">aun</tspan></tspan></text>
   </g>
 </svg>
