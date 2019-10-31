@@ -47,9 +47,6 @@
             <img src='img/article-queller2-big.png' alt='queller'/>
           </section>
           <section>
-            <img src='img/article-rice.png' alt='rice'/>
-          </section>
-          <section>
             <img src='img/article-xiao2015.png' alt='MaxEnt'/>
           </section>
           <section>
@@ -74,6 +71,25 @@
             \[\forall e \in \mathcal{F}: P(e) \leq 1?\]
             \[\forall e_0, e_1 \in \mathcal{F}: e_0 \subseteq e_1 \Rightarrow P(e_0) \leq P(e_1)?\]
             \[\forall e_0, e_1 \in \mathcal{F}: P(e_0 \cup e_1) = P(e_0) + P(e_1) - P(e_0 \cap e_1)?\]
+          </section>
+          <section>
+            <h2>A Problem of Knowledge Representation</h2>
+            <br/>
+            <p>How to encode ecological knowledge?</p>
+            <br/>
+            <p>How to reason about a complex web of theories?</p>
+            <br/>
+            <p>How to understand theories in their full context?</p>
+          </section>
+          <section>
+            <!-- I say "compactly" because you can approximate everything with a deep neural net, I want the system to represent directly the formula. -->
+            <h2>Interpretability is not enough!</h2>
+            <p>We need a system capable of:</p>
+            <ul>
+              <li>Compactly encoding mathematical theories of biodiversity</li>
+              <li>Understanding enough maths to see how the theories are related</li>
+              <li>Handling the inherent uncertainty associated with biodiversity data</li>
+            </ul>
           </section>
           <section>
             <h2>Goals</h2>
@@ -150,7 +166,6 @@
             \[a \land (b \lor c) \Rightarrow d.\]
             \[Fever \land (Cough \lor AchingMuscles) \Rightarrow Flu.\]
             \[CrustaceaIsMonophyletic \Rightarrow TrumpIsAStableGenius.\]
-            \[\begin{align}CrustaceaIsMonophyletic & \veebar (CrustaceaIsParaphyletic \\ & \lor CrustaceaIsPolyphyletic).\end{align}\]
             \[OnePlusTwoIsThree.\]
             \[\neg PlutoIsAPlanet\]
           </section>
@@ -205,6 +220,7 @@
             <h2>Pros and Cons of Propositional Logic</h2>
             <p>It's couldn't be simpler.</p>
             <p>Cannot represent complex relationships or mathematical ideas.</p>
+            <p>Provides very little context (often why statistical approaches reach silly conclusions).</p>
           </section>
         </section>
 
@@ -248,8 +264,14 @@
             \[z = s \times h^2.\]
             \[\forall s: Autotroph(s) \lor [\exists p: PreyOn(s, p)].\]
             \[\forall x, y: \dot{x} = \alpha x - \beta xy \land \dot{y} = \delta xy - \gamma y.\]
-            \[Monophyletic(Crustacea) \Rightarrow Stable(Trump) \land Genius(Trump).\]
             \[\forall x \in \mathbb{R}: x \geq 0 \Rightarrow \sqrt{x^2} = x.\]
+          </section>
+          <section>
+            <h2>From 0 to 1</h2>
+            \[\begin{align}CrustaceaIsMonophyletic & \veebar (CrustaceaIsParaphyletic \\ & \lor CrustaceaIsPolyphyletic).\end{align}\]
+            \[\begin{align}PhylogenyType(Crustacea) & = Monophyletic \veebar (\\
+                           PhylogenyType(Crustacea) & = Paraphyletic \lor \\
+                           PhylogenyType(Crustacea) & = Polyphyletic).\end{align}\]
           </section>
           <section>
             <h2>Context</h2>
