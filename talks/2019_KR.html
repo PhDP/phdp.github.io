@@ -565,18 +565,23 @@
           </section>
           <section>
             <h2>Curry-Howard(–Lambek) correspondence</h2>
-            <p><b>TL;DR: A program is a proof.</b></p>
+            <p><b>TL;DR: A proof is a program and the formula it proves is the type for the program.</b></p>
             <br/>
             \[\frac{\Gamma \vdash \alpha \Rightarrow \beta, \Gamma \vdash \alpha}{\Gamma \vdash \beta}.\]
             <br/>
             \[\frac{\Gamma \vdash M : \alpha \to \beta, \Gamma \vdash N: \alpha}{\Gamma \vdash M\ N : \beta}.\]
           </section>
           <section>
-            <p>Complexity of proofs: \(\mathcal{O}\)(¯\_(ツ)_/¯), pronounced "Oh dear".</p>
-          </section>
-          <section>
             <h2>Lambda Cube</h2>
             <img src='img/lambda cube.png' alt='lambda cube'/>
+          </section>
+          <section>
+            <h2>Some Implications</h2>
+            <p><b>Type theory represents a unification of programming with mathematical logic.</b></p>
+            <br/>
+            <p><b>Languages for theorem proving tend to be strongly normalizing, meaning they will always terminate. As a consequence: they are <i>not</i> Turing-complete.</b></p>
+            <br/>
+            <p><b>Complexity of proofs: \(\mathcal{O}\)(¯\_(ツ)_/¯), pronounced "Oh dear".</b></p>
           </section>
           <section>
             <img src='img/book-hol.png' alt='hol book'/>
