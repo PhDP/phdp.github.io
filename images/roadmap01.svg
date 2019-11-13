@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg39"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="roadmap01.svg">
+  <defs
+     id="defs33" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="337.45272"
+     inkscape:cy="190.50974"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="996"
+     inkscape:window-x="0"
+     inkscape:window-y="28"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata36">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.583354px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458386"
+       x="58.407261"
+       y="219.98918"
+       id="text27"
+       transform="scale(1.000002,0.999998)"><tspan
+         sodipodi:role="line"
+         id="tspan25"
+         x="58.407261"
+         y="219.98918"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.75559616px;font-family:'EB Garamond 12 All SC';-inkscape-font-specification:'EB Garamond 12 All SC';stroke-width:0.26458386"
+         dx="0 0 0 0 -1.2000024">akarui 0.1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58335304px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458386"
+       x="84.701454"
+       y="251.58984"
+       id="text27-3"
+       transform="scale(1.000002,0.999998)"><tspan
+         sodipodi:role="line"
+         id="tspan25-6"
+         x="84.701454"
+         y="251.58984"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.75559616px;font-family:'EB Garamond 12 All SC';-inkscape-font-specification:'EB Garamond 12 All SC';stroke-width:0.26458386"
+         dx="0 0"><tspan
+   style="font-size:14.11111069px"
+   id="tspan90">λ</tspan>D</tspan></text>
+  </g>
+</svg>
