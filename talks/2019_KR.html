@@ -93,7 +93,7 @@
           </section>
           <section>
             <h2>Goals</h2>
-            <p><b>0. Implement a language powerful enough to represent mathematical ideas and complex relationships between objects (λC &amp; full FOL).</b></p>
+            <p><b>0. Implement a language powerful enough to represent mathematical ideas and complex relationships between objects.</b></p>
             <p><b>1. Study {many-valued, probabilistic} extensions and how they can be used to encode ecological knowledge.</b></p>
             <p><b>2. Develop and encode ecological theories in our extended languages.</b></p>
             <p><b>3. Symbolic regression for machine learning within our extended languages.</b></p>
@@ -101,6 +101,8 @@
           <section>
             <img src='../images/faun-large.svg.png' alt='faun'/>
             <p>Written in Rust.</p>
+            <p>Now: <a href='https://github.com/PhDP/Faun'>https://github.com/PhDP/Faun</a> (work on 'develop').</p>
+            <p>Later: <a href='https://github.com/faun-ai/Faun'>https://github.com/faun-ai/Faun</a>.</p>
           </section>
         </section>
 
@@ -506,7 +508,7 @@
           <section>
             <h2>Untyped λ-Calculus</h2>
             <p>Given a set of variables \(\mathcal{V}\), the set of all valid lambda terms \(\Lambda\):</p>
-            \[\Lambda = \mathcal{V} \mid (\Lambda\ \Lambda) \mid (\lambda \mathcal{V} . \Lambda).\]
+            \[\Lambda ::= \mathcal{V} \mid (\Lambda\ \Lambda) \mid (\lambda \mathcal{V} . \Lambda).\]
           </section>
           <section>
             <h2>Precedence &amp; Associativity</h2>
@@ -533,7 +535,7 @@
           </section>
           <section>
             <h2>Functions have only one argument</h2>
-            \[divides := \lambda\ b\ . (\lambda n\ .\ \dots).\]
+            \[divides := \lambda b\ . (\lambda n\ .\ \dots).\]
             \[isEven := divides\ 2.\]
             <br/>
             <br/>
@@ -573,16 +575,27 @@
             \[\frac{\Gamma \vdash M : \alpha \to \beta, \Gamma \vdash N: \alpha}{\Gamma \vdash M\ N : \beta}.\]
           </section>
           <section>
-            <h2>Lambda Cube</h2>
-            <img src='img/lambda cube.png' alt='lambda cube'/>
-          </section>
-          <section>
             <h2>Some Implications</h2>
             <p><b>Type theory represents a unification of programming with mathematical logic.</b></p>
             <br/>
             <p><b>Languages for theorem proving tend to be strongly normalizing, meaning they will always terminate. As a consequence: they are <i>not</i> Turing-complete.</b></p>
             <br/>
             <p><b>Complexity of proofs: \(\mathcal{O}\)(¯\_(ツ)_/¯), pronounced "Oh dear".</b></p>
+          </section>
+          <section>
+            <h2>Lambda Cube</h2>
+            <img src='img/lambda cube.png' alt='lambda cube'/>
+          </section>
+          <section>
+            <h2>Lambda Cube</h2>
+            <p>\(\lambda \rightarrow\): Terms depending on Terms.</p>
+            <p>\(\lambda 2\): Terms depending on Types.</p>
+            <p>\(\lambda \underline{\omega}\): Types depending on Types.</p>
+            <p>\(\lambda P\): Types depending on Terms.</p>
+          </section>
+          <section>
+            <h2>Lambda Cube</h2>
+            \[\Lambda_C ::= \mathbb{T} \mid \mathbb{P} \mid \mathcal{V} \mid \Lambda_C\ \Lambda_C \mid \lambda \mathcal{V}: \Lambda_C\ .\ \Lambda_C \mid \forall \mathcal{V}: \Lambda_C\ .\ \Lambda_C.\]
           </section>
           <section>
             <img src='img/book-hol.png' alt='hol book'/>
