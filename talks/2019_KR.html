@@ -41,19 +41,13 @@
             </blockquote>
           </section>
           <section>
-            <img src='img/article-queller.png' alt='queller'/>
-          </section>
-          <section>
-            <img src='img/article-queller2-big.png' alt='queller'/>
-          </section>
-          <section>
-            <img src='img/article-xiao2015.png' alt='MaxEnt'/>
-          </section>
-          <section>
             <img src='img/article-mcgill.png' alt='McGill'/>
           </section>
           <section>
-            <img src='img/article-logic-theorist.png' alt='logic theorist'/>
+            <img src='img/article-queller.png' alt='queller'/>
+          </section>
+          <section>
+            <img src='img/article-queller2-big.png' alt='queller2'/>
           </section>
           <section>
             <h2>Probability Theory</h2>
@@ -103,6 +97,8 @@
             <p>Written in Rust.</p>
             <p>Now: <a href='https://github.com/PhDP/Faun'>https://github.com/PhDP/Faun</a> (work on 'develop').</p>
             <p>Later: <a href='https://github.com/faun-ai/Faun'>https://github.com/faun-ai/Faun</a>.</p>
+            <br/>
+            <p>...plus a side project in Haskell to experiment with ideas (currently: symbolic regression).</p>
           </section>
         </section>
 
@@ -453,7 +449,7 @@
                 <td>Isabelle</td>
                 <td>ML</td>
                 <td>Yes</td>
-                <td>Weak type theory</td>
+                <td>Weak type theory (Simple Type Theory)</td>
               </tr>
               <tr>
                 <td>Agda</td>
@@ -594,6 +590,18 @@
             <p>λP: Types depending on Terms.</p>
           </section>
           <section>
+            <h2>Dependent Types</h2>
+
+<pre style='font-size:1.0em;'><code class='haskell'>data Vec : ℕ -> Type -> Type where
+  Nil  : Vec 0 a
+  (::) : (x : a) -> (xs : Vec n a) -> Vec (n + 1) a
+
+append : Vec n elem -> Vec m elem -> Vec (n + m) elem</code></pre>
+
+<br/>
+<p>From Edwin Brady's <i>Type-driven Development with Idris-Manning Publications</i> (Manning, 2017).</p>
+          </section>
+          <section>
             <h2>λC: Calculus of Constructions</h2>
             \[\Lambda_C ::= \mathbb{T} \mid \mathbb{P} \mid \mathcal{V} \mid \Lambda_C\ \Lambda_C \mid \lambda \mathcal{V}: \Lambda_C\ .\ \Lambda_C \mid \forall \mathcal{V}: \Lambda_C\ .\ \Lambda_C.\]
           </section>
@@ -683,7 +691,7 @@ safeSqrt 0.5 :: (Ord a, Floating a) => Maybe a
           <section>
 <pre style='font-size:1em;'><code class='haskell'>data Maybe a = Nothing | Just a
 
-realSqrt r :: Double -> Maybe Double
+realSqrt :: Double -> Maybe Double
 realSqrt r = if r < 0 then Nothing else Just (sqrt r)
 </code></pre>
           </section>
@@ -1003,10 +1011,16 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <p>From J-W van de Meent et al. <i>An Introduction to Probabilistic Programming</i>, arxiv:1809.10756, 2018.</p>
           </section>
           <section>
+            <img src='img/paper-staton16.png' alt='staton16'/>
+          </section>
+          <section>
+            <img src='img/article-category.png' alt='cat'/>
+          </section>
+          <section>
             <img src='img/article-lambda-prob.png' alt='lambda prob'/>
           </section>
           <section>
-            <img src='img/paper-staton16.png' alt='staton16'/>
+            <img src='img/probabilistic-lambda.png' alt='probabilistic lambda'/>
           </section>
           <section>
             <h2>Solid Implementations!</h2>
