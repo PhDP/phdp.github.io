@@ -101,7 +101,6 @@
             <p>...plus a side project in Haskell to experiment with ideas (currently: symbolic regression).</p>
           </section>
         </section>
-
         <section>
           <section>
             <h2>Zeroth-Order (or Propositional) Logic</h2>
@@ -118,6 +117,9 @@
               <li>If \(f_0, f_1\) are WFFs, then \(f_0 \star f_1\) is a WFF.</li>
             </ol>
             <p>With \(\star = \{\land, \lor, \Rightarrow, \leftrightarrow, \veebar\}.\)</p>
+            <br/>
+            <br/>
+            <p>WFF: Well-Formed Formula.</p>
           </section>
           <section>
             <table style='width: 60%; text-align:center;'>
@@ -164,7 +166,7 @@
             \[Fever \land (Cough \lor AchingMuscles) \Rightarrow Flu.\]
             \[CrustaceaIsMonophyletic \Rightarrow TrumpIsAStableGenius.\]
             \[OnePlusTwoIsThree.\]
-            \[\neg PlutoIsAPlanet\]
+            \[\neg PlutoIsAPlanet.\]
           </section>
           <section>
             <h2>Modus Ponens</h2>
@@ -175,6 +177,7 @@
 \end{equation}</pre>
           </section>
           <section>
+            <h2>Modus Ponens</h2>
             <p>\(\alpha \Rightarrow \beta:\) If Kathryn likes Star Trek, then she likes Star Wars.</p>
             <p>\(\alpha:\) Kathryn likes Star Trek.</p>
             <p>\(\therefore \beta:\) Therefore, Kathryn likes Star Wars.</p>
@@ -184,9 +187,10 @@
           </section>
           <section>
             <h2>Modus Tollens</h2>
-            \[\frac{\alpha \Rightarrow \beta, \neg \beta}{\neg \alpha}.\]
+            \[\frac{\Gamma \vdash \alpha \Rightarrow \beta, \Gamma \vdash \neg \beta}{\Gamma \vdash \neg \alpha}.\]
           </section>
           <section>
+            <h2>Modus Tollens</h2>
             <p>\(\alpha \Rightarrow \beta:\) If Cosmo is a serial killer, then he has a cat.</p>
             <p>\(\neg \beta:\) Cosmo doesn't have a cat.</p>
             <p>\(\therefore \neg \alpha:\) Therefore, Cosmo is not a serial killer.</p>
@@ -196,9 +200,9 @@
           </section>
           <section>
             <h2>A Party of Rules!</h2>
-            \[\frac{\neg \neg \alpha}{\alpha}.\]
-            \[\frac{\alpha \land \beta}{\alpha}.\]
-            \[\frac{\alpha \Rightarrow \beta}{\neg \alpha \lor \beta}.\]
+            \[\frac{\Gamma \vdash \neg \neg \alpha}{\Gamma \vdash \alpha}.\]
+            \[\frac{\Gamma \vdash \alpha \land \beta}{\Gamma \vdash \alpha}.\]
+            \[\frac{\Gamma \vdash \alpha \Rightarrow \beta}{\Gamma \vdash \neg \alpha \lor \beta}.\]
             \[...\]
           </section>
           <section>
@@ -239,7 +243,7 @@
             \[b + 2^8.\]
             \[Addition(b, Exponentiation(2, 8)).\]
             \[CapitalOf(Finland).\]
-            \[NativeLanguage(Marie\ Curie).\]
+            \[NativeLanguage(Emmy\ Noether).\]
           </section>
           <section>
             <h2>Formula</h2>
@@ -406,9 +410,18 @@
             <h2>Type Theory</h2>
           </section>
           <section>
-            <p><b>Whitehead and Russell's ramified theory of types, typed lambda calculi, Simple Type Theory, Martin-Löf Type Theory, Homotopy Type Theory.</b></p>
-            <p><b>Some lambda calculi are not based on type theory (e.g. Untyped Lambda Calculus, the foundation for Lisps).</b></p>
-            <p><b>"Higher-order logic" isn't always used consistenty, but here it will mean: any logic capable of higher-order quantification.</b></p>
+            <p>Whitehead and Russell's ramified theory of types.</p>
+            <p>Simple Type Theory.</p>
+            <p>Martin-Löf Type Theory.</p>
+            <p>Homotopy Type Theory.</p>
+            <p><b>Lambda calculus (λ-calculus)</b>.</p>
+          </section>
+          <section>
+            <p><b>Some λ-calculi are not based on type theory</b></p>
+            <p>E.g. Untyped Lambda Calculus, the foundation for Lisps.</p>
+          </section>
+          <section>
+            <p><b>"Higher-order logic" isn't always used consistenty (it often refers to Simple Type Theory), but here it will mean: any logic capable of higher-order quantification.</b></p>
           </section>
           <section>
             <img src='img/article-farmer2006.png' alt='stt'/>
@@ -513,9 +526,9 @@
             <p>Application has precedence over abstraction: \(\lambda x\ .\ M\ N \equiv \lambda x\ .\ (M\ N)\).</p>
           </section>
           <section>
-            \[(\lambda x\ .\ x^2)\ 6,\]
-            \[(\lambda x\ .\ x^2)[x := 6],\]
-            \[6^2.\]
+            \[(\lambda x\ .\ x)\ 6,\]
+            \[(\lambda x\ .\ x)[x := 6],\]
+            \[6.\]
           </section>
           <section>
             \[(\lambda y\ .\ (\lambda x\ .\ x + y))\ 42\ 5,\]
@@ -813,7 +826,7 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <p>Emily Riehl (<a href='https://twitter.com/emilyriehl'>@emilyriehl</a>)</p>
           </section>
           <section>
-            <h2>The case for type theory (especially λC)</h2>
+            <h2>The case for λC</h2>
             <p>Can quantify over anything (\(\infty\)-order logic).</p>
             <p>Used for decades to formalize mathematics.</p>
             <p>They form rich logics.</p>
@@ -821,9 +834,8 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <p>They are expressive functional programming languages.</p>
           </section>
           <section>
-            <h2>The case against type theory (especially λC)</h2>
+            <h2>The case against λC</h2>
             <p>Arguably easier to use in many cases, but the foundations are conceptually harder to understand.</p>
-            <p>All implementations are different.</p>
             <p>Richer than 0th/1st order logics, and thus inference is harder.</p>
           </section>
         </section>
