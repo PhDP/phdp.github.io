@@ -516,24 +516,24 @@
           </section>
           <section>
             <h2>Church Numerals</h2>
-            \[+ := \lambda m\ n\ f\ x\ .\ m\ f\ (n\ f\ x).\]
+            \[+ := \lambda m\ n\ s\ x\ .\ m\ s\ (n\ s\ x).\]
             <br/>
             <br/>
             <p>Let's try 2 + 3!</p>
           </section>
           <section>
-            \[\begin{align}step\ 0:& +\ 2\ 3.\\
-                           step\ 1D:& (\lambda m\ n\ f\ x\ .\ m\ f\ (n\ f\ x))\ 2\ 3.\\
-                           step\ 2\beta:& (\lambda n\ f\ x\ .\ 2\ f\ (n\ f\ x))\ 3.\\
-                           step\ 3\beta:& (\lambda f\ x\ .\ 2\ f\ (3\ f\ x)).\\
-                           step\ 4D:& (\lambda f\ x\ .\ 2\ f\ ((\lambda f\ x\ .\ f\ (f\ (f\ x)))\ f\ x)).\\
-                           step\ 5\alpha:& (\lambda f\ x\ .\ 2\ f\ ((\lambda g\ y\ .\ g\ (g\ (g\ y)))\ f\ x)).\\
-                           step\ 6\beta:& (\lambda f\ x\ .\ 2\ f\ ((\lambda y\ .\ f\ (f\ (f\ y)))\ x)).\\
-                           step\ 7\beta:& (\lambda f\ x\ .\ 2\ f\ (f\ (f\ (f\ x)))).\\
-                           step\ 8D:& (\lambda f\ x\ .\ (\lambda f\ x\ .\ f\ (f\ x))\ f\ (f\ (f\ (f\ x)))).\\
-                           step\ 9\alpha:& (\lambda f\ x\ .\ (\lambda g\ y\ .\ g\ (g\ y))\ f\ (f\ (f\ (f\ x)))).\\
-                           step\ 10\beta:& (\lambda f\ x\ .\ (\lambda y\ .\ f\ (f\ y))\ (f\ (f\ (f\ x)))).\\
-                           step\ 11\beta:& (\lambda f\ x\ .\ (\lambda y\ .\ f\ (f\ (f\ (f\ (f\ x)))))).\end{align}\]
+            \[\begin{align}step\ 0&: +\ 2\ 3.\\
+                           step\ 1D&: (\lambda m\ n\ s\ x\ .\ m\ s\ (n\ s\ x))\ 2\ 3.\\
+                           step\ 2\beta&: (\lambda n\ s\ x\ .\ 2\ s\ (n\ s\ x))\ 3.\\
+                           step\ 3\beta&: \lambda s\ x\ .\ 2\ s\ (3\ s\ x).\\
+                           step\ 4D&: \lambda s\ x\ .\ 2\ s\ ((\lambda s\ x\ .\ s\ (s\ (s\ x)))\ s\ x).\\
+                           step\ 5\alpha&: \lambda s\ x\ .\ 2\ s\ ((\lambda g\ y\ .\ g\ (g\ (g\ y)))\ s\ x).\\
+                           step\ 6\beta&: \lambda s\ x\ .\ 2\ s\ ((\lambda y\ .\ s\ (s\ (s\ y)))\ x).\\
+                           step\ 7\beta&: \lambda s\ x\ .\ 2\ s\ (s\ (s\ (s\ x))).\\
+                           step\ 8D&: \lambda s\ x\ .\ (\lambda s\ x\ .\ s\ (s\ x))\ s\ (s\ (s\ (s\ x))).\\
+                           step\ 9\alpha&: \lambda s\ x\ .\ (\lambda g\ y\ .\ g\ (g\ y))\ s\ (s\ (s\ (s\ x))).\\
+                           step\ 10\beta&: \lambda s\ x\ .\ (\lambda y\ .\ s\ (s\ y))\ (s\ (s\ (s\ x))).\\
+                           step\ 11\beta&: \lambda s\ x\ .\ s\ (s\ (s\ (s\ (s\ x)))).\end{align}\]
           </section>
           <section>
             <p><b>Untyped λ-Calculus is a universal model of computation.</b></p>
@@ -691,9 +691,11 @@ append : Vec n elem -> Vec m elem -> Vec (n + m) elem</code></pre>
           </section>
           <section>
             <img src='img/book-hol.png' alt='hol book'/>
+            <p> Rob Nederpelt &amp; Herman Geuvers. <b>Type Theory and Formal Proof: An Introduction</b>, Cambridge University Press, 2014.</p>
           </section>
           <section>
             <img src='img/book-types-prog-land.jpg' alt='pierce'/>
+            <p>Benjamin C. Pierce. <b>Types and Programming Languages</b>, MIT Press, 2002.</p>
           </section>
           <section>
             <h2>The case for λC</h2>
@@ -926,11 +928,11 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
           </section>
           <section>
             <img src='img/lyah.png' alt='lyah'/>
-            <p><a href='http://learnyouahaskell.com'>http://learnyouahaskell.com</a></p>
+            <p>Miran Lipovaca. <b>Learn You a Haskell for Great Good!</b> (<a href='http://learnyouahaskell.com'>http://learnyouahaskell.com</a>), No Starch Press, 2011.</p>
           </section>
           <section>
             <img width='900px' src='img/category-in-context.jpg' alt='context'/>
-            <p>Emily Riehl (<a href='https://twitter.com/emilyriehl'>@emilyriehl</a>)</p>
+            <p>Emily Riehl (<a href='https://twitter.com/emilyriehl'>@emilyriehl</a>), <b>Category Theory in Context</b>, Dover, 2016.</p>
           </section>
         </section>
 
