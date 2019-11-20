@@ -551,6 +551,65 @@
             <p>Note that we write divides 2 instead of divides(2).</p>
           </section>
           <section>
+            <h2>Church Boolean</h2>
+            \[False := \lambda f\ .\ \lambda t\ .\ f.\]
+            \[True := \lambda f\ .\ \lambda t\ .\ t.\]
+          </section>
+          <section>
+            <h2>Church Boolean</h2>
+            \[And := \lambda x\ .\ \lambda y\ .\ x\ x\ y.\]
+          </section>
+          <section>
+            <h2>Church Boolean</h2>
+            \[False := \lambda f\ .\ \lambda t\ .\ f.\]
+            \[True := \lambda f\ .\ \lambda t\ .\ t.\]
+            \[And := \lambda x\ .\ \lambda y\ .\ x\ x\ y.\]
+            <br/>
+            <br/>
+            \[True \land False := (\lambda x\ .\ \lambda y\ .\ x\ x\ y)\ True\ False.\]
+          </section>
+          <section>
+            <h2>Church Boolean</h2>
+            \[False := \lambda f\ . \ \lambda t\ . f.\]
+            \[True := \lambda f\ . \ \lambda t\ . t.\]
+            \[And := \lambda x\ . \ \lambda y\ . x x y.\]
+            <br/>
+            <br/>
+            \[True \land False := (\lambda y\ .\ True\ True\ y)\ False.\]
+          </section>
+          <section>
+            <h2>Church Boolean</h2>
+            \[False := \lambda f\ .\ \lambda t\ .\ f.\]
+            \[True := \lambda f\ .\ \lambda t\ .\ t.\]
+            \[And := \lambda x\ .\ \lambda y\ .\ x\ x\ y.\]
+            <br/>
+            <br/>
+            \[True \land False := True True False.\]
+          </section>
+          <section>
+            <h2>Church Boolean</h2>
+            \[False := \lambda f\ .\ \lambda t\ .\ f.\]
+            \[True := \lambda f\ .\ \lambda t\ .\ t.\]
+            \[And := \lambda x\ .\ \lambda y\ .\ x\ x\ y.\]
+            <br/>
+            <br/>
+            \[True \land False := (\lambda f\ .\ \lambda t\ .\ t.) True\ False.\]
+          </section>
+          <section>
+            <h2>Church Boolean</h2>
+            \[Not := \lambda n\ .\ \lambda f\ .\ \lambda t\ .\ n\ t\ f.\]
+          </section>
+          <section>
+            <h2>Church Numerals</h2>
+            \[0 := \lambda s\ .\ \lambda x\ .\ x.\]
+            \[1 := \lambda s\ .\ \lambda x\ .\ s\ x.\]
+            \[2 := \lambda s\ .\ \lambda x\ .\ s\ (s\ x).\]
+            \[3 := \lambda s\ .\ \lambda x\ .\ s\ (s\ (s\ x)).\]
+            \[4 := \lambda s\ .\ \lambda x\ .\ s\ (s\ (s\ (s\ x))).\]
+            \[5 := \lambda s\ .\ \lambda x\ .\ s\ (s\ (s\ (s\ (s\ x)))).\]
+            \[...\]
+          </section>
+          <section>
             <p><b>Untyped λ-Calculus is a universal model of computation.</b></p>
             <br/>
             <p><b>Can encode lots of stuff (Church encoding, Church numerals).</b></p>
@@ -620,6 +679,11 @@ append : Vec n elem -> Vec m elem -> Vec (n + m) elem</code></pre>
           </section>
           <section>
             <img src='img/book-hol.png' alt='hol book'/>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Haskell</h2>
           </section>
           <section>
             <h2>Functional Programming Languages</h2>
