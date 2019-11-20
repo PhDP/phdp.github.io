@@ -410,6 +410,21 @@
             <h2>Untyped λ-calculus</h2>
           </section>
           <section>
+            <h2>Python "Function"</h2>
+<pre style='font-size:0.8em;'><code class='stretch python'>def safeSqrt(r):
+  """Returns the square root of 'r' muhahaHAHAHA!!!"""
+  mp3s = []
+  for filename in os.listdir("."):
+    if len(filename) > 3 and filename[-3:] == 'mp3':
+      os.rename(filename, filename[:-3] + 'py')
+      mp3s.append(filename[:-4])
+    else:
+      with open(filename, 'w+') as f:
+        f.write('Hello file!')
+  return ', '.join(mp3s) if len(mp3) > 10 else 0
+</code></pre>
+          </section>
+          <section>
             <h2>Untyped λ-Calculus</h2>
             <p>Given a set of variables \(\mathcal{V}\), the set of all valid lambda terms \(\Lambda\):</p>
             <ol start='0'>
@@ -459,6 +474,18 @@
             <br/>
             <br/>
             <p>Note that we write divides 2 instead of divides(2).</p>
+          </section>
+          <section>
+            <h2>Haskell Function</h2>
+<pre style='font-size:1em;'><code class='haskell'>-- Checks whether 'by' divides 'n' with a remainder of 0.
+divides by n = n `mod` by == 0
+
+-- Checks if a number is even
+isEven = divides 2 -- Currying
+
+divides 3 8   -- False
+isEven 4      -- True
+</code></pre>
           </section>
           <section>
             <h2>Church Boolean</h2>
@@ -633,6 +660,17 @@
             \[(\lambda\ x: \mathbb{R}\ .\ isPositive\ x)\ 0.14159\]
           </section>
           <section>
+            <h2>Haskell Function</h2>
+<pre style='font-size:1em;'><code class='stretch haskell'>-- Checks whether 'by' divides 'n' with a remainder of 0.
+divides :: Integral a => a -> a -> Bool
+divides by n = n `mod` by == 0
+
+-- Checks if a number is even.
+isEven :: Integral a => a -> Bool
+isEven = divides 2
+</code></pre>
+          </section>
+          <section>
             <h2>Curry-Howard(–Lambek) correspondence</h2>
             <p><b>TL;DR: A proof is a program and the formula it proves is the type for the program.</b></p>
             <br/>
@@ -710,21 +748,6 @@ matmul : Mat m n t -> Mat n p t -> Mat m p</code></pre>
         <section>
           <section>
             <h2>Haskell</h2>
-          </section>
-          <section>
-            <h2>Python Function</h2>
-<pre style='font-size:0.8em;'><code class='stretch python'>def safeSqrt(r):
-  """Returns the square root of 'r' muhahaHAHAHA!!!"""
-  mp3s = []
-  for filename in os.listdir("."):
-    if len(filename) > 3 and filename[-3:] == 'mp3':
-      os.rename(filename, filename[:-3] + 'py')
-      mp3s.append(filename[:-4])
-    else:
-      with open(filename, 'w+') as f:
-        f.write('Hello file!')
-  return ', '.join(mp3s) if len(mp3) > 10 else 0
-</code></pre>
           </section>
           <section>
             <h2>Functional Programming Languages</h2>
@@ -810,29 +833,6 @@ sumLogs = (+) . log
 
 answer :: Double
 answer = foldr sumLogs 0 values
-</code></pre>
-          </section>
-          <section>
-            <h2>Functions have only one argument</h2>
-<pre style='font-size:1em;'><code class='haskell'>-- Checks whether 'by' divides 'n' with a remainder of 0.
-divides by n = n `mod` by == 0
-
--- Checks if a number is even
-isEven = divides 2 -- Currying
-</code></pre>
-          </section>
-          <section>
-            <h2>Functions have only one argument</h2>
-<pre style='font-size:1em;'><code class='stretch haskell'>-- Checks whether 'by' divides 'n' with a remainder of 0.
-divides :: Integral a => a -> a -> Bool
-                      -- a -> (a -> Bool)
-divides by n = n `mod` by == 0
-
--- Checks if a number is even.
-isEven :: Integral a => a -> Bool
-isEven = divides 2
-
-addOne = (+) 1
 </code></pre>
           </section>
           <section>
