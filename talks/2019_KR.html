@@ -493,7 +493,7 @@
             \[And := \lambda x\ .\ \lambda y\ .\ x\ x\ y.\]
             <br/>
             <br/>
-            \[True \land False := (\lambda f\ .\ \lambda t\ .\ t.) True\ False.\]
+            \[True \land False := (\lambda f\ .\ \lambda t\ .\ t.)\ True\ False.\]
           </section>
           <section>
             <h2>Church Boolean</h2>
@@ -510,30 +510,29 @@
             \[...\]
           </section>
           <section>
-            <h2>First a shotcut...</h2>
+            <h2>But first, a shortcut...</h2>
             \[\lambda x\ .\ \lambda y\ .\ \lambda z\ . M.\]
             \[\lambda x\ y\ z\ .\ M.\]
           </section>
           <section>
             <h2>Church Numerals</h2>
             \[+ := \lambda m\ n\ f\ x\ .\ m\ f\ (n\ f\ x).\]
-          </section>
-          <section>
-            \[2 := \lambda s\ x\ .\ s (s x); 3 := \lambda s\ x\ .\ s (s (s x)).\]
-            \[+ := \lambda m\ n\ f\ x\ .\ m\ f\ (n\ f\ x).\]
             <br/>
-            \[step 0: + 2 3.\]
-            \[step 1D: (\lambda m\ n\ f\ x\ .\ m\ f\ (n\ f\ x))\ 2\ 3.\]
-            \[step 2\beta: (\lambda n\ f\ x\ .\ 2\ f\ (n\ f\ x))\ 3.\]
-            \[step 3\beta: (\lambda f\ x\ .\ 2\ f\ (3\ f\ x)).\]
-            \[step 4D: (\lambda f\ x\ .\ 2\ f\ ((\lambda f\ x\ .\ f\ (f\ (f\ x)))\ f\ x)).\]
-            \[step 5\alpha: (\lambda f\ x\ .\ 2\ f\ ((\lambda g\ y\ .\ g\ (g\ (g\ y)))\ f\ x)).\]
-            \[step 6\beta: (\lambda f\ x\ .\ 2\ f\ ((\lambda y\ .\ f\ (f\ (f\ y)))\ x)).\]
-            \[step 7\beta: (\lambda f\ x\ .\ 2\ f\ (f\ (f\ (f\ x)))).\]
-            \[step 8D: (\lambda f\ x\ .\ (\lambda f\ x\ .\ f\ (f\ x))\ f\ (f\ (f\ (f\ x)))).\]
-            \[step 9\alpha: (\lambda f\ x\ .\ (\lambda g\ y\ .\ g\ (g\ y))\ f\ (f\ (f\ (f\ x)))).\]
-            \[step 10\beta: (\lambda f\ x\ .\ (\lambda y\ .\ f\ (f\ y))\ (f\ (f\ (f\ x)))).\]
-            \[step 11\beta: (\lambda f\ x\ .\ (\lambda y\ .\ f\ (f\ (f\ (f\ (f\ x)))))).\]
+            <br/>
+            <p>Let's try 2 + 3!</p>
+          </section>
+            \[\begin{align}step\ 0:& +\ 2\ 3.
+                           step\ 1D:& (\lambda m\ n\ f\ x\ .\ m\ f\ (n\ f\ x))\ 2\ 3.\\
+                           step\ 2\beta:& (\lambda n\ f\ x\ .\ 2\ f\ (n\ f\ x))\ 3.\\
+                           step\ 3\beta:& (\lambda f\ x\ .\ 2\ f\ (3\ f\ x)).\\
+                           step\ 4D:& (\lambda f\ x\ .\ 2\ f\ ((\lambda f\ x\ .\ f\ (f\ (f\ x)))\ f\ x)).\\
+                           step\ 5\alpha:& (\lambda f\ x\ .\ 2\ f\ ((\lambda g\ y\ .\ g\ (g\ (g\ y)))\ f\ x)).\\
+                           step\ 6\beta:& (\lambda f\ x\ .\ 2\ f\ ((\lambda y\ .\ f\ (f\ (f\ y)))\ x)).\\
+                           step\ 7\beta:& (\lambda f\ x\ .\ 2\ f\ (f\ (f\ (f\ x)))).\\
+                           step\ 8D:& (\lambda f\ x\ .\ (\lambda f\ x\ .\ f\ (f\ x))\ f\ (f\ (f\ (f\ x)))).\\
+                           step\ 9\alpha:& (\lambda f\ x\ .\ (\lambda g\ y\ .\ g\ (g\ y))\ f\ (f\ (f\ (f\ x)))).\\
+                           step\ 10\beta:& (\lambda f\ x\ .\ (\lambda y\ .\ f\ (f\ y))\ (f\ (f\ (f\ x)))).\\
+                           step\ 11\beta:& (\lambda f\ x\ .\ (\lambda y\ .\ f\ (f\ (f\ (f\ (f\ x)))))).\end{align}\]
           </section>
           <section>
             <p><b>Untyped λ-Calculus is a universal model of computation.</b></p>
