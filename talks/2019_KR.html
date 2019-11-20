@@ -477,10 +477,10 @@
           </section>
           <section>
             <h2>Haskell Function</h2>
-<pre style='font-size:1em;'><code class='haskell'>-- Checks whether 'by' divides 'n' with a remainder of 0.
-divides by n = n `mod` by == 0
+<pre style='font-size:1em;'><code class='haskell'>-- Checks whether 'b' divides 'n' with a remainder of 0.
+divides b n = n `mod` b == 0
 
--- Checks if a number is even
+-- Checks if a number is even.
 isEven = divides 2 -- Currying
 
 divides 3 8   -- False
@@ -661,9 +661,9 @@ isEven 4      -- True
           </section>
           <section>
             <h2>Haskell Function</h2>
-<pre style='font-size:1em;'><code class='stretch haskell'>-- Checks whether 'by' divides 'n' with a remainder of 0.
+<pre style='font-size:1em;'><code class='stretch haskell'>-- Checks whether 'b' divides 'n' with a remainder of 0.
 divides :: Integral a => a -> a -> Bool
-divides by n = n `mod` by == 0
+divides b n = n `mod` b == 0
 
 -- Checks if a number is even.
 isEven :: Integral a => a -> Bool
