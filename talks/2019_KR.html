@@ -665,9 +665,15 @@
 <pre style='font-size:1.0em;'><code class='haskell'>data Vec : ℕ -> Type -> Type where
   ...
 
-append : Vec n t -> Vec m t -> Vec (n + m) t
+append : Vec n t -> Vec m t -> Vec (n + m) t</code></pre>
 
-data Mat : ℕ -> ℕ -> Type -> Type where
+<br/>
+<p>Edwin Brady. <i>Type-driven Development with Idris-Manning Publications</i>, Manning, 2017.</p>
+          </section>
+          <section>
+            <h2>Dependent Types</h2>
+
+<pre style='font-size:1.0em;'><code class='haskell'>data Mat : ℕ -> ℕ -> Type -> Type where
   ...
 
 matmul : Mat m n t -> Mat n p t -> Mat m p</code></pre>
