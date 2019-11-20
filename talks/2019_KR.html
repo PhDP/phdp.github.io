@@ -663,13 +663,17 @@
             <h2>Dependent Types</h2>
 
 <pre style='font-size:1.0em;'><code class='haskell'>data Vec : ℕ -> Type -> Type where
-  Nil  : Vec 0 a
-  (::) : (x : a) -> (xs : Vec n a) -> Vec (n + 1) a
+  ...
 
-append : Vec n elem -> Vec m elem -> Vec (n + m) elem</code></pre>
+append : Vec n t -> Vec m t -> Vec (n + m) t
+
+data Mat : ℕ -> ℕ -> Type -> Type where
+  ...
+
+matmul : Mat m n t -> Mat n p t -> Mat m p</code></pre>
 
 <br/>
-<p>From Edwin Brady's <i>Type-driven Development with Idris-Manning Publications</i> (Manning, 2017).</p>
+<p>Edwin Brady. <i>Type-driven Development with Idris-Manning Publications</i>, Manning, 2017.</p>
           </section>
           <section>
             <h2>λC: Calculus of Constructions</h2>
