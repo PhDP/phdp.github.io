@@ -499,7 +499,7 @@ isEven 4      -- True
           <section>
             <h2>Church Boolean</h2>
             \[True := \lambda t\ f\ .\ t;\ False := \lambda t\ f\ .\ f.\]
-            \[And := \lambda x\ y\ .\ x\ y\ x.\]
+            \[\land := \lambda x\ y\ .\ x\ y\ x.\]
             <br/>
             <br/>
             \[\begin{align}True \land False\ & := (\lambda x\ y\ .\ x\ y\ x)\ True\ False.\\
@@ -509,7 +509,7 @@ isEven 4      -- True
           <section>
             <h2>Church Boolean</h2>
             \[True := \lambda t\ f\ .\ t;\ False := \lambda t\ f\ .\ f.\]
-            \[And := \lambda x\ y\ .\ x\ y\ x.\]
+            \[\land := \lambda x\ y\ .\ x\ y\ x.\]
             <br/>
             <br/>
             \[\begin{align}True \land False\ & := True\ False\ True.\\
@@ -518,8 +518,8 @@ isEven 4      -- True
           </section>
           <section>
             <h2>Church Boolean</h2>
-            \[Or := \lambda x\ y\ .\ x\ x\ y.\]
-            \[Not := \lambda n\ t\ f\ .\ n\ f\ t.\]
+            \[\lor := \lambda x\ y\ .\ x\ x\ y.\]
+            \[\neg := \lambda n\ t\ f\ .\ n\ f\ t.\]
           </section>
           <section>
             <h2>Church Numerals</h2>
