@@ -407,6 +407,144 @@
 
         <section>
           <section>
+            <h2>Untyped λ-calculus</h2>
+          </section>
+          <section>
+            <h2>Untyped λ-Calculus</h2>
+            <p>Given a set of variables \(\mathcal{V}\), the set of all valid lambda terms \(\Lambda\):</p>
+            <ol start='0'>
+              <li><b>Variable</b>: If \(v \in \mathcal{V}\), then \(v \in \Lambda\).</li>
+              <li><b>Abstraction</b>: If \(v \in \mathcal{V}\) and \(M \in \Lambda\), then \((\lambda v . M) \in \Lambda\).</li>
+              <li><b>Application</b>: If \(M\) and \(N \in \Lambda\), then \(M\ N \in \Lambda\).</li>
+            </ol>
+          </section>
+          <section>
+            <h2>Untyped λ-Calculus</h2>
+            <p>Given a set of variables \(\mathcal{V}\), the set of all valid lambda terms \(\Lambda\):</p>
+            \[\Lambda ::= \mathcal{V} \mid (\Lambda\ \Lambda) \mid (\lambda \mathcal{V} . \Lambda).\]
+          </section>
+          <section>
+            <h2>Precedence &amp; Associativity</h2>
+            <p>Abstraction is right-associative: \(\lambda x\ y\ .\ M \equiv \lambda x\ .\ (\lambda y\ .\ M)\).</p>
+            <p>Application is left-associative: \(M\ N\ O\ P \equiv ((M\ N)\ O)\ P\).</p>
+            <p>Application has precedence over abstraction: \(\lambda x\ .\ M\ N \equiv \lambda x\ .\ (M\ N)\).</p>
+          </section>
+          <section>
+            \[(\lambda x\ .\ x)\ 6,\]
+            \[(\lambda x\ .\ x)[x := 6],\]
+            \[6.\]
+          </section>
+          <section>
+            \[(\lambda y\ .\ (\lambda x\ .\ x + y))\ 42\ 5,\]
+            \[(\lambda y\ .\ (\lambda x\ .\ x + y))[y := 42]\ 5,\]
+            \[(\lambda x\ .\ x + 42)\ 5,\]
+            \[(\lambda x\ .\ x + 42)[x := 5],\]
+            \[5 + 42.\]
+          </section>
+          <section>
+            \[(\lambda x\ .\ x\ x)\ (\lambda x\ .\ x\ x),\]
+            \[(\lambda x\ .\ x\ x)[x := (\lambda x\ .\ x\ x)],\]
+            \[(\lambda x\ .\ x\ x)\ (\lambda x\ .\ x\ x).\]
+          </section>
+          <section>
+            <h2>Functions have only one argument</h2>
+            \[divides := \lambda b\ . (\lambda n\ .\ \dots).\]
+            \[isEven := divides\ 2.\]
+            <br/>
+            <br/>
+            <p>Note that we write divides 2 instead of divides(2).</p>
+          </section>
+          <section>
+            <h2>Church Boolean</h2>
+            \[False := \lambda f\ .\ \lambda t\ .\ f.\]
+            \[True := \lambda f\ .\ \lambda t\ .\ t.\]
+          </section>
+          <section>
+            <h2>Church Boolean</h2>
+            \[And := \lambda x\ .\ \lambda y\ .\ x\ x\ y.\]
+          </section>
+          <section>
+            <h2>Church Boolean</h2>
+            \[False := \lambda f\ .\ \lambda t\ .\ f; True := \lambda f\ .\ \lambda t\ .\ t.\]
+            \[And := \lambda x\ .\ \lambda y\ .\ x\ x\ y.\]
+            <br/>
+            <br/>
+            \[True \land False := (\lambda x\ .\ \lambda y\ .\ x\ x\ y)\ True\ False.\]
+          </section>
+          <section>
+            <h2>Church Boolean</h2>
+            \[False := \lambda f\ .\ \lambda t\ .\ f; True := \lambda f\ .\ \lambda t\ .\ t.\]
+            \[And := \lambda x\ . \ \lambda y\ . x x y.\]
+            <br/>
+            <br/>
+            \[True \land False := (\lambda y\ .\ True\ True\ y)\ False.\]
+          </section>
+          <section>
+            <h2>Church Boolean</h2>
+            \[False := \lambda f\ .\ \lambda t\ .\ f; True := \lambda f\ .\ \lambda t\ .\ t.\]
+            \[And := \lambda x\ .\ \lambda y\ .\ x\ x\ y.\]
+            <br/>
+            <br/>
+            \[True \land False := True\ True\ False.\]
+          </section>
+          <section>
+            <h2>Church Boolean</h2>
+            \[False := \lambda f\ .\ \lambda t\ .\ f; True := \lambda f\ .\ \lambda t\ .\ t.\]
+            \[And := \lambda x\ .\ \lambda y\ .\ x\ x\ y.\]
+            <br/>
+            <br/>
+            \[True \land False := (\lambda f\ .\ \lambda t\ .\ t.) True\ False.\]
+          </section>
+          <section>
+            <h2>Church Boolean</h2>
+            \[Not := \lambda n\ .\ \lambda f\ .\ \lambda t\ .\ n\ t\ f.\]
+          </section>
+          <section>
+            <h2>Church Numerals</h2>
+            \[0 := \lambda s\ .\ \lambda x\ .\ x.\]
+            \[1 := \lambda s\ .\ \lambda x\ .\ s\ x.\]
+            \[2 := \lambda s\ .\ \lambda x\ .\ s\ (s\ x).\]
+            \[3 := \lambda s\ .\ \lambda x\ .\ s\ (s\ (s\ x)).\]
+            \[4 := \lambda s\ .\ \lambda x\ .\ s\ (s\ (s\ (s\ x))).\]
+            \[5 := \lambda s\ .\ \lambda x\ .\ s\ (s\ (s\ (s\ (s\ x)))).\]
+            \[...\]
+          </section>
+          <section>
+            <h2>First a shotcut...</h2>
+            \[\lambda x\ .\ \lambda y\ .\ \lambda z\ . M.\]
+            \[\lambda x\ y\ z\ .\ M.\]
+          </section>
+          <section>
+            <h2>Church Numerals</h2>
+            \[+ := \lambda m\ n\ f\ x\ .\ m\ f\ (n\ f\ x).\]
+          </section>
+          <section>
+            \[2 := \lambda s\ x\ .\ s (s x); 3 := \lambda s\ x\ .\ s (s (s x)).\]
+            \[+ := \lambda m\ n\ f\ x\ .\ m\ f\ (n\ f\ x).\]
+            <br/>
+            \[step 0: + 2 3.\]
+            \[step 1D: (\lambda m\ n\ f\ x\ .\ m\ f\ (n\ f\ x))\ 2\ 3.\]
+            \[step 2\beta: (\lambda n\ f\ x\ .\ 2\ f\ (n\ f\ x))\ 3.\]
+            \[step 3\beta: (\lambda f\ x\ .\ 2\ f\ (3\ f\ x)).\]
+            \[step 4D: (\lambda f\ x\ .\ 2\ f\ ((\lambda f\ x\ .\ f\ (f\ (f\ x)))\ f\ x)).\]
+            \[step 5\alpha: (\lambda f\ x\ .\ 2\ f\ ((\lambda g\ y\ .\ g\ (g\ (g\ y)))\ f\ x)).\]
+            \[step 6\beta: (\lambda f\ x\ .\ 2\ f\ ((\lambda y\ .\ f\ (f\ (f\ y)))\ x)).\]
+            \[step 7\beta: (\lambda f\ x\ .\ 2\ f\ (f\ (f\ (f\ x)))).\]
+            \[step 8D: (\lambda f\ x\ .\ (\lambda f\ x\ .\ f\ (f\ x))\ f\ (f\ (f\ (f\ x)))).\]
+            \[step 9\alpha: (\lambda f\ x\ .\ (\lambda g\ y\ .\ g\ (g\ y))\ f\ (f\ (f\ (f\ x)))).\]
+            \[step 10\beta: (\lambda f\ x\ .\ (\lambda y\ .\ f\ (f\ y))\ (f\ (f\ (f\ x)))).\]
+            \[step 11\beta: (\lambda f\ x\ .\ (\lambda y\ .\ f\ (f\ (f\ (f\ (f\ x)))))).\]
+          </section>
+          <section>
+            <p><b>Untyped λ-Calculus is a universal model of computation.</b></p>
+            <br/>
+            <p><b>Can encode lots of stuff (Church encoding, Church numerals).</b></p>
+            <br/>
+            <p><b>But not that useful for our purpose.</b></p>
+          </section>
+        </section>
+        <section>
+          <section>
             <h2>Type Theory</h2>
           </section>
           <section>
@@ -491,132 +629,6 @@
             </table>
           </section>
           <section>
-            <h2>Python "Function"</h2>
-<pre style='font-size:0.8em;'><code class='stretch python'>def safeSqrt(r):
-  """Returns the square root of 'r' muhahaHAHAHA!!!"""
-  mp3s = []
-  for filename in os.listdir("."):
-    if len(filename) > 3 and filename[-3:] == 'mp3':
-      os.rename(filename, filename[:-3] + 'py')
-      mp3s.append(filename[:-4])
-    else:
-      with open(filename, 'w+') as f:
-        f.write('Hello file!')
-  return ', '.join(mp3s) if len(mp3) > 10 else 0
-</code></pre>
-          </section>
-          <section>
-            <h2>Untyped λ-Calculus</h2>
-            <p>Given a set of variables \(\mathcal{V}\), the set of all valid lambda terms \(\Lambda\):</p>
-            <ol start='0'>
-              <li><b>Variable</b>: If \(v \in \mathcal{V}\), then \(v \in \Lambda\).</li>
-              <li><b>Abstraction</b>: If \(v \in \mathcal{V}\) and \(M \in \Lambda\), then \((\lambda v . M) \in \Lambda\).</li>
-              <li><b>Application</b>: If \(M\) and \(N \in \Lambda\), then \(M\ N \in \Lambda\).</li>
-            </ol>
-          </section>
-          <section>
-            <h2>Untyped λ-Calculus</h2>
-            <p>Given a set of variables \(\mathcal{V}\), the set of all valid lambda terms \(\Lambda\):</p>
-            \[\Lambda ::= \mathcal{V} \mid (\Lambda\ \Lambda) \mid (\lambda \mathcal{V} . \Lambda).\]
-          </section>
-          <section>
-            <h2>Precedence &amp; Associativity</h2>
-            <p>Abstraction is right-associative: \(\lambda x\ y\ .\ M \equiv \lambda x\ .\ (\lambda y\ .\ M)\).</p>
-            <p>Application is left-associative: \(M\ N\ O\ P \equiv ((M\ N)\ O)\ P\).</p>
-            <p>Application has precedence over abstraction: \(\lambda x\ .\ M\ N \equiv \lambda x\ .\ (M\ N)\).</p>
-          </section>
-          <section>
-            \[(\lambda x\ .\ x)\ 6,\]
-            \[(\lambda x\ .\ x)[x := 6],\]
-            \[6.\]
-          </section>
-          <section>
-            \[(\lambda y\ .\ (\lambda x\ .\ x + y))\ 42\ 5,\]
-            \[(\lambda y\ .\ (\lambda x\ .\ x + y))[y := 42]\ 5,\]
-            \[(\lambda x\ .\ x + 42)\ 5,\]
-            \[(\lambda x\ .\ x + 42)[x := 5],\]
-            \[5 + 42.\]
-          </section>
-          <section>
-            \[(\lambda x\ .\ x\ x)\ (\lambda x\ .\ x\ x),\]
-            \[(\lambda x\ .\ x\ x)[x := (\lambda x\ .\ x\ x)],\]
-            \[(\lambda x\ .\ x\ x)\ (\lambda x\ .\ x\ x).\]
-          </section>
-          <section>
-            <h2>Functions have only one argument</h2>
-            \[divides := \lambda b\ . (\lambda n\ .\ \dots).\]
-            \[isEven := divides\ 2.\]
-            <br/>
-            <br/>
-            <p>Note that we write divides 2 instead of divides(2).</p>
-          </section>
-          <section>
-            <h2>Church Boolean</h2>
-            \[False := \lambda f\ .\ \lambda t\ .\ f.\]
-            \[True := \lambda f\ .\ \lambda t\ .\ t.\]
-          </section>
-          <section>
-            <h2>Church Boolean</h2>
-            \[And := \lambda x\ .\ \lambda y\ .\ x\ x\ y.\]
-          </section>
-          <section>
-            <h2>Church Boolean</h2>
-            \[False := \lambda f\ .\ \lambda t\ .\ f.\]
-            \[True := \lambda f\ .\ \lambda t\ .\ t.\]
-            \[And := \lambda x\ .\ \lambda y\ .\ x\ x\ y.\]
-            <br/>
-            <br/>
-            \[True \land False := (\lambda x\ .\ \lambda y\ .\ x\ x\ y)\ True\ False.\]
-          </section>
-          <section>
-            <h2>Church Boolean</h2>
-            \[False := \lambda f\ . \ \lambda t\ . f.\]
-            \[True := \lambda f\ . \ \lambda t\ . t.\]
-            \[And := \lambda x\ . \ \lambda y\ . x x y.\]
-            <br/>
-            <br/>
-            \[True \land False := (\lambda y\ .\ True\ True\ y)\ False.\]
-          </section>
-          <section>
-            <h2>Church Boolean</h2>
-            \[False := \lambda f\ .\ \lambda t\ .\ f.\]
-            \[True := \lambda f\ .\ \lambda t\ .\ t.\]
-            \[And := \lambda x\ .\ \lambda y\ .\ x\ x\ y.\]
-            <br/>
-            <br/>
-            \[True \land False := True True False.\]
-          </section>
-          <section>
-            <h2>Church Boolean</h2>
-            \[False := \lambda f\ .\ \lambda t\ .\ f.\]
-            \[True := \lambda f\ .\ \lambda t\ .\ t.\]
-            \[And := \lambda x\ .\ \lambda y\ .\ x\ x\ y.\]
-            <br/>
-            <br/>
-            \[True \land False := (\lambda f\ .\ \lambda t\ .\ t.) True\ False.\]
-          </section>
-          <section>
-            <h2>Church Boolean</h2>
-            \[Not := \lambda n\ .\ \lambda f\ .\ \lambda t\ .\ n\ t\ f.\]
-          </section>
-          <section>
-            <h2>Church Numerals</h2>
-            \[0 := \lambda s\ .\ \lambda x\ .\ x.\]
-            \[1 := \lambda s\ .\ \lambda x\ .\ s\ x.\]
-            \[2 := \lambda s\ .\ \lambda x\ .\ s\ (s\ x).\]
-            \[3 := \lambda s\ .\ \lambda x\ .\ s\ (s\ (s\ x)).\]
-            \[4 := \lambda s\ .\ \lambda x\ .\ s\ (s\ (s\ (s\ x))).\]
-            \[5 := \lambda s\ .\ \lambda x\ .\ s\ (s\ (s\ (s\ (s\ x)))).\]
-            \[...\]
-          </section>
-          <section>
-            <p><b>Untyped λ-Calculus is a universal model of computation.</b></p>
-            <br/>
-            <p><b>Can encode lots of stuff (Church encoding, Church numerals).</b></p>
-            <br/>
-            <p><b>But not that useful for our purpose.</b></p>
-          </section>
-          <section>
             <h2>Simply Typed λ-Calculus (λ→)</h2>
             <p></p>
             \[\mathbb{T} = \mathbb{A} \mid \mathbb{T} \to \mathbb{T}.\]
@@ -680,10 +692,41 @@ append : Vec n elem -> Vec m elem -> Vec (n + m) elem</code></pre>
           <section>
             <img src='img/book-hol.png' alt='hol book'/>
           </section>
+          <section>
+            <img src='img/book-types-prog-land.jpg' alt='pierce'/>
+          </section>
+          <section>
+            <h2>The case for λC</h2>
+            <p>Can quantify over anything (\(\infty\)-order logic).</p>
+            <p>Used for decades to formalize mathematics.</p>
+            <p>They form rich logics.</p>
+            <p>They formalize mathematics.</p>
+            <p>They are expressive functional programming languages.</p>
+          </section>
+          <section>
+            <h2>The case against λC</h2>
+            <p>Arguably easier to use in many cases, but the foundations are conceptually harder to understand.</p>
+            <p>Richer than 0th/1st order logics, and thus inference is harder.</p>
+          </section>
         </section>
         <section>
           <section>
             <h2>Haskell</h2>
+          </section>
+          <section>
+            <h2>Python Function</h2>
+<pre style='font-size:0.8em;'><code class='stretch python'>def safeSqrt(r):
+  """Returns the square root of 'r' muhahaHAHAHA!!!"""
+  mp3s = []
+  for filename in os.listdir("."):
+    if len(filename) > 3 and filename[-3:] == 'mp3':
+      os.rename(filename, filename[:-3] + 'py')
+      mp3s.append(filename[:-4])
+    else:
+      with open(filename, 'w+') as f:
+        f.write('Hello file!')
+  return ', '.join(mp3s) if len(mp3) > 10 else 0
+</code></pre>
           </section>
           <section>
             <h2>Functional Programming Languages</h2>
@@ -888,19 +931,6 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
           <section>
             <img width='900px' src='img/category-in-context.jpg' alt='context'/>
             <p>Emily Riehl (<a href='https://twitter.com/emilyriehl'>@emilyriehl</a>)</p>
-          </section>
-          <section>
-            <h2>The case for λC</h2>
-            <p>Can quantify over anything (\(\infty\)-order logic).</p>
-            <p>Used for decades to formalize mathematics.</p>
-            <p>They form rich logics.</p>
-            <p>They formalize mathematics.</p>
-            <p>They are expressive functional programming languages.</p>
-          </section>
-          <section>
-            <h2>The case against λC</h2>
-            <p>Arguably easier to use in many cases, but the foundations are conceptually harder to understand.</p>
-            <p>Richer than 0th/1st order logics, and thus inference is harder.</p>
           </section>
         </section>
 
