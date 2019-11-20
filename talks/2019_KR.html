@@ -291,7 +291,7 @@
           </section>
           <section>
             <img src='img/book-fol.png' alt='fol'/>
-            <p>From J Harrison's <i>Handbook Of Practical Logic And Automated Reasoning</i>, Cambridge University Press, 2009.</p>
+            <p>John Harrison. <b>Handbook Of Practical Logic And Automated Reasoning</b>, Cambridge University Press, 2009.</p>
           </section>
           <section>
             \[\forall n, by: Divisor(n, by) \equiv mod(n, by) = 0.\]
@@ -456,47 +456,36 @@
           </section>
           <section>
             <h2>Church Boolean</h2>
-            \[False := \lambda f\ .\ \lambda t\ .\ f.\]
-            \[True := \lambda f\ .\ \lambda t\ .\ t.\]
+            \[True := \lambda t\ .\ \lambda f\ .\ t.\]
+            \[False := \lambda t\ .\ \lambda f\ .\ f.\]
           </section>
           <section>
             <h2>Church Boolean</h2>
-            \[And := \lambda x\ .\ \lambda y\ .\ x\ x\ y.\]
+            \[And := \lambda x\ .\ \lambda y\ .\ x\ y\ x.\]
           </section>
           <section>
             <h2>Church Boolean</h2>
-            \[False := \lambda f\ .\ \lambda t\ .\ f; True := \lambda f\ .\ \lambda t\ .\ t.\]
-            \[And := \lambda x\ .\ \lambda y\ .\ x\ x\ y.\]
+            \[True := \lambda t\ .\ \lambda f\ .\ t;\ False := \lambda t\ .\ \lambda f\ .\ f.\]
+            \[And := \lambda x\ .\ \lambda y\ .\ x\ y\ x.\]
             <br/>
             <br/>
-            \[True \land False := (\lambda x\ .\ \lambda y\ .\ x\ x\ y)\ True\ False.\]
+            \[\begin{align}True \land False\ & := (\lambda x\ .\ \lambda y\ .\ x\ y\ x)\ True\ False.\\
+                                             & := (\lambda y\ .\ True\ y\ True)\ False.\\
+                                             & := True\ False\ True\end{align}.\]
           </section>
           <section>
             <h2>Church Boolean</h2>
-            \[False := \lambda f\ .\ \lambda t\ .\ f; True := \lambda f\ .\ \lambda t\ .\ t.\]
-            \[And := \lambda x\ . \ \lambda y\ . x x y.\]
+            \[True := \lambda t\ .\ \lambda f\ .\ t;\ False := \lambda t\ .\ \lambda f\ .\ f.\]
+            \[And := \lambda x\ .\ \lambda y\ .\ x\ y\ x.\]
             <br/>
             <br/>
-            \[True \land False := (\lambda y\ .\ True\ True\ y)\ False.\]
+            \[\begin{align}True \land False\ & := True\ False\ True.\\
+                                             & := (\lambda t\ .\ \lambda f\ .\ t)\ False\ True.\\
+                                             & := False.\end{align}.\]
           </section>
           <section>
             <h2>Church Boolean</h2>
-            \[False := \lambda f\ .\ \lambda t\ .\ f; True := \lambda f\ .\ \lambda t\ .\ t.\]
-            \[And := \lambda x\ .\ \lambda y\ .\ x\ x\ y.\]
-            <br/>
-            <br/>
-            \[True \land False := True\ True\ False.\]
-          </section>
-          <section>
-            <h2>Church Boolean</h2>
-            \[False := \lambda f\ .\ \lambda t\ .\ f; True := \lambda f\ .\ \lambda t\ .\ t.\]
-            \[And := \lambda x\ .\ \lambda y\ .\ x\ x\ y.\]
-            <br/>
-            <br/>
-            \[True \land False := (\lambda f\ .\ \lambda t\ .\ t.)\ True\ False.\]
-          </section>
-          <section>
-            <h2>Church Boolean</h2>
+            \[Or := \lambda x\ .\ \lambda y\ .\ x\ x\ y.\]
             \[Not := \lambda n\ .\ \lambda f\ .\ \lambda t\ .\ n\ t\ f.\]
           </section>
           <section>
@@ -552,11 +541,7 @@
             <p>Simple Type Theory.</p>
             <p>Martin-Löf Type Theory.</p>
             <p>Homotopy Type Theory.</p>
-            <p><b>Lambda calculus (λ-calculus)</b>.</p>
-          </section>
-          <section>
-            <p><b>Some λ-calculi are not based on type theory</b></p>
-            <p>E.g. Untyped λ-calculus, the foundation for Lisps.</p>
+            <p><b>Typed Lambda calculus (λ-calculus)</b>.</p>
           </section>
           <section>
             <p><b>"Higher-order logic" isn't always used consistenty (it often refers to Simple Type Theory), but here it will mean: any logic capable of higher-order quantification.</b></p>
@@ -777,25 +762,6 @@ map :: (a -> b) -> [a] -> [b]
 <div class='terminal'><pre>
 λ> :t False
 False :: Bool
-</pre></div>
-          </section>
-          <section>
-<pre style='font-size:1em;'><code class='haskell'>type Language = String
-data NativeLanguage =
-    None
-  | Unilingual Language
-  | Multilingual (Set Language)
-</code></pre>
-
-<div class='terminal'><pre>λ> :t None
-None :: NativeLanguage
-
-λ> :t Multilingual
-Multilingual :: Set Language -> NativeLanguage
-
-λ> marieCurie = Multilingual (Set.fromList ["Polish", "Russian"])
-λ> :t marieCurie
-marieCurie :: NativeLanguage
 </pre></div>
           </section>
           <section>
@@ -1056,9 +1022,12 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
           </section>
           <section>
             <img src='img/book-mathfuzzy1.jpg' alt='mathfuzzy1'/>
+            <p>Petr Cintula, Petr H. Jek, and Carles Noguera. <b>Handbook of Mathematical Fuzzy Logic Volume {1, 2}</b>, College Publications, 2011.</p>
+            <p>Petr Cintula, Christian G. Fermueller, and Carles Noguera. <b>Handbook of Mathematical Fuzzy Logic Volume 3</b>, College Publications, 2015.</p>
           </section>
           <section>
             <img src='img/book-fuzzymath.png' alt='mathfuzzy1'/>
+            <p>Radim Belohlavek, Joseph W. Dauben, and George J. Klir. <b>Fuzzy Logic and Mathematics: A Historical Perspective</b>, Oxford University Press, 2017.</p>
           </section>
           <section>
             <h2>2nd order fuzziness</h2>
@@ -1078,6 +1047,7 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
           </section>
           <section>
             <img src='img/book cover-mendel17.png' alt='mendel17'/>
+            <p>Jerry M. Mendel. <b>Uncertain Rule-Based Fuzzy Systems 2nd edition</b>, Springer, 2017.</p>
           </section>
           <section>
             <h2>Pure logic</h2>
