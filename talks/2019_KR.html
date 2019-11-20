@@ -456,52 +456,47 @@
           </section>
           <section>
             <h2>Church Boolean</h2>
-            \[True := \lambda t\ .\ \lambda f\ .\ t.\]
-            \[False := \lambda t\ .\ \lambda f\ .\ f.\]
+            \[True := \lambda t\ f\ .\ t.\]
+            \[False := \lambda t\ f\ .\ f.\]
           </section>
           <section>
             <h2>Church Boolean</h2>
-            \[And := \lambda x\ .\ \lambda y\ .\ x\ y\ x.\]
+            \[And := \lambda x\ y\ .\ x\ y\ x.\]
           </section>
           <section>
             <h2>Church Boolean</h2>
-            \[True := \lambda t\ .\ \lambda f\ .\ t;\ False := \lambda t\ .\ \lambda f\ .\ f.\]
-            \[And := \lambda x\ .\ \lambda y\ .\ x\ y\ x.\]
+            \[True := \lambda t\ f\ .\ t;\ False := \lambda t\ f\ .\ f.\]
+            \[And := \lambda x\ y\ .\ x\ y\ x.\]
             <br/>
             <br/>
-            \[\begin{align}True \land False\ & := (\lambda x\ .\ \lambda y\ .\ x\ y\ x)\ True\ False.\\
+            \[\begin{align}True \land False\ & := (\lambda x\ y\ .\ x\ y\ x)\ True\ False.\\
                                              & := (\lambda y\ .\ True\ y\ True)\ False.\\
                                              & := True\ False\ True.\end{align}\]
           </section>
           <section>
             <h2>Church Boolean</h2>
-            \[True := \lambda t\ .\ \lambda f\ .\ t;\ False := \lambda t\ .\ \lambda f\ .\ f.\]
-            \[And := \lambda x\ .\ \lambda y\ .\ x\ y\ x.\]
+            \[True := \lambda t\ f\ .\ t;\ False := \lambda t\ f\ .\ f.\]
+            \[And := \lambda x\ y\ .\ x\ y\ x.\]
             <br/>
             <br/>
             \[\begin{align}True \land False\ & := True\ False\ True.\\
-                                             & := (\lambda t\ .\ \lambda f\ .\ t)\ False\ True.\\
+                                             & := (\lambda t\ f\ .\ t)\ False\ True.\\
                                              & := False.\end{align}\]
           </section>
           <section>
             <h2>Church Boolean</h2>
-            \[Or := \lambda x\ .\ \lambda y\ .\ x\ x\ y.\]
-            \[Not := \lambda n\ .\ \lambda f\ .\ \lambda t\ .\ n\ t\ f.\]
+            \[Or := \lambda x\ y\ .\ x\ x\ y.\]
+            \[Not := \lambda n\ t\ f\ .\ n\ f\ t.\]
           </section>
           <section>
             <h2>Church Numerals</h2>
-            \[\begin{align}0 :=& \ \lambda s\ .\ \lambda x\ .\ x.\\
-                           1 :=& \ \lambda s\ .\ \lambda x\ .\ s\ x.\\
-                           2 :=& \ \lambda s\ .\ \lambda x\ .\ s\ (s\ x).\\
-                           3 :=& \ \lambda s\ .\ \lambda x\ .\ s\ (s\ (s\ x)).\\
-                           4 :=& \ \lambda s\ .\ \lambda x\ .\ s\ (s\ (s\ (s\ x))).\\
-                           5 :=& \ \lambda s\ .\ \lambda x\ .\ s\ (s\ (s\ (s\ (s\ x)))).\\
+            \[\begin{align}0 :=& \ \lambda s\ x\ .\ x.\\
+                           1 :=& \ \lambda s\ x\ .\ s\ x.\\
+                           2 :=& \ \lambda s\ x\ .\ s\ (s\ x).\\
+                           3 :=& \ \lambda s\ x\ .\ s\ (s\ (s\ x)).\\
+                           4 :=& \ \lambda s\ x\ .\ s\ (s\ (s\ (s\ x))).\\
+                           5 :=& \ \lambda s\ x\ .\ s\ (s\ (s\ (s\ (s\ x)))).\\
                            6 :=& \ \dots \end{align}\]
-          </section>
-          <section>
-            <h2>But first, a shortcut...</h2>
-            \[\lambda x\ .\ \lambda y\ .\ \lambda z\ . M.\]
-            \[\lambda x\ y\ z\ .\ M.\]
           </section>
           <section>
             <h2>Church Numerals</h2>
@@ -1026,7 +1021,7 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <p>Petr Cintula, Christian G. Fermueller, and Carles Noguera. <b>Handbook of Mathematical Fuzzy Logic Volume 3</b>, College Publications, 2015.</p>
           </section>
           <section>
-            <img src='img/book-fuzzymath.png' alt='mathfuzzy1'/>
+            <img width='400px' src='img/book-fuzzymath.png' alt='mathfuzzy1'/>
             <p>Radim Belohlavek, Joseph W. Dauben, and George J. Klir. <b>Fuzzy Logic and Mathematics: A Historical Perspective</b>, Oxford University Press, 2017.</p>
           </section>
           <section>
