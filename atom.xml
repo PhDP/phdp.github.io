@@ -130,7 +130,7 @@ href='https://link.springer.com/chapter/10.1007/11729976_29'>Good locality has a
 of genetic algorithms, and grammatical evolution tends to suffer from poor locality</a>. To get an intuition of why
 this is an issue, just imagine a representation with no locality at all, such that the probability of reaching a given
 formula is the same regardless of your starting point. In this world, selecting better and better formulas and applying
-mutations to them would be useless, there would be no advantage to mutating a fit formula over an unfit formula if
+mutations to them is useless, there's no advantage to mutating a fit formula over an unfit formula if
 mutations send it all over the place. Different approaches like Cartesian genetic programming are less affected by this
 issue. Nevertheless, grammatical evolution is a fun little idea that may come in handy.</p>
 
@@ -320,7 +320,7 @@ soft logic</a> is about.</p>
 <p>With False = 0 and True = 1, you get the following connectives and truth
 tables for standard logic:</p>
 
-<table style='width: 80%; text-align:center;'>
+<table style='width: 100%; text-align:center;'>
   <tr>
     <th>Connective</th>
     <th>Informal name</th>
@@ -1563,7 +1563,7 @@ Haskell, C++, and Julia.</p>
 
 <p>No programming languages were hurt while writing this post. It's not a
 competition, and I avoided talking about languages I dislike. Sum types are
-discussed in length because they are awesome and useful for this problem
+discussed at length because they are awesome and useful for this problem
 (and many, many others).</p>
 
 <h2>The ML family</h2>
