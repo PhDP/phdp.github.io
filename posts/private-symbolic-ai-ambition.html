@@ -1,0 +1,170 @@
+---
+title: Symbolic Regression's A.I. Ambition
+tags: artificial intelligence, machine learning
+---
+
+<p>The basic idea of symbolic regression is simple: to learn mathematical 
+formulas from data. Unlike the ouput of several machine learning techniques, 
+mathematical formulas are clear and easy to interpret. The importance (or lack 
+thereof) of interpretability is a hot topic in the A.I. community (<a 
+href='https://arxiv.org/abs/1806.00069'>see Leilani Gilpin et al.'s excellent 
+overview of the topic</a>). The result of many machine learning algorithms is a 
+gigantic blob of numbers. NVIDIA's MegatronLM, a deep learning approach to 
+natural language processing, has billions of parameters. Now, whether 
+interpretability matters will obviously depend on what you're trying to 
+achieve, and it some cases there's possibly no simple, interpretable solution 
+to the problem. On the other hand, it can often be important to understand how 
+a conclusion is reached, and in those cases, symbolic regression goes way 
+beyond simple interpretability. Mathematical formulas are not only clear but 
+form the foundation of modern scientific knowledge, that's the language we use 
+to formalize our ideas. Having a machine learning technique speak the same 
+language as science allows for knowledge to travel in both directions: 
+scientific theories can serve as a prior for a machine learning algorithms, and 
+machine learning can learn and revise scientific theories. Robots and humans in 
+harmony (for now)! Also, not only are mathematical formulas clear for humans, 
+but it's arguably a better form of knowledge for computers too (more on that 
+later). Let's start with a brief overview of symbolic regression.</p>
+
+<h2>Quick Overview of Symbolic Regression</h2>
+
+<p>Symbolic regression is mostly done using a diverse set of techniques called 
+genetic algorithms. In a nutshell, we begin with a <i>population</i> of initial 
+solutions (the mathematical formulas) and improve them by a process of 
+<i>mutation</i> (small changes to a solution), <i>crossover</i> (mixing 
+existing solutions) and <i>selection</i> (picking the best solution given our 
+training data). Genetic algorithms work best when solutions can be represented 
+as sequences of a fixed length and, unfortunately, mathematical formulas form 
+trees of a potentially infinite size. That didn't stop creative minds from 
+developing clever ways to represent mathematical formulas. The are dozens of 
+methods designed to evolve mathematical formulas: one idea is to use an array 
+of integers (<a href='2019-01-25-grammar-evolution.html'>I wrote a blog post 
+about the idea here</a>). Among other interesting methods: <a 
+href='https://doi.org/10.1162/evco_a_00205'>Tomasz P. Pawlak and Krzysztof 
+Krawiec's Competent Geometric Semantic Genetic Programming for Symbolic 
+Regression ...</a> and <a href='https://doi.org/10.1145/2908812.2908898'>La 
+Cava et al.'s ε-Lexicase selection (2016)</a>. An idea I particularly 
+like is called Cartesian Genetic Programming, where formulas are placed on a 
+grid. See <a href='https://doi.org/10.1007/978-3-642-17310-3'>Julian F Miller's 
+<i>Cartesian Genetic Programming</i> (2011)</a> for a detailed overview of 
+Cartesian Genetic Programming, and also <a 
+href='https://doi.org/10.1007/s10710-019-09360-6'>his recent paper on the 
+evolution of the method</a>. All these techniques can be used to evolve 
+mathematical formulas or programs (essentially the same thing).</p>
+
+<div class='imagecenter'>
+  <img src='../images/cartesian.png' alt='Cartesian Genetic Programming'/>
+</div>
+
+<p>On the left we have Einstein's famous mass–energy equivalence. As a tree, it 
+begins with the equality predicate (=), has two variables (<i>e</i> for energy 
+and <i>m</i> to mass), two constants (2 and <i>c</i>, the speed of light), and 
+two functions (multiplication and exponentiation). On the right, the formula is 
+placed on a grid (green vertices). The red vertices represent inactive elements 
+that may become active through the optimization process. It also limits the 
+complexity of the formulas, preventing the algorithm from growing formulas 
+that would be too large.</p>
+
+<p>But is symbolic regression working? Yes. A recent benchmark of a few 
+symbolic regression techniques showed they can achieve similar accuracy than 
+"standard" machine learning algorithms, with an edge given to ε-lexicase 
+selection: <a href='https://doi.org/10.1145/3205455.3205539'>Patryk Orzechowski 
+et al. (2018)</a>. Also, one of the most impressive result in modern machine 
+learning is how a system based on deep reinforcement learning was able to play 
+Atari games with little more than the video feed (a similar idea lead to the 
+first human-level Go A.I. system). The Atari result was recently recreated with 
+Cartesian Genetic Programming (<a 
+href='https://doi.org/10.1145/3205455.3205578'>Dennis G. Wilson et al., 
+2018</a>), but of course the output is much easier to understand. What's also 
+clear is that symbolic regression's fancy output has a cost and it's exactly 
+what you'd expect: it tends to be slow. One reason is the lack of 
+highly-optimized software for symbolic regression. The deep learning world has 
+an army of experienced C++/C/CUDA programmers writing highly optimized code. 
+This is not the case for symbolic regression and of course, that can be fixed. 
+But the main reason symbolic regression is so computationally intensive is 
+simply that there is a cost to search solutions in the vast landscape of 
+mathematical ideas.</p>
+
+<h2>To lambda and beyond!</h2>
+
+<p>This is all well and good, but ultimately, the scope of symbolic regression 
+seems rather limited. Use it when you need clarity and can handle the increased 
+computational resources required. On the deep learning side, there is a clear 
+path toward more ambitious, smarter A.I.s. It goes beyond having bigger and 
+bigger networks, but, well, that's definitely part of the plan. And it works, 
+NVIDIA's MegatronLM doesn't have billions of parameters for nothing, it hopes 
+to use them to tackle bigger problems, more nuances in human languages (<a 
+href='https://arxiv.org/pdf/1909.08053.pdf'>Mohammad Shoeybi et al., 2020</a>). 
+What's the equivalent ambition for symbolic regression? Am I suggesting that we 
+use symbolic regression to find gigantic equation that simultaneously covers 
+several topics? A Theory of Quite Literally Everything? No I'm not! Or am I!?! 
+No, really, I'm not. It's not only unrealistic, it's just not how science is 
+supposed to work. We don't need a single equation to cover mass-energy 
+equivalence and viral epidemics. Science is symbolic, the <i>e</i> in 
+Einstein's theory isn't just a letter, it's a reference to a concept that is 
+found in many other equations. Just like the \(h^2\) in Breeder's equation is a 
+reference to heritability, which is also a concept used in several equations. 
+Science is a huge body of interconnected knowledge. The connective tissue is 
+mathematics, is tells us how various mathematical formulas are related. Thus, 
+the grand ambition of symbolic regression should be to help revise and discover 
+mathematical formulas within a corpus of interconnected knowledge.</p>
+
+<p>In a long-forgotten era called the 70s, A.I. researchers were quite fond of 
+expert systems. They were large knowledge bases of formulas, generally based on 
+subsets of first-order logic. With the benefit of hindsight, we can say they 
+were terrible for real-world applications. Logic is inflexible, everything has 
+to be true or false. Furthermore, by "subset", I mean the logic almost never 
+allowed functions. These expert systems could not even store something as 
+simple as energy-mass equivalence. On the other hand, mathematicians and 
+computer scientists have designed richer languages capable of formalizing 
+mathematics: the typed lambda calculi! There are various kinds of typed lambda 
+calculi, but the most interesting one for mathematicians form higher-order 
+logic (i.e.: they are richer than first-order logic and always support 
+functions). It's not a coincidence that Haskell, which is based on a typed 
+lambda calculus called System F, share similarities with languages used to 
+formalize mathematics. It's truly a shame that most programming languages lack 
+rigorous foundations. Anyhow, as far as I know, symbolic regression has never 
+been done within typed calculus. It's unfortunate because languages like Lean 
+have accumulated an impressive knowledge of mathematics. The problem, of 
+course, is that the real world isn't pure mathematics...</p>
+
+<h2>P(λC)?</h2>
+
+<p>Here's a brief theory of how scientific knowledge could be formalized. At 
+the top, we have mathematics (in some sort of typed lambda calculus). New 
+mathematical results are built on first principles and existing results. 
+Higher-order logic or not, we have the same problem as the expert systems of 
+old: there is only <i>true</i> or <i>false</i>. Thus, our typed lambda calculus 
+will be probabilistic using Bayesian higher-order probabilistic programming <a 
+href='https://arxiv.org/abs/1809.10756'>(Jan-Willem van de Meent et al., 
+2018)</a>, a powerful framework that allows the definition of probabilistic 
+distribution over higher-order constructs. With this, we can start including 
+scientific theories as functions based on a corpus of mathematical knowledge, 
+related to various other elements of scientific knowledge, and real-world 
+observations. It provides a lot of context for theories. A theory for influenza 
+epidemics is using real numbers, differential equations, ideas from network 
+theory. It's also be related to other ideas (maybe other types of network 
+dynamics, or the propagation of different viruses). Lastly, of course, it's 
+based on observations. Formalizing theories in a probabilistic higher-order 
+logic can clarify their full context. It's also where symbolic regression can 
+be useful: it becomes a tool to augment a growing base of knowledge instead of 
+something used for a highly specific problem.</p>
+
+<p>Bayesian higher-order probabilistic programming is an active field of 
+research, but it has already yielded solid algorithms. Also: typed lambda 
+calculi are extremely well-studied. Nobody has yet to mix the two though. One 
+reason is that it requires a good expertise in domains with few interactions 
+(programming language theory &amp; probability theory). The other one is that 
+it's a lot of work to adopt a formal approach to mathematics. You need to 
+encode natural numbers, integers, real numbers, etc etc. Just getting to linear 
+algebra or differential equation is a massive task. The upside is that having 
+solid foundations means you get the opportunity to grow something. A first step 
+would be a probabilistic Simple Type Theory (also called higher-order logic, <a 
+href='https://doi.org/10.1016/j.jal.2007.11.001'>see William Farmer's 2008 
+paper</a>). Because of its minimalist type system, it is difficult to use to 
+formalize complex mathematical notions (i.e. even linear algebra is a pain). On 
+the plus side, and as its name implies, Simple Type Theory is simple to 
+implement and understand. It's also directly on the road to a richer logic 
+called the Calculus of Constructions (used by Coq and Lean, two of the best 
+efforts to formalize mathematics, see <a 
+href='https://doi.org/10.1017/CBO9781139567725'>Rob Nederpelt and Herman 
+Geuvers<i>Type Theory and Formal Proof</i>, 2014</a>).</p>
