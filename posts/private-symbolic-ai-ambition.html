@@ -1,13 +1,50 @@
----
-title: Symbolic Regression's A.I. Ambition
-tags: artificial intelligence, machine learning
----
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Philippe Desjardins-Proulx</title>
+  <link rel="stylesheet" media="screen" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" media="screen" href="../css/code.css" />
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900|Source+Sans+Pro:400,400i,700,700i|Ubuntu+Mono:400,400i,700,700i&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700&display=swap&subset=japanese" rel="stylesheet" /> 
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<!-- <a href='https://github.com/PhDP/'>
+  <img style='position: absolute; top: 0; left: 0; border: 0;' src='/images/forkme.png' alt='Fork me on GitHub'>
+</a> -->
+
+<div id="header">
+  <!-- <h1><a href='mailto:philippe.d.proulx@gmail.com'>Philippe Desjardins-Proulx</a></h1> -->
+  <nav>
+    <ul>
+      <li>( Philippe Desjardins-Proulx</li>
+      <li><a href="../index.html">about</a></li>
+      <li><a href="../papers.html">papers</a></li>
+      <li><a href="../blog.html">blog</a></li>
+      <li><a href="https://ca.linkedin.com/in/philippedp"><i class="fa fa-linkedin-square"></i></a></li>
+      <li><a href="https://github.com/PhDP"><i class="fa fa-github"></i></a></li>
+      <li><a href="https://twitter.com/phdpqc"><i class="fa fa-twitter"></i></a></li>
+      <li><a href="mailto:philippe.desjardins.proulx@umontreal.ca"><i class="fa fa-envelope"></i></a>)</li>
+    </ul>
+  </nav>
+</div>
+
+<div id="content">
+  <h1>Symbolic Regression's A.I. Ambition</h1>
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="Symbolic Regression's A.I. Ambition" data-via="phdpqc">Tweet</a>
+<p id="dt"><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  2020.03.05
+</p>
 
 <p>The basic idea of symbolic regression is simple: to learn mathematical 
 formulas from data. Unlike the ouput of several machine learning techniques, 
 mathematical formulas are clear and easy to interpret. The importance (or lack 
-thereof) of interpretability is a hot topic in the A.I. community (<a 
-href='https://arxiv.org/abs/1806.00069'>see Leilani Gilpin et al.'s excellent 
+thereof) of interpretability is a hot topic in the A.I. community (<a href="https://arxiv.org/abs/1806.00069">see Leilani Gilpin et al.'s excellent 
 overview of the topic</a>). The result of many machine learning algorithms is a 
 gigantic blob of numbers. NVIDIA's MegatronLM, a deep learning approach to 
 natural language processing, has billions of parameters. Now, whether 
@@ -37,22 +74,20 @@ as sequences of a fixed length and, unfortunately, mathematical formulas form
 trees of a potentially infinite size. That didn't stop creative minds from 
 developing clever ways to represent mathematical formulas. The are dozens of 
 methods designed to evolve mathematical formulas: one idea is to use an array 
-of integers (<a href='2019-01-25-grammar-evolution.html'>I wrote a blog post 
-about the idea here</a>). Among other interesting methods: <a 
-href='https://doi.org/10.1162/evco_a_00205'>Tomasz P. Pawlak and Krzysztof 
+of integers (<a href="2019-01-25-grammar-evolution.html">I wrote a blog post 
+about the idea here</a>). Among other interesting methods: <a href="https://doi.org/10.1162/evco_a_00205">Tomasz P. Pawlak and Krzysztof 
 Krawiec's Competent Geometric Semantic Genetic Programming for Symbolic 
-Regression ...</a> and <a href='https://doi.org/10.1145/2908812.2908898'>La 
+Regression ...</a> and <a href="https://doi.org/10.1145/2908812.2908898">La 
 Cava et al.'s ε-Lexicase selection (2016)</a>. An idea I particularly 
 like is called Cartesian Genetic Programming, where formulas are placed on a 
-grid. See <a href='https://doi.org/10.1007/978-3-642-17310-3'>Julian F Miller's 
+grid. See <a href="https://doi.org/10.1007/978-3-642-17310-3">Julian F Miller's 
 <i>Cartesian Genetic Programming</i> (2011)</a> for a detailed overview of 
-Cartesian Genetic Programming, and also <a 
-href='https://doi.org/10.1007/s10710-019-09360-6'>his recent paper on the 
+Cartesian Genetic Programming, and also <a href="https://doi.org/10.1007/s10710-019-09360-6">his recent paper on the 
 evolution of the method</a>. All these techniques can be used to evolve 
 mathematical formulas or programs (essentially the same thing).</p>
 
-<div class='imagecenter'>
-  <img src='../images/cartesian.png' alt='Cartesian Genetic Programming'/>
+<div class="imagecenter">
+  <img src="../images/cartesian.png" alt="Cartesian Genetic Programming" />
 </div>
 
 <p>On the left we have Einstein's famous mass–energy equivalence. As a tree, it 
@@ -67,13 +102,12 @@ that would be too large.</p>
 <p>But is symbolic regression working? Yes. A recent benchmark of a few 
 symbolic regression techniques showed they can achieve similar accuracy than 
 "standard" machine learning algorithms, with an edge given to ε-lexicase 
-selection: <a href='https://doi.org/10.1145/3205455.3205539'>Patryk Orzechowski 
+selection: <a href="https://doi.org/10.1145/3205455.3205539">Patryk Orzechowski 
 et al. (2018)</a>. Also, one of the most impressive result in modern machine 
 learning is how a system based on deep reinforcement learning was able to play 
 Atari games with little more than the video feed (a similar idea lead to the 
 first human-level Go A.I. system). The Atari result was recently recreated with 
-Cartesian Genetic Programming (<a 
-href='https://doi.org/10.1145/3205455.3205578'>Dennis G. Wilson et al., 
+Cartesian Genetic Programming (<a href="https://doi.org/10.1145/3205455.3205578">Dennis G. Wilson et al., 
 2018</a>), but of course the output is much easier to understand. What's also 
 clear is that symbolic regression's fancy output has a cost and it's exactly 
 what you'd expect: it tends to be slow. One reason is the lack of 
@@ -92,8 +126,7 @@ computational resources required. On the deep learning side, there is a clear
 path toward more ambitious, smarter A.I.s. It goes beyond having bigger and 
 bigger networks, but, well, that's definitely part of the plan. And it works, 
 NVIDIA's MegatronLM doesn't have billions of parameters for nothing, it hopes 
-to use them to tackle bigger problems, more nuances in human languages (<a 
-href='https://arxiv.org/pdf/1909.08053.pdf'>Mohammad Shoeybi et al., 2020</a>). 
+to use them to tackle bigger problems, more nuances in human languages (<a href="https://arxiv.org/pdf/1909.08053.pdf">Mohammad Shoeybi et al., 2020</a>). 
 What's the equivalent ambition for symbolic regression? Am I suggesting that we 
 use symbolic regression to find gigantic equation that simultaneously covers 
 several topics? A Theory of Quite Literally Everything? No I'm not! Or am I!?! 
@@ -134,8 +167,7 @@ the top, we have mathematics (in some sort of typed lambda calculus). New
 mathematical results are built on first principles and existing results. 
 Higher-order logic or not, we have the same problem as the expert systems of 
 old: there is only <i>true</i> or <i>false</i>. Thus, our typed lambda calculus 
-will be probabilistic using Bayesian higher-order probabilistic programming <a 
-href='https://arxiv.org/abs/1809.10756'>(Jan-Willem van de Meent et al., 
+will be probabilistic using Bayesian higher-order probabilistic programming <a href="https://arxiv.org/abs/1809.10756">(Jan-Willem van de Meent et al., 
 2018)</a>, a powerful framework that allows the definition of probabilistic 
 distribution over higher-order constructs. With this, we can start including 
 scientific theories as functions based on a corpus of mathematical knowledge, 
@@ -158,13 +190,30 @@ it's a lot of work to adopt a formal approach to mathematics. You need to
 encode natural numbers, integers, real numbers, etc etc. Just getting to linear 
 algebra or differential equation is a massive task. The upside is that having 
 solid foundations means you get the opportunity to grow something. A first step 
-would be a probabilistic Simple Type Theory (also called higher-order logic, <a 
-href='https://doi.org/10.1016/j.jal.2007.11.001'>see William Farmer's 2008 
+would be a probabilistic Simple Type Theory (also called higher-order logic, <a href="https://doi.org/10.1016/j.jal.2007.11.001">see William Farmer's 2008 
 paper</a>). Because of its minimalist type system, it is difficult to use to 
 formalize complex mathematical notions (i.e. even linear algebra is a pain). On 
 the plus side, and as its name implies, Simple Type Theory is simple to 
 implement and understand. It's also directly on the road to a richer logic 
 called the Calculus of Constructions (used by Coq and Lean, two of the best 
-efforts to formalize mathematics, see <a 
-href='https://doi.org/10.1017/CBO9781139567725'>Rob Nederpelt and Herman 
+efforts to formalize mathematics, see <a href="https://doi.org/10.1017/CBO9781139567725">Rob Nederpelt and Herman 
 Geuvers<i>Type Theory and Formal Proof</i>, 2014</a>).</p>
+
+
+
+  <div id="hidden">
+    let world = "<span id="jp">世界</span>" in print $ "Hello " ++ world ++ "!"
+  </div>
+</div>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: { equationNumbers: { autoNumber: 'AMS' } }
+  });
+</script>
+<script type="text/javascript" src="../js/bower/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="../js/highlight.pack.js"></script>
+<script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+
+</body>
+</html>
