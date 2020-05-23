@@ -14,7 +14,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'/>
 
     <link rel='stylesheet' href='reveal.js-3.8.0/css/reveal.css'/>
-    <link rel='stylesheet' href='reveal.js-3.8.0/css/theme/ecomaths.css' id='theme'/>
+    <link rel='stylesheet' href='reveal.js-3.8.0/css/theme/faun.css' id='theme'/>
     <link rel='stylesheet' href='reveal.js-3.8.0/lib/css/hemisu.css' id='highlight-theme'/>
   </head>
 
@@ -23,16 +23,21 @@
     <div class='reveal'>
       <div class='slides'>
         <section>
-          <img width='800px' src='../images/faun-large.svg' alt='faun'/>
-          <br/>
-          <br/>
-          <p>Philippe Desjardins-Proulx, Ph.D.</p>
-          <p>Postdoctoral researcher, <a href='https://poisotlab.io/'>Poisot Lab</a>, <a href='https://www.umontreal.ca/'>Université de Montréal</a></p>
-        </section>
-
-        <section>
           <section>
-            <h2>Theories for Ecology</h2>
+            <img width='50%' src='img/faun-large.svg.png' alt='faun'/>
+            <br/>
+            <br/>
+            <p>Philippe Desjardins-Proulx, Ph.D.</p>
+            <p>Postdoctoral researcher, <a href='https://poisotlab.io/'>Poisot Lab</a>, <a href='https://www.umontreal.ca/'>Université de Montréal</a></p>
+          </section>
+          <section>
+            <img src='img/article-purves.png' alt='purves'/>
+          </section>
+          <section>
+            <h1>What about theories?</h1>
+          </section>
+          <section>
+            <img src='img/article-science-finance.png' alt='purves'/>
           </section>
           <section>
             <img width='900px' src='img/article-lewis80.png' alt='lew80'/>
@@ -44,122 +49,10 @@
             <img src='img/article-queller2-big.png' alt='queller'/>
           </section>
           <section>
-            <img src='img/article-mcgill.png' alt='McGill'/>
-          </section>
-          <section>
-            <h2>A Problem of Knowledge Representation</h2>
-            <br/>
-            <p>How to encode ecological knowledge?</p>
-            <br/>
-            <p>How to reason about a complex web of theories?</p>
-            <br/>
-            <p>How to understand theories in their full context?</p>
-          </section>
-          <section>
-            <img src='../images/faun-large.svg.png' alt='faun'/>
-            <p>Written in Rust.</p>
-            <p>...</p>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h2>Markov Logic Networks</h2>
-          </section>
-          <section>
-            <p>Is the most primitive logic.</p>
-            <p>Bivalent, so truth: \(\{False, True\} \equiv \{F, T\} \equiv \{\bot, \top\}\).</p>
-          </section>
-          <section>
-            <p>Given a set of propositional symbols \(\mathcal{S}\):</p>
-            <ol start='0'>
-              <li>If \(s \in \mathcal{S}\), then \(s\) is a WFF.</li>
-              <li>If \(f\) is a WFF, then \(\neg f\) is a WFF.</li>
-              <li>If \(f_0, f_1\) are WFFs, then \(f_0 \star f_1\) is a WFF.</li>
-            </ol>
-            <p>With \(\star = \{\land, \lor, \Rightarrow, \leftrightarrow, \veebar\}.\)</p>
-          </section>
-          <section>
-            <table style='width: 60%; text-align:center;'>
-              <tr>
-                <th>Connective</th>
-                <th>Informal</th>
-                <th>Symbol</th>
-                <th>F x F</th><th>F x T</th><th>T x F</th><th>T x T</th>
-              </tr>
-              <tr>
-                <td>Conjunction</td>
-                <td>and</td>
-                <td>\(\land\)</td>
-                <td>F</td><td>F</td><td>F</td><td>T</td>
-              </tr>
-              <tr>
-                <td>Disjunction</td>
-                <td>or</td>
-                <td>\(\lor\)</td>
-                <td>F</td><td>T</td><td>T</td><td>T</td>
-              </tr>
-              <tr>
-                <td>Implication</td>
-                <td>implies</td>
-                <td>\(\Rightarrow\)</td>
-                <td>T</td><td>T</td><td>F</td><td>T</td>
-              </tr>
-              <tr>
-                <td>Equivalence</td>
-                <td>iff</td>
-                <td>\(\equiv, \Leftrightarrow\)</td>
-                <td>T</td><td>F</td><td>F</td><td>T</td>
-              </tr>
-              <tr>
-                <td>Exclusive disjunction</td>
-                <td>xor</td>
-                <td>\(\veebar\)</td>
-                <td>F</td><td>T</td><td>T</td><td>F</td>
-              </tr>
-            </table>
-          </section>
-          <section>
-            \[a \land (b \lor c) \Rightarrow d.\]
-            \[Fever \land (Cough \lor AchingMuscles) \Rightarrow Flu.\]
-            \[CrustaceaIsMonophyletic \Rightarrow TrumpIsAStableGenius.\]
-            \[OnePlusTwoIsThree.\]
-            \[\neg PlutoIsAPlanet\]
-          </section>
-          <section>
-            <h2>Modus Ponens</h2>
-            \[\frac{\alpha \Rightarrow \beta, \alpha}{\beta} \mbox{ or } \frac{\alpha \Rightarrow \beta, \alpha}{\therefore \beta}  \mbox{ or } \frac{\Gamma \vdash \alpha \Rightarrow \beta, \Gamma \vdash \alpha}{\Gamma \vdash \beta}.\]
-            <br/>
-<pre style='font-size:1em;color:#000'>\begin{equation}
-  \infer{\beta}{\alpha \Rightarrow \beta & \alpha}.
-\end{equation}</pre>
-          </section>
-          <section>
-            <p>\(\alpha \Rightarrow \beta:\) If Kathryn likes Star Trek, then she likes Star Wars.</p>
-            <p>\(\alpha:\) Kathryn likes Star Trek.</p>
-            <p>\(\therefore \beta:\) Therefore, Kathryn likes Star Wars.</p>
-            <br/>
-            <br/>
-            <p><i>May not reflect reality!</i></p>
-          </section>
-          <section>
-            <h2>Modus Tollens</h2>
-            \[\frac{\alpha \Rightarrow \beta, \neg \beta}{\neg \alpha}.\]
-          </section>
-          <section>
-            <p>\(\alpha \Rightarrow \beta:\) If Cosmo is a serial killer, then he has a cat.</p>
-            <p>\(\neg \beta:\) Cosmo doesn't have a cat.</p>
-            <p>\(\therefore \neg \alpha:\) Therefore, Cosmo is not a serial killer.</p>
-            <br/>
-            <br/>
-            <p><i>Absolutely reflect reality (p-value < 0.001).</i></p>
-          </section>
-          <section>
-            <h2>A Party of Rules!</h2>
-            \[\frac{\neg \neg \alpha}{\alpha}.\]
-            \[\frac{\alpha \land \beta}{\alpha}.\]
-            \[\frac{\alpha \Rightarrow \beta}{\neg \alpha \lor \beta}.\]
-            \[...\]
+            <h2>Wishlist</h2>
+            <p><b>We need probabilistic reasoning</b></p>
+            <p><b>We need logical reasoning</b></p>
+            <p><b>We need mathematical knowledge</b></p>
           </section>
           <section>
             <h3>Probability theory is a zeroth-order logic</h3>
@@ -174,16 +67,7 @@
             \[\begin{align}P(l, \neg c, m, \neg g) & = P(l)P(\neg c)P(m|\neg c)P(\neg g | l, \neg c, m)\\ & = 0.81 \times (1 - 0.65) \times 0.27 \times (1 - 0.42)\\ & = 0.044.\end{align}\]
           </section>
           <section>
-            <h2>Pros and Cons of Propositional Logic</h2>
-            <p>It's couldn't be simpler.</p>
-            <p>Cannot represent complex relationships or mathematical ideas.</p>
-            <p>Provides very little context (often why statistical approaches reach silly conclusions).</p>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h2>Faun's Logic</h2>
+            <h2>First-Order Logic</h2>
           </section>
           <section>
             <h2>Term</h2>
@@ -199,7 +83,7 @@
             \[b + 2^8.\]
             \[Addition(b, Exponentiation(2, 8)).\]
             \[CapitalOf(Finland).\]
-            \[NativeLanguage(Marie\ Curie).\]
+            \[NativeLanguage(Emmy\ Noether).\]
           </section>
           <section>
             <h2>Formula</h2>
@@ -224,81 +108,23 @@
             \[\forall x \in \mathbb{R}: x \geq 0 \Rightarrow \sqrt{x^2} = x.\]
           </section>
           <section>
-            <h2>From 0 to 1</h2>
-            \[\begin{align}CrustaceaIsMonophyletic & \veebar (CrustaceaIsParaphyletic \\ & \lor CrustaceaIsPolyphyletic).\end{align}\]
-            \[\begin{align}\forall c: & PhylogenyType(c) = Monophyletic\ \veebar (PhylogenyType(c) \\ & = Paraphyletic \lor PhylogenyType(c) = Polyphyletic).\end{align}\]
+            \[\forall s, h^2, \exists z: z = s \times h^2.\]
+            \[\forall s: Autotroph(s) \lor [\exists p: PreyOn(s, p)].\]
+            \[\forall x, y: \dot{x} = \alpha x - \beta xy \land \dot{y} = \delta xy - \gamma y.\]
+            \[\forall x \in \mathbb{R}: x \geq 0 \Rightarrow \sqrt{x^2} = x.\]
           </section>
           <section>
-            <h2>Context</h2>
-            \[\forall x, y: Friends(x, y) \land Smoking(x) \Rightarrow Smoking(y).\]
-            \[\forall x, y: PreyOn(x, y) \land \neg Parasite(x) \Rightarrow M(x) > M(y).\]
-            \[\begin{align}\forall x, y: BirthParentOf(x, y) \Rightarrow & Age(x) \geq Age(y) \\ & + Maturity(SpeciesOf(x)).\end{align}\]
-            <br/>
-            \[\forall x, y: P(x, y) \equiv P(y, x).\]
+            <img src='img/book-har09-inference-rules.png' alt='inference rules'/>
+          </section>
+          <section>
+            <img src='img/book-har09.png' alt='fol'/>
+            <p>John Harrison. <b>Handbook Of Practical Logic And Automated Reasoning</b>, Cambridge University Press, 2009.</p>
           </section>
           <section>
             <h2>Paper-Tiger Logic</h2>
             <p>In A.I.: first-order logic often refer to watered down version of the language (e.g. SQL).</p>
             <p>In particular, functions are often not allowed.</p>
             <p>Without functions, first-order logic is just a logic. With functions, it can represent a large class of mathematical ideas.</p>
-          </section>
-          <section>
-            <img src='img/har09-inference-rules.png' alt='inference rules'/>
-          </section>
-          <section>
-            <img src='img/book-fol.png' alt='fol'/>
-            <p>From J Harrison's <i>Handbook Of Practical Logic And Automated Reasoning</i>, Cambridge University Press, 2009.</p>
-          </section>
-          <section>
-            \[\forall n, by: Divisor(n, by) \equiv mod(n, by) = 0.\]
-            \[\forall n: Even(n) \equiv Divisor(n, 2).\]
-            \[\forall n: Perfect(n) \equiv n > 1 \land n = 1 + \sum_{i \in [2, n)}i\times I(Divisor(n, i)).\]
-            \[\forall n: Perfect(n) \Rightarrow Even(n)?\]
-          </section>
-          <section>
-            <h2>Who cares about \(\mathbb{N}\)?</h2>
-            <p>With \(x, y \in \mathbb{N}: x - y \in \mathbb{Z}\).</p>
-            <p>With \(x \in \mathbb{Z}, y \in \mathbb{N}: (x / y) \in \mathbb{Q}\).</p>
-            <p>\(\mathbb{R}\) is a lot more work, but the idea is roughly to define \(x \in \mathbb{R}\) as a sequence of rationals converging to \(x\).</p>
-            <p>Probability theory requires \(\mathbb{R}\) (among other things).</p>
-          </section>
-          <section>
-            <h2>Peano axioms (1/3)</h2>
-            \[0 \in \mathbb{N}.\]
-            \[\forall x \in \mathbb{N}: x = x.\]
-            \[\forall x, y \in \mathbb{N}: x = y \Rightarrow y = x.\]
-            \[\forall x, y, z \in \mathbb{N}: x = y \land y = z \Rightarrow x = z.\]
-          </section>
-          <section>
-            <h2>Peano axioms (2/3)</h2>
-            \[\forall x, y: x \in \mathbb{N} \land x = y \Rightarrow y \in \mathbb{N}.\]
-            \[\forall x \in \mathbb{N}: S(x) \in \mathbb{N}.\]
-            \[\forall x, y \in \mathbb{N}: x = y \equiv S(x) = S(y).\]
-            \[\forall x \in \mathbb{N}: \neg(S(n) = 0).\]
-          </section>
-          <section>
-            <h2>Peano axioms (3/3)</h2>
-            \[\forall P: P(0) \land [\forall x \in \mathbb{N}: P(x) \Rightarrow P(S(x))] \Rightarrow [\forall x \in \mathbb{N}: P(x)].\]
-          </section>
-          <section>
-            <h2>Can we reach \(h\) from \(t\) in a graph?</h2>
-
-            \[Reach(t, h) \Leftrightarrow t = h.\]
-          </section>
-          <section>
-            <h2>Can we reach \(h\) from \(t\) in a graph?</h2>
-
-            \[Reach(t, h) \Leftrightarrow t = h \lor Edge(t, h).\]
-          </section>
-          <section>
-            <h2>Can we reach \(h\) from \(t\) in a graph?</h2>
-
-            \[\begin{align}Reach(t, h) & \Leftrightarrow t = h \\ & \lor Edge(t, h) \\ & \lor [\exists x: Edge(t, x) \land Edge(x, h)].\end{align}\]
-          </section>
-          <section>
-            <h2>Can we reach \(h\) from \(t\) in a graph?</h2>
-
-            \[\begin{align}Reach(t, h) & \Leftrightarrow t = h \\ & \lor Edge(t, h) \\ & \lor [\exists x: Edge(t, x) \land Edge(x, h)] \\ & \lor [\exists x, y: Edge(t, x) \land Edge(x, y) \land Edge(y, h)] \\ & \lor [\exists x, y, z: Edge(t, x) \land Edge(x, y) \land Edge(y, z) \land Edge(z, h)].\end{align}\]
           </section>
           <section>
             <h2>Markov Logic</h2>
@@ -335,37 +161,19 @@
             \[\forall x, y: \dot{x} = \alpha x - \beta xy \land \dot{y} = \delta xy - \gamma y; 0.0.\]
           </section>
           <section>
-            <h2>Pitfall 1 of 8128: _ is probabilistic</h2>
-            <img src='img/stochastic-price.png' alt='rice'/>
-            <p>From Rice and Papadopoulos' <a href='https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0007130'>Evolution with Stochastic Fitness and Stochastic Migration</a>.</p>
+            <h2>Markov Logic Networks</h2>
+            <img src='img/preyon-prob.png' width='100%' alt='logic'/>
           </section>
           <section>
-            <h2>The Case <b>for</b> First-Order Logic</h2>
-            <p>Can encode not all, but a lot of mathematics.</p>
-            <p>Simple to implement.</p>
-            <p>Simple to understand.</p>
-            <p>Well-understood.</p>
-            <p>Uniform.</p>
-            <p>Widely used (caveat: often watered down in A.I.).</p>
+            <h2>First-order logic</h2>
+            <ul>
+              <li>Simple and easy to implement.</li>
+              <li>Many versions use only a subset of FOL (Prolog, SQL).</li>
+              <li>Even full FOL cannot be used to formalize mathematics (e.g. real numbers, reachability in graphs).</li>
+            </ul>
           </section>
           <section>
-            <h2>The Case <b>for</b> First-Order Logic</h2>
-            <p>You can have built-in types for, well, anything: integer, natural numbers, etc.</p>
-            <p>You can also often get around the limitations of first-order logic, e.g. \(CanReach(x, y)\).</p>
-          </section>
-          <section>
-            <h2>The Case <b>Against</b> First-Order Logic</h2>
-            <p>Many ideas are difficult to represent.</p>
-            <p>Generally based on set theory, which is awkward to handle complex objects.</p>
-            <p>Efforts to formalize mathematics done with type theories.</p>
-          </section>
-          <section>
-            <h2>Type Theory</h2>
-          </section>
-          <section>
-            <p><b>Whitehead and Russell's ramified theory of types, typed lambda calculi, Simple Type Theory, Martin-Löf Type Theory, Homotopy Type Theory.</b></p>
-            <p><b>Some lambda calculi are not based on type theory (e.g. Untyped Lambda Calculus, the foundation for Lisps).</b></p>
-            <p><b>"Higher-order logic" isn't always used consistenty, but here it will mean: any logic capable of higher-order quantification.</b></p>
+            <h2>Higher Order Languages</h2>
           </section>
           <section>
             <img src='img/article-farmer2006.png' alt='stt'/>
@@ -375,6 +183,79 @@
           </section>
           <section>
             <img src='img/articles-safeml.png' alt='safeml'/>
+          </section>
+          <section>
+            <h2>Untyped λ-Calculus</h2>
+            <p>Given a set of variables \(\mathcal{V}\), the set of all valid lambda terms \(\Lambda\):</p>
+            <ol start='0'>
+              <li><b>Variable</b>: If \(v \in \mathcal{V}\), then \(v \in \Lambda\).</li>
+              <li><b>Abstraction</b>: If \(v \in \mathcal{V}\) and \(M \in \Lambda\), then \((\lambda v . M) \in \Lambda\).</li>
+              <li><b>Application</b>: If \(M\) and \(N \in \Lambda\), then \(M\ N \in \Lambda\).</li>
+            </ol>
+          </section>
+          <section>
+            <h2>Untyped λ-Calculus</h2>
+            <p>Given a set of variables \(\mathcal{V}\), the set of all valid lambda terms \(\Lambda\):</p>
+            \[\Lambda ::= \mathcal{V} \mid (\Lambda\ \Lambda) \mid (\lambda \mathcal{V} . \Lambda).\]
+          </section>
+          <section>
+            <h2>Precedence &amp; Associativity</h2>
+            <p>Abstraction is right-associative: \(\lambda x\ y\ .\ M \equiv \lambda x\ .\ (\lambda y\ .\ M)\).</p>
+            <p>Application is left-associative: \(M\ N\ O\ P \equiv ((M\ N)\ O)\ P\).</p>
+            <p>Application has precedence over abstraction: \(\lambda x\ .\ M\ N \equiv \lambda x\ .\ (M\ N)\).</p>
+          </section>
+          <section>
+            \[(\lambda x\ .\ x)\ 6,\]
+            \[(\lambda x\ .\ x)[x := 6],\]
+            \[6.\]
+            <br/>
+            <br/>
+            <p><i>Note: 6 isn't a variable, we're cheating a bit here.</i></p>
+          </section>
+          <section>
+            \[(\lambda y\ .\ (\lambda x\ .\ x + y))\ 42\ 5,\]
+            \[(\lambda y\ .\ (\lambda x\ .\ x + y))[y := 42]\ 5,\]
+            \[(\lambda x\ .\ x + 42)\ 5,\]
+            \[(\lambda x\ .\ x + 42)[x := 5],\]
+            \[5 + 42.\]
+            <br/>
+            <br/>
+            <p><i>Cheating again: what is 5? 42? +?</i></p>
+          </section>
+          <section>
+            <h2>Turing complete...</h2>
+            \[(\lambda x\ .\ x\ x)\ (\lambda x\ .\ x\ x),\]
+            \[(\lambda x\ .\ x\ x)[x := (\lambda x\ .\ x\ x)],\]
+            \[(\lambda x\ .\ x\ x)\ (\lambda x\ .\ x\ x).\]
+          </section>
+          <section>
+            <p><b>Untyped λ-Calculus is a universal model of computation.</b></p>
+            <br/>
+            <p><b>Can encode lots of stuff (Church encoding, Church numerals).</b></p>
+            <br/>
+            <p><b>But not that useful for our purpose.</b></p>
+          </section>
+          <section>
+            <h2>Type Theory</h2>
+          </section>
+          <section>
+            <p>Whitehead and Russell's Ramified Theory of Types.</p>
+            <p>Simple Type Theory.</p>
+            <p>Martin-Löf Type Theory.</p>
+            <p>Homotopy Type Theory.</p>
+            <p><b>Typed Lambda calculus (λ-calculus)</b>.</p>
+          </section>
+          <section>
+            <p><b>"Higher-order logic" isn't always used consistenty (it often refers to Simple Type Theory), but here it will mean: any logic capable of higher-order quantification.</b></p>
+          </section>
+          <section>
+            <img src='img/article-farmer2006.png' alt='stt'/>
+          </section>
+          <section>
+            <img src='img/article-lean.png' alt='lean'/>
+          </section>
+          <section>
+            <img src='img/article-safeml.png' alt='safeml'/>
           </section>
           <section>
             <table style='width:100%; text-align:center;'>
@@ -406,7 +287,7 @@
                 <td>Isabelle</td>
                 <td>ML</td>
                 <td>Yes</td>
-                <td>Weak type theory</td>
+                <td>Weak type theory (Simple Type Theory)</td>
               </tr>
               <tr>
                 <td>Agda</td>
@@ -435,89 +316,10 @@
             </table>
           </section>
           <section>
-            <h2>Python "Function"</h2>
-<pre style='font-size:0.8em;'><code class='stretch python'>def safeSqrt(r):
-  """Returns the square root of 'r' muhahaHAHAHA!!!"""
-  mp3s = []
-  for filename in os.listdir("."):
-    if len(filename) > 3 and filename[-3:] == 'mp3':
-      os.rename(filename, filename[:-3] + 'py')
-      mp3s.append(filename[:-4])
-    else:
-      with open(filename, 'w+') as f:
-        f.write('Hello file!')
-  return ', '.join(mp3s) if len(mp3) > 10 else 0
-</code></pre>
-          </section>
-          <section>
-            <h2>Untyped λ-Calculus</h2>
-            <p>Given a set of variables \(\mathcal{V}\), the set of all valid lambda terms \(\Lambda\):</p>
-            <ol start='0'>
-              <li><b>Variable</b>: If \(v \in \mathcal{V}\), then \(v \in \Lambda\).</li>
-              <li><b>Abstraction</b>: If \(v \in \mathcal{V}\) and \(M \in \Lambda\), then \((\lambda v . M) \in \Lambda\).</li>
-              <li><b>Application</b>: If \(M\) and \(N \in \Lambda\), then \(M\ N \in \Lambda\).</li>
-            </ol>
-          </section>
-          <section>
-            <h2>Untyped λ-Calculus</h2>
-            <p>Given a set of variables \(\mathcal{V}\), the set of all valid lambda terms \(\Lambda\):</p>
-            \[\Lambda = \mathcal{V} \mid (\Lambda\ \Lambda) \mid (\lambda \mathcal{V} . \Lambda).\]
-          </section>
-          <section>
-            <h2>Precedence &amp; Associativity</h2>
-            <p>Abstraction is right-associative: \(\lambda x\ y\ .\ M \equiv \lambda x\ .\ (\lambda y\ .\ M)\).</p>
-            <p>Application is left-associative: \(M\ N\ O\ P \equiv ((M\ N)\ O)\ P\).</p>
-            <p>Application has precedence over abstraction: \(\lambda x\ .\ M\ N \equiv \lambda x\ .\ (M\ N)\).</p>
-          </section>
-          <section>
-            \[(\lambda x\ .\ x^2)\ 6,\]
-            \[(\lambda x\ .\ x^2)[x := 6],\]
-            \[6^2.\]
-          </section>
-          <section>
-            \[(\lambda y\ .\ (\lambda x\ .\ x + y))\ 42\ 5,\]
-            \[(\lambda y\ .\ (\lambda x\ .\ x + y))[y := 42]\ 5,\]
-            \[(\lambda x\ .\ x + 42)\ 5,\]
-            \[(\lambda x\ .\ x + 42)[x := 5],\]
-            \[5 + 42.\]
-          </section>
-          <section>
-            \[(\lambda x\ .\ x\ x)\ (\lambda x\ .\ x\ x),\]
-            \[(\lambda x\ .\ x\ x)[x := (\lambda x\ .\ x\ x)],\]
-            \[(\lambda x\ .\ x\ x)\ (\lambda x\ .\ x\ x).\]
-          </section>
-          <section>
-            <h2>Functions have only one argument</h2>
-            \[divides := \lambda\ b\ . (\lambda n\ .\ \dots).\]
-            \[isEven := divides\ 2.\]
-            <br/>
-            <br/>
-            <p>Note that we write divides 2 instead of divides(2).</p>
-          </section>
-          <section>
-            <p><b>Untyped λ-Calculus is a universal model of computation.</b></p>
-            <br/>
-            <p><b>Can encode lots of stuff (Church encoding, Church numerals).</b></p>
-            <br/>
-            <p><b>But not that useful for our purpose.</b></p>
-          </section>
-          <section>
             <h2>Simply Typed λ-Calculus (λ→)</h2>
             <p></p>
             \[\mathbb{T} = \mathbb{A} \mid \mathbb{T} \to \mathbb{T}.\]
             \[\Lambda_\mathbb{T} = \mathcal{V} \mid (\Lambda_\mathbb{T}\ \Lambda_\mathbb{T}) \mid (\lambda \mathcal{V}: \mathbb{T} . \Lambda_\mathbb{T}).\]
-          </section>
-          <section>
-            <h2>Abstaction in λ→</h2>
-            <p>If \(M: \beta\), then \((\lambda x: \alpha\ .\ M): \alpha \to \beta\).</p>
-            <br/>
-            \[(\lambda\ x: \mathbb{R}\ .\ isPositive\ x): \mathbb{R} \to \{F, T\}.\]
-          </section>
-          <section>
-            <h2>Application in λ→</h2>
-            <p>If \(M: \alpha \to \beta\) and \(N: \alpha\), then \(M\ N : \beta\).</p>
-            <br/>
-            \[(\lambda\ x: \mathbb{R}\ .\ isPositive\ x)\ 0.14159\]
           </section>
           <section>
             <h2>Curry-Howard(–Lambek) correspondence</h2>
@@ -528,10 +330,6 @@
             \[\frac{\Gamma \vdash M : \alpha \to \beta, \Gamma \vdash N: \alpha}{\Gamma \vdash M\ N : \beta}.\]
           </section>
           <section>
-            <h2>Lambda Cube</h2>
-            <img src='img/lambda cube.png' alt='lambda cube'/>
-          </section>
-          <section>
             <h2>Some Implications</h2>
             <p><b>Type theory represents a unification of programming with mathematical logic.</b></p>
             <br/>
@@ -540,214 +338,56 @@
             <p><b>Complexity of proofs: \(\mathcal{O}\)(¯\_(ツ)_/¯), pronounced "Oh dear".</b></p>
           </section>
           <section>
-            <img src='img/book-hol.png' alt='hol book'/>
+            <h2>Lambda Cube</h2>
+            <img src='img/lambda cube.png' alt='lambda cube'/>
           </section>
           <section>
-            <h2>Functional Programming Languages</h2>
-            <p>Programming with functions</p>
-            <p>Focus on immutability</p>
-            <p>Recursion instead of loops</p>
+            <h2>Lambda Cube</h2>
+            <p>λ→: Terms depending on Terms.</p>
+            <p>λ2: Terms depending on Types.</p>
+            <p>λ\(\underline{\omega}\): Types depending on Types.</p>
+            <p>λP: Types depending on Terms.</p>
+          </section>
+          <section>
+            <h2>Dependent Types</h2>
+
+<pre style='font-size:1.0em;'><code class='haskell'>data Vec : ℕ -> Type -> Type where
+  ...
+
+append : Vec n t -> Vec m t -> Vec (n + m) t</code></pre>
+
+<br/>
+<p>Edwin Brady. <i>Type-driven Development with Idris-Manning Publications</i>, Manning, 2017.</p>
+          </section>
+          <section>
+            <h2>Dependent Types</h2>
+
+<pre style='font-size:1.0em;'><code class='haskell'>data Mat : ℕ -> ℕ -> Type -> Type where
+  ...
+
+matmul : Mat m n t -> Mat n p t -> Mat m p</code></pre>
+
+<br/>
+<p>Edwin Brady. <i>Type-driven Development with Idris-Manning Publications</i>, Manning, 2017.</p>
+          </section>
+          <section>
+            <h2>λC: Calculus of Constructions</h2>
+            \[\Lambda_C ::= \mathbb{T} \mid \mathbb{P} \mid \mathcal{V} \mid \Lambda_C\ \Lambda_C \mid \lambda \mathcal{V}: \Lambda_C\ .\ \Lambda_C \mid \forall \mathcal{V}: \Lambda_C\ .\ \Lambda_C.\]
             <br/>
-            <p>Typed ML: Haskell, Standard ML, OCaml, F#</p>
-            <p>Untyped Lisps: Common Lisp, Scheme, Clojure</p>
-            <p>Languages to formalize mathematics are also functional</p>
+            <br/>
+            <p>Thierry Coquand and Gérard Huet. <b><a href='https://core.ac.uk/download/pdf/82038778.pdf'>The Calculus of Constructions</a></b>. Information and Computation 76: 95-120, 1988.</p>
+            <p>λC was development alongside <a href='https://coq.inria.fr/'>Coq</a>. <a href='https://leanprover.github.io/'>Lean</a> is also based on λC.</p>
           </section>
           <section>
-            <h2>Haskell</h2>
-            <p>Created in 1990 by a group of mathematicians and CS theorists</p>
-            <p>Pure functional language</p>
-            <p>Statically typed (à la C, C++) but with type inference</p>
-            <p>Immutable data structures</p>
-            <p>Based on System F (2nd-order typed λ-calculus)</p>
-            <p>Relies heavily on category theory</p>
-          </section>
-          <section><div class='terminal'><pre>λ> 42 + 5
-47
-
-λ> (+) 42 5
-47
-
-λ> :t 'c'
-'c' :: Char
-
-λ> :t 32
-32 :: Num p => p
-
-λ> foldr (*) 1 [6, 28, 70, 496, 836]
-4876354560
-
-λ> :t map
-map :: (a -> b) -> [a] -> [b]
-
-λ> :t (**)
-(**) :: Floating a => a -> a -> a
-</pre></div>
+            <img src='img/book-hol.png' alt='hol book'/>
+            <p> Rob Nederpelt &amp; Herman Geuvers. <b>Type Theory and Formal Proof: An Introduction</b>, Cambridge University Press, 2014.</p>
           </section>
           <section>
-<pre style='font-size:1em;'><code class='haskell'>data Bool = False | True</code></pre>
-
-<div class='terminal'><pre>
-λ> :t False
-False :: Bool
-</pre></div>
+            <img src='img/book-types-prog-land.jpg' alt='pierce'/>
+            <p>Benjamin C. Pierce. <b>Types and Programming Languages</b>, MIT Press, 2002.</p>
           </section>
           <section>
-<pre style='font-size:1em;'><code class='haskell'>type Language = String
-data NativeLanguage =
-    None
-  | Unilingual Language
-  | Multilingual (Set Language)
-</code></pre>
-
-<div class='terminal'><pre>λ> :t None
-None :: NativeLanguage
-
-λ> :t Multilingual
-Multilingual :: Set Language -> NativeLanguage
-
-λ> marieCurie = Multilingual (Set.fromList ["Polish", "Russian"])
-λ> :t marieCurie
-marieCurie :: NativeLanguage
-</pre></div>
-          </section>
-          <section>
-<pre style='font-size:1em;'><code class='haskell'>data Maybe a = Nothing | Just a
-
-safeSqrt r = if r < 0 then Nothing else Just (sqrt r)
-</code></pre>
-<div class='terminal'><pre>
-λ> :t safeSqrt
-safeSqrt :: (Ord a, Floating a) => a -> Maybe a
-λ> :t safeSqrt 0.5
-safeSqrt 0.5 :: (Ord a, Floating a) => Maybe a
-</pre></div>
-          </section>
-          <section>
-<pre style='font-size:1em;'><code class='haskell'>data Maybe a = Nothing | Just a
-
-realSqrt r :: Double -> Maybe Double
-realSqrt r = if r < 0 then Nothing else Just (sqrt r)
-</code></pre>
-          </section>
-          <section>
-<pre style='font-size:1em;'><code class='haskell'>values = [0.05, 0.01, 0.07, 0.0032, 0.00014]
-
-sumLogs = (+) . log
-
-foldr sumLogs 0 values
-</code></pre>
-          </section>
-          <section>
-<pre style='font-size:1em;'><code class='haskell'>values = [0.05, 0.01, 0.07, 0.0032, 0.00014]
-
-sumLogs :: (Floating a) => a -> a -> a
-sumLogs = (+) . log
-
-answer :: Double
-answer = foldr sumLogs 0 values
-</code></pre>
-          </section>
-          <section>
-            <h2>Functions have only one argument</h2>
-<pre style='font-size:1em;'><code class='haskell'>-- Checks whether 'by' divides 'n' with a remainder of 0.
-divides by n = n `mod` by == 0
-
--- Checks if a number is even
-isEven = divides 2 -- Currying
-</code></pre>
-          </section>
-          <section>
-            <h2>Functions have only one argument</h2>
-<pre style='font-size:1em;'><code class='stretch haskell'>-- Checks whether 'by' divides 'n' with a remainder of 0.
-divides :: Integral a => a -> a -> Bool
-                      -- a -> (a -> Bool)
-divides by n = n `mod` by == 0
-
--- Checks if a number is even.
-isEven :: Integral a => a -> Bool
-isEven = divides 2
-
-addOne = (+) 1
-</code></pre>
-          </section>
-          <section>
-            <h2>Type Theory: Abstraction and Application</h2>
-<div class='terminal'><pre>
-λ> values = [0.1, 0.4, 0.9, 0.03, 0.0001, 0.8]
-
-λ> map sqrt values
-[0.32,0.63,0.95,0.17,0.89]
-
-λ> map (+ 1) values
-[1.1,1.4,1.9,1.03,1.0001,1.8]
-
-λ> map (log . sqrt) values
-[-1.15,-0.46,-0.0052,-1.75,-4.61,-0.11]
-
-λ> map (\x -> if x < 0.5 then 'a' else 'z') values
-"aazaaz"
-</pre></div>
-          </section>
-          <section>
-            <h2>Type Theory: Abstraction and Application</h2>
-<div class='terminal'><pre>
-λ> :t (\x -> if x < 0.5 then 'a' else 'z')
-(\x -> if x < 0.5 then 'a' else 'z') :: (Ord a, Fractional a) => a -> Char
-
-λ> (\x -> if x < 0.5 then 'a' else 'z') 0.2
-'a'
-
-λ> (\x -> if x < 0.5 then 'a' else 'z') 0.5
-'z'
-</pre></div>
-          </section>
-          <section>
-<div class='terminal'><pre>
-λ> capitalOf = Map.fromList [("Arrakeen", "Arrakis")]
-λ> Map.lookup "France" capitals
-Nothing
-
-λ> Map.lookup "Arrakis" capitals
-Just "Arrakeen"
-</pre></div>
-          </section>
-          <section>
-<pre style='font-size:0.95em;'><code class='stretch haskell'>type Graph k e = Map k (Map k e)
-
-getEdge :: (Ord k) => k -> k -> Graph k e -> Maybe e
-getEdge head tail g =
-  case Map.lookup head g of
-    Maybe g' => case Map.lookup tail g' of
-                  Maybe edge => edge
-                  Nothing    => Nothing
-    Nothing => Nothing
-</code></pre>
-          </section>
-          <section>
-<pre style='font-size:0.95em;'><code class='stretch haskell'>type Graph k e = Map k (Map k e)
-
-getEdge :: (Ord k) => k -> k -> Graph k e -> Maybe e
-getEdge head tail g = Map.lookup head g >>= Map.lookup tail
-</code></pre>
-          </section>
-          <section>
-<pre style='font-size:1em;'><code class='stretch haskell'>class Monad m where
-  (>>=)  :: m a -> (a -> m b) -> m b
-  (>>)   :: m a -> m b        -> m b
-  return :: a                 -> m a
-  fail   :: String -> m a
-</code></pre>
-          </section>
-          <section>
-            <img src='img/lyah.png' alt='lyah'/>
-            <p><a href='http://learnyouahaskell.com'>http://learnyouahaskell.com</a></p>
-          </section>
-          <section>
-            <img width='900px' src='img/category-in-context.jpg' alt='context'/>
-            <p>Emily Riehl (<a href='https://twitter.com/emilyriehl'>@emilyriehl</a>)</p>
-          </section>
-          <section>
-            <h2>The case for type theory (especially λC)</h2>
+            <h2>The case for λC</h2>
             <p>Can quantify over anything (\(\infty\)-order logic).</p>
             <p>Used for decades to formalize mathematics.</p>
             <p>They form rich logics.</p>
@@ -755,28 +395,109 @@ getEdge head tail g = Map.lookup head g >>= Map.lookup tail
             <p>They are expressive functional programming languages.</p>
           </section>
           <section>
-            <h2>The case against type theory (especially λC)</h2>
+            <h2>The case against λC</h2>
             <p>Arguably easier to use in many cases, but the foundations are conceptually harder to understand.</p>
-            <p>All implementations are different.</p>
             <p>Richer than 0th/1st order logics, and thus inference is harder.</p>
           </section>
           <section>
+            <h2>HOL vs λC</h2>
+            <p>HOL has a much simpler core and is simpler to understand.</p>
+            <p>Both are used to formalize mathematics (HOL4, HOL Light, Isabelle) vs (Coq, Lean).</p>
+            <p>HOL is really awkward in many cases, including linear algebra. It tends to have quicks (x/0 = 0 in HOL Light) and
+            is not seriously considered as a formal representation of mathematics, even if it has practical benefits over λC.</p>
+            <p>Thus, <b>simpler</b> often means it's <i>harder</i> to used as a modelling language.</p>
+          </section>
+          <section>
+            <h2>Higher-Order Probabilistic Programming</h2>
+          </section>
+          <section>
+            <img src='img/book-intro-prob-prog.png' width='50%' alt='intro'/>
             <blockquote style='padding-left: 0.5em; border-left: 0.3em solid #5DD836'>
               <p>[...] ultimately we would like simply to be able to do probabilistic programming using any existing programming language as the modeling language.</p>
             </blockquote>
             <p>From J-W van de Meent et al. <i>An Introduction to Probabilistic Programming</i>, arxiv:1809.10756, 2018.</p>
           </section>
           <section>
+            <img src='img/article-staton16.png' alt='staton16'/>
+          </section>
+          <section>
+            <img src='img/article-category.png' alt='cat'/>
+          </section>
+          <section>
             <img src='img/article-lambda-prob.png' alt='lambda prob'/>
           </section>
           <section>
-            <img src='img/paper-staton16.png' alt='staton16'/>
+            <img src='img/article-lambda-prob-inference.png' alt='probabilistic lambda'/>
           </section>
-        </section>
-
-        <section>
           <section>
-            <h2>Questions?</h2>
+            <h2>Solid Implementations!</h2>
+            <p><a href='https://github.com/probprog/anglican'>Anglican</a></p>
+            <p><a href='https://github.com/TuringLang/Turing.jl'>Turing.jl</a></p>
+            <p><a href='https://pyro.ai/'>Uber's Pyro</a></p>
+            <br/>
+            <br/>
+            <p>All operate on untyped languages.</p>
+            <p>None can do sophisticated logical or mathematical reasoning.</p>
+            <p>But they show inference is possible on arbitrary functions.</p>
+          </section>
+          <section>
+            <img src='img/article-formal-verification-prob.png' alt='formal'/>
+          </section>
+          <section>
+            <img src='img/book-semantics-typed-lambda.png' alt='formal'/>
+          </section>
+          <section>
+            <img src='img/logic_map.png' width='95%' alt='logic map'/>
+          </section>
+          <section>
+            <h2>Wishlist</h2>
+            <p style='color:#0000cc'><b>We need probabilistic reasoning</b></p>
+            <p style='color:#cc0000'><b>We need logical reasoning</b></p>
+            <p style='color:#00cc00'><b>We need mathematical knowledge</b></p>
+          </section>
+          <section>
+            <img src='img/logic_map_wishlist.png' width='95%' alt='logic map'/>
+          </section>
+          <section>
+            <img src='../images/faun-large.svg.png' alt='faun'/>
+            <p><b>Goal</b>: A Probabilistic Calculus of Constructions.</p>
+            <p><a href='https://www.rust-lang.org/'>Written in Rust (I see it as a C/Haskell hybrid)</a>.</p>
+            <p>For now: <a href='https://github.com/PhDP/Faun'>https://github.com/PhDP/Faun</a> (will move to its own org).</p>
+            <p>Sando suggested <a href='https://nvie.com/posts/a-successful-git-branching-model/'>this Git branching strategy</a>.</p>
+            <p>Apache-2 license (with the LLVM exception to ensure GPL compatibility).</p>
+          </section>
+          <section>
+            <h2>How Faun will turn out</h2>
+            <p><b>The Ugly</b>: It's Impossible.</p>
+          </section>
+          <section>
+            <h2>How Faun will turn out</h2>
+            <p><b>The Ugly</b>: It's Impossible.</p>
+            <p><b>The OK</b>: It's possible but slow.</p>
+          </section>
+          <section>
+            <h2>How Faun will turn out</h2>
+            <p><b>The Ugly</b>: It's Impossible.</p>
+            <p><b>The OK</b>: It's possible but slow.</p>
+            <p><b>The Good</b>: It's possible but compatibility with Lean is a problem (cheating with axioms!).</p>
+          </section>
+          <section>
+            <h2>How Faun will turn out</h2>
+            <p><b>The Ugly</b>: It's Impossible.</p>
+            <p><b>The OK</b>: It's possible but slow.</p>
+            <p><b>The Good</b>: It's possible but compatibility with Lean is a problem (cheating with axioms!).</p>
+            <p><b>The Great</b>: It's possible and Lean compatibility is attainable.</p>
+          </section>
+          <section>
+            <h2>Current Plan</h2>
+            <p>Focus on a theoretical paper (Information and Computation, Journal of Logic and Computation, 27th International Conference on Types for Proofs and Programs)
+          </section>
+          <section>
+            <h2>Open Questions</h2>
+            <p>Files for data &amp; probability distribution?</p>
+            <p>How to organize tasks (who is working on what). Open Trello?</p>
+            <p>How to test Bayesian inference.</p>
+            <p></p>
           </section>
         </section>
 
