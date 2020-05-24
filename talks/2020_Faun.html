@@ -55,6 +55,9 @@
             <a href='https://doi.org/10.1086/690937'><img src='img/article-queller2-big.png' alt='queller'/></a>
           </section>
           <section>
+            <a href=' https://doi.org/10.1371/journal.pone.0007130'><img src='img/article-rice.png' alt='rice'/></a>
+          </section>
+          <section>
             <h2>Wishlist for Encoding Theories</h2>
             <p><b>Probabilistic reasoning</b></p>
             <p><b>[Higher-order] Logical reasoning</b></p>
@@ -105,22 +108,6 @@
             <p>\(\diamondsuit = \{\forall, \exists, \exists!\}\).</p>
           </section>
           <section>
-            <p>An <b>interpretation</b> tells us whether a symbol refers to a constant, function, or
-            predicate, and what is its domain.</p>
-
-            \[e = m \times C^2.\]
-            \[z = s \times h^2.\]
-            \[\forall s: Autotroph(s) \lor [\exists p: PreyOn(s, p)].\]
-            \[\forall x, y: \dot{x} = \alpha x - \beta xy \land \dot{y} = \delta xy - \gamma y.\]
-            \[\forall x \in \mathbb{R}: x \geq 0 \Rightarrow \sqrt{x^2} = x.\]
-          </section>
-          <section>
-            \[\forall s, h^2, \exists z: z = s \times h^2.\]
-            \[\forall s: Autotroph(s) \lor [\exists p: PreyOn(s, p)].\]
-            \[\forall x, y: \dot{x} = \alpha x - \beta xy \land \dot{y} = \delta xy - \gamma y.\]
-            \[\forall x \in \mathbb{R}: x \geq 0 \Rightarrow \sqrt{x^2} = x.\]
-          </section>
-          <section>
             <a href=' https://doi.org/10.1017/CBO9780511576430'><img src='img/book-har09-inference-rules.png' alt='inference rules'/></a>
           </section>
           <section>
@@ -134,14 +121,7 @@
             <p>Without functions, first-order logic is just a logic. With functions, it can represent a large class of mathematical ideas.</p>
           </section>
           <section>
-            <h2>Markov Logic</h2>
-
-            <p>\(Fr(Person, Person):\) Whether the first person is friend with the second person.</p>
-            <p>\(Sm(Person):\) Whether the person smokes.</p>
-            <p>\(Ca(Person):\) Whether the person has or had cancer.</p>
-          </section>
-          <section>
-            <h2>Markov Logic</h2>
+            <h2>Markov Logic Networks</h2>
 
             \[\forall x: Sm(x) \Rightarrow Ca(x); 1.5.\]
             \[\forall x: \neg[\exists y: Fr(x, y)] \Rightarrow Sm(x); 2.3.\]
@@ -152,20 +132,12 @@
             <p>Weights \(\in \mathbb{R}\).</p>
           </section>
           <section>
-            <h2>Markov Logic</h2>
+            <h2>Markov Logic Networks</h2>
             <p>With a set of persons \(\{A, B\}\):</p>
             <br/>
 
             \[P(Ca(A) | Fr(B, A), Ca(B)).\]
             \[P(Ca(A) | Fr(B, A), Ca(B), \forall x, y: Fr(x, y) \equiv Fr(y, x); 4.5).\]
-          </section>
-          <section>
-            <h2>Issues with Markov Logic</h2>
-
-            <p>Has an old, unmaintained C++ implementation that runs on a single thread.</p>
-            <p>A good logic, but doesn't handle functions well.</p>
-
-            \[\forall x, y: \dot{x} = \alpha x - \beta xy \land \dot{y} = \delta xy - \gamma y; 0.0.\]
           </section>
           <section>
             <h2>Markov Logic Networks</h2>
@@ -246,6 +218,7 @@
             <a href='https://arxiv.org/abs/1706.08605'><img src='img/articles-safeml.png' width='95%' alt='safeml'/></a>
           </section>
           <section>
+            <h2>Type Theories</h2>
             <p>Whitehead and Russell's Ramified Theory of Types.</p>
             <p>Simple Type Theory.</p>
             <p>Martin-Löf Type Theory.</p>
@@ -393,20 +366,18 @@ matmul : Mat m n t -> Mat n p t -> Mat m p</code></pre>
             <p>They are expressive functional programming languages.</p>
           </section>
           <section>
-            <h2>The case against λC</h2>
-            <p>Arguably easier to use in many cases, but the foundations are conceptually harder to understand.</p>
-            <p>Richer than 0th/1st order logics, and thus inference is harder.</p>
-          </section>
-          <section>
-            <h2>HOL vs λC</h2>
+            <h2>HOL (Simple Type Theory) vs λC</h2>
             <p>HOL has a much simpler core and is simpler to understand.</p>
             <p>Both are used to formalize mathematics (HOL4, HOL Light, Isabelle) vs (Coq, Lean).</p>
-            <p>HOL is really awkward in many cases, including linear algebra. It tends to have quicks (x/0 = 0 in HOL Light) and
+            <p>HOL is really awkward in many cases, including linear algebra. It tends to have quirks (x/0 = 0 in HOL Light) and
             is not seriously considered as a formal representation of mathematics, even if it has practical benefits over λC.</p>
             <p>Thus, <b>simpler</b> often means it's <i>harder</i> to used as a modelling language.</p>
           </section>
           <section>
-            <h2>Higher-Order Probabilistic Programming</h2>
+            <p><b>How do we get a probabilistic version of a higher-order logic?</b></p>
+          </section>
+          <section>
+            <h2>[Bayesian] Higher-Order Probabilistic Programming</h2>
           </section>
           <section>
             <a href='https://arxiv.org/abs/1809.10756'><img src='img/book-intro-prob-prog.png' width='50%' alt='intro'/></a>
@@ -485,13 +456,6 @@ matmul : Mat m n t -> Mat n p t -> Mat m p</code></pre>
             <p><b>The OK</b>: It's possible but too computationally intensive.</p>
             <p><b>The Good</b>: It's possible, efficient, but no compatibility with Lean.</p>
             <p><b>The Great</b>: Faun as a strict superset of Lean.</p>
-          </section>
-          <section>
-            <h2>Open Questions</h2>
-            <p>Files for data &amp; probability distribution?</p>
-            <p>How to organize tasks (who is working on what). Open Trello?</p>
-            <p>How to test Bayesian inference.</p>
-            <p></p>
           </section>
           <section>
             <h2>Current Plan</h2>
