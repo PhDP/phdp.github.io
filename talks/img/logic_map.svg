@@ -15,7 +15,10 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
-   sodipodi:docname="logic_map.svg">
+   sodipodi:docname="logic_map.svg"
+   inkscape:export-filename="/home/phdp/Dropbox/work/my_page/talks/img/logic_map.png"
+   inkscape:export-xdpi="110.32137"
+   inkscape:export-ydpi="110.32137">
   <defs
      id="defs2">
     <marker
@@ -72,8 +75,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.6122035"
-     inkscape:cx="640.41935"
-     inkscape:cy="419.13487"
+     inkscape:cx="528.46078"
+     inkscape:cy="416.65379"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -368,7 +371,7 @@
        style="fill:#ff8314;fill-opacity:1;stroke:#000000;stroke-width:0.59098506;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#908c00;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#646464;fill-opacity:1;stroke:none;stroke-width:0.26458332;"
        x="131.3268"
        y="162.92584"
        id="text5841-7-3-2-82-6-0"><tspan
@@ -376,7 +379,7 @@
          id="tspan5839-5-1-2-7-7-9"
          x="131.3268"
          y="162.92584"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46666622px;font-family:'Ubuntu Condensed';-inkscape-font-specification:'Ubuntu Condensed, ';fill:#005800;fill-opacity:1;stroke-width:0.26458332">Not {Anglican, Turing, Pyro}</tspan></text>
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46666622px;font-family:'Ubuntu Condensed';-inkscape-font-specification:'Ubuntu Condensed, ';fill:#646464;fill-opacity:1;stroke-width:0.26458332;">Not {Anglican, Turing, Pyro}</tspan></text>
     <circle
        id="path10-6-0-0-8-7-4"
        cx="183.11505"
