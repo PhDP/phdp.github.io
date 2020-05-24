@@ -10,7 +10,7 @@ body {
   margin-bottom: 1em;
   margin-left: 0;
   padding-left: 0.5em;
-  border-left: 10px solid #cccccc;
+  border-left: 10px solid #cccccc !important;
   color: #000000;
 }
 
