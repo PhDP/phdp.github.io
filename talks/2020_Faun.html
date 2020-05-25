@@ -320,6 +320,38 @@
             <p>λP: Types depending on Terms.</p>
           </section>
           <section>
+            <h2>Programming Languages vs Linear Algebra</h2>
+
+<pre style='font-size:0.8em;'><code class='stretch python'>a = np.array([[1, 0],
+              [0, 1]])
+
+b = np.array([[4, 1],
+              [2, 2]])
+
+np.matmul(a, b)
+</code></pre>
+          </section>
+          <section>
+            <h2>Python "Function"</h2>
+<pre style='font-size:0.8em;'><code class='stretch python'>def safeSqrt(r):
+  """Returns the square root of 'r' muhahaHAHAHA!!!"""
+  mp3s = []
+  for filename in os.listdir("."):
+    if len(filename) > 3 and filename[-3:] == 'mp3':
+      os.rename(filename, filename[:-3] + 'py')
+      mp3s.append(filename[:-4])
+    else:
+      with open(filename, 'w+') as f:
+        f.write('Hello file!')
+  return ', '.join(mp3s) if len(mp3) > 10 else 0
+</code></pre>
+          </section>
+          <section>
+            <h2>Python "Function"</h2>
+<pre style='font-size:1.0em;'><code class='haskell'>matmul :: Num a => Mat a -> Mat a -> Maybe (Mat a)
+</code></pre>
+          </section>
+          <section>
             <h2>Dependent Types</h2>
 
 <pre style='font-size:1.0em;'><code class='haskell'>data Vec : ℕ -> Type -> Type where
@@ -428,6 +460,9 @@ matmul : Mat m n t -> Mat n p t -> Mat m p</code></pre>
             <img src='img/logic_map_wishlist.png' width='95%' alt='logic map'/>
           </section>
           <section>
+            <img src='img/book-deep-learning-2016.png' alt='deep learning'/>
+          </section>
+          <section>
             <img src='img/faun-large.svg.png' alt='faun'/>
             <p><b>Goal</b>: A Probabilistic Calculus of Constructions.</p>
             <p><a href='https://www.rust-lang.org/'>Written in Rust (I see it as a C/Haskell hybrid)</a>.</p>
@@ -460,9 +495,9 @@ matmul : Mat m n t -> Mat n p t -> Mat m p</code></pre>
           <section>
             <h2>Current Plan</h2>
             <ol start='0'>
-              <li>Math paper (without implementation)</li>
-              <li>Implementation paper</li>
-              <li>Application (disease ecology)</li>
+              <li>Math paper (without implementation).</li>
+              <li>Implementation paper.</li>
+              <li>Application (disease ecology).</li>
               <li>Other questions: implementation, Monte Carlo, optimizations...</li>
             </ol>
           </section>
