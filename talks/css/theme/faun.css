@@ -1,19 +1,17 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic,700italic');
-@import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Ubuntu:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 body {
   background: #FFFFFF;
   background-color: #FFFFFF;
 }
 
-blockquote {
+.reveal blockquote {
   margin-top: 1em;
   margin-bottom: 1em;
   margin-left: 0;
   padding-left: 0.5em;
-  border-left: 5em solid #000;
-  color: #000;
+  border-left: 10px solid #cccccc !important;
+  color: #000000;
 }
 
 .reveal {
@@ -21,7 +19,7 @@ blockquote {
   font-size: 36px;
   font-weight: normal;
   letter-spacing: -0.02em;
-  color: #457CD8;
+  color: #2e685f;
 }
 
 div.terminal {
@@ -31,7 +29,7 @@ div.terminal {
 
 ::selection {
   color: white;
-  background: #000;
+  background: #2e685f;
   text-shadow: none; }
 
 .reveal h1,
@@ -41,8 +39,9 @@ div.terminal {
 .reveal h5,
 .reveal h6 {
   margin: 0 0 20px 0;
-  color: #000;
-  font-family: "Montserrat", sans-serif;
+  color: #2e685f;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
   line-height: 0.9em;
   letter-spacing: -0.03em;
   text-transform: none;
@@ -62,7 +61,7 @@ div.terminal {
 }
 
 .reveal a:not(.image) {
-  color: #344ccc;
+  color: #49998c;
   text-decoration: none;
   -webkit-transition: color .15s ease;
   -moz-transition: color .15s ease;
@@ -134,3 +133,26 @@ div.terminal {
 
 .reveal .slide-number {
   color: #838996; }
+
+.reveal pre {
+  display: block;
+  position: relative;
+  width: 90%;
+  margin: 20px auto;
+  text-align: left;
+  font-size: 0.55em;
+  font-family: 'Ubuntu Mono', monospace;
+  line-height: 1.2em;
+  word-wrap: break-word;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15); }
+
+.reveal code {
+  font-family: monospace;
+  text-transform: none; }
+
+.reveal pre code {
+  display: block;
+  padding: 5px;
+  overflow: auto;
+  max-height: 400px;
+  word-wrap: normal; }
