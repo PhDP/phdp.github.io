@@ -55,7 +55,7 @@
             <a href='https://doi.org/10.1086/690937'><img src='img/article-queller2-big.png' alt='queller'/></a>
           </section>
           <section>
-            <a href=' https://doi.org/10.1371/journal.pone.0007130'><img src='img/article-rice.png' alt='rice'/></a>
+            <a href='https://doi.org/10.1371/journal.pone.0007130'><img src='img/article-rice.png' alt='rice'/></a>
           </section>
           <section>
             <h2>Wishlist for Encoding Theories</h2>
@@ -309,25 +309,22 @@
           </section>
           <section>
             <h2>Lambda Cube</h2>
-            <img src='img/lambda cube.png' alt='lambda cube'/>
+            <img src='img/lambda cube.png' width='80%' alt='lambda cube'/>
           </section>
           <section>
             <h2>Lambda Cube</h2>
             <p>λ→: Terms depending on Terms.</p>
             <p>λ2: Terms depending on Types.</p>
             <p>λ\(\underline{\omega}\): Types depending on Types.</p>
-            <p>λP: Types depending on Terms.</p>
+            <p><b>λP: Types depending on Terms.</b></p>
           </section>
           <section>
-            <h2>Programming Languages vs Linear Algebra</h2>
-<pre style='font-size:0.8em;'><code class='stretch python'>a = np.array([[1, 0],
-              [0, 1]])
-
-b = np.array([[4, 1],
-              [2, 2]])
-
-np.matmul(a, b)
-</code></pre>
+            <h2>λC: Calculus of Constructions</h2>
+            \[\Lambda_C ::= \mathbb{T} \mid \mathbb{P} \mid \mathcal{V} \mid \Lambda_C\ \Lambda_C \mid \lambda \mathcal{V}: \Lambda_C\ .\ \Lambda_C \mid \forall \mathcal{V}: \Lambda_C\ .\ \Lambda_C.\]
+            <br/>
+            <br/>
+            <p>Thierry Coquand and Gérard Huet. <b><a href='https://core.ac.uk/download/pdf/82038778.pdf'>The Calculus of Constructions</a></b>. Information and Computation 76: 95-120, 1988.</p>
+            <p>λC was development alongside <a href='https://coq.inria.fr/'>Coq</a>. <a href='https://leanprover.github.io/'>Lean</a> is also based on λC.</p>
           </section>
           <section>
             <h2>Python "Function"</h2>
@@ -345,9 +342,24 @@ np.matmul(a, b)
 </code></pre>
           </section>
           <section>
-            <h2>Haskell saves the day...?</h2>
-<pre style='font-size:1.0em;'><code class='haskell'>matmul :: Num a => Mat a -> Mat a -> Maybe (Mat a)
+            <h2>Programming Languages vs Linear Algebra</h2>
+<pre style='font-size:0.8em;'><code class='stretch python'>x = np.array([[1, 6],
+              [1, 5],
+              [8, 9]])
+
+y = np.array([[4, 1],
+              [2, 2],
+              [0, 5]])
+
+np.matmul(x, y)
 </code></pre>
+          </section>
+          <section>
+            <h2>Haskell save the day...?</h2>
+<pre style='font-size:1.0em;'><code class='haskell'>matmul :: Num a => Mat a -> Mat a -> Maybe (Mat a)</code></pre>
+<br/>
+<br/>
+<pre style='font-size:1.0em;'><code class='haskell'>matmul :: Num a => Mat a -> Mat a -> Either LAError (Mat a)</code></pre>
           </section>
           <section>
             <h2>Dependent Types</h2>
@@ -370,14 +382,6 @@ matmul : Mat m n t -> Mat n p t -> Mat m p</code></pre>
 
 <br/>
 <p><a href='https://www.manning.com/books/type-driven-development-with-idris'>Edwin Brady. <i>Type-driven Development with Idris</i>, Manning, 2017.</a></p>
-          </section>
-          <section>
-            <h2>λC: Calculus of Constructions</h2>
-            \[\Lambda_C ::= \mathbb{T} \mid \mathbb{P} \mid \mathcal{V} \mid \Lambda_C\ \Lambda_C \mid \lambda \mathcal{V}: \Lambda_C\ .\ \Lambda_C \mid \forall \mathcal{V}: \Lambda_C\ .\ \Lambda_C.\]
-            <br/>
-            <br/>
-            <p>Thierry Coquand and Gérard Huet. <b><a href='https://core.ac.uk/download/pdf/82038778.pdf'>The Calculus of Constructions</a></b>. Information and Computation 76: 95-120, 1988.</p>
-            <p>λC was development alongside <a href='https://coq.inria.fr/'>Coq</a>. <a href='https://leanprover.github.io/'>Lean</a> is also based on λC.</p>
           </section>
           <section>
             <a href='https://www.cambridge.org/ca/academic/subjects/computer-science/programming-languages-and-applied-logic/type-theory-and-formal-proof-introduction?format=AR&isbn=9781316056349'><img src='img/book-hol.png' alt='hol book'/>
@@ -495,7 +499,7 @@ matmul : Mat m n t -> Mat n p t -> Mat m p</code></pre>
             <ol start='0'>
               <li>Math paper (without implementation).</li>
               <li>Implementation paper.</li>
-              <li>Application (disease ecology).</li>
+              <li>Applications (disease ecology).</li>
               <li>Other questions: implementation, Monte Carlo, optimizations...</li>
             </ol>
           </section>
