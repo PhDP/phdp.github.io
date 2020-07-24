@@ -13,18 +13,19 @@
         <tspan x="-8" y="22.5" font-family="Palatino-Roman" font-size="60" kerning="0" fill="#000000">: </tspan>
       </text>
     </g>
-    <text transform="matrix(1, 0, 0, 1, 144.739, 26.503)">
-      <tspan x="-15.017" y="22.5" font-family="Palatino-Roman" font-size="60" kerning="0" fill="#18818C">τ</tspan>
+    <text transform="matrix(1, 0, 0, 1, 142.739, 27.5)">
+      <tspan x="-22.617" y="22.5" font-family="Palatino-Roman" font-size="60" kerning="0" fill="#18818C">Λ</tspan>
     </text>
     <g>
-      <text transform="matrix(1, 0, 0, 1, 172.255, 27.5)">
+      <text transform="matrix(1, 0, 0, 1, 177, 27.5)">
         <tspan x="-15.5" y="22.5" font-family="Palatino-Roman" font-size="60" kerning="0" fill="#000000"> . </tspan>
       </text>
-      <text transform="matrix(1, 0, 0, 1, 218.94, 27.5)">
+      <text transform="matrix(1, 0, 0, 1, 219.94, 27.5)">
         <tspan x="-17.185" y="22.5" font-family="Palatino-Roman" font-size="60" kerning="-4" fill="#000000">F</tspan>
       </text>
       <text transform="matrix(1, 0, 0, 1, 316.345, 29)">
-        <tspan x="-85.22" y="21" font-family="EBGaramond12-AllSC" font-size="60" kerning="0" fill="#000000">aun ai</tspan>
+        <tspan x="-85.22" y="21" font-family="EBGaramond12-AllSC" font-size="60" kerning="-2" fill="#000000">a</tspan>
+        <tspan x="-53.92" y="21" font-family="EBGaramond12-AllSC" font-size="60" kerning="0" fill="#000000">un ai</tspan>
       </text>
     </g>
   </g>
