@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv='content-type' content='text/html; charset=utf-8'/>
+  <title>Philippe Desjardins-Proulx</title>
+  <link rel='stylesheet' media='screen' href='/css/style.css' type='text/css'/>
+  <link href='//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'/>
+  <script type='text/x-mathjax-config'>
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['\\(','\\)']]}});
+  </script>
+  <script type='text/javascript' async
+    src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML'>
+  </script>
+</head>
+
+<body>
+
+<div id='header'>
+  <nav>
+    <ul>
+      <li>( <a href='/index.html'>Philippe Desjardins-Proulx</a></li>
+      <li><a href='/blog/'>blog</a></li>
+      <li><a href='/papers/'>publications</a></li>
+      <li><a href='https://github.com/PhDP'><i class='fa fa-github'></i></a></li>
+      <li><a href='https://ca.linkedin.com/in/philippedp'><i class='fa fa-linkedin-square'></i></a></li>
+      <li><a href='mailto:philippe.desjardins.proulx@umontreal.ca'><i class='fa fa-envelope'></i></a></li>
+      <li><a href='https://twitter.com/phdpqc'><i class='fa fa-twitter'></i></a></li>
+      <li><a style='color:#ff6f00;a:hover{color:#8e240e;text-decoration:none;}' href='/atom.xml'><i class='fa fa-rss'></i></a> )</li>
+    </ul>
+  </nav>
+</div>
+
+<div id='content'>
+  
+<h1 class="title">
+  Data Scientists: This is not your grandmother&#x27;s C++
+</h1>
+
+<p id="dt">2016-06-28</p>
+
+<p><p>A quick note. I saw a few lines of antiquated C++ in a Python presentation
+for the obligatory "look-how-C++-sucks" bit. If you like Python, good for you,
+I'm not here to bash it. But for the love of Hopper, stop freaking people out
+with old, outdated C++. Many (most?) high-performance machine learning
+libraries are written in modern C++, often with a Python interface. If you want
+to understand how hot new tools like <a
+href='https://github.com/tensorflow/tensorflow'>TensorFlow</a> or <a
+href='https://github.com/Microsoft/CNTK'>CNTK</a> work: you'll learn a lot by
+diving into their C++ core.</p>
+<p>The scary C++ examples follow a common theme: show how something simple is
+absurdly contrived in C++ compared to Python. Hey let's create a vector (well,
+it'll be a list in Python) of sets and print the result in some format:</p>
+<pre style="background-color:#fdf6e3;">
+<code><span style="color:#657b83;">sets = [{</span><span style="color:#6c71c4;">1</span><span style="color:#657b83;">, </span><span style="color:#6c71c4;">2</span><span style="color:#657b83;">, </span><span style="color:#6c71c4;">3</span><span style="color:#657b83;">}, {</span><span style="color:#6c71c4;">4</span><span style="color:#657b83;">, </span><span style="color:#6c71c4;">5</span><span style="color:#657b83;">, </span><span style="color:#6c71c4;">6</span><span style="color:#657b83;">}, {</span><span style="color:#6c71c4;">42</span><span style="color:#657b83;">, </span><span style="color:#6c71c4;">47</span><span style="color:#657b83;">, </span><span style="color:#6c71c4;">15</span><span style="color:#657b83;">}]
+
+</span><span style="color:#859900;">for set in </span><span style="color:#657b83;">sets:
+  </span><span style="color:#859900;">print</span><span style="color:#657b83;">(</span><span style="color:#839496;">&#39;</span><span style="color:#2aa198;">{ </span><span style="color:#839496;">&#39;</span><span style="color:#657b83;">, </span><span style="color:#268bd2;">end</span><span style="color:#657b83;">=</span><span style="color:#839496;">&#39;&#39;</span><span style="color:#657b83;">)
+  </span><span style="color:#859900;">for </span><span style="color:#657b83;">i </span><span style="color:#859900;">in set</span><span style="color:#657b83;">:
+    </span><span style="color:#859900;">print</span><span style="color:#657b83;">(</span><span style="color:#859900;">str</span><span style="color:#657b83;">(i) + </span><span style="color:#839496;">&#39; &#39;</span><span style="color:#657b83;">, </span><span style="color:#268bd2;">end</span><span style="color:#657b83;">=</span><span style="color:#839496;">&#39;&#39;</span><span style="color:#657b83;">)
+  </span><span style="color:#859900;">print</span><span style="color:#657b83;">(</span><span style="color:#839496;">&#39;</span><span style="color:#2aa198;">}</span><span style="color:#839496;">&#39;</span><span style="color:#657b83;">)
+</span></code></pre><p>Clean and simple. Now the C++ version, Frankenstein's monster in code
+form, look how ugly it is:</p>
+<pre style="background-color:#fdf6e3;">
+<code><span style="color:#cb4b16;">#include </span><span style="color:#839496;">&lt;</span><span style="color:#2aa198;">iostream</span><span style="color:#839496;">&gt;</span><span style="color:#b58900;">;
+</span><span style="color:#cb4b16;">#include </span><span style="color:#839496;">&lt;</span><span style="color:#2aa198;">set</span><span style="color:#839496;">&gt;</span><span style="color:#b58900;">;
+</span><span style="color:#cb4b16;">#include </span><span style="color:#839496;">&lt;</span><span style="color:#2aa198;">vector</span><span style="color:#839496;">&gt;</span><span style="color:#b58900;">;
+
+</span><span style="color:#268bd2;">int </span><span style="color:#b58900;">main</span><span style="color:#657b83;">() {
+  </span><span style="color:#859900;">using namespace</span><span style="color:#657b83;"> std;
+
+  vector&lt;set&lt;</span><span style="color:#268bd2;">int</span><span style="color:#657b83;">&gt;&gt; sets;
+
+  {
+    set&lt;</span><span style="color:#268bd2;">int</span><span style="color:#657b83;">&gt; tmp;
+    tmp.</span><span style="color:#b58900;">insert</span><span style="color:#657b83;">(</span><span style="color:#6c71c4;">1</span><span style="color:#657b83;">);
+    tmp.</span><span style="color:#b58900;">insert</span><span style="color:#657b83;">(</span><span style="color:#6c71c4;">2</span><span style="color:#657b83;">);
+    tmp.</span><span style="color:#b58900;">insert</span><span style="color:#657b83;">(</span><span style="color:#6c71c4;">3</span><span style="color:#657b83;">);
+    sets.</span><span style="color:#b58900;">push_back</span><span style="color:#657b83;">(tmp);
+
+    tmp.</span><span style="color:#b58900;">clear</span><span style="color:#657b83;">();
+    tmp.</span><span style="color:#b58900;">insert</span><span style="color:#657b83;">(</span><span style="color:#6c71c4;">4</span><span style="color:#657b83;">);
+    tmp.</span><span style="color:#b58900;">insert</span><span style="color:#657b83;">(</span><span style="color:#6c71c4;">5</span><span style="color:#657b83;">);
+    tmp.</span><span style="color:#b58900;">insert</span><span style="color:#657b83;">(</span><span style="color:#6c71c4;">6</span><span style="color:#657b83;">);
+    sets.</span><span style="color:#b58900;">push_back</span><span style="color:#657b83;">(tmp);
+
+    tmp.</span><span style="color:#b58900;">clear</span><span style="color:#657b83;">();
+    tmp.</span><span style="color:#b58900;">insert</span><span style="color:#657b83;">(</span><span style="color:#6c71c4;">42</span><span style="color:#657b83;">);
+    tmp.</span><span style="color:#b58900;">insert</span><span style="color:#657b83;">(</span><span style="color:#6c71c4;">47</span><span style="color:#657b83;">);
+    tmp.</span><span style="color:#b58900;">insert</span><span style="color:#657b83;">(</span><span style="color:#6c71c4;">15</span><span style="color:#657b83;">);
+    sets.</span><span style="color:#b58900;">push_back</span><span style="color:#657b83;">(tmp);
+  }
+
+  vector&lt;set&lt;</span><span style="color:#268bd2;">int</span><span style="color:#657b83;">&gt;&gt;::const_iterator it = sets.</span><span style="color:#b58900;">begin</span><span style="color:#657b83;">();
+  </span><span style="color:#859900;">for </span><span style="color:#657b83;">(; it != sets.</span><span style="color:#b58900;">end</span><span style="color:#657b83;">(); ++it) {
+    cout &lt;&lt; </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">{ </span><span style="color:#839496;">&quot;</span><span style="color:#657b83;">;
+    </span><span style="color:#859900;">for </span><span style="color:#657b83;">(set&lt;</span><span style="color:#268bd2;">int</span><span style="color:#657b83;">&gt;::const_iterator j = it-&gt;</span><span style="color:#b58900;">begin</span><span style="color:#657b83;">(); j != it-&gt;</span><span style="color:#b58900;">end</span><span style="color:#657b83;">(); ++j)
+      cout &lt;&lt; </span><span style="color:#859900;">*</span><span style="color:#657b83;">j &lt;&lt; </span><span style="color:#839496;">&#39; &#39;</span><span style="color:#657b83;">;
+    cout &lt;&lt; </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">}</span><span style="color:#dc322f;">\n</span><span style="color:#839496;">&quot;</span><span style="color:#657b83;">;
+  }
+
+  </span><span style="color:#859900;">return </span><span style="color:#6c71c4;">0</span><span style="color:#657b83;">;
+}
+</span></code></pre><p>Kill it! Kill it with fire! Everything from creating the vector of sets to
+looping is awful... Except that's C++98. Nobody in their right mind is using
+C++98 unless they're forced to. I'm not even sure this is good C++98 code, I
+haven't written with this standard in ages. It's easy to forget not so long ago
+we couldn't write vector&lt;set&lt;int&gt; &gt; without adding a space between
+the two &gt;&gt;.  In modern C++, the code looks like this:</p>
+<pre style="background-color:#fdf6e3;">
+<code><span style="color:#cb4b16;">#include </span><span style="color:#839496;">&lt;</span><span style="color:#2aa198;">iostream</span><span style="color:#839496;">&gt;</span><span style="color:#b58900;">;
+</span><span style="color:#cb4b16;">#include </span><span style="color:#839496;">&lt;</span><span style="color:#2aa198;">set</span><span style="color:#839496;">&gt;</span><span style="color:#b58900;">;
+</span><span style="color:#cb4b16;">#include </span><span style="color:#839496;">&lt;</span><span style="color:#2aa198;">vector</span><span style="color:#839496;">&gt;</span><span style="color:#b58900;">;
+
+</span><span style="color:#268bd2;">auto </span><span style="color:#b58900;">main</span><span style="color:#657b83;">() -&gt; </span><span style="color:#268bd2;">int </span><span style="color:#657b83;">{
+  </span><span style="color:#859900;">using namespace</span><span style="color:#657b83;"> std;
+
+  </span><span style="color:#268bd2;">auto </span><span style="color:#859900;">const</span><span style="color:#657b83;"> sets = </span><span style="color:#b58900;">vector</span><span style="color:#657b83;">&lt;set&lt;</span><span style="color:#268bd2;">int</span><span style="color:#657b83;">&gt;&gt;{{</span><span style="color:#6c71c4;">1</span><span style="color:#657b83;">, </span><span style="color:#6c71c4;">2</span><span style="color:#657b83;">, </span><span style="color:#6c71c4;">3</span><span style="color:#657b83;">}, {</span><span style="color:#6c71c4;">4</span><span style="color:#657b83;">, </span><span style="color:#6c71c4;">5</span><span style="color:#657b83;">, </span><span style="color:#6c71c4;">6</span><span style="color:#657b83;">}, {</span><span style="color:#6c71c4;">42</span><span style="color:#657b83;">, </span><span style="color:#6c71c4;">47</span><span style="color:#657b83;">, </span><span style="color:#6c71c4;">15</span><span style="color:#657b83;">}};
+
+  </span><span style="color:#859900;">for </span><span style="color:#657b83;">(</span><span style="color:#268bd2;">auto </span><span style="color:#859900;">const&amp;</span><span style="color:#657b83;"> set </span><span style="color:#859900;">:</span><span style="color:#657b83;"> sets) {
+    cout &lt;&lt; </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">{ </span><span style="color:#839496;">&quot;</span><span style="color:#657b83;">;
+    </span><span style="color:#859900;">for </span><span style="color:#657b83;">(</span><span style="color:#268bd2;">int</span><span style="color:#657b83;"> i </span><span style="color:#859900;">:</span><span style="color:#657b83;"> set)
+      cout &lt;&lt; i &lt;&lt; </span><span style="color:#839496;">&#39; &#39;</span><span style="color:#657b83;">;
+    cout &lt;&lt; </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">}</span><span style="color:#dc322f;">\n</span><span style="color:#839496;">&quot;</span><span style="color:#657b83;">;
+  }
+
+  </span><span style="color:#859900;">return </span><span style="color:#6c71c4;">0</span><span style="color:#657b83;">;
+}
+</span></code></pre><p>That's C++11 in action. I prefer this code to the Python version: it
+type-checks, compiles to efficient code, and gives you better control over
+memory (using references vs copy). You may prefer the Python version, fine, but
+it's not <i>that</i> different. Plus, as Python and C++ follow similar
+paradigms (except for type checking), the things that tend to be annoying to
+write in C++, <a href='2015-04-05-automated-reasoning.html'>e.g.  handling
+abstract syntax trees</a>, are equally painful in Python. So stop what you're
+doing, <a href='http://www.informit.com/store/discovering-modern-c-plus-plus-an-intensive-course-9780134383699'>grab
+a good book</a>, and learn modern C++.</p>
+</p>
+
+
+  <div id='hidden'>
+    <p><a href='/reading/'>(∀m: Medium . m &lt; <span id='jp'>本</span>)</a></p>
+  </div>
+</div>
+
+</body>
+</html>

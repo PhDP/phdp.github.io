@@ -1,0 +1,1071 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title></title>
+	<link href="https://phdp.github.io/atom.xml" rel="self" type="application/atom+xml"/>
+	<link href="https://phdp.github.io"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2021-01-07T00:00:00+00:00</updated>
+	<id>https://phdp.github.io/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Afghanistan (Tim Y, 20XX)</title>
+		<published>2021-01-07T00:00:00+00:00</published>
+		<updated>2021-01-07T00:00:00+00:00</updated>
+		<link href="https://phdp.github.io/reading/afghanistan/" type="text/html"/>
+		<id>https://phdp.github.io/reading/afghanistan/</id>
+		<content type="html">&lt;h3 id=&quot;keywords&quot;&gt;Keywords&lt;&#x2F;h3&gt;
+&lt;p&gt;History; Politics.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;impressions&quot;&gt;Impressions&lt;&#x2F;h3&gt;
+&lt;p&gt;...??&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;key-points&quot;&gt;Key points&lt;&#x2F;h3&gt;
+&lt;p&gt;...!!!!&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;quotes&quot;&gt;Quotes&lt;&#x2F;h3&gt;
+&lt;p&gt;...&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>The Shallows (Tim X, 200X)</title>
+		<published>2021-01-01T00:00:00+00:00</published>
+		<updated>2021-01-01T00:00:00+00:00</updated>
+		<link href="https://phdp.github.io/reading/shallows/" type="text/html"/>
+		<id>https://phdp.github.io/reading/shallows/</id>
+		<content type="html">&lt;h3 id=&quot;keywords&quot;&gt;Keywords&lt;&#x2F;h3&gt;
+&lt;p&gt;...&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;impressions&quot;&gt;Impressions&lt;&#x2F;h3&gt;
+&lt;p&gt;The first part is fascinating and full of good book recommendations.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;key-points&quot;&gt;Key points&lt;&#x2F;h3&gt;
+&lt;h3 id=&quot;quotes&quot;&gt;Quotes&lt;&#x2F;h3&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Evolving mathematical formulas with grammatical evolution</title>
+		<published>2019-01-25T00:00:00+00:00</published>
+		<updated>2019-01-25T00:00:00+00:00</updated>
+		<link href="https://phdp.github.io/blog/grammar-evolution/" type="text/html"/>
+		<id>https://phdp.github.io/blog/grammar-evolution/</id>
+		<content type="html">&lt;p&gt;Let&#x27;s say we want to learn a mathematical formula to perform some task. We could turn to genetic algorithms,
+techniques inspired by biological evolution where a population of solutions is subjected to selection, mutations, and
+crossovers. The idea is simple: we start with a set of potential solutions (our candidate mathematical formulas),
+&quot;mutate&quot; them to explore the solution space, and then select the best to sire a new generation of solutions. Rinse and
+repeat until either a good enough solution is found, or you&#x27;re tired of waiting. There are quite a few variations
+on that theme, but it&#x27;s the gist of it.&lt;&#x2F;p&gt;
+&lt;p&gt;The quibble here is, well, how do we mutate a mathematical formula? How do we ensure that the new formulas generated
+are valid? I wanted to write a brief post to highlight how grammatical evolution can be used to evolve mathematical
+formulas (and programs, and lots of things). Grammatical evolution strikes me as a ludicrously general, elegant idea to
+handle the evolution of complex formulas juggling inputs of various types. It also has a nontrivial flaw that will be
+described at the end of the post. Take it as a fun little idea to keep in your A.I. toolbox.&lt;&#x2F;p&gt;
+&lt;p&gt;To evolve mathematical formulas, we need a way to represent the formulas (our solutions) in such a way that valid
+variants are simple to generate. In particular, a key idea in genetic algorithms is that we generate new solutions by
+&quot;mixing the genomes&quot;, so to speak, of fit parents from the previous generation. But how? A mathematical expression is a
+tree, how do you mix trees? How do we ensure the expressions don&#x27;t grow too big? One approach involves putting the
+mathematical formula on a grid (&lt;a href=&#x27;https:&#x2F;&#x2F;link.springer.com&#x2F;book&#x2F;10.1007&#x2F;978-3-642-17310-3&#x27;&gt;i.e. Cartesian
+genetic programming&lt;&#x2F;a&gt;), which is arguably more effective than the method described here, but for now we&#x27;ll explore
+how to generate expressions from grammars. Here&#x27;s a simple grammar for digits:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;digit&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;pre&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;p&gt;&lt;digit&gt; is a production rule, they&#x27;ll always be enclosed within angle brackets. After ::= (&quot;is defined as&quot;),
+we get the definition of the production rule as a set of alternatives separated by disjunctions &quot;|&quot;. Thus, a digit is
+defined as 0, or 1, or 2, or 3, etc. By the by, this format for grammars is called the Backus–Naur form (BNF). It gets
+interesting when production rules refer to other production rules, so here&#x27;s a more interesting grammar describing a
+mathematical formula with inputs x and y inside a C function:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;cfun&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; ::= double please_work(double x, double y) { return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;; }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; ::= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;op&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;
+         | &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;pre&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;
+         | &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;fun1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)
+         | &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;fun2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)
+         | &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;
+&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;op&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;   ::= + | - | &#x2F; | *
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;pre&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;  ::= -
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;fun1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; ::= sin | cos | tan
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;fun2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; ::= fmod
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;  ::= x | y
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;p&gt;This grammar has seven production rules and can generate strings such as:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;double please_work(double x, double y) { return -sin(x) + y; }&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;pre&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;p&gt;Of course, the grammar can generate many other strings, not just this one. A particular string can be seen as a
+series of choices among alternatives. Let&#x27;s say I were to give you the following sequence of integers: [10, 1, 2, 6, 9,
+4, 0, 4, 7] and tell you to start at the first production rule &lt;cfun&gt; and use this sequence of integers to select
+alternatives. The alternatives use zero-based indexing and if the integer is bigger than the number of alternatives for
+a production rule, just apply a modulo (made simpler by zero-based indexing). For example, with &lt;fun1&gt; and the
+number 2, we&#x27;d get &quot;tan&quot;, with &lt;var&gt; and 7 we get &quot;y&quot;, with &lt;expr&gt; and 2 we get &lt;pre-op&gt;&lt;expr&gt;.
+If there&#x27;s only one alternative, we do not need to consume an integer from the sequence. Let&#x27;s see where [10, 1, 2, 6,
+9, 4, 0, 4, 7] leads us. We begin with&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;double please_work(double x, double y) { return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;; }
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;p&gt;and use the number 10 to select among &lt;expr&gt;. There are five alternatives, 10 mod 5 = 0, thus:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;double please_work(double x, double y) { return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;op&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;; }
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;p&gt;We then have to select among &lt;expr&gt; again and our next integer is 1:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;double please_work(double x, double y) { return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;pre&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;op&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;; }
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;p&gt;There&#x27;s only one &lt;pre&gt;, thus our next integer, 2, is used to generates &lt;fun1&gt;(&lt;expr&gt;) from
+&lt;expr&amp;gt. 6 is used to select &quot;sin&quot; from &lt;fun1&gt;, and so on and so forth. From the beginning, the sequence [10,
+1, 2, 6, 9, 4, 0, 4, 7] applied to our little grammar generates:
+&lt;pre style=&quot;background-color:#fdf6e3;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;double please_work(double x, double y) { return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;; }
+double please_work(double x, double y) { return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;op&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;; }
+double please_work(double x, double y) { return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;pre&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;op&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;; }
+double please_work(double x, double y) { return -&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;fun1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;op&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;; }
+double please_work(double x, double y) { return -sin(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;op&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;; }
+double please_work(double x, double y) { return -sin(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;op&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;; }
+double please_work(double x, double y) { return -sin(x) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;op&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;; }
+double please_work(double x, double y) { return -sin(x) + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;; }
+double please_work(double x, double y) { return -sin(x) + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;; }
+double please_work(double x, double y) { return -sin(x) + y; }
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;p&gt;Depending on the grammar, it may be common to run out of integers. A partial solution is to allow the sequence to
+wrap, so when the end of the sequence is reached we go back to the beginning. When wrapping is allowed, it can only be
+done a (generally small) number of times. The other solution is to simply not return anything, essentially killing
+sequences that fail to finish an expression. The finite length of the sequence gives some control over how complex the
+resulting expression can be. The grammar used as an example here is a bit extreme, it would often run out of integers
+because of the way &lt;expr&gt; just creates more &lt;expr&gt; for all but one alternatives, and wrapping won&#x27;t save us
+from this fundamental issue.&lt;&#x2F;p&gt;
+&lt;p&gt;The advantage of generating strings from a grammar and a sequence of integers is twofold. Primo, it&#x27;s easy to ensure
+the validity of expressions even in the presence of different types of input. Secondo, we can mutate the expressions
+simply by changing an integer, and generate children from parents by mixing their sequence of integers. So I guess
+it&#x27;s Mission Accomplished! We have a flexible method to generate C functions, assembly code, sentences in Cebuano,
+mathematical formulas... Well, not quite. The non-probabilistic nature of the grammar can be an issue, we may want some
+alternatives to be more common than others, although it is something better learned at runtime than hardwired in the
+grammar. A more serious issue is lack of locality. In our previous sequence, if we were to change the 10 by a 9,
+we&#x27;d get&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;double please_work(double x, double y) { return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;; }
+double please_work(double x, double y) { return y; }
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;p&gt;That&#x27;s a rather different formula. By locality, we mean we&#x27;d like similar sequences of integers to map to similar
+formulas (or whatever you&#x27;re generating). This way, small changes to the sequence would yield different, but similar
+formulas, and greater changes would yield more distinct formulas. &lt;a
+href=&#x27;https:&#x2F;&#x2F;link.springer.com&#x2F;chapter&#x2F;10.1007&#x2F;11729976_29&#x27;&gt;Good locality has a measurable effect on the performance
+of genetic algorithms, and grammatical evolution tends to suffer from poor locality&lt;&#x2F;a&gt;. To get an intuition of why
+this is an issue, just imagine a representation with no locality at all, such that the probability of reaching a given
+formula is the same regardless of your starting point. In this world, selecting better and better formulas and applying
+mutations to them is useless, there&#x27;s no advantage to mutating a fit formula over an unfit formula if
+mutations send it all over the place. Different approaches like Cartesian genetic programming are less affected by this
+issue. Nevertheless, grammatical evolution is a fun little idea that may come in handy.&lt;&#x2F;p&gt;
+&lt;!-- Geometric Semantic Genetic Programming, in Parallel Problem Solving from Nature, 2012. --&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Fuzzy knowledge and fuzzy logic connectives</title>
+		<published>2017-02-21T00:00:00+00:00</published>
+		<updated>2017-02-21T00:00:00+00:00</updated>
+		<link href="https://phdp.github.io/blog/fuzzy-connectives/" type="text/html"/>
+		<id>https://phdp.github.io/blog/fuzzy-connectives/</id>
+		<content type="html">&lt;p&gt;Interesting things are going on in the world of many-valued logic &lt;a
+href=&#x27;https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;1603.06318&#x27;&gt;as recent approaches to combine
+first-order logic rules with deep learning tend to involve fuzzying the logic
+predicates&lt;&#x2F;a&gt;. Whereas fuzzy logic is fairly simple to understand intuitively,
+it has more connectives, or to be exact, alternative ways to define them.&lt;&#x2F;p&gt;
+&lt;p&gt;In this post I&#x27;ll explain a bit why fuzzy logic is interesting in the
+context of knowledge representation. Then, I&#x27;ll introduce various fuzzy logic
+connectives and explain how they&#x27;re connected. Fuzzy logic connectives are
+based on triangular norms (T-norms), and the more formal treatments of the
+subject tend to care only about conjunction (for good reason, we&#x27;ll see why).
+Here, my goal is to be very explicit and get derive the formulas to compute the
+truth values. The maths are really simple, but hopefully the discussion will
+still be interesting.&lt;&#x2F;p&gt;
+&lt;h2&gt;From expert systems to scientific knowledge&lt;&#x2F;h2&gt;
+&lt;p&gt;Fuzzy logic is a radical departure from normal logic. Everything you&#x27;ve done
+in mathematics, computer science, and even probability theory, was bivalent.
+True or false, and nothing else. Sure, you can say the probability to pick a
+queen from a deck of cards is 1&#x2F;13, but in the end, you&#x27;ll either have a queen
+or not. Again: true or false. Fuzzy logic breaks the mold, considering truth be
+be a gradient from 0 (false) to 1 (true). There are various many-valued (&quot;fuzzy&quot;)
+logics, but here we&#x27;ll always consider the truth values to be real numbers in
+the [0, 1] closed range. An important thing to remember is that fuzzy logic is
+a strict superset of bivalent logic, it&#x27;s more general, and thus the
+connectives should behave exactly like bivalent logic connectives when the
+truth values are restricted to 0s and 1s.&lt;&#x2F;p&gt;
+&lt;p&gt;There&#x27;s a long tradition in A.I. of building expert systems, arguably the
+most famous being MYCIN, which was used for infections, but what if we wanted a
+system flexible enough to include complex scientific theories. Turns out that&#x27;s
+tricky. We&#x27;ve made a lot of progress on this front, with frameworks like &lt;a
+href=&#x27;http:&#x2F;&#x2F;phdp.github.io&#x2F;posts&#x2F;2015-07-13-srl-code.html&#x27;&gt;Markov logic&lt;&#x2F;a&gt;
+allowing first-order logic rules to be associated with a weight, which in turn
+allows probabilistic queries. Yet you&#x27;re still limited to true&#x2F;false values for
+predicates. Take for example this seemingly simple idea: when a population is
+small and has plenty of preys (or is an autotroph, in which case it has no
+preys), it will experience exponential growth. With \(s\) for a species, \(l\)
+for a location, and \(t\) for time, we could express the rule in predicate
+logic as:&lt;&#x2F;p&gt;
+&lt;p&gt;[SmallPop(s, l) \land (HasPreys(s, l) \lor Autotroph(s)) \Rightarrow N(s, l, t + 1) = R(s) \times N(s, l, t).]&lt;&#x2F;p&gt;
+&lt;p&gt;Where \(SmallPop\) establishes whether the population is small, \(HasPreys\)
+whether it has preys, \(Autotroph\) whether it needs preys, and the right-side
+of the implication is the traditional formula for exponential growth in discrete
+time (\(R\) is the rate of growth).&lt;&#x2F;p&gt;
+&lt;p&gt;Even a probability of being true is just not enough, because we never expect
+this rule to be exactly true. If you predict 102 rabbits and get 101, it&#x27;s
+&quot;false&quot;. Furthermore, predicates like \(SmallPop\) and \(HasPreys\) are better
+represented with nuances. With fuzzy logic, we could give a truth value for
+\(SmallPop\) based on the current population size compared to a normal-sized
+population, we could also quantify \(HasPreys\) on the population densities of
+the preys, and perhaps more importantly, we could have an \(ExponentialGrowth\)
+predicate and establish its truth value by comparing the predicted population
+size to the real population size. In this framework, predicting 102 rabbits
+when there are 101 would yield a truth value of 0.99 instead of 0. Note that
+it&#x27;s still possible to assign weights to fuzzy rules, in fact, it&#x27;s exactly
+what &lt;a href=&#x27;http:&#x2F;&#x2F;stephenbach.net&#x2F;files&#x2F;kimmig-probprog12.pdf&#x27;&gt;probabilistic
+soft logic&lt;&#x2F;a&gt; is about.&lt;&#x2F;p&gt;
+&lt;p&gt;But enough exposition, let&#x27;s explore how the connectives work.&lt;&#x2F;p&gt;
+&lt;h2&gt;Normal logic is fuzzy logic with boring values&lt;&#x2F;h2&gt;
+&lt;p&gt;With False = 0 and True = 1, you get the following connectives and truth
+tables for standard logic:&lt;&#x2F;p&gt;
+&lt;table style=&#x27;width: 100%; text-align:center;&#x27;&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Connective&lt;&#x2F;th&gt;
+    &lt;th&gt;Informal name&lt;&#x2F;th&gt;
+    &lt;th&gt;Symbol&lt;&#x2F;th&gt;
+    &lt;th&gt;1 x 1&lt;&#x2F;th&gt;&lt;th&gt;1 x 0&lt;&#x2F;th&gt;&lt;th&gt;0 x 1&lt;&#x2F;th&gt;&lt;th&gt;0 x 0&lt;&#x2F;th&gt;
+  &lt;&#x2F;tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Conjunction&lt;&#x2F;td&gt;
+    &lt;td&gt;and&lt;&#x2F;td&gt;
+    &lt;td&gt;\(\land\)&lt;&#x2F;td&gt;
+    &lt;td&gt;1&lt;&#x2F;td&gt;&lt;td&gt;0&lt;&#x2F;td&gt;&lt;td&gt;0&lt;&#x2F;td&gt;&lt;td&gt;0&lt;&#x2F;td&gt;
+  &lt;&#x2F;tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Disjunction&lt;&#x2F;td&gt;
+    &lt;td&gt;or&lt;&#x2F;td&gt;
+    &lt;td&gt;\(\lor\)&lt;&#x2F;td&gt;
+    &lt;td&gt;1&lt;&#x2F;td&gt;&lt;td&gt;1&lt;&#x2F;td&gt;&lt;td&gt;1&lt;&#x2F;td&gt;&lt;td&gt;0&lt;&#x2F;td&gt;
+  &lt;&#x2F;tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Implication&lt;&#x2F;td&gt;
+    &lt;td&gt;implies&lt;&#x2F;td&gt;
+    &lt;td&gt;\(\Rightarrow\)&lt;&#x2F;td&gt;
+    &lt;td&gt;1&lt;&#x2F;td&gt;&lt;td&gt;0&lt;&#x2F;td&gt;&lt;td&gt;1&lt;&#x2F;td&gt;&lt;td&gt;1&lt;&#x2F;td&gt;
+  &lt;&#x2F;tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Equivalence&lt;&#x2F;td&gt;
+    &lt;td&gt;iff&lt;&#x2F;td&gt;
+    &lt;td&gt;\(\leftrightarrow\)&lt;&#x2F;td&gt;
+    &lt;td&gt;1&lt;&#x2F;td&gt;&lt;td&gt;0&lt;&#x2F;td&gt;&lt;td&gt;0&lt;&#x2F;td&gt;&lt;td&gt;1&lt;&#x2F;td&gt;
+  &lt;&#x2F;tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Exclusive disjunction&lt;&#x2F;td&gt;
+    &lt;td&gt;xor&lt;&#x2F;td&gt;
+    &lt;td&gt;\(\veebar\)&lt;&#x2F;td&gt;
+    &lt;td&gt;0&lt;&#x2F;td&gt;&lt;td&gt;1&lt;&#x2F;td&gt;&lt;td&gt;1&lt;&#x2F;td&gt;&lt;td&gt;0&lt;&#x2F;td&gt;
+  &lt;&#x2F;tr&gt;
+&lt;&#x2F;table&gt;
+&lt;p&gt;Plus, we have one unary connective, negation, represented by \(\neg\). In
+practice all the connectives can be defined with only negation and
+conjunction:&lt;&#x2F;p&gt;
+&lt;p&gt;[x \land y.]
+[x \lor y = \neg(\neg x \land \neg y).]
+[x \Rightarrow y = \neg x \lor y = \neg (x \land \neg y).]
+[x \leftrightarrow y = (x \Rightarrow y) \land (y \Rightarrow x) = \neg (x \land \neg y) \land \neg (y \land \neg x).]
+[x \veebar y = \neg (x \leftrightarrow y) = \neg (\neg (x \land \neg y) \land \neg (y \land \neg x)).]&lt;&#x2F;p&gt;
+&lt;p&gt;The definition of disjunction using only negation and conjunction leads us
+to the famous De Morgan laws:&lt;&#x2F;p&gt;
+&lt;p&gt;[\neg(x \land y) = \neg x \lor \neg y]
+[\neg(x \lor y) = \neg x \land \neg y]&lt;&#x2F;p&gt;
+&lt;p&gt;We won&#x27;t talk about quantifiers (forall \(\forall\) and exists \(\exists\)),
+let&#x27;s just say that, even in this case, for a formula \(x\), the formula
+\(\exists x\) could be written \(\neg \forall \neg x\). I say this because,
+while we explore all the connectives here, formal texts will often define the
+smallest possible set of symbols. The larger set of connectives and qualifiers
+are mostly there for us, to make things easier to read and understand. Typical
+pandering to humans :P. As a quick side note, there&#x27;s intriguing work being
+done on &lt;a
+href=&#x27;http:&#x2F;&#x2F;link.springer.com&#x2F;chapter&#x2F;10.1007&#x2F;978-3-319-40566-7_5&#x27;&gt;soft
+qualifiers&lt;&#x2F;a&gt; for fuzzy logic. But back to the connectives...&lt;&#x2F;p&gt;
+&lt;h2&gt;A first bite of fuzzy connectives&lt;&#x2F;h2&gt;
+&lt;p&gt;With False = 0 and True = 1, and given that we expect the fuzzy connectives
+to behave the same as bivalent connectives, we can have:&lt;&#x2F;p&gt;
+&lt;p&gt;[\neg x = 1 - x.]
+[x \land y = min(x, y).]
+[x \lor y = max(x, y).]&lt;&#x2F;p&gt;
+&lt;p&gt;So \(\neg 1 = 0\), \(1 \land 0 = 0\), \(0 \land 1 = 1\), you can check,
+these connectives behave like normal bivalent connectives when they need to
+but they&#x27;re also defined for other values: with \(x = 0.1\) and \(y = 0.7\)
+we get \(x \land y = 0.1\) and \(x \lor y = 0.7\). Let&#x27;s try to see if
+our definition of disjunction using only conjunction and negation works
+too:&lt;&#x2F;p&gt;
+&lt;p&gt;[x \lor y = \neg(\neg x \land \neg y).]
+[x \lor y = \neg min(\neg x, \neg y).]
+[x \lor y = 1 - min(1 - x, 1 - y).]&lt;&#x2F;p&gt;
+&lt;p&gt;Turns out, \(max(x, y)\) is indeed the same as \(1 - min(1 - x, 1 - y)\).
+To see why it&#x27;s helpful to use a more geometric formula for the minimum and
+maximum:&lt;&#x2F;p&gt;
+&lt;p&gt;[max(a, b) = \frac{a + b + |a - b|}{2}.]
+[min(a, b) = \frac{a + b - |a - b|}{2}.]&lt;&#x2F;p&gt;
+&lt;p&gt;The intuition behind the formulas above is that the maximum is the mid-point
+\((a + b)&#x2F;2\) &lt;emph&gt;plus&lt;&#x2F;emph&gt; half the distance between \(a\) and \(b\) (i.e.:
+\(|a - b|\)), while the minimum is the mid-point &lt;emph&gt;minus&lt;&#x2F;emph&gt; half the
+distance. Back to our definition of disjunction:&lt;&#x2F;p&gt;
+&lt;p&gt;[max(x, y) = 1 - min(1 - x, 1 - y),]
+[max(x, y) = 1 - 0.5(1 - x + 1 - y - |1 - x - 1 + y|),]
+[max(x, y) = 0.5(x + y + |y - x|).]&lt;&#x2F;p&gt;
+&lt;p&gt;...and that&#x27;s our definition of maximum (remember that \(|a| = |-a|\)).&lt;&#x2F;p&gt;
+&lt;p&gt;Alright! We have our simple, happy definitions for conjunction and
+disjunction with continuous values. These definition are awesome: they are both
+simpler and more general than the truth tables we normally get for logic
+connectives... but there&#x27;s a catch: there are other ways to define the fuzzy
+connectives. For example&lt;&#x2F;p&gt;
+&lt;p&gt;[x \land y = max(0, x + y - 1).]
+[x \lor y = min(1, x + y).]&lt;&#x2F;p&gt;
+&lt;p&gt;Our first definitions for fuzzy connectives were based on the Gödel T-norm,
+while these are based on the Lukasiewicz T-norm. Again, is our definition of
+disjunction from conjunction valid?&lt;&#x2F;p&gt;
+&lt;p&gt;[x \lor y = \neg(\neg x \land \neg y),]
+[min(1, x + y) = \neg max(0, \neg x + \neg y - 1),]
+[min(1, x + y) = 1 - max(0, 1 - x + 1 - y - 1),]
+[min(1, x + y) = 1 - max(0, 1 - x - y),]
+[0.5(1 + x + y - |1 - x - y|) = 1 - 0.5(0 + (1 - x - y) + |0 - (1 - x - y)|),]
+[0.5(1 + x + y - |1 - x - y|) = 1 - 0.5(1 - x - y + |x + y - 1|),]
+[0.5(1 + x + y - |1 - x - y|) = 0.5(1 + x + y - |x + y - 1|),]&lt;&#x2F;p&gt;
+&lt;p&gt;Works fine! These definitions might look needlessly complicated compared to
+the simple \(min(x, y)\) for conjunction, but they often make more sense since
+they combine the truth values instead of just discarding one like the
+minimum.&lt;&#x2F;p&gt;
+&lt;p&gt;Defining implication in Lukasiewicz logic is straightforward:&lt;&#x2F;p&gt;
+&lt;p&gt;[x \Rightarrow y = \neg x \lor y,]
+[x \Rightarrow y = min(1, 1 - x + y).]&lt;&#x2F;p&gt;
+&lt;p&gt;As for equivalence:&lt;&#x2F;p&gt;
+&lt;p&gt;[x \leftrightarrow y = (x \Rightarrow y) \land (y \Rightarrow x),]
+[x \leftrightarrow y = min(1, 1 - x + y) \land min(1, 1 - y + x),]
+[x \leftrightarrow y = max(0, min(1, 1 - x + y) + min(1, 1 - y + x) - 1),]
+[x \leftrightarrow y = max(0, 0.5(4 - x + y - y + x - | x - y| - |y - x|) - 1),]
+[x \leftrightarrow y = max(0, 1 - |x - y|).]&lt;&#x2F;p&gt;
+&lt;p&gt;Technically, this is the definition of equivalence, but in practice since
+\(x - y\) can never be greater than 1 with the truth values restricted to the
+[0, 1] range, we can simplify to&lt;&#x2F;p&gt;
+&lt;p&gt;[x \leftrightarrow y = 1 - |x - y|.]&lt;&#x2F;p&gt;
+&lt;p&gt;And we&#x27;ll define exclusive disjunction from there:&lt;&#x2F;p&gt;
+&lt;p&gt;[x \veebar y = \neg (x \leftrightarrow y),]
+[x \veebar y = 1 - (1 - |x - y|),]
+[x \veebar y = |x - y|.]&lt;&#x2F;p&gt;
+&lt;p&gt;We have all our connectives, plus two versions of disjunction and
+conjunction. We&#x27;ll now explore T-norm. Yes, there are more possible
+connectives.&lt;&#x2F;p&gt;
+&lt;h2&gt;Triangular norm (T-norm)&lt;&#x2F;h2&gt;
+&lt;p&gt;So we have two ways to define conjunction, are there others? Yes! A
+T-norm is a function from \([0, 1]^2 \rightarrow [0, 1]\) that satisfies the
+following properties given \(x, y, z, z&#x27;, y&#x27; \in [0, 1]\):&lt;&#x2F;p&gt;
+&lt;ol type=&quot;I&quot;&gt;
+  &lt;li&gt;\(t(x, 0) = 0\).&lt;&#x2F;li&gt;
+  &lt;li&gt;\(t(x, 1) = x\).&lt;&#x2F;li&gt;
+  &lt;li&gt;Commutativity: \(t(x, y) = t(y, x)\).&lt;&#x2F;li&gt;
+  &lt;li&gt;Associativity: \(t(x, t(y, z)) = t(t(x, y), z)\).&lt;&#x2F;li&gt;
+  &lt;li&gt;Monotonicity: If \(x \leq x&#x27;, y \leq y&#x27;\), then \(t(x, y) \leq t(x&#x27;, y&#x27;)\).&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;We also have the T-conorm, which has the same properties as the T-norm
+except the the first two properties are changed to \(t(x, 0) = x\) and \(t(x,
+1) = 1\).&lt;&#x2F;p&gt;
+&lt;p&gt;So what is a T-norm? Multiplication, yes, simple plain multiplication, is a
+valid T-norm:&lt;&#x2F;p&gt;
+&lt;p&gt;[x \land y = x \times y.]
+[x \lor y = 1 - ((1 - x) \times (1 - y)).]
+[x \lor y = y + x - xy.]&lt;&#x2F;p&gt;
+&lt;p&gt;At this point we have three ways to define conjunction: \(min(x, y)\), which
+is called Gödel&#x27;s T-norm (or Gödel-Dummett), \(max(0, x + y - 1)\) which is
+Lukasiewicz&#x27; T-norm, and finally we have simple multiplication, often
+called the product T-norm.&lt;&#x2F;p&gt;
+&lt;h2&gt;Appendix: Connectives all in one place for Łukasiewicz logic&lt;&#x2F;h2&gt;
+&lt;table style=&#x27;width: 80%&#x27;&gt;
+  &lt;tr&gt;&lt;th&gt;Connective&lt;&#x2F;th&gt;             &lt;th&gt;Equation&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;
+  &lt;tr&gt;&lt;td&gt;Conjunction&lt;&#x2F;td&gt;            &lt;td&gt;\(max(0, x + y - 1)\)&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+  &lt;tr&gt;&lt;td&gt;Weak Conjunction&lt;&#x2F;td&gt;       &lt;td&gt;\(min(x, y)\)&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+  &lt;tr&gt;&lt;td&gt;Disjunction&lt;&#x2F;td&gt;            &lt;td&gt;\(min(1, x + y)\)&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+  &lt;tr&gt;&lt;td&gt;Weak Disjunction&lt;&#x2F;td&gt;       &lt;td&gt;\(max(x, y)\)&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+  &lt;tr&gt;&lt;td&gt;Implication&lt;&#x2F;td&gt;            &lt;td&gt;\(min(1, 1 - x + y)\)&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+  &lt;tr&gt;&lt;td&gt;Equivalence&lt;&#x2F;td&gt;            &lt;td&gt;\(1 - |x - y|\)&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+  &lt;tr&gt;&lt;td&gt;Exclusive disjunction&lt;&#x2F;td&gt;  &lt;td&gt;\(|x - y|\)&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;table&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>CMake project templates for C++11 and CUDA with google test&#x2F;benchmark support</title>
+		<published>2017-01-30T00:00:00+00:00</published>
+		<updated>2017-01-30T00:00:00+00:00</updated>
+		<link href="https://phdp.github.io/blog/cmake/" type="text/html"/>
+		<id>https://phdp.github.io/blog/cmake/</id>
+		<content type="html">&lt;p&gt;Books generally don&#x27;t cover project organization and few introductions to
+C++ discuss testing frameworks, let alone benchmarking. In my experience, many
+science students compile without optimization flags, don&#x27;t know how to separate
+header and source files, tests, etc etc. So I created two simple &lt;a
+href=&#x27;https:&#x2F;&#x2F;cmake.org&#x2F;&#x27;&gt;cmake&lt;&#x2F;a&gt; project templates. One for C++11 (with a
+library and an executable) and one for CUDA. Both support testing with &lt;a
+href=&#x27;https:&#x2F;&#x2F;github.com&#x2F;google&#x2F;googletest&#x27;&gt;Google Test&lt;&#x2F;a&gt; and benchmarks with
+&lt;a href=&#x27;https:&#x2F;&#x2F;github.com&#x2F;google&#x2F;benchmark&#x27;&gt;Google Benchmark&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&#x27;https:&#x2F;&#x2F;github.com&#x2F;PhDP&#x2F;cmake-gtest-gbench-starter&#x27;&gt;C++11 cmake project with google test &#x2F; google benchmark support.&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+  &lt;li&gt;&lt;a href=&#x27;https:&#x2F;&#x2F;github.com&#x2F;PhDP&#x2F;cuda-cmake-gtest-gbench-starter&#x27;&gt;C++&#x2F;CUDA cmake project with google test &#x2F; google benchmark support.&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;&lt;a href=&#x27;https:&#x2F;&#x2F;cmake.org&#x2F;&#x27;&gt;CMake&lt;&#x2F;a&gt; is a popular tool for building
+cross-platform C++ applications, you shouldn&#x27;t have any issue installing
+it.&lt;&#x2F;p&gt;
+&lt;p&gt;The C++ project template works on both Linux&#x2F;UNIX and Windows, while the
+CUDA project is tested only on Linux. Feel free to fork &#x2F; suggest
+improvements.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Data Scientists: This is not your grandmother&#x27;s C++</title>
+		<published>2016-06-28T00:00:00+00:00</published>
+		<updated>2016-06-28T00:00:00+00:00</updated>
+		<link href="https://phdp.github.io/blog/not-your-grandmother-cpp/" type="text/html"/>
+		<id>https://phdp.github.io/blog/not-your-grandmother-cpp/</id>
+		<content type="html">&lt;p&gt;A quick note. I saw a few lines of antiquated C++ in a Python presentation
+for the obligatory &quot;look-how-C++-sucks&quot; bit. If you like Python, good for you,
+I&#x27;m not here to bash it. But for the love of Hopper, stop freaking people out
+with old, outdated C++. Many (most?) high-performance machine learning
+libraries are written in modern C++, often with a Python interface. If you want
+to understand how hot new tools like &lt;a
+href=&#x27;https:&#x2F;&#x2F;github.com&#x2F;tensorflow&#x2F;tensorflow&#x27;&gt;TensorFlow&lt;&#x2F;a&gt; or &lt;a
+href=&#x27;https:&#x2F;&#x2F;github.com&#x2F;Microsoft&#x2F;CNTK&#x27;&gt;CNTK&lt;&#x2F;a&gt; work: you&#x27;ll learn a lot by
+diving into their C++ core.&lt;&#x2F;p&gt;
+&lt;p&gt;The scary C++ examples follow a common theme: show how something simple is
+absurdly contrived in C++ compared to Python. Hey let&#x27;s create a vector (well,
+it&#x27;ll be a list in Python) of sets and print the result in some format:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;sets = [{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;}, {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;4&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;5&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;6&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;}, {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;42&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;47&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;15&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;}]
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;for set in &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;sets:
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;{ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;end&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;#39;&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;i &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;in set&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;:
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;str&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(i) + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;#39; &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;end&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;#39;&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;p&gt;Clean and simple. Now the C++ version, Frankenstein&#x27;s monster in code
+form, look how ugly it is:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;#include &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;iostream&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;#include &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;set&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;#include &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;vector&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;;
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;() {
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;using namespace&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; std;
+
+  vector&amp;lt;set&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;&amp;gt;&amp;gt; sets;
+
+  {
+    set&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;&amp;gt; tmp;
+    tmp.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;insert&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;);
+    tmp.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;insert&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;);
+    tmp.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;insert&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;);
+    sets.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;push_back&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(tmp);
+
+    tmp.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;clear&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;();
+    tmp.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;insert&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;4&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;);
+    tmp.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;insert&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;5&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;);
+    tmp.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;insert&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;6&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;);
+    sets.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;push_back&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(tmp);
+
+    tmp.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;clear&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;();
+    tmp.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;insert&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;42&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;);
+    tmp.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;insert&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;47&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;);
+    tmp.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;insert&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;15&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;);
+    sets.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;push_back&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(tmp);
+  }
+
+  vector&amp;lt;set&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;&amp;gt;&amp;gt;::const_iterator it = sets.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;begin&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;();
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(; it != sets.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;end&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(); ++it) {
+    cout &amp;lt;&amp;lt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;{ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;;
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(set&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;&amp;gt;::const_iterator j = it-&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;begin&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(); j != it-&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;end&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(); ++j)
+      cout &amp;lt;&amp;lt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;j &amp;lt;&amp;lt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;#39; &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;;
+    cout &amp;lt;&amp;lt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#dc322f;&quot;&gt;\n&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;;
+  }
+
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;;
+}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;p&gt;Kill it! Kill it with fire! Everything from creating the vector of sets to
+looping is awful... Except that&#x27;s C++98. Nobody in their right mind is using
+C++98 unless they&#x27;re forced to. I&#x27;m not even sure this is good C++98 code, I
+haven&#x27;t written with this standard in ages. It&#x27;s easy to forget not so long ago
+we couldn&#x27;t write vector&amp;lt;set&amp;lt;int&amp;gt; &amp;gt; without adding a space between
+the two &amp;gt;&amp;gt;.  In modern C++, the code looks like this:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;#include &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;iostream&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;#include &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;set&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;#include &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;vector&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;;
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;() -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;using namespace&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; std;
+
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; sets = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;vector&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;&amp;lt;set&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;&amp;gt;&amp;gt;{{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;}, {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;4&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;5&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;6&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;}, {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;42&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;47&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;15&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;}};
+
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const&amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; set &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;:&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; sets) {
+    cout &amp;lt;&amp;lt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;{ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;;
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; i &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;:&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; set)
+      cout &amp;lt;&amp;lt; i &amp;lt;&amp;lt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;#39; &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;;
+    cout &amp;lt;&amp;lt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#dc322f;&quot;&gt;\n&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;;
+  }
+
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;;
+}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;p&gt;That&#x27;s C++11 in action. I prefer this code to the Python version: it
+type-checks, compiles to efficient code, and gives you better control over
+memory (using references vs copy). You may prefer the Python version, fine, but
+it&#x27;s not &lt;i&gt;that&lt;&#x2F;i&gt; different. Plus, as Python and C++ follow similar
+paradigms (except for type checking), the things that tend to be annoying to
+write in C++, &lt;a href=&#x27;2015-04-05-automated-reasoning.html&#x27;&gt;e.g.  handling
+abstract syntax trees&lt;&#x2F;a&gt;, are equally painful in Python. So stop what you&#x27;re
+doing, &lt;a href=&#x27;http:&#x2F;&#x2F;www.informit.com&#x2F;store&#x2F;discovering-modern-c-plus-plus-an-intensive-course-9780134383699&#x27;&gt;grab
+a good book&lt;&#x2F;a&gt;, and learn modern C++.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Automated reasoning in F#, Scala, Haskell, C++, and Julia</title>
+		<published>2015-04-05T00:00:00+00:00</published>
+		<updated>2015-04-05T00:00:00+00:00</updated>
+		<link href="https://phdp.github.io/blog/automated-reasoning/" type="text/html"/>
+		<id>https://phdp.github.io/blog/automated-reasoning/</id>
+		<content type="html">&lt;p&gt;We need to simplify the following expression:&lt;&#x2F;p&gt;
+&lt;p&gt;[e = (1 + 0 \times x) \times 3 + 12.]&lt;&#x2F;p&gt;
+&lt;p&gt;Luckily for us, we won&#x27;t have to remember any elementary school arithmetic,
+because Harris&#x27; excellent &lt;a
+  href=&#x27;http:&#x2F;&#x2F;www.cambridge.org&#x2F;ca&#x2F;academic&#x2F;subjects&#x2F;computer-science&#x2F;programming-languages-and-applied-logic&#x2F;handbook-practical-logic-and-automated-reasoning&#x27;&gt;
+  &lt;i&gt;Handbook of Practical Logic and Automated Reasoning&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; begins with a
+simple algorithm to do exactly that. It&#x27;s not complicated, but it&#x27;s a pretty
+good barometer of how painful a programming language will be for the kind of
+hybrid (probabilistic logic, or statistical relational) approaches I work with.
+Here, I compare the implementations of Harris&#x27; simple algorithm in F#, Scala,
+Haskell, C++, and Julia.&lt;&#x2F;p&gt;
+&lt;p&gt;No programming languages were hurt while writing this post. It&#x27;s not a
+competition, and I avoided talking about languages I dislike. Sum types are
+discussed at length because they are awesome and useful for this problem
+(and many, many others).&lt;&#x2F;p&gt;
+&lt;h2&gt;The ML family&lt;&#x2F;h2&gt;
+&lt;p&gt;Harris&#x27; book uses OCaml, a popular language for solvers. F#, Haskell, and
+Scala all share roots with OCaml, with F# being the closest thing to an OCaml
+dialect. I&#x27;ll start with F#:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&#x2F;&#x2F;&#x2F; A sum type for the expression.
+&#x2F;&#x2F;&#x2F; An expression is either a var (which is a string), a constant
+&#x2F;&#x2F;&#x2F; (which is an integer), an addition (made of two expressions)
+&#x2F;&#x2F;&#x2F; or a multiplication (also made of two expressions).
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;type &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;Expr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;=
+    |&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Var &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;of &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;string
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;|&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;of &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;int
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;|&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Add &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;of &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;Expr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;* &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;Expr
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;|&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Mul &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;of &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;Expr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;* &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;Expr
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&#x2F;&#x2F;&#x2F; Simplify a single component of the expression. This function
+&#x2F;&#x2F;&#x2F; takes an expression and use pattern matching to select the
+&#x2F;&#x2F;&#x2F; right approach based on type and value. For example, if we
+&#x2F;&#x2F;&#x2F; add a constant 0 to some x (which can be expression), then
+&#x2F;&#x2F;&#x2F; we return x.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;let &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;simplify1 e &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;=
+    match&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; e &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;with
+    |&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Add &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; x&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;)
+    |&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Add &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;x&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;)
+    |&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Mul &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;x&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;)
+    |&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Mul &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; x&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;)        -&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; x
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;|&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Mul &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;x&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;)
+    |&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Mul &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; x&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;)        -&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;|&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Add &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Const a&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Const b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;)  -&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;a &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;)
+    |&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Mul &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Const a&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Const b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;)  -&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;a &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;)
+    | _                       -&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; e
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&#x2F;&#x2F;&#x2F; Recursive function to simplify an entire expression.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;let rec &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;simplify e &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;=
+    match&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; e &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;with
+    |&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Add &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;x&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; y&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;) -&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Add &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;simplify x&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; simplify y&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;)
+    |&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Mul &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;x&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; y&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;) -&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Mul &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;simplify x&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; simplify y&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;)
+    | _          -&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; e
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;|&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; simplify1
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&#x2F;&#x2F;&#x2F; Return the value string if the expression can be reduced to a constant.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;let &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;exprStr e &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;=
+    match&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; e &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;with
+    |&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Const x &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; string x
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;| _       -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;The expression could not be simplified to a constant.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&#x2F;&#x2F;&#x2F; The |&amp;gt; operator sends the result on its left to its right, for example
+&#x2F;&#x2F;&#x2F; &amp;quot;5.0 |&amp;gt; log |&amp;gt; sqrt&amp;quot; computes log(5.0) and then the square root of the
+&#x2F;&#x2F;&#x2F; result. This is nice because it allows a more natural left-to-right
+&#x2F;&#x2F;&#x2F; flow for functional programming.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;[&amp;lt;EntryPoint&amp;gt;]
+let &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;main argv &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;
+    Add &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Mul &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Add &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Mul &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Var &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;x&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;)),&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;),&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;12&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;)
+    |&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; simplify
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;|&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; exprStr
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;|&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; printf &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;%s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&#x2F;&#x2F;&#x2F; F#&amp;#39;s main returns 0 for success à la C
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;p&gt;It&#x27;s almost the same as the OCaml version in Harris&#x27; book. The key trick is
+to define an expression (Expr) as a variable (string) &lt;b&gt;or&lt;&#x2F;b&gt; a constant
+(integer) &lt;b&gt;or&lt;&#x2F;b&gt; an addition &lt;b&gt;or&lt;&#x2F;b&gt; a multiplication (both made of two
+expressions). The &lt;b&gt;or&lt;&#x2F;b&gt; is important, object-oriented programming languages
+focuses on hierarchies of objects, while sum types define a type as a series of
+alternatives. Sum types are important for another reason: they provide
+an easy way to express things like &quot;this function &lt;i&gt;might&lt;&#x2F;i&gt; return
+an integer&quot;, for example in Haskell if we want a data structure that maps
+keys to values:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Data.Map &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;Map&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;import qualified &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Data.Map &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;as &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Map&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;
+
+capitals &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Map&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;fromList [(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;Finland&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;Helsinki&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;), (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;France&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;Paris&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;),
+  (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;Japan&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;Tokyo&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;), (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;South Korea&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;Seoul&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;), (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;Arrakis&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;Arrakeen&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)]
+
+lookupCapitals country &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;= case &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Map&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;lookup country capitals &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;of
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Just&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; capital &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;The capital of &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;++&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; country &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;++ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt; is &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;++&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; capital &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;++ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Nothing      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;Is &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;++&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; country &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;++ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt; even a country?&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;p&gt;The point is that a key-value store will only return a value if the key is
+present. In this example, the map takes a country (string) and returns its
+capital (string). However, when we try to take a value from the map with the
+lookup function, Haskell returns a &lt;b&gt;Maybe&lt;&#x2F;b&gt; type with either &lt;b&gt;Just
+String&lt;&#x2F;b&gt;, if the string provided is found in the map, or &lt;b&gt;Nothing&lt;&#x2F;b&gt; if
+the key is absent. We then use pattern matching to deal with these
+possibilities in the lookupCapitals function. One of the most common mistake in
+programming is to return a null and not deal with it properly. The solution
+with sum types is to return a wrapped value and handling possibilities
+explicitly with pattern matching. It solves with types what many languages
+would solve with exceptions and try-catch apparatuses.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;ghci&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; lookupCapitals &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;Arrakis&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;
+&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;The capital of Arrakis is Arrakeen.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;
+ghci&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; lookupCapitals &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;Canada&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;
+&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;Is Canada even a country?&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;p&gt;Speaking of Haskell, the code for the algorithm is:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#859900;&quot;&gt;data &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Expr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;=
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Var String
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;| &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Const Int
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;| &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Add Expr Expr
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;| &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Mult Expr Expr
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;simplify1 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;:: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;Expr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;Expr
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;simplify1 e &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;= case&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; e &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;of
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) x           &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; x
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; x (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)           &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; x
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; a) (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; b)   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; a &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; b
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Mult&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; x (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Mult&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) x          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Mult&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; x (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; x
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Mult&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) x          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; x
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Mult&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; a) (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; b)  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; a * b
+  _                         &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; e
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;simplify &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;:: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;Expr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;Expr
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;simplify e &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;= case&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; e &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;of
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; x y   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; simplify1 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; (simplify x) (simplify y)
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Mult&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; x y  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; simplify1 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Mult&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; (simplify x) (simplify y)
+  _         &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; simplify1 e
+
+e &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Mult&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Mult&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Var &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;x&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;))) (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)) (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;12&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)
+s &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; simplify e
+
+main &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; putStrLn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$ case&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; s &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;of
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;Const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; x &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; show x
+  _ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;Could not simplify the expression to a constant.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;p&gt;It&#x27;s quite similar to F#. I decided to add types explicitly to
+&lt;i&gt;simplify1&lt;&#x2F;i&gt; and &lt;i&gt;simplify&lt;&#x2F;i&gt;, but Haskell is smart enough to deduce the
+type without this. Arguably the only thing worth explaining is the $ operator.
+The operator forces Haskell to evaluate the expression to the right of the
+operator in priority, and if it reminds you of parentheses, you are absolutely
+right. &lt;i&gt;x&lt;&#x2F;i&gt; and &lt;i&gt;y&lt;&#x2F;i&gt; have the same value here:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;x &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; log (sqrt (exp &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;5.0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;))
+y &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; log &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; sqrt &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; exp &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;5.0
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;p&gt;The operator is there to reduce visual clutter. In my opinion, F# is easier
+to read because the |&gt; operator enforces left-to-right reading, which is more
+natural than reading code inside-out:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#859900;&quot;&gt;let &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;z &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; exp &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;5.0 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;|&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; sqrt &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;|&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; log
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;p&gt;Although it&#x27;s trivial to simulate this operator in Haskell:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;(|&amp;gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;:: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;t0 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;t0 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;t1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;t1
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;(|&amp;gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; x f &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; f x
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;-- Now valid Haskell:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;z &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; exp &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;5.0 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;|&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; sqrt &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;|&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; log
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;p&gt;And now for something a bit different: Scala. It&#x27;s also a static
+functional programming language with sum types, but its greater
+integration with the object-oriented paradigm is evident:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;object&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt; Simplify &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#586e75;&quot;&gt;sealed abstract &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;class&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt; Expr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#586e75;&quot;&gt;override &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;toString &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;= show(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d33682;&quot;&gt;this&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) }
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;case class&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt; Variable&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;String&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;extends &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;Expr
+  case class&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt; Const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;Int&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;extends &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;Expr
+  case class&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt; Add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;left&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;right&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;extends &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;Expr
+  case class&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt; Mult&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;left&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;right&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;extends &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;Expr
+
+  def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;evalOne&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;e&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;): &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Expr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;= e &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;match &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;case Add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;r&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)         &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;=&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; r
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;case Add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;l&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;))         &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;=&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; l
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;case Add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;a&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;))  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;=&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(a + b)
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;case Mult&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;r&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;=&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;case Mult&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;l&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;))        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;=&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;case Mult&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;r&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;=&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; r
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;case Mult&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;l&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;))        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;=&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; l
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;case Mult&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;a&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;=&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(a * b)
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;case &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d33682;&quot;&gt;_                        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;=&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; e
+  }
+
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;eval&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;e&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;): &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Expr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;= e &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;match &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;case Add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;l&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;r&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;=&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; evalOne(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(eval(l), eval(r)))
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;case Mult&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;l&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;r&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;=&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; evalOne(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Mult&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(eval(l), eval(r)))
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;case &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d33682;&quot;&gt;_          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;=&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; e
+  }
+
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;show&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;e&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) = e &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;match &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;case Const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;x&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;=&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; print(x)
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;case &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d33682;&quot;&gt;_        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;=&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;
+      print(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;The expression could not be simplified to a constant.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)
+  }
+
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;args&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Array&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;String&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;]) {
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;var e &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Mult&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Mult&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Variable&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;x&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;))),
+              &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;12&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;))
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;var s &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;= eval(e)
+    print(s)
+  }
+}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;p&gt;Everything is an object in Scala. Thus, we have to define the functions to
+simplify as methods inside a singleton object. I named the functions
+&lt;i&gt;evalOne&lt;&#x2F;i&gt; and &lt;i&gt;eval&lt;&#x2F;i&gt; since it has a bit odd to have a function named
+&lt;i&gt;simplify&lt;&#x2F;i&gt; inside a Simplify object.&lt;&#x2F;p&gt;
+&lt;h2&gt;C++&lt;&#x2F;h2&gt;
+&lt;p&gt;Few understand every corner of C++&#x27;s monstrous standard. It&#x27;s huge.  Surely,
+with so many features, there must something to solve this
+simple problem cleanly.  Well... no. It&#x27;s a well-known lacuna with C++,
+see &lt;a href=&quot;https:&#x2F;&#x2F;parasol.tamu.edu&#x2F;~yuriys&#x2F;pm&#x2F;&quot;&gt;&lt;i&gt;Open and
+Efficient Type Switch for C++&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; for a library built to implement
+pattern matching (the effort is directed by the creator
+of the C++ language). That said, here I&#x27;ll use the boost library (A)
+because solutions based only on the standard library are contrived and
+(B) because boost is almost standard, and I don&#x27;t want to rely on third-party
+libraries.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;#include &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;iostream&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;#include &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;string&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;#include &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;boost&#x2F;variant.hpp&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;gt;
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&#x2F;&#x2F; Forward declarations:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;mult&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;;
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&#x2F;&#x2F; The variant for the expression:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;using &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;expr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;= boost::variant&amp;lt;
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;,
+  std::string,
+  boost::recursive_wrapper&amp;lt;add&amp;gt;,
+  boost::recursive_wrapper&amp;lt;mult&amp;gt;&amp;gt;;
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&#x2F;&#x2F; A base class for all binary operations:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;binary_op &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{
+  expr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;m_left&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;m_right&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;;
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;:
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&#x2F;&#x2F; Builds a binary operation from left and right expressions.
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;binary_op&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(expr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;left&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, expr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;right&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)
+    : &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;m_left&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(left), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;m_right&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(right) {
+  }
+
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&#x2F;&#x2F; Returns the expression to the left side of the expression.
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;left&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;() &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;-&amp;gt; expr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;m_left&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;;
+  }
+
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&#x2F;&#x2F; Returns the expression to the right side of the expression.
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;right&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;() &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;-&amp;gt; expr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;m_right&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;;
+  }
+};
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&#x2F;&#x2F; Defines the &amp;#39;add&amp;#39; operator.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;add &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;public &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;binary_op &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(expr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;left&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, expr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const &amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;right&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)
+    : &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;binary_op&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(left, right) {
+  }
+};
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&#x2F;&#x2F; Defines the &amp;#39;mult&amp;#39; operator.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;mult &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;public &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;binary_op &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;mult&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(expr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;left&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, expr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const &amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;right&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)
+    : &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;binary_op&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(left, right) {
+  }
+};
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&#x2F;&#x2F; Overload * and + to simplify creating expressions.
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;operator+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(expr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;lhs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, expr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;rhs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) -&amp;gt; expr {
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{lhs, rhs};
+}
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;operator*&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(expr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;lhs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, expr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;rhs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) -&amp;gt; expr {
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;mult&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{lhs, rhs};
+}
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&#x2F;&#x2F; A visitor for addition.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;add_visit &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;public &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;boost::static_visitor&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;&amp;lt;expr&amp;gt; {
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;operator()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;int lhs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;int rhs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;-&amp;gt; expr {
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{lhs + rhs};
+  }
+
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;template&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;typename&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; R&amp;gt;
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;operator()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;int lhs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, R &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;rhs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;-&amp;gt; expr {
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; lhs == &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;? &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{rhs} &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{lhs}, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{rhs}};
+  }
+
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;template&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;typename&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; L&amp;gt;
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;operator()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(L &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;lhs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;int rhs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;-&amp;gt; expr{
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; rhs == &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;? &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{lhs} &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{lhs}, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{rhs}};
+  }
+
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;template&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;typename&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; L, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;typename&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; R&amp;gt;
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;operator()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(L &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;lhs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, R &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;rhs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;-&amp;gt; expr {
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{lhs}, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{rhs}};
+  }
+};
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&#x2F;&#x2F; A visitor for multiplication.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;mul_visit &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;public &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;boost::static_visitor&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;&amp;lt;expr&amp;gt; {
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;operator()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;int lhs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;int rhs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;-&amp;gt; expr {
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{lhs &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; rhs};
+  }
+
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;template&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;typename&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; R&amp;gt;
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;operator()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;int lhs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, R &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;rhs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;-&amp;gt; expr {
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; lhs == &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;?
+      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;} &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(lhs == &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;? &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{rhs} &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;mult&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{lhs}, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{rhs}});
+  }
+
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;template&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;typename&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; L&amp;gt;
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;operator()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(L &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;lhs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;int rhs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;-&amp;gt; expr {
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; rhs == &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;?
+      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;} &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(rhs == &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;? &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{lhs} &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;mult&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{rhs}, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{lhs}});
+  }
+
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;template&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;typename&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; L, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;typename&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; R&amp;gt;
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;operator()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(L &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;lhs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;, R &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;rhs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;-&amp;gt; expr {
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;mult&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{lhs}, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{rhs}};
+  }
+};
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;simplify1 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;public &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;boost::static_visitor&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;&amp;lt;expr&amp;gt; {
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;operator()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(add &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;a&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;-&amp;gt; expr {
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;boost::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;apply_visitor&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;add_visit&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{}, a.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;left&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(), a.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;right&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;());
+  }
+
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;operator()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(mult &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;m&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;-&amp;gt; expr {
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;boost::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;apply_visitor&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;mul_visit&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{}, m.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;left&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(), m.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;right&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;());
+  }
+
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;template&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;typename&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; T&amp;gt;
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;operator()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(T &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;t&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;-&amp;gt; expr {
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{t};
+  }
+};
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;simplify &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;public &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;boost::static_visitor&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;&amp;lt;expr&amp;gt; {
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;operator()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(add &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;a&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;-&amp;gt; expr {
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; left = boost::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;apply_visitor&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;simplify&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{}, a.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;left&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;());
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; right = boost::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;apply_visitor&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;simplify&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{}, a.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;right&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;());
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; add_lr = boost::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;apply_visitor&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;add_visit&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{}, left, right);
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;boost::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;apply_visitor&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;simplify1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{}, add_lr);
+  }
+
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;operator()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(mult &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;m&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;-&amp;gt; expr {
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; left = boost::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;apply_visitor&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;simplify&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{}, m.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;left&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;());
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; right = boost::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;apply_visitor&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;simplify&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{}, m.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;right&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;());
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; mul_lr = boost::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;apply_visitor&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;mul_visit&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{}, left, right);
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;boost::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;apply_visitor&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;simplify1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{}, mul_lr);
+  }
+
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;template&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;typename&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; T&amp;gt;
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;operator()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(T &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;t&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;-&amp;gt; expr {
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{t};
+  }
+};
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;print_expr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;public &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;boost::static_visitor&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;&amp;lt;std::string&amp;gt; {
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;operator()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;int n&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;-&amp;gt; std::string {
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;to_string&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(n);
+  };
+
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;operator()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(expr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const&amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;-&amp;gt; std::string {
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;The expression could not be simplified to a constant.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;;
+  };
+};
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;() -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; e = (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;} + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;} &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;* &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;x&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;}) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;* &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;} + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;12&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;};
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;auto&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; s = boost::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;apply_visitor&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;simplify&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{}, e);
+  std::cout &amp;lt;&amp;lt; boost::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;apply_visitor&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;print_expr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{}, s) &amp;lt;&amp;lt; std::endl;
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;;
+}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;p&gt;This is boost::variant in action. My biggest qualm with this type of clever
+header-heavy code is that you get to see a big chunk of the developers&#x27;
+lifework unroll before your eyes every time a small mistake is made. Otherwise
+it&#x27;s an OK substitute for proper sum types&#x2F;pattern matching. If you want to know
+how this code works, you need to read a bit on the visitor pattern.&lt;&#x2F;p&gt;
+&lt;h2&gt;Julia&lt;&#x2F;h2&gt;
+&lt;p&gt;Julia is an attempt to build a fast and flexible replacement for
+R&#x2F;Python&#x2F;Matlab.  An issue with most dynamic languages is that there is no
+elegant way to switch on type. To be fair, you cannot really do it with most
+static languages either, see previous section... However, Julia supports
+multiple-dispatch based on type annotation. To be clear, it&#x27;s quite different
+from the F#&#x2F;Scala&#x2F;Haskell approach.  In these languages, it is possible to define
+sum types and do pattern matching on their constructors. With Julia, we define a
+function with type annotation and let the interpreter dispatch based on runtime
+type information. Multiple dispatch is supported in Julia for performance: it
+allows the interpreter to compile optimized functions and use the best one,
+adding predictability while keeping the language dynamic (for some reason...).
+Here&#x27;s the algorithm in Julia:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;abstract Expr
+
+type Const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;&amp;lt;:&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Expr; val&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;end&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;
+type Var &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;&amp;lt;:&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Expr; name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;String &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;end&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;
+type Add &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;&amp;lt;:&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Expr; left&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Expr; right&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Expr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;end&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;
+type Mult &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;&amp;lt;:&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Expr; left&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Expr; right&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Expr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;end&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;
+
+add(x&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Const, y&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Const) = Const(x.val &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; y.val)
+add(x&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Const, y&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Expr) = x.val &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;== &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#ec9489;color:#657b83;&quot;&gt;?&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; y &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;:&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Add(x, y)
+add(x&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Expr, y&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Const) = add(y, x)
+add(x&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Expr, y&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Expr) = Add(x, y)
+
+mult(x&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Const, y&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Const) = Const(x.val &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; y.val)
+mult(x&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Const, y&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Expr) = x.val &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;== &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#ec9489;color:#657b83;&quot;&gt;?&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; y &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(x.val &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;== &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#ec9489;color:#657b83;&quot;&gt;?&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Const(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Mult(x, y))
+mult(x&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Expr, y&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Const) = mult(y, x)
+mult(x&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Expr, y&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Expr) = Mult(x, y)
+
+simplify&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(a&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Add) = add(a.left, a.right)
+simplify&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(m&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Mult) = mult(m.left, m.right)
+simplify&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(e&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Expr) = e
+
+simplify(a&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Add) = simplify&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(Add(simplify(a.left), simplify(a.right)))
+simplify(m&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Mult) = simplify&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(Mult(simplify(m.left), simplify(m.right)))
+simplify(e&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Expr) = e
+
+printExpr(c&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Const) = print(c.val)
+printExpr(e&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;Expr) =
+  print(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;The expression could not be simplified to a constant.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)
+
+e = Add(Mult(Add(Const(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;), Mult(Const(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;), Var(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;x&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;))), Const(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)), Const(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;12&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;))
+s = simplify(e)
+printExpr(s)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;p&gt;Unlike pattern matching, we can only dispatch on type, so we need an if
+expression (the ? operator in Julia, just like C), or I could&#x27;ve used the match
+macro, but it&#x27;s overkill here. It&#x27;s not too inelegant, and at first I thought
+it was a good enough way to simulate sum types and pattern matching. It matters
+to the Julia ecosystem because these features are very useful to build solvers,
+logic and theorem proving systems, etc etc. Pretty nice for a technical
+computing platform. Unfortunately, while Julia does well with this simple example,
+I think an oddity with the language would soon bite us: return type declarations
+are not allowed, and yes, it &lt;i&gt;is&lt;&#x2F;i&gt; a big deal.&lt;&#x2F;p&gt;
+&lt;p&gt;First, it&#x27;s a question of correctness: you can return a float thinking
+you&#x27;re returning an integer. Also, since annotations are not
+allowed for the return value, it&#x27;s also impossible to add annotation for a
+higher-order function (a function taking functions as input). As a concrete
+example, first-order logic has &lt;i&gt;predicates&lt;&#x2F;i&gt; mapping objects to a boolean,
+and &lt;i&gt;functions&lt;&#x2F;i&gt; mapping objects to objects. We&#x27;d like to do:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;solve(pre&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(Object &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Bool), ...)
+
+solve(fun&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(Object &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt; Object), ...)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;p&gt;But instead, we&#x27;d have to test the type of the return value inside the
+function. That said, Julia is young and &lt;a
+href=&#x27;https:&#x2F;&#x2F;github.com&#x2F;JuliaLang&#x2F;julia&#x2F;issues&#x2F;1090&#x27;&gt;it might get return type
+declarations at some point.&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;h2&gt;Conclusion&lt;&#x2F;h2&gt;
+&lt;p&gt;Sum types and pattern matching are awesome.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>L&#x27;intuition des Intelligences Artificielles</title>
+		<published>2013-04-29T00:00:00+00:00</published>
+		<updated>2013-04-29T00:00:00+00:00</updated>
+		<link href="https://phdp.github.io/blog/intuition-ai/" type="text/html"/>
+		<id>https://phdp.github.io/blog/intuition-ai/</id>
+		<content type="html">&lt;p&gt;En 1997, DeepBlue bat le champion d&#x27;échecs Garry Kasparov lors d&#x27;un match
+de 6 parties. Depuis, les ordinateurs règnent en maîtres incontestés des
+échecs. Pourtant, leur victoire est en quelque sorte décevante. C&#x27;est une
+victoire de la force brute. DeepBlue, un dinosaure comparé aux programmes
+modernes, pouvait évaluer 200 millions de positions par seconde alors que
+les joueurs d&#x27;échecs ne considèrent que quelques coups par tour. Il est
+clair que les ordinateurs nous surpassent, et ce depuis longtemps, pour
+résoudre des problèmes mathématiques qui demandent une série bien définie
+d&#x27;étapes. Par exemple, le calcul de n&#x27;importe quelle racine carrée est très
+simple. Il suffit de suivre rigoureusement un certain nombre d&#x27;opérations et
+voilà ! Simple pour un ordinateur mais pas pour nous. Les auteurs de
+science-fiction nous offrent souvent la caricature d&#x27;ordinateurs incapables
+de penser globalement, incapables d&#x27;intuition. Bref, des DeepBlue qui
+écrasent l&#x27;être humain avec leur force de calcul. C&#x27;est une erreur. Toutes
+les I.A. (Intelligence Artificielle) ne sont pas des DeepBlue et nous
+développons actuellement des programmes qui ont une intelligence très
+similaire à la nôtre. C&#x27;est une quête pour construire des I.A. capables de
+raisonner sur des questions complexes. C&#x27;est une quête pour programmer
+l&#x27;intuition.&lt;&#x2F;p&gt;
+&lt;p&gt;À première vue, l&#x27;intelligence humaine semble complètement différente des
+ordinateurs. Ces derniers conservent la plupart des données dans les disques
+durs qu&#x27;on peut voir comme de gigantesques tables. Pour accéder à un élément
+(une mémoire), il suffit de connaître sa position qui est représentée par un
+nombre. Mauvais nombre, mauvaise mémoire. À l&#x27;inverse, la mémoire humaine
+est résiliente et associative. Si je vous demande le nom du très
+charismatique premier ministre du Québec qui a dirigé la province entre 2003
+et 2012, la plupart des gens seront capables de trouver la bonne réponse,
+même si « très charismatique » colle difficilement au personnage. Autre
+différence : la capacité de calculs (ou évaluation) de notre cerveau est
+largement supérieure à DeepBlue. L&#x27;acte de reconnaître un objet (ceci est un
+chat, ça c&#x27;est un arbre) est très difficile. Même le plus puissant
+ordinateur serait incapable de se déplacer en forêt tout en évaluant la
+position et la nature des objets, ce que nous faisons pourtant sans grands
+efforts. Notre cerveau est donc très doué pour certains types d&#x27;analyses,
+surtout celles qui demandent de regrouper plusieurs évidences. Les
+spécialistes de l&#x27;I.A. tentent depuis longtemps de créer des I.A. qui
+ressemblent à l&#x27;intelligence humaine. Et ils ont réussi. Les réseaux de
+neurones artificiels font partie de ces techniques. Tout comme le cerveau
+humain, ces réseaux ont une mémoire résiliente et associative. Ils sont
+capables de prendre en compte un grand nombre d&#x27;évidences et les relations
+complexes qui lient ces évidences.&lt;&#x2F;p&gt;
+&lt;p&gt;L&#x27;I.A. prend énormément d&#x27;expansion mais elle n&#x27;a pas la forme que les
+gens imaginent. Google utilise déjà ces techniques pour son moteur de
+recherche, pour traduire des textes, adapter les publicités. Amazon,
+Microsoft, IBM, Fujitsu; pratiquement toutes les compagnies de haute
+technologie investissent de grandes sommes en I.A. et les succès se
+multiplient. Goeffrey Hinton est un des grands spécialistes des réseaux de
+neurones artificiels. Il s&#x27;en sert pour apprendre à des programmes à
+raisonner sur des tâches complexes. Par exemple, ces réseaux de neurones
+peuvent reconnaître les chiffres (1, 2, 3, 4, …) mieux qu&#x27;un être humain. Si
+vous croyez que c&#x27;est facile, demandez à un professeur de mathématiques. Les
+formes des chiffres varient énormément et certains, moi par exemple, ont
+développé une incroyable capacité à écrire des 4 qui ressemblent à des 9, ou
+des 7 qui ressemblent à des 1. Personne n&#x27;a jamais réussi à écrire à la main
+un programme capable de reconnaître les chiffres. Les réseaux de neurones
+d&#x27;Hinton sont capables d&#x27;apprendre à les reconnaître et ils le font comme
+les humains: on gave le réseau de chiffres en leur donnant la bonne réponse
+(ça, c&#x27;est un quatre, ça, c&#x27;est un un, etc) et il apprend un modèle (très
+complexe!) qui lui permet ensuite de déduire le chiffre à partir d&#x27;une
+forme. Hinton n&#x27;écrit pas un programme pour reconnaître les chiffres, il
+écrit un programme capable d&#x27;apprendre à reconnaître les chiffres. Mieux
+encore: en 2012, Hinton et son équipe participent à un concours du géant
+pharmaceutique Merk. L&#x27;objectif est de découvrir des molécules au potentiel
+pharmaceutique. Les équipes de scientifiques qui participent à ce concours
+sont des experts dans le domaine, certains y travaillent depuis des
+décennies. L&#x27;équipe de Hinton arrive, en retard, au concours et n&#x27;a aucune
+expérience dans le domaine. Pourtant, il gagne! Un réseau de neurones
+artificiels, à qui on a donné une large base de données, a réussi à
+apprendre comment flairer une bonne molécule mieux que les experts. Le choc
+fut assez grand pour mériter à l&#x27;équipe d&#x27;Hinton un article dans le
+prestigieux New York Times.&lt;&#x2F;p&gt;
+&lt;p&gt;Il faudra encore attendre plusieurs années avant de voir des I.A.
+maîtriser toutes les subtilités du langage humain, une tâche où notre
+cerveau est exceptionnellement bien adapté. Pour bien des tâches complexes
+cependant, ils commencent déjà à développer une redoutable intuition.
+L&#x27;intuition est un concept difficile à définir. Très brièvement, on peut
+dire que c&#x27;est un raisonnement fondé sur un grand nombre d&#x27;évidences. Prises
+individuellement, ces évidences peuvent être faibles, mais en groupe elles
+forment un modèle solide. C&#x27;est exactement ce que les réseaux de neurones
+font: ils analysent de grandes bases de données et apprennent à lire les
+relations subtiles, tout comme les humains maîtrisent les subtilités de leur
+métier après des années d&#x27;expérience. Ceci inclut plusieurs tâches:
+comprendre les systèmes économiques, financiers, moléculaires, et...
+écologiques. C&#x27;est ce qui m&#x27;a amené à l&#x27;I.A. Je m&#x27;intéresse aux forces qui
+maintiennent la biodiversité. Ces forces sont multiples et complexes,
+tellement complexes que je doute qu&#x27;on puisse enfermer Mère Nature dans une
+simple équation. Les outils mathématiques traditionnels ont longtemps eu de
+la difficulté à analyser les sujets complexes. Les I.A., cependant, ont tout
+ce qu&#x27;il faut pour percer ces mystères, même s&#x27;il reste beaucoup de chemin à
+faire. Le problème, c&#x27;est qu&#x27;on comprend encore mal l&#x27;intelligence. Un peu
+comme les pionniers de l&#x27;aviation tentaient maladroitement d&#x27;imiter les
+ailes des oiseaux, nous bâtissons des I.A. en imitant le cerveau humain. Une
+meilleure science de l&#x27;information nous permettra de dépasser les limites du
+cerveau humain, mais les succès actuels de l&#x27;I.A. sont tout de même
+impressionnants. Il a fallu quelques milliards d&#x27;années pour que la vie sur
+terre mène à une intelligence comme la nôtre. Les I.A. n&#x27;ont pas 100 ans et
+ils révolutionnent déjà le monde de la technologie.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+</feed>

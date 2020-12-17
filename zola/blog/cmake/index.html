@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv='content-type' content='text/html; charset=utf-8'/>
+  <title>Philippe Desjardins-Proulx</title>
+  <link rel='stylesheet' media='screen' href='/css/style.css' type='text/css'/>
+  <link href='//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'/>
+  <script type='text/x-mathjax-config'>
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['\\(','\\)']]}});
+  </script>
+  <script type='text/javascript' async
+    src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML'>
+  </script>
+</head>
+
+<body>
+
+<div id='header'>
+  <nav>
+    <ul>
+      <li>( <a href='/index.html'>Philippe Desjardins-Proulx</a></li>
+      <li><a href='/blog/'>blog</a></li>
+      <li><a href='/papers/'>publications</a></li>
+      <li><a href='https://github.com/PhDP'><i class='fa fa-github'></i></a></li>
+      <li><a href='https://ca.linkedin.com/in/philippedp'><i class='fa fa-linkedin-square'></i></a></li>
+      <li><a href='mailto:philippe.desjardins.proulx@umontreal.ca'><i class='fa fa-envelope'></i></a></li>
+      <li><a href='https://twitter.com/phdpqc'><i class='fa fa-twitter'></i></a></li>
+      <li><a style='color:#ff6f00;a:hover{color:#8e240e;text-decoration:none;}' href='/atom.xml'><i class='fa fa-rss'></i></a> )</li>
+    </ul>
+  </nav>
+</div>
+
+<div id='content'>
+  
+<h1 class="title">
+  CMake project templates for C++11 and CUDA with google test&#x2F;benchmark support
+</h1>
+
+<p id="dt">2017-01-30</p>
+
+<p><p>Books generally don't cover project organization and few introductions to
+C++ discuss testing frameworks, let alone benchmarking. In my experience, many
+science students compile without optimization flags, don't know how to separate
+header and source files, tests, etc etc. So I created two simple <a
+href='https://cmake.org/'>cmake</a> project templates. One for C++11 (with a
+library and an executable) and one for CUDA. Both support testing with <a
+href='https://github.com/google/googletest'>Google Test</a> and benchmarks with
+<a href='https://github.com/google/benchmark'>Google Benchmark</a>.</p>
+<ul>
+  <li><a href='https://github.com/PhDP/cmake-gtest-gbench-starter'>C++11 cmake project with google test / google benchmark support.</a></li>
+  <li><a href='https://github.com/PhDP/cuda-cmake-gtest-gbench-starter'>C++/CUDA cmake project with google test / google benchmark support.</a></li>
+</ul>
+<p><a href='https://cmake.org/'>CMake</a> is a popular tool for building
+cross-platform C++ applications, you shouldn't have any issue installing
+it.</p>
+<p>The C++ project template works on both Linux/UNIX and Windows, while the
+CUDA project is tested only on Linux. Feel free to fork / suggest
+improvements.</p>
+</p>
+
+
+  <div id='hidden'>
+    <p><a href='/reading/'>(∀m: Medium . m &lt; <span id='jp'>本</span>)</a></p>
+  </div>
+</div>
+
+</body>
+</html>

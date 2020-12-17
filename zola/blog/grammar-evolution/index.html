@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv='content-type' content='text/html; charset=utf-8'/>
+  <title>Philippe Desjardins-Proulx</title>
+  <link rel='stylesheet' media='screen' href='/css/style.css' type='text/css'/>
+  <link href='//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'/>
+  <script type='text/x-mathjax-config'>
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['\\(','\\)']]}});
+  </script>
+  <script type='text/javascript' async
+    src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML'>
+  </script>
+</head>
+
+<body>
+
+<div id='header'>
+  <nav>
+    <ul>
+      <li>( <a href='/index.html'>Philippe Desjardins-Proulx</a></li>
+      <li><a href='/blog/'>blog</a></li>
+      <li><a href='/papers/'>publications</a></li>
+      <li><a href='https://github.com/PhDP'><i class='fa fa-github'></i></a></li>
+      <li><a href='https://ca.linkedin.com/in/philippedp'><i class='fa fa-linkedin-square'></i></a></li>
+      <li><a href='mailto:philippe.desjardins.proulx@umontreal.ca'><i class='fa fa-envelope'></i></a></li>
+      <li><a href='https://twitter.com/phdpqc'><i class='fa fa-twitter'></i></a></li>
+      <li><a style='color:#ff6f00;a:hover{color:#8e240e;text-decoration:none;}' href='/atom.xml'><i class='fa fa-rss'></i></a> )</li>
+    </ul>
+  </nav>
+</div>
+
+<div id='content'>
+  
+<h1 class="title">
+  Evolving mathematical formulas with grammatical evolution
+</h1>
+
+<p id="dt">2019-01-25</p>
+
+<p><p>Let's say we want to learn a mathematical formula to perform some task. We could turn to genetic algorithms,
+techniques inspired by biological evolution where a population of solutions is subjected to selection, mutations, and
+crossovers. The idea is simple: we start with a set of potential solutions (our candidate mathematical formulas),
+"mutate" them to explore the solution space, and then select the best to sire a new generation of solutions. Rinse and
+repeat until either a good enough solution is found, or you're tired of waiting. There are quite a few variations
+on that theme, but it's the gist of it.</p>
+<p>The quibble here is, well, how do we mutate a mathematical formula? How do we ensure that the new formulas generated
+are valid? I wanted to write a brief post to highlight how grammatical evolution can be used to evolve mathematical
+formulas (and programs, and lots of things). Grammatical evolution strikes me as a ludicrously general, elegant idea to
+handle the evolution of complex formulas juggling inputs of various types. It also has a nontrivial flaw that will be
+described at the end of the post. Take it as a fun little idea to keep in your A.I. toolbox.</p>
+<p>To evolve mathematical formulas, we need a way to represent the formulas (our solutions) in such a way that valid
+variants are simple to generate. In particular, a key idea in genetic algorithms is that we generate new solutions by
+"mixing the genomes", so to speak, of fit parents from the previous generation. But how? A mathematical expression is a
+tree, how do you mix trees? How do we ensure the expressions don't grow too big? One approach involves putting the
+mathematical formula on a grid (<a href='https://link.springer.com/book/10.1007/978-3-642-17310-3'>i.e. Cartesian
+genetic programming</a>), which is arguably more effective than the method described here, but for now we'll explore
+how to generate expressions from grammars. Here's a simple grammar for digits:</p>
+<pre style="background-color:#fdf6e3;">
+<code><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">digit</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;"> ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9</span><span style="color:#93a1a1;">&lt;/</span><span style="color:#268bd2;">pre</span><span style="color:#93a1a1;">&gt;
+</span></code></pre><p><digit> is a production rule, they'll always be enclosed within angle brackets. After ::= ("is defined as"),
+we get the definition of the production rule as a set of alternatives separated by disjunctions "|". Thus, a digit is
+defined as 0, or 1, or 2, or 3, etc. By the by, this format for grammars is called the Backus–Naur form (BNF). It gets
+interesting when production rules refer to other production rules, so here's a more interesting grammar describing a
+mathematical formula with inputs x and y inside a C function:</p>
+<pre style="background-color:#fdf6e3;">
+<code><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">cfun</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;"> ::= double please_work(double x, double y) { return </span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">expr</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;">; }
+</span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">expr</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;"> ::= </span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">expr</span><span style="color:#93a1a1;">&gt; &lt;</span><span style="color:#268bd2;">op</span><span style="color:#93a1a1;">&gt; &lt;</span><span style="color:#268bd2;">expr</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;">
+         | </span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">pre</span><span style="color:#93a1a1;">&gt;&lt;</span><span style="color:#268bd2;">expr</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;">
+         | </span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">fun1</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;">(</span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">expr</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;">)
+         | </span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">fun2</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;">(</span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">expr</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;">, </span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">expr</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;">)
+         | </span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">var</span><span style="color:#93a1a1;">&gt;
+&lt;</span><span style="color:#268bd2;">op</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;">   ::= + | - | / | *
+</span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">pre</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;">  ::= -
+</span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">fun1</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;"> ::= sin | cos | tan
+</span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">fun2</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;"> ::= fmod
+</span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">var</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;">  ::= x | y
+</span></code></pre><p>This grammar has seven production rules and can generate strings such as:</p>
+<pre style="background-color:#fdf6e3;">
+<code><span style="color:#657b83;">double please_work(double x, double y) { return -sin(x) + y; }</span><span style="color:#93a1a1;">&lt;/</span><span style="color:#268bd2;">pre</span><span style="color:#93a1a1;">&gt;
+</span></code></pre><p>Of course, the grammar can generate many other strings, not just this one. A particular string can be seen as a
+series of choices among alternatives. Let's say I were to give you the following sequence of integers: [10, 1, 2, 6, 9,
+4, 0, 4, 7] and tell you to start at the first production rule <cfun> and use this sequence of integers to select
+alternatives. The alternatives use zero-based indexing and if the integer is bigger than the number of alternatives for
+a production rule, just apply a modulo (made simpler by zero-based indexing). For example, with <fun1> and the
+number 2, we'd get "tan", with <var> and 7 we get "y", with <expr> and 2 we get <pre-op><expr>.
+If there's only one alternative, we do not need to consume an integer from the sequence. Let's see where [10, 1, 2, 6,
+9, 4, 0, 4, 7] leads us. We begin with</p>
+<pre style="background-color:#fdf6e3;">
+<code><span style="color:#657b83;">double please_work(double x, double y) { return </span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">expr</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;">; }
+</span></code></pre><p>and use the number 10 to select among <expr>. There are five alternatives, 10 mod 5 = 0, thus:</p>
+<pre style="background-color:#fdf6e3;">
+<code><span style="color:#657b83;">double please_work(double x, double y) { return </span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">expr</span><span style="color:#93a1a1;">&gt; &lt;</span><span style="color:#268bd2;">op</span><span style="color:#93a1a1;">&gt; &lt;</span><span style="color:#268bd2;">expr</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;">; }
+</span></code></pre><p>We then have to select among <expr> again and our next integer is 1:</p>
+<pre style="background-color:#fdf6e3;">
+<code><span style="color:#657b83;">double please_work(double x, double y) { return </span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">pre</span><span style="color:#93a1a1;">&gt;&lt;</span><span style="color:#268bd2;">expr</span><span style="color:#93a1a1;">&gt; &lt;</span><span style="color:#268bd2;">op</span><span style="color:#93a1a1;">&gt; &lt;</span><span style="color:#268bd2;">expr</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;">; }
+</span></code></pre><p>There's only one <pre>, thus our next integer, 2, is used to generates <fun1>(<expr>) from
+<expr&gt. 6 is used to select "sin" from <fun1>, and so on and so forth. From the beginning, the sequence [10,
+1, 2, 6, 9, 4, 0, 4, 7] applied to our little grammar generates:
+<pre style="background-color:#fdf6e3;">
+<code><span style="color:#657b83;">double please_work(double x, double y) { return </span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">expr</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;">; }
+double please_work(double x, double y) { return </span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">expr</span><span style="color:#93a1a1;">&gt; &lt;</span><span style="color:#268bd2;">op</span><span style="color:#93a1a1;">&gt; &lt;</span><span style="color:#268bd2;">expr</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;">; }
+double please_work(double x, double y) { return </span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">pre</span><span style="color:#93a1a1;">&gt;&lt;</span><span style="color:#268bd2;">expr</span><span style="color:#93a1a1;">&gt; &lt;</span><span style="color:#268bd2;">op</span><span style="color:#93a1a1;">&gt; &lt;</span><span style="color:#268bd2;">expr</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;">; }
+double please_work(double x, double y) { return -</span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">fun1</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;">(</span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">expr</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;">) </span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">op</span><span style="color:#93a1a1;">&gt; &lt;</span><span style="color:#268bd2;">expr</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;">; }
+double please_work(double x, double y) { return -sin(</span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">expr</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;">) </span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">op</span><span style="color:#93a1a1;">&gt; &lt;</span><span style="color:#268bd2;">expr</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;">; }
+double please_work(double x, double y) { return -sin(</span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">var</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;">) </span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">op</span><span style="color:#93a1a1;">&gt; &lt;</span><span style="color:#268bd2;">expr</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;">; }
+double please_work(double x, double y) { return -sin(x) </span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">op</span><span style="color:#93a1a1;">&gt; &lt;</span><span style="color:#268bd2;">expr</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;">; }
+double please_work(double x, double y) { return -sin(x) + </span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">expr</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;">; }
+double please_work(double x, double y) { return -sin(x) + </span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">var</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;">; }
+double please_work(double x, double y) { return -sin(x) + y; }
+</span></code></pre><p>Depending on the grammar, it may be common to run out of integers. A partial solution is to allow the sequence to
+wrap, so when the end of the sequence is reached we go back to the beginning. When wrapping is allowed, it can only be
+done a (generally small) number of times. The other solution is to simply not return anything, essentially killing
+sequences that fail to finish an expression. The finite length of the sequence gives some control over how complex the
+resulting expression can be. The grammar used as an example here is a bit extreme, it would often run out of integers
+because of the way <expr> just creates more <expr> for all but one alternatives, and wrapping won't save us
+from this fundamental issue.</p>
+<p>The advantage of generating strings from a grammar and a sequence of integers is twofold. Primo, it's easy to ensure
+the validity of expressions even in the presence of different types of input. Secondo, we can mutate the expressions
+simply by changing an integer, and generate children from parents by mixing their sequence of integers. So I guess
+it's Mission Accomplished! We have a flexible method to generate C functions, assembly code, sentences in Cebuano,
+mathematical formulas... Well, not quite. The non-probabilistic nature of the grammar can be an issue, we may want some
+alternatives to be more common than others, although it is something better learned at runtime than hardwired in the
+grammar. A more serious issue is lack of locality. In our previous sequence, if we were to change the 10 by a 9,
+we'd get</p>
+<pre style="background-color:#fdf6e3;">
+<code><span style="color:#657b83;">double please_work(double x, double y) { return </span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">var</span><span style="color:#93a1a1;">&gt;</span><span style="color:#657b83;">; }
+double please_work(double x, double y) { return y; }
+</span></code></pre><p>That's a rather different formula. By locality, we mean we'd like similar sequences of integers to map to similar
+formulas (or whatever you're generating). This way, small changes to the sequence would yield different, but similar
+formulas, and greater changes would yield more distinct formulas. <a
+href='https://link.springer.com/chapter/10.1007/11729976_29'>Good locality has a measurable effect on the performance
+of genetic algorithms, and grammatical evolution tends to suffer from poor locality</a>. To get an intuition of why
+this is an issue, just imagine a representation with no locality at all, such that the probability of reaching a given
+formula is the same regardless of your starting point. In this world, selecting better and better formulas and applying
+mutations to them is useless, there's no advantage to mutating a fit formula over an unfit formula if
+mutations send it all over the place. Different approaches like Cartesian genetic programming are less affected by this
+issue. Nevertheless, grammatical evolution is a fun little idea that may come in handy.</p>
+<!-- Geometric Semantic Genetic Programming, in Parallel Problem Solving from Nature, 2012. -->
+</p>
+
+
+  <div id='hidden'>
+    <p><a href='/reading/'>(∀m: Medium . m &lt; <span id='jp'>本</span>)</a></p>
+  </div>
+</div>
+
+</body>
+</html>
