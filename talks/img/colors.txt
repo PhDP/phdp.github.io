@@ -1,3 +1,0 @@
-primary     00905d
-secondary   768295
-
