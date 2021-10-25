@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="200" height="59" viewBox="0, 0, 200, 59">
+  <g id="Layer_1">
+    <g>
+      <text transform="matrix(1, 0, 0, 1, 32.577, 28)">
+        <tspan x="-18.327" y="22.5" font-family="Palatino-Roman" font-size="60" kerning="0" fill="#18818C">λ </tspan>
+      </text>
+    </g>
+    <g>
+      <text transform="matrix(1, 0, 0, 1, 70.089, 28)">
+        <tspan x="-17.185" y="22.5" font-family="Palatino-Roman" font-size="60" kerning="-4" fill="#000000">F</tspan>
+      </text>
+      <text transform="matrix(1, 0, 0, 1, 167.494, 29.5)">
+        <tspan x="-85.22" y="21" font-family="EBGaramond12-AllSC" font-size="60" kerning="-1" fill="#000000">a</tspan>
+        <tspan x="-52.92" y="21" font-family="EBGaramond12-AllSC" font-size="60" kerning="0" fill="#000000">un</tspan>
+      </text>
+    </g>
+  </g>
+</svg>
