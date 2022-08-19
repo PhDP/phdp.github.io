@@ -1,49 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <title>Philippe Desjardins-Proulx</title>
+  <meta name="description" content="Research Description, Papers, AI/Math Blog" />
   <link rel="stylesheet" media="screen" href="./css/style.css" type="text/css" />
   <link rel="stylesheet" media="screen" href="./css/code.css" type="text/css" />
-  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" rel="stylesheet" type="text/css" />
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['\\(','\\)']]}});
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+  </script>
+  <script src="./js/dark-mode.min.js"></script>
 </head>
 
 <body>
 
-<div id="header">
-  <nav>
-    <ul>
-      <li>( Philippe Desjardins-Proulx</li>
-      <li><a href="./index.html">about</a></li>
-      <li><a href="./publications.html">publications</a></li>
-      <li><a href="https://github.com/PhDP"><i class="fa fa-github"></i></a></li>
-      <li><a href="https://ca.linkedin.com/in/philippedp"><i class="fa fa-linkedin-square"></i></a></li>
-      <li><a href="mailto:philippe.desjardins.proulx@umontreal.ca"><i class="fa fa-envelope"></i></a>)</li>
-      <!-- <li><a href='https://twitter.com/LambdaPhDP'><i class='fa fa-twitter'></i></a></li> -->
-      <!-- <li><a id='atom' href='/atom.xml'><i class='fa fa-rss'></i></a>)</li> -->
-    </ul>
-  </nav>
-</div>
+<div class="ml-auto"><div class="relative inline-block"><button id="button-dark-mode" class="h-12 w-12 p-1 inline-flex items-center justify-center rounded-full focus:outline-none hover:text-gray-700 dark:hover:text-white focus:bg-gray-100 dark:focus:bg-gray-800"><svg xmlns="http://www.w3.org/2000/svg" aria-label="Sun Icon" fill="currentColor" stroke="none" width="30" height="30" class="inline-block" viewBox="0 0 20 20" id="light-mode-icon"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg><svg xmlns="http://www.w3.org/2000/svg" aria-label="Moon Icon" fill="currentColor" stroke="none" width="30" height="30" class="inline-block" viewBox="0 0 20 20" id="dark-mode-icon"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg></button></div></div>
 
-<div id="content">
-  <p><a href="images/yuuki-3mo.jpg"> <img style="margin-left:1em; margin-bottom:1em" src="images/yuuki-3mo-small.jpg" alt="Me with 3mo Yuuki" align="right" /> </a></p>
+<nav>
+  <div class="nav-par">(</div>
+  <div class="nav-item"><a href="./index.html">Philippe Desjardins-Proulx</a></div>
+  <!-- <div class='nav-item'><a href='/blog.html'>blog</a></div> -->
+  <div class="nav-item"><a href="./publications.html">publications</a></div>
+  <div class="nav-item"><a href="https://github.com/PhDP"><i class="fa-brands fa-github"></i></a></div>
+  <div class="nav-item"><a href="https://twitter.com/LambdaPhDP"><i class="fa-brands fa-twitter"></i></a></div>
+  <div class="nav-item"><a href="https://ca.linkedin.com/in/philippedp"><i class="fa-brands fa-linkedin"></i></a></div>
+  <div class="nav-item"><a href="mailto:philippe.desjardins.proulx@umontreal.ca"><i class="fa fa-envelope"></i></a></div>
+  <div class="nav-item"><a id="atom" href="./atom.xml"><i class="fa-solid fa-square-rss"></i></a></div>
+  <div class="nav-par">)</div>
+</nav>
+
+<main>
+  <p><a href="images/yuuki-3mo.jpg">
+<img style="margin-left:1em; margin-bottom:1em" src="images/yuuki-3mo-small.jpg" alt="Me with 3mo Yuuki" align="right" />
+</a></p>
 <p>
-I’m a postdoctoral reseacher working on Artificial Intelligence applied to disease ecology at the <a href="https://poisotlab.io/">Poisot lab</a> (<a href="https://www.umontreal.ca/en/">University of Montreal</a>). <b>I currently focus on probabilistic programming with typed λ-calculi &amp; learning mathematical formulas from data</b>.
+I’m a postdoctoral reseacher working on Artificial Intelligence applied to
+disease ecology at the <a href="https://poisotlab.io/">Poisot lab</a> (<a href="https://www.umontreal.ca/en/">University of Montreal</a>). <b>I currently
+focus on probabilistic programming with typed λ-calculi &amp; learning
+mathematical formulas from data</b>.
 </p>
 <p>
-I did my Ph.D. at the <a href="https://ielab.recherche.usherbrooke.ca/">Canada Research Chair on Integrative ecology</a> (<a href="http://www.usherbrooke.ca/">Université de Sherbrooke</a>). My work was supported by an Alexander Graham Bell Graduate Scholarship from the <a href="https://www.nserc-crsng.gc.ca/">NSERC</a>, a generous <a href="https://research.microsoft.com/en-us/projects/azure/">Azure for Research Award from Microsoft Research</a>, and a hardware donation from <a href="https://www.nvidia.com/">NVIDIA</a>.
+I did my Ph.D. at the <a href="https://ielab.recherche.usherbrooke.ca/">Canada Research Chair on
+Integrative ecology</a> (<a href="http://www.usherbrooke.ca/">Université de
+Sherbrooke</a>). My work was supported by an Alexander Graham Bell Graduate
+Scholarship from the <a href="https://www.nserc-crsng.gc.ca/">NSERC</a>, a
+generous <a href="https://research.microsoft.com/en-us/projects/azure/">Azure
+for Research Award from Microsoft Research</a>, and a hardware donation from <a href="https://www.nvidia.com/">NVIDIA</a>.
 </p>
 <p>
-My work depends on many high-quality open-source projects: <a href="https://www.haskell.org/ghc/">Glasgow Haskell Compiler</a>, <a href="https://www.rust-lang.org/">Rust</a>, <a href="https://leanprover.github.io/">Lean Theorem Prover</a>, <a href="https://www.vim.org/">Vim</a>/<a href="https://neovim.io/">Neovim</a>, <a href="https://www.linux.com/">Linux</a>/<a href="https://www.ubuntu.com/">Ubuntu</a>, <a href="https://git-scm.com/">Git</a>, <a href="https://llvm.org/">LLVM</a>, <a href="https://gcc.gnu.org/">GCC</a>.
+My work depends on many high-quality open-source projects:
+<a href="https://www.rust-lang.org/">Rust</a>,
+<a href="https://leanprover.github.io/">Lean</a>,
+<a href="https://www.haskell.org/ghc/">Glasgow Haskell Compiler</a>,
+<a href="https://github.com/agda/agda">Agda</a>,
+<a href="https://llvm.org/">LLVM</a>,
+<a href="https://gcc.gnu.org/">GCC</a>,
+<a href="https://www.vim.org/">Vim</a>/<a href="https://neovim.io/">Neovim</a>,
+<a href="https://www.linux.com/">Linux</a>/<a href="https://www.ubuntu.com/">Ubuntu</a>,
+<a href="https://git-scm.com/">Git</a>.
 </p>
 
-  <div id="hidden">
-    let world = "<span id="jp">世界</span>" in print $ "Hello " ++ world ++ ", gens una sumus!"
-  </div>
-</div>
+  <footer>
+    let world = "<span id="jp">世界</span>" in print $ "Hello " ++ world ++ "! Gens una sumus!"
+  </footer>
+</main>
 
-<script type="text/javascript" src="./js/highlight.pack.js"></script>
+<script type="text/javascript" src="./js/highlight.min.js"></script>
+<script type="text/javascript" charset="UTF-8" src="./js/lean.min.js"></script>
 <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
 
 </body>

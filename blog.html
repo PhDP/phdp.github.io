@@ -1,73 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <title>Philippe Desjardins-Proulx</title>
+  <meta name="description" content="Research Description, Papers, AI/Math Blog" />
   <link rel="stylesheet" media="screen" href="./css/style.css" type="text/css" />
   <link rel="stylesheet" media="screen" href="./css/code.css" type="text/css" />
-  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" rel="stylesheet" type="text/css" />
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['\\(','\\)']]}});
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+  </script>
+  <script src="./js/dark-mode.min.js"></script>
 </head>
 
 <body>
 
-<!-- <a href='https://github.com/PhDP/'>
-  <img style='position: absolute; top: 0; left: 0; border: 0;' src='/images/forkme.png' alt='Fork me on GitHub'>
-</a> -->
+<div class="ml-auto"><div class="relative inline-block"><button id="button-dark-mode" class="h-12 w-12 p-1 inline-flex items-center justify-center rounded-full focus:outline-none hover:text-gray-700 dark:hover:text-white focus:bg-gray-100 dark:focus:bg-gray-800"><svg xmlns="http://www.w3.org/2000/svg" aria-label="Sun Icon" fill="currentColor" stroke="none" width="30" height="30" class="inline-block" viewBox="0 0 20 20" id="light-mode-icon"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg><svg xmlns="http://www.w3.org/2000/svg" aria-label="Moon Icon" fill="currentColor" stroke="none" width="30" height="30" class="inline-block" viewBox="0 0 20 20" id="dark-mode-icon"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg></button></div></div>
 
-<div id="header">
-  <nav>
-    <ul>
-      <li>( Philippe Desjardins-Proulx</li>
-      <li><a href="./index.html">about</a></li>
-      <li><a href="./papers.html">papers</a></li>
-      <li><a href="./blog.html">blog</a></li>
-      <li><a href="https://github.com/PhDP"><i class="fa fa-github"></i></a></li>
-      <li><a href="https://ca.linkedin.com/in/philippedp"><i class="fa fa-linkedin-square"></i></a></li>
-      <li><a href="mailto:philippe.desjardins.proulx@umontreal.ca"><i class="fa fa-envelope"></i></a></li>
-      <li><a href="https://twitter.com/phdpqc"><i class="fa fa-twitter"></i></a></li>
-      <li><a style="color:#ff6f00" href="./atom.xml"><i class="fa fa-rss"></i></a>)</li>
-    </ul>
-  </nav>
-</div>
+<nav>
+  <div class="nav-par">(</div>
+  <div class="nav-item"><a href="./index.html">Philippe Desjardins-Proulx</a></div>
+  <!-- <div class='nav-item'><a href='/blog.html'>blog</a></div> -->
+  <div class="nav-item"><a href="./publications.html">publications</a></div>
+  <div class="nav-item"><a href="https://github.com/PhDP"><i class="fa-brands fa-github"></i></a></div>
+  <div class="nav-item"><a href="https://twitter.com/LambdaPhDP"><i class="fa-brands fa-twitter"></i></a></div>
+  <div class="nav-item"><a href="https://ca.linkedin.com/in/philippedp"><i class="fa-brands fa-linkedin"></i></a></div>
+  <div class="nav-item"><a href="mailto:philippe.desjardins.proulx@umontreal.ca"><i class="fa fa-envelope"></i></a></div>
+  <div class="nav-item"><a id="atom" href="./atom.xml"><i class="fa-solid fa-square-rss"></i></a></div>
+  <div class="nav-par">)</div>
+</nav>
 
-<div id="content">
+<main>
   <div id="posts">
-  <p>2019-01-25 :: <a href="./posts/2019-01-25-grammar-evolution.html">Evolving mathematical formulas with grammatical evolution</a></p>
-<p>2018-04-17 :: <a href="./posts/2018-04-17-sol.html">A crash course in second-order logic</a></p>
-<p>2017-02-21 :: <a href="./posts/2017-02-21-fuzzy-connectives.html">Fuzzy knowledge and fuzzy logic connectives</a></p>
-<p>2017-01-30 :: <a href="./posts/2017-01-30-cmake.html">CMake project templates for C++11 and CUDA with google test/benchmark support</a></p>
-<p>2017-01-27 :: <a href="./posts/2017-01-27-linux.html">Ten years on Linux</a></p>
-<p>2016-06-28 :: <a href="./posts/2016-06-28-not-your-grandmother-cpp.html">Data Scientists: This is not your grandmother's C++</a></p>
-<p>2015-11-02 :: <a href="./posts/2015-11-02-theory-and-ml.html">Scientific theories &amp; machine learning</a></p>
-<p>2015-07-13 :: <a href="./posts/2015-07-13-srl-code.html">A gentle introduction to statistical relational learning: maths, code, and examples</a></p>
-<p>2015-07-13 :: <a href="./posts/2015-07-13-fol.html">A crash course in first-order logic</a></p>
-<p>2015-04-05 :: <a href="./posts/2015-04-05-automated-reasoning.html">Automated reasoning in F#, Scala, Haskell, C++, and Julia</a></p>
-<p>2014-06-11 :: <a href="./posts/2014-06-11-food-webs.html">Knowledge representation and species interactions</a></p>
-<p>2013-07-05 :: <a href="./posts/2013-07-05-dtl.html">Machine learning and deep transfer learning</a></p>
-<p>2013-05-14 :: <a href="./posts/2013-05-14-case-preprint.html">The case for open preprints in biology</a></p>
-<p>2013-04-29 :: <a href="./posts/2013-04-29-intuition-ai.html">L'intuition des Intelligences Artificielles</a></p>
-<p>2013-02-06 :: <a href="./posts/2013-02-06-transposon.html">Evolution of a transposon in Daphnia hybrid genomes</a></p>
-<p>2012-09-24 :: <a href="./posts/2012-09-24-repeatability.html">The repeatability of niche and neutral communities</a></p>
-<p>2012-09-12 :: <a href="./posts/2012-09-12-wagner.html">Wagner: a simple model to study speciation patterns</a></p>
-<p>2012-08-22 :: <a href="./posts/2012-08-22-case-arxiv.html">The case for arXiv and a broader conception of peer-reviews</a></p>
-<p>2012-06-27 :: <a href="./posts/2012-06-27-complex.html">A complex speciation-richness relationship in a simple neutral model</a></p>
-<p>2012-03-27 :: <a href="./posts/2012-03-27-foot.html">A foot in the neutral trap</a></p>
-<p>2012-01-01 :: <a href="./posts/2012-01-01-how-likely.html">How likely is speciation in neutral ecology?</a></p>
-<p>2010-05-01 :: <a href="./posts/2010-05-01-origine.html">L'origine de la biodiversité</a></p>
+  <p id="post-list">2022-09-21 :: <a href="./posts/2022-09-21-gradual.html">Gradual Types and the Bridge from Data Science to Maths</a> [PDF]</p>
+<p id="post-list">2022-09-07 :: <a href="./posts/2022-09-07-prob.html">Higher-Order Probability Theory</a> [PDF]</p>
 
 </div>
 
 
+  <footer>
+    let world = "<span id="jp">世界</span>" in print $ "Hello " ++ world ++ "! Gens una sumus!"
+  </footer>
+</main>
 
-  <div id="hidden">
-    let world = "<span id="jp">世界</span>" in print $ "Hello " ++ world ++ "!"
-  </div>
-</div>
-
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<script type="text/javascript" src="./js/highlight.pack.js"></script>
+<script type="text/javascript" src="./js/highlight.min.js"></script>
+<script type="text/javascript" charset="UTF-8" src="./js/lean.min.js"></script>
 <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
 
 </body>
