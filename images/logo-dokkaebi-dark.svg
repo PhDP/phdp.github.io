@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="75mm"
+   height="40mm"
+   viewBox="0 0 75 40"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="logo-dokkaebi-dark.svg"
+   inkscape:export-filename="/home/phdp/Dropbox/Images/Info/Logos/Dokkaebi/logo-dokkaebi-dark-400.png"
+   inkscape:export-xdpi="145.87231"
+   inkscape:export-ydpi="145.87231"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="2.1266375"
+     inkscape:cx="212.30699"
+     inkscape:cy="165.2844"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     width="100mm" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="38.289219"
+       y="22.937254"
+       id="text1310"><tspan
+         sodipodi:role="line"
+         id="tspan1308"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:25.4px;font-family:'AR PL UMing CN';-inkscape-font-specification:'AR PL UMing CN';text-align:center;text-anchor:middle;fill:#8a0000;fill-opacity:1;stroke-width:0.264583"
+         x="38.289219"
+         y="22.937254">도깨비</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.2889px;font-family:'EB Garamond';-inkscape-font-specification:'EB Garamond';text-align:center;text-anchor:middle;fill:#ececec;stroke-width:0.264583"
+         x="38.289219"
+         y="38.614265"
+         dy="0 0 0 0 0 0 0 0 0 0 0 -2.3199999"
+         id="tspan6062"><tspan
+           dy="-2.3199999"
+           id="tspan7432"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.2889px;font-family:'EB Garamond 12 All SC';-inkscape-font-specification:'EB Garamond 12 All SC';text-align:center;text-anchor:middle;fill:#ececec;stroke-width:0.264583">Dokkaebi AI</tspan></tspan></text>
+  </g>
+</svg>
