@@ -12,6 +12,9 @@
    id="svg108"
    sodipodi:docname="logo-faun.svg"
    inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   inkscape:export-filename="/home/phdp/Documents/logos/logo-faun-450.png"
+   inkscape:export-xdpi="113.83422"
+   inkscape:export-ydpi="113.83422"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -25,9 +28,9 @@
    inkscape:pageopacity="0.0"
    inkscape:pagecheckerboard="0"
    showgrid="false"
-   inkscape:zoom="1.0432543"
-   inkscape:cx="244.90674"
-   inkscape:cy="382.93637"
+   inkscape:zoom="1.4753844"
+   inkscape:cx="251.121"
+   inkscape:cy="344.65594"
    inkscape:window-width="1920"
    inkscape:window-height="1016"
    inkscape:window-x="0"
@@ -385,21 +388,21 @@
 <text
    xml:space="preserve"
    style="font-style:normal;font-weight:normal;font-size:120px;line-height:0;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#00905d;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:10;stroke-dasharray:none"
-   x="61.650002"
-   y="483.11194"
+   x="56.650024"
+   y="483.11179"
    id="text2729"><tspan
      sodipodi:role="line"
      id="tspan2727"
-     x="61.650002"
-     y="483.11194"
+     x="56.650024"
+     y="483.11179"
      style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:120px;line-height:0;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;fill:#00905d;fill-opacity:1;stroke-width:2;stroke-miterlimit:10;stroke-dasharray:none"
-     dx="0 0 -62 -6.5500002 0 -15.36998"
-     dy="0 0 61.25"><tspan
+     dx="0 0 -56.999981 -6.5499978 0 -15.369975"
+     dy="0 0 61.249981"><tspan
    style="font-size:120px;line-height:0;fill:#00905d;fill-opacity:1;stroke:#00905d;stroke-width:2;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
    id="tspan15499">f<tspan
    style="font-size:86.6667px;line-height:0"
    id="tspan4880"
    rotate="180 0"
-   dx="62"
-   dy="-61.25">A</tspan></tspan>μn: AI</tspan></text></g>
+   dx="66.999977"
+   dy="-61.249981">A</tspan></tspan>μn: AI</tspan></text></g>
 </svg>
